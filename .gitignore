@@ -1,0 +1,13 @@
+# --- Build & Compiled Files ---
+*.class
+*.log
+*.ctxt
+*.jar
+*.war
+*.ear
+
+# Build directories
+/bin/
+/build/
+/target/
+/out/
