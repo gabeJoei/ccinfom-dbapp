@@ -6,18 +6,20 @@ public class customerRecordModel {
     private String lastName;
     private String email;
     private String phoneNum;
+    private String customerPass;
 
     // empty constructor
     public customerRecordModel() {}
 
     // full constructor
     public customerRecordModel(int customerAccID, String firstName, String lastName, 
-                                String email, String phoneNum){
+                                String email, String phoneNum, String customerPass){
         this.customerAccID = customerAccID;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.phoneNum = phoneNum;
+        this.customerPass = customerPass;
     }
 
     // ============ Setters ============
@@ -41,12 +43,17 @@ public class customerRecordModel {
         this.phoneNum = phoneNum;
     }
 
+    public void setCustomerPass(String customerPass) {
+        this.customerPass = customerPass;
+    }
+
     // ============ Getters ============
     public int getCustomerAccID() { return this.customerAccID; }
     public String getFirstName() { return this.firstName; }
     public String getLastName() { return this.lastName; }
     public String getEmail() { return this.email; }
     public String getPhoneNum() { return this.phoneNum; }
+    public String getCustomerPass() { return this.customerPass; }
     
     public static void main(String[] args){
 
