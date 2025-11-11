@@ -12,7 +12,7 @@ public class customerRecordDAO {
 
     // CREATE 
     public boolean addCustomerRecordData(customerRecordModel customer){
-        String query = "INSERT INTO Customer (customerAccID,lastName,firstName,email,phoneNum) VALUES (?,?,?,?,?)";
+        String query = "INSERT INTO customer (customerAccID,lastName,firstName,email,phoneNum,customerPass) VALUES (?,?,?,?,?,?)";
         try (Connection connect=databaseConnection.getConnection();  
             PreparedStatement prepState=connect.prepareStatement(query)) {
             
@@ -21,6 +21,7 @@ public class customerRecordDAO {
             prepState.setString(3, customer.getFirstName());
             prepState.setString(4, customer.getEmail());
             prepState.setString(5, customer.getPhoneNum());
+            prepState.setString(6, customer.getCustomerPass());
 
             prepState.executeUpdate();
 
@@ -35,7 +36,7 @@ public class customerRecordDAO {
 
     // READ
     public customerRecordModel getCustomerRecordData(customerRecordModel customer){
-        String query = "SELECT FROM * Customer WHERE customerAccID=?";
+        String query = "SELECT * FROM customer WHERE customerAccID=?";
         try (Connection connect=databaseConnection.getConnection(); 
             PreparedStatement prepState=connect.prepareStatement(query)) {
 
@@ -55,9 +56,30 @@ public class customerRecordDAO {
         return null;
     }
 
+    // READ - CUSTOMER TRANSACTION
+    public customerRecordModel getCustomerTransaction(customerRecordModel customer) {
+        String query = "SELECT * FROM customer C JOIN payment P ON C.customerAccID=P.customerAccID WHERE C.customerAccID=?";
+        try (Connection connect=databaseConnection.getConnection(); 
+            PreparedStatement prepState=connect.prepareStatement(query)) {
+            prepState.setInt(1, customer.getCustomerAccID());
+
+            ResultSet result = prepState.executeQuery();
+            while(result.next()) {
+                return extractCustomerFromResultSet(result);
+            }
+
+            result.close();
+            prepState.close();
+            connect.close();
+        }catch(SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return null;
+    }
+
     // UPDATE 
     public boolean modifyCustomerRecordData(customerRecordModel customer){
-        String query = "UPDATE Customer SET lastName=?, firstName=?, email=?, phoneNum=? WHERE customerAccID=?";
+        String query = "UPDATE Customer SET lastName=?, firstName=?, email=?, phoneNum=?, customerPass=?, WHERE customerAccID=?";
         try (Connection connect=databaseConnection.getConnection(); 
             PreparedStatement prepState=connect.prepareStatement(query)){
             
@@ -65,7 +87,8 @@ public class customerRecordDAO {
             prepState.setString(2, customer.getFirstName());
             prepState.setString(3, customer.getEmail());
             prepState.setString(4, customer.getPhoneNum());
-            prepState.setInt(5, customer.getCustomerAccID());
+            prepState.setString(5, customer.getCustomerPass());
+            prepState.setInt(6, customer.getCustomerAccID());
 
             prepState.executeUpdate();
             prepState.close();
