@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 
 import com.grp5.model.bikeRecordModel;
 import com.grp5.utils.databaseConnection;
@@ -13,11 +12,9 @@ public class bikeRecordDAO {
 
     // Create
     public int addBikeRecord(bikeRecordModel bikeRecord) {
-        try {
-            Connection connect = databaseConnection.getConnection();
-
-            PreparedStatement prepState = connect.prepareStatement(
-                    "INSERT INTO bike (bikeID,branchIDNum,bikeAvailability,bikeModel,hourlyRate,dailyRate) VALUES (?,?,?,?,?,?)");
+        try (Connection connect = databaseConnection.getConnection();
+                PreparedStatement prepState = connect.prepareStatement(
+                        "INSERT INTO bike (bikeID,branchIDNum,bikeAvailability,bikeModel,hourlyRate,dailyRate) VALUES (?,?,?,?,?,?)");) {
             prepState.setInt(1, bikeRecord.getBikeID());
             prepState.setInt(2, bikeRecord.getBranchIDNum());
             prepState.setBoolean(3, bikeRecord.getBikeAvailability());
@@ -26,8 +23,6 @@ public class bikeRecordDAO {
             prepState.setBigDecimal(6, bikeRecord.getDailyRate());
 
             int rowsInserted = prepState.executeUpdate();
-            prepState.close();
-            connect.close();
             return rowsInserted;
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -37,13 +32,14 @@ public class bikeRecordDAO {
 
     // Read
     public bikeRecordModel getBikeRecord(int bikeID) {
-        try {
-            Connection connect = databaseConnection.getConnection();
-            PreparedStatement prepState = connect.prepareStatement("SELECT * FROM bike WHERE ?");
+        try (Connection connect = databaseConnection.getConnection();
+                PreparedStatement prepState = connect.prepareStatement(
+                        "SELECT bikeID,branchIDNum,bikeAvailability,bikeModel,hourlyRate,dailyRate FROM bike WHERE bikeID=?");) {
+
             prepState.setInt(1, bikeID);
             ResultSet result = prepState.executeQuery();
 
-            while (result.next()) {
+            if (result.next()) {
                 return extractBikeFromResultSet(result);
             }
 
@@ -69,14 +65,12 @@ public class bikeRecordDAO {
 
     // Delete
     public int deleteBikeRecord(int bikeID) {
-        try {
-            Connection connect = databaseConnection.getConnection();
+        try (Connection connect = databaseConnection.getConnection();
+                PreparedStatement prepState = connect.prepareStatement("DELETE from bike WHERE bikeID=?");) {
 
-            PreparedStatement prepState = connect.prepareStatement("DELETE from bike WHERE bikeID=?");
             prepState.setInt(1, bikeID);
             int rowsDeleted = prepState.executeUpdate();
 
-            connect.close();
             return rowsDeleted;
         } catch (SQLException e) {
             System.out.println(e.getMessage());
