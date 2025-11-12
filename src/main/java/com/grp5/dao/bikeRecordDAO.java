@@ -36,6 +36,31 @@ public class bikeRecordDAO {
     }
 
     // Read
+    public bikeRecordModel getBikeRecord(int bikeID) {
+        try {
+            Connection connect = databaseConnection.getConnection();
+            PreparedStatement prepState = connect.prepareStatement("SELECT * FROM bike WHERE ?");
+            prepState.setInt(1, bikeID);
+            ResultSet result = prepState.executeQuery();
+
+            while (result.next()) {
+
+            }
+
+            connect.close();
+            return null;
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            return null;
+        }
+    }
+
+    private bikeRecordModel extractBikeFromResultSet(ResultSet result) throws SQLException {
+        bikeRecordModel bikeRecord = new bikeRecordModel(result.getInt("bikeID"), result.getString("bikeModel"));
+        bikeRecord.setBranchIDNum(result.getInt("branchIDNum"));
+        // TO-DO : Modify SQL file to only store True or False
+        return bikeRecord;
+    }
 
     // Update
 
