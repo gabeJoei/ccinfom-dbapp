@@ -1,11 +1,11 @@
 package com.grp5.model;
 
 import java.math.BigDecimal;
-import java.sql.Timestamp;
-import java.time.Duration;
+//package
+import java.sql.*;
+import java.time.*;
 
 import com.grp5.utils.generalUtilities;
-
 
 public class transactionRecordModel {
 
@@ -116,15 +116,14 @@ if(duration.toHours()>24){
 return payment;
 }
     public String toString(){
-        return "Payment{"+
-                "paymentReferenceNumber="+ paymentReferenceNumber
+        return  "paymentReferenceNumber="+ paymentReferenceNumber
                 +",customerID="+customerAccountID
                 +",reservationReferenceNumber="+reservationReferenceNumber
                 +",branchID="+branchID
                 +",bikeID="+bikeID
                 +",paymentDate="+paymentDate
                 +",paymentAmount="+paymentAmount
-                +"\n}";
+                +"\n";
         
     }
 }
