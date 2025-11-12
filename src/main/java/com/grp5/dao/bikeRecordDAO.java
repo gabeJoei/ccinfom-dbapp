@@ -65,4 +65,19 @@ public class bikeRecordDAO {
     // Update
 
     // Delete
+    public int deleteBikeRecord(int bikeID) {
+        try {
+            Connection connect = databaseConnection.getConnection();
+
+            PreparedStatement prepState = connect.prepareStatement("DELETE from bike WHERE bikeID=?");
+            prepState.setInt(1, bikeID);
+            int rowsDeleted = prepState.executeUpdate();
+
+            connect.close();
+            return rowsDeleted;
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            return 0;
+        }
+    }
 }
