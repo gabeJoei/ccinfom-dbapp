@@ -12,9 +12,9 @@ public class bikeRecordDAO {
 
     // Create
     public int addBikeRecord(bikeRecordModel bikeRecord) {
+        String query = "INSERT INTO bike (bikeID,branchIDNum,bikeAvailability,bikeModel,hourlyRate,dailyRate) VALUES (?,?,?,?,?,?)";
         try (Connection connect = databaseConnection.getConnection();
-                PreparedStatement prepState = connect.prepareStatement(
-                        "INSERT INTO bike (bikeID,branchIDNum,bikeAvailability,bikeModel,hourlyRate,dailyRate) VALUES (?,?,?,?,?,?)");) {
+                PreparedStatement prepState = connect.prepareStatement(query);) {
             prepState.setInt(1, bikeRecord.getBikeID());
             prepState.setInt(2, bikeRecord.getBranchIDNum());
             prepState.setBoolean(3, bikeRecord.getBikeAvailability());
@@ -32,9 +32,9 @@ public class bikeRecordDAO {
 
     // Read
     public bikeRecordModel getBikeRecord(int bikeID) {
+        String query = "SELECT bikeID,branchIDNum,bikeAvailability,bikeModel,hourlyRate,dailyRate FROM bike WHERE bikeID=?";
         try (Connection connect = databaseConnection.getConnection();
-                PreparedStatement prepState = connect.prepareStatement(
-                        "SELECT bikeID,branchIDNum,bikeAvailability,bikeModel,hourlyRate,dailyRate FROM bike WHERE bikeID=?");) {
+                PreparedStatement prepState = connect.prepareStatement(query);) {
 
             prepState.setInt(1, bikeID);
             try (ResultSet result = prepState.executeQuery();) {
@@ -59,11 +59,32 @@ public class bikeRecordDAO {
     }
 
     // Update
+    public int updateBikeRecord(bikeRecordModel bikeRecord) {
+        String query = "UPDATE bike SET branchIDNum = ?, bikeAvailability = ?, bikeModel = ?, hourlyRate = ?, dailyRate = ? WHERE bikeID = ?";
+        try (Connection connect = databaseConnection.getConnection();
+                PreparedStatement prepState = connect.prepareStatement(query)) {
+
+            prepState.setInt(1, bikeRecord.getBranchIDNum());
+            prepState.setBoolean(2, bikeRecord.getBikeAvailability());
+            prepState.setString(3, bikeRecord.getBikeModel());
+            prepState.setBigDecimal(4, bikeRecord.getHourlyRate());
+            prepState.setBigDecimal(5, bikeRecord.getDailyRate());
+            prepState.setInt(6, bikeRecord.getBikeID());
+
+            int rowsAffected = prepState.executeUpdate();
+            return rowsAffected;
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            return 0;
+        }
+    }
 
     // Delete
     public int deleteBikeRecord(int bikeID) {
+        String query = "DELETE FROM bike WHERE bikeID=?";
         try (Connection connect = databaseConnection.getConnection();
-                PreparedStatement prepState = connect.prepareStatement("DELETE FROM bike WHERE bikeID=?");) {
+                PreparedStatement prepState = connect.prepareStatement(query);) {
 
             prepState.setInt(1, bikeID);
             int rowsDeleted = prepState.executeUpdate();
@@ -74,4 +95,10 @@ public class bikeRecordDAO {
             return 0;
         }
     }
+
+    // TO-DO: Create "nice-to-have" methods
+    // updateRates()
+    // updateBikeAvailability
+    // updateBikeModel
+    // updateBranch
 }
