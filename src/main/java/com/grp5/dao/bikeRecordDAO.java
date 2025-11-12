@@ -44,9 +44,10 @@ public class bikeRecordDAO {
             ResultSet result = prepState.executeQuery();
 
             while (result.next()) {
-
+                return extractBikeFromResultSet(result);
             }
 
+            result.close();
             connect.close();
             return null;
         } catch (SQLException e) {
@@ -58,7 +59,9 @@ public class bikeRecordDAO {
     private bikeRecordModel extractBikeFromResultSet(ResultSet result) throws SQLException {
         bikeRecordModel bikeRecord = new bikeRecordModel(result.getInt("bikeID"), result.getString("bikeModel"));
         bikeRecord.setBranchIDNum(result.getInt("branchIDNum"));
-        // TO-DO : Modify SQL file to only store True or False
+        bikeRecord.setBikeAvailability(result.getBoolean("bikeAvailability"));
+        bikeRecord.setHourlyRate(result.getBigDecimal("hourlyRate"));
+        bikeRecord.setDailyRate(result.getBigDecimal("dailyRate"));
         return bikeRecord;
     }
 
