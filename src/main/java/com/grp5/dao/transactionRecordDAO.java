@@ -57,6 +57,43 @@ public class transactionRecordDAO {
         return null;
     }
 
+     public int delTransactionRecordData(int paymentReferenceNum){
+        try{
+            Connection connect=databaseConnection.getConnection();
+            PreparedStatement prepState=connect.prepareStatement("DELETE FROM Payment WHERE paymentReferenceNum=?");
+            prepState.setInt(1,paymentReferenceNum);
+            prepState.executeUpdate();
+            prepState.close();
+            connect.close();
+            return 1;
+        }catch(SQLException e){
+            System.out.println(e.getMessage());
+            return 0;
+        }
+       
+    }
+    public int modifyTransactionRecordData(transactionRecordModel transaction){
+        String query="UPDATE payment SET customerID=?,reservationReferenceNum=?,bikeID=?,branchID=?,paymentDate=?,paymentAmount=? WHERE paymentReferenceNum=?";
+        try{
+            Connection connect=databaseConnection.getConnection();
+            PreparedStatement prepState=connect.prepareStatement(query); 
+            prepState.setInt(1,transaction.getCustomerAccountID());
+            prepState.setInt(2,transaction.getReservationReferenceNumber());
+            prepState.setInt(3,transaction.getBikeID());
+            prepState.setInt(4,transaction.getBrachID());
+            prepState.setTimestamp(5,transaction.getpaymentDate());
+            prepState.setBigDecimal(6, transaction.getPaymentAmount());
+            prepState.setInt(7,transaction.getPaymentReferenceNumber());
+            prepState.executeUpdate();
+            prepState.close();
+            connect.close();
+            return 1;
+        }catch(SQLException e){
+            System.out.println(e.getMessage());
+            return 0;
+        }
+    }
+
     public void paymentJoinCustomer(String columnName, int columnIVal, String columnSVal){
         //ArrayList<transactionRecordModel> transaction= new ArrayList<>();
         //transactionRecordModel transaction= new transactionRecordModel();
