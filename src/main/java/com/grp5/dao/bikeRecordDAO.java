@@ -1,5 +1,6 @@
 package com.grp5.dao;
 
+import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -96,9 +97,81 @@ public class bikeRecordDAO {
         }
     }
 
+    // ========== Just some additional methods =========
+
+    public int updateBikeRates(bikeRecordModel bikeRecord, BigDecimal hourlyRate, BigDecimal dailyRate) {
+        String query = "UPDATE bike SET hourlyRate=?, dailyRate=? WHERE bikeID=?";
+        try (Connection connect = databaseConnection.getConnection();
+                PreparedStatement prepState = connect.prepareStatement(query)) {
+
+            prepState.setBigDecimal(1, hourlyRate);
+            prepState.setBigDecimal(2, dailyRate);
+            prepState.setInt(3, bikeRecord.getBikeID());
+
+            int rowsAffected = prepState.executeUpdate();
+            return rowsAffected;
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            return 0;
+        }
+    }
+
+    public int updateBikeAvailability(bikeRecordModel bikeRecord, boolean bikeAvailability) {
+        String query = "UPDATE bike SET bikeAvailability=? WHERE bikeID=?";
+        try (Connection connect = databaseConnection.getConnection();
+                PreparedStatement prepState = connect.prepareStatement(query)) {
+
+            prepState.setBoolean(1, bikeAvailability);
+            prepState.setInt(2, bikeRecord.getBikeID());
+
+            int rowsAffected = prepState.executeUpdate();
+            return rowsAffected;
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            return 0;
+        }
+    }
+
+    public int updateBikeBranch(bikeRecordModel bikeRecord, int branchIDNum) {
+        String query = "UPDATE bike SET branchIDNum= WHERE bikeID=?";
+        try (Connection connect = databaseConnection.getConnection();
+                PreparedStatement prepState = connect.prepareStatement(query)) {
+
+            prepState.setInt(1, branchIDNum);
+            prepState.setInt(2, bikeRecord.getBikeID());
+
+            int rowsAffected = prepState.executeUpdate();
+            return rowsAffected;
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            return 0;
+        }
+    }
+
+    public boolean isAvailable(bikeRecordModel bikeRecord) {
+        String query = "SELECT bikeAvailability FROM bike WHERE bikeID=?";
+        try (Connection connect = databaseConnection.getConnection();
+                PreparedStatement prepState = connect.prepareStatement(query)) {
+
+            prepState.setInt(1, bikeRecord.getBikeID());
+
+            try (ResultSet result = prepState.executeQuery();) {
+                if (result.next()) {
+                    return result.getBoolean("bikeAvailability");
+                }
+            }
+
+            return false;
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            return false;
+        }
+    }
+
     // TO-DO: Create "nice-to-have" methods
-    // updateRates()
-    // updateBikeAvailability
-    // updateBikeModel
-    // updateBranch
+    // [/] updateRates()
+    // [/] updateBikeAvailability
+    // [/] updateBranch
+    // [/] checkBikeAvailability
+    // [] updateBikeModel
 }
