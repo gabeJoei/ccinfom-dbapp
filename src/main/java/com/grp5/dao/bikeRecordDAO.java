@@ -37,14 +37,11 @@ public class bikeRecordDAO {
                         "SELECT bikeID,branchIDNum,bikeAvailability,bikeModel,hourlyRate,dailyRate FROM bike WHERE bikeID=?");) {
 
             prepState.setInt(1, bikeID);
-            ResultSet result = prepState.executeQuery();
-
-            if (result.next()) {
-                return extractBikeFromResultSet(result);
+            try (ResultSet result = prepState.executeQuery();) {
+                if (result.next()) {
+                    return extractBikeFromResultSet(result);
+                }
             }
-
-            result.close();
-            connect.close();
             return null;
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -66,7 +63,7 @@ public class bikeRecordDAO {
     // Delete
     public int deleteBikeRecord(int bikeID) {
         try (Connection connect = databaseConnection.getConnection();
-                PreparedStatement prepState = connect.prepareStatement("DELETE from bike WHERE bikeID=?");) {
+                PreparedStatement prepState = connect.prepareStatement("DELETE FROM bike WHERE bikeID=?");) {
 
             prepState.setInt(1, bikeID);
             int rowsDeleted = prepState.executeUpdate();
