@@ -9,7 +9,6 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.application.Platform;
 import javafx.scene.*;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
@@ -22,7 +21,7 @@ public class App extends Application {
     private static Scene scene;
 
     @Override
-    public void start(Stage stage) throws IOException {
+    public void start(Stage primaryStage) throws IOException {
 
         // 1. Test database connection
         Connection conn = databaseConnection.getConnection();
@@ -43,23 +42,16 @@ public class App extends Application {
             return;
         }
 
-        /*
-         * // This is the standard JavaFX code to load your UI
-         * scene = new Scene(loadFXML("primary"), 640, 480);
-         * stage.setScene(scene);
-         * stage.setTitle("My Bike App"); // Set your app title
-         * stage.show();
-         */
+        String fxmlFile = "/com/grp5/primary.fxml";
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlFile));
+        Parent root = loader.load();
+
     }
 
-    /*
-     * // This method is for loading your .fxml UI file
-     * private static Parent loadFXML(String fxml) throws IOException {
-     * FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource(fxml +
-     * ".fxml"));
-     * return fxmlLoader.load();
-     * }
-     */
+    private static Parent loadFXML(String fxml) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource(fxml + ".fxml"));
+        return fxmlLoader.load();
+    }
 
     // This is the new "main" method. Its ONLY job is to launch the JavaFX app.
     public static void main(String[] args) {

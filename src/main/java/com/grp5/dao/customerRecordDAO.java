@@ -10,12 +10,12 @@ import com.grp5.utils.databaseConnection;
 
 public class customerRecordDAO {
 
-    // CREATE 
-    public boolean addCustomerRecordData(customerRecordModel customer){
-        String query = "INSERT INTO customer (customerAccID,lastName,firstName,customerEmail,phoneNumber,customerPass) VALUES (?,?,?,?,?,?)";
-        try (Connection connect=databaseConnection.getConnection();  
-            PreparedStatement prepState=connect.prepareStatement(query)) {
-            
+    // CREATE
+    public boolean addCustomerRecordData(customerRecordModel customer) {
+        String query = "INSERT INTO customer (customerAccID,lastName,firstName,email,phoneNum,customerPass) VALUES (?,?,?,?,?,?)";
+        try (Connection connect = databaseConnection.getConnection();
+                PreparedStatement prepState = connect.prepareStatement(query)) {
+
             prepState.setInt(1, customer.getCustomerAccID());
             prepState.setString(2, customer.getLastName());
             prepState.setString(3, customer.getFirstName());
@@ -28,29 +28,29 @@ public class customerRecordDAO {
             prepState.close();
             connect.close();
             return true;
-        }catch(SQLException e){
+        } catch (SQLException e) {
             System.out.println(e.getMessage());
             return false;
         }
     }
 
     // READ
-    public customerRecordModel getCustomerRecordData(customerRecordModel customer){
+    public customerRecordModel getCustomerRecordData(customerRecordModel customer) {
         String query = "SELECT * FROM customer WHERE customerAccID=?";
-        try (Connection connect=databaseConnection.getConnection(); 
-            PreparedStatement prepState=connect.prepareStatement(query)) {
+        try (Connection connect = databaseConnection.getConnection();
+                PreparedStatement prepState = connect.prepareStatement(query)) {
 
             prepState.setInt(1, customer.getCustomerAccID());
 
-            ResultSet result=prepState.executeQuery(); 
-            while (result.next()){
+            ResultSet result = prepState.executeQuery();
+            while (result.next()) {
                 return extractCustomerFromResultSet(result);
             }
-            
+
             result.close();
             prepState.close();
             connect.close();
-        }catch(SQLException e){
+        } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
         return null;
@@ -59,30 +59,30 @@ public class customerRecordDAO {
     // READ - CUSTOMER TRANSACTION
     public customerRecordModel getCustomerTransaction(customerRecordModel customer) {
         String query = "SELECT * FROM customer C JOIN payment P ON C.customerAccID=P.customerAccID WHERE C.customerAccID=?";
-        try (Connection connect=databaseConnection.getConnection(); 
-            PreparedStatement prepState=connect.prepareStatement(query)) {
+        try (Connection connect = databaseConnection.getConnection();
+                PreparedStatement prepState = connect.prepareStatement(query)) {
             prepState.setInt(1, customer.getCustomerAccID());
 
             ResultSet result = prepState.executeQuery();
-            while(result.next()) {
+            while (result.next()) {
                 return extractCustomerFromResultSet(result);
             }
 
             result.close();
             prepState.close();
             connect.close();
-        }catch(SQLException e) {
+        } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
         return null;
     }
 
-    // UPDATE 
-    public boolean modifyCustomerRecordData(customerRecordModel customer){
+    // UPDATE
+    public boolean modifyCustomerRecordData(customerRecordModel customer) {
         String query = "UPDATE Customer SET lastName=?, firstName=?, email=?, phoneNum=?, customerPass=?, WHERE customerAccID=?";
-        try (Connection connect=databaseConnection.getConnection(); 
-            PreparedStatement prepState=connect.prepareStatement(query)){
-            
+        try (Connection connect = databaseConnection.getConnection();
+                PreparedStatement prepState = connect.prepareStatement(query)) {
+
             prepState.setString(1, customer.getLastName());
             prepState.setString(2, customer.getFirstName());
             prepState.setString(3, customer.getEmail());
@@ -94,25 +94,25 @@ public class customerRecordDAO {
             prepState.close();
             connect.close();
             return true;
-        }catch(SQLException e){
+        } catch (SQLException e) {
             System.out.println(e.getMessage());
             return false;
         }
     }
 
-    // DELETE 
-    public boolean delCustomerRecordData(int customerAccID){
+    // DELETE
+    public boolean delCustomerRecordData(int customerAccID) {
         String query = "DELETE FROM Customer WHERE customerAccID=?";
-        try (Connection connect=databaseConnection.getConnection(); 
-            PreparedStatement prepState=connect.prepareStatement(query)){
+        try (Connection connect = databaseConnection.getConnection();
+                PreparedStatement prepState = connect.prepareStatement(query)) {
 
-            prepState.setInt(1,customerAccID);
+            prepState.setInt(1, customerAccID);
 
             prepState.executeUpdate();
             prepState.close();
             connect.close();
             return true;
-        }catch(SQLException e){
+        } catch (SQLException e) {
             System.out.println(e.getMessage());
             return false;
         }
@@ -129,4 +129,3 @@ public class customerRecordDAO {
         return customerModel;
     }
 }
-

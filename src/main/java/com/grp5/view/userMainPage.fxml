@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.canvas.Canvas?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<TitledPane animated="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" text="untitled" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/25">
+  <content>
+    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: orange;">
+         <children>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="100.0" layoutX="-1.0" stroke="BLACK" strokeType="INSIDE" width="600.0" />
+            <Circle fill="DODGERBLUE" layoutX="60.0" layoutY="50.0" radius="36.0" stroke="BLACK" strokeType="INSIDE" />
+            <Text layoutX="109.0" layoutY="46.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name:" />
+            <Text layoutX="109.0" layoutY="63.0" strokeType="OUTSIDE" strokeWidth="0.0" text="User ID:" />
+            <Text layoutX="150.0" layoutY="46.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Holder_For_Name" />
+            <Text layoutX="158.0" layoutY="63.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Holder_For_UserID" />
+            <Canvas height="109.0" layoutX="26.0" layoutY="147.0" width="96.0" />
+            <Button layoutX="482.0" layoutY="37.0" mnemonicParsing="false" text="Profile" />
+            <Circle fill="DODGERBLUE" layoutX="561.0" layoutY="50.0" radius="22.0" stroke="BLACK" strokeType="INSIDE" />
+            <Text layoutX="61.0" layoutY="144.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Reserve A Bike">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Text>
+            <Text layoutX="261.0" layoutY="144.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rent A Bike">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Text>
+            <Text layoutX="446.0" layoutY="143.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rental History">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Text>
+            <Circle fill="DODGERBLUE" layoutX="109.0" layoutY="218.0" radius="61.0" stroke="BLACK" strokeType="INSIDE" />
+            <Button layoutX="62.0" layoutY="297.0" mnemonicParsing="false" text="Reserve A Bike" />
+            <Circle fill="DODGERBLUE" layoutX="299.0" layoutY="218.0" radius="61.0" stroke="BLACK" strokeType="INSIDE" />
+            <Button layoutX="279.0" layoutY="297.0" mnemonicParsing="false" text="Bike" />
+            <Button layoutX="465.0" layoutY="297.0" mnemonicParsing="false" text="History" />
+            <Circle fill="DODGERBLUE" layoutX="492.0" layoutY="218.0" radius="61.0" stroke="BLACK" strokeType="INSIDE" />
+         </children></AnchorPane>
+  </content>
+</TitledPane>
