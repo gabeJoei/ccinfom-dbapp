@@ -67,8 +67,7 @@ public class bikeReservationDAO {
             pstmt.setTimestamp(3, reservation.getReservationDate());
             pstmt.setTimestamp(4, reservation.getStartDate());
             pstmt.setTimestamp(5, reservation.getEndDate());
-            pstmt.setTimestamp(6, reservation.getDateReturned() != null ? Timestamp.valueOf(reservation.getDateReturned()) : null);
-            pstmt.setString(7, reservation.getStatus());
+            pstmt.setTimestamp(6, reservation.getDateReturned());
             pstmt.setInt(8, reservation.getBranchID());
             pstmt.setInt(9, reservation.getReservationReferenceNum());
 
@@ -125,7 +124,7 @@ public class bikeReservationDAO {
         reservation.setReservationDate(rs.getTimestamp("reservationDate"));
         reservation.setStartDate(rs.getTimestamp("startDate"));
         reservation.setEndDate(rs.getTimestamp("endDate"));
-        reservation.setDateReturned(rs.getTimestamp("dateReturned") != null ? rs.getTimestamp("dateReturned").toString() : null);
+        reservation.setDateReturned(rs.getTimestamp("dateReturned"));
         reservation.setStatus(rs.getString("reservationStatus"));
         return reservation;
     }

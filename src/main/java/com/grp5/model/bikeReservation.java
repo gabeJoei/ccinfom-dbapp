@@ -10,7 +10,7 @@ public class bikeReservation {
     private Timestamp reservationDate;
     private Timestamp startDate;
     private Timestamp endDate;
-    private String dateReturned; // ENUM: 'inUse' or 'returned
+    private Timestamp dateReturned;
     private String status; 
     
     // Empty constructor
@@ -19,7 +19,7 @@ public class bikeReservation {
     // Full constructor
     public bikeReservation(int reservationReferenceNum, int customerAccID, 
                           int bikeID, int branchID, Timestamp reservationDate, 
-                          Timestamp startDate, Timestamp endDate, String dateReturned) {
+                          Timestamp startDate, Timestamp endDate, Timestamp dateReturned) {
         this.reservationReferenceNum = reservationReferenceNum;
         this.customerAccID = customerAccID;
         this.bikeID = bikeID;
@@ -38,7 +38,7 @@ public class bikeReservation {
     public Timestamp getReservationDate() { return reservationDate; }
     public Timestamp getStartDate() { return startDate; }
     public Timestamp getEndDate() { return endDate; }
-    public String getDateReturned() { return dateReturned; }
+    public Timestamp getDateReturned() { return dateReturned; }
     public String getStatus(){return status;}
     
     // Setters
@@ -63,7 +63,7 @@ public class bikeReservation {
     public void setEndDate(Timestamp endDate) {
         this.endDate = endDate;
     }
-    public void setDateReturned(String dateReturned) {
+    public void setDateReturned(Timestamp dateReturned) {
         this.dateReturned = dateReturned;
     }
     public void setStatus(String status){
@@ -84,3 +84,7 @@ public class bikeReservation {
                 '}';
     }
 }
+
+
+
+
