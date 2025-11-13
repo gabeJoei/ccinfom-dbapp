@@ -1,34 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.Group?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.control.TitledPane?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<TitledPane animated="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" text="untitled" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/25">
-  <content>
-    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: orange;">
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: orange;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Group layoutX="149.0" layoutY="11.0">
          <children>
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="377.0" layoutX="-3.0" layoutY="-1.0" stroke="BLACK" strokeType="INSIDE" width="303.0" />
-            <Text layoutX="95.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sign Up" wrappingWidth="106.79461669921875">
-               <font>
-                  <Font size="29.0" />
-               </font>
-            </Text>
-            <Text layoutX="20.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Enter Full Name" />
-            <TextField layoutX="20.0" layoutY="80.0" prefHeight="25.0" prefWidth="259.0" />
-            <Text layoutX="20.0" layoutY="128.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Enter Password" />
-            <TextField layoutX="20.0" layoutY="131.0" prefHeight="25.0" prefWidth="259.0" />
-            <Text layoutX="20.0" layoutY="179.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Re-Enter Password" />
-            <TextField layoutX="20.0" layoutY="182.0" prefHeight="25.0" prefWidth="260.0" />
-            <Text layoutX="20.0" layoutY="229.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Enter your Email Account:" />
-            <TextField layoutX="20.0" layoutY="232.0" prefHeight="25.0" prefWidth="259.0" />
-            <Text layoutX="20.0" layoutY="280.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Enter your Phone Number:" />
-            <TextField layoutX="20.0" layoutY="283.0" prefHeight="25.0" prefWidth="261.0" />
-            <Button layoutX="120.0" layoutY="320.0" mnemonicParsing="false" text="SIGN UP" />
-         </children></AnchorPane>
-  </content>
-</TitledPane>
+            <AnchorPane layoutX="3.0" layoutY="1.0" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: orange;">
+               <children>
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="377.0" layoutX="-3.0" layoutY="-1.0" stroke="BLACK" strokeType="INSIDE" width="303.0" />
+                  <Text layoutX="95.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sign Up" wrappingWidth="106.79461669921875">
+                     <font>
+                        <Font size="29.0" />
+                     </font>
+                  </Text>
+                  <Text layoutX="20.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Enter Full Name" />
+                  <TextField layoutX="20.0" layoutY="80.0" prefHeight="25.0" prefWidth="259.0" />
+                  <Text layoutX="20.0" layoutY="128.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Enter Password" />
+                  <TextField layoutX="20.0" layoutY="131.0" prefHeight="25.0" prefWidth="259.0" />
+                  <Text layoutX="20.0" layoutY="179.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Re-Enter Password" />
+                  <TextField layoutX="20.0" layoutY="182.0" prefHeight="25.0" prefWidth="260.0" />
+                  <Text layoutX="20.0" layoutY="229.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Enter your Email Account:" />
+                  <TextField layoutX="20.0" layoutY="232.0" prefHeight="25.0" prefWidth="259.0" />
+                  <Text layoutX="20.0" layoutY="280.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Enter your Phone Number:" />
+                  <TextField layoutX="20.0" layoutY="283.0" prefHeight="25.0" prefWidth="261.0" />
+                  <Button layoutX="120.0" layoutY="320.0" mnemonicParsing="false" text="SIGN UP" />
+               </children>
+            </AnchorPane>
+         </children>
+      </Group>
+   </children>
+</AnchorPane>

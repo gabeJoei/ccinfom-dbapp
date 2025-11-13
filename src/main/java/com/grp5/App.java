@@ -25,49 +25,34 @@ public class App extends Application {
 
         // 1. Test database connection
         Connection conn = databaseConnection.getConnection();
-        if (conn != null) {
-            System.out.println("Connected to the database successfully!");
-            System.out.println("AMEN");
-            
-        } else {
-            System.out.println("Failed to connect to the database.");
-
-            // Show error pop-up
+        if (conn == null) {
             Alert alert = new Alert(AlertType.ERROR);
             alert.setTitle("Database Connection Error");
             alert.setHeaderText("Failed to connect to the database.");
             alert.setContentText("Please ensure the MySQL server is running and credentials are set.");
             alert.showAndWait();
 
-            // Quit
             Platform.exit();
             return;
         }
-        System.out.println("Here?");
-        String fxmlFile = "/com/grp5/view/admin_or_user.fxml";
         
+        String fxmlFile = "/com/grp5/view/logIn.fxml";   
         FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlFile));
-        
         Parent root = loader.load();
         Scene scene = new Scene(root);
         primaryStage.setTitle("CCINFOM Application");
         primaryStage.setScene(scene);
         primaryStage.show();
-
-        System.out.println(" JavaFX UI loaded successfully.");
     }
 
     private static Parent loadFXML(String fxml) throws IOException {
-        
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource(fxml + ".fxml"));
         return fxmlLoader.load();
     }
 
     // This is the new "main" method. Its ONLY job is to launch the JavaFX app.
     public static void main(String[] args) {
-        
         launch(args);
-        System.out.println("HELLO FUCKING WORLD");
     }
 
 
