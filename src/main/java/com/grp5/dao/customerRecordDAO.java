@@ -12,7 +12,7 @@ public class customerRecordDAO {
 
     // CREATE
     public boolean addCustomerRecordData(customerRecordModel customer) {
-        String query = "INSERT INTO customer (customerAccID,lastName,firstName,email,phoneNum,customerPass) VALUES (?,?,?,?,?,?)";
+        String query = "INSERT INTO customer (customerAccID,lastName,firstName,customerEmail,phoneNumber,customerPass) VALUES (?,?,?,?,?,?)";
         try (Connection connect = databaseConnection.getConnection();
                 PreparedStatement prepState = connect.prepareStatement(query)) {
 
@@ -79,7 +79,7 @@ public class customerRecordDAO {
 
     // UPDATE
     public boolean modifyCustomerRecordData(customerRecordModel customer) {
-        String query = "UPDATE Customer SET lastName=?, firstName=?, email=?, phoneNum=?, customerPass=?, WHERE customerAccID=?";
+        String query = "UPDATE Customer SET lastName=?, firstName=?, customerEmail=?, phoneNumber=?, customerPass=?, WHERE customerAccID=?";
         try (Connection connect = databaseConnection.getConnection();
                 PreparedStatement prepState = connect.prepareStatement(query)) {
 
@@ -124,8 +124,9 @@ public class customerRecordDAO {
         customerModel.setCustomerAccID(result.getInt("customerAccID"));
         customerModel.setLastName(result.getString("lastName"));
         customerModel.setFirstName(result.getString("firstName"));
-        customerModel.setEmail(result.getString("email"));
-        customerModel.setPhoneNum(result.getString("phoneNum"));
+        customerModel.setEmail(result.getString("customerEmail"));
+        customerModel.setPhoneNum(result.getString("phoneNumber"));
+        customerModel.setCustomerPass(result.getString("customerPass"));
         return customerModel;
     }
 }
