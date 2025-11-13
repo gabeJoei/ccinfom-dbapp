@@ -21,7 +21,7 @@ public class UserSideController {
 
     //checks if there is an email and password already in the database matching the input.
     public customerRecordModel loginChecker(String inputedEmail, String inputedPass){
-        String query="SELECT * FROM customer WHERE customerEmail=? AND password=?";
+        String query="SELECT * FROM customer WHERE customerEmail=? AND customerPass=?";
         customerRecordModel user=new customerRecordModel();
         try(Connection connect=databaseConnection.getConnection();
         PreparedStatement prepState=connect.prepareStatement(query)){

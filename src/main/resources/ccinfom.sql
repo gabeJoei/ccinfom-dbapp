@@ -18,6 +18,7 @@
 --
 -- Table structure for table `bike`
 --
+use ccinfom;
 
 DROP TABLE IF EXISTS `bike`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
