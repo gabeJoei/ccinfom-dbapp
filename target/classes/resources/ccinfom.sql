@@ -19,9 +19,6 @@
 -- Table structure for table `bike`
 --
 
-CREATE DATABASE IF NOT EXISTS ccinfom DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-USE ccinfom;
-
 DROP TABLE IF EXISTS `bike`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
@@ -204,4 +201,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-11-13  9:49:54
+-- Dump completed on 2025-11-13 10:13:28
