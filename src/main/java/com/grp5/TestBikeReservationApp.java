@@ -12,7 +12,7 @@ import javafx.stage.Stage;
  * Test Application for Bike Reservation Controller
  * Launches the Bike Reservation Management interface
  */
-public class TestBikeReservationApp extends Application {
+public class App extends Application {
     
     @Override
     public void start(Stage primaryStage) {
@@ -32,7 +32,7 @@ public class TestBikeReservationApp extends Application {
             // Load FXML
             // The FXML is now at /com/grp5/controller/bikeReservationView.fxml
             FXMLLoader fxmlLoader = new FXMLLoader(
-                TestBikeReservationApp.class.getResource("/com/grp5/controller/bikeReservationView.fxml")
+                App.class.getResource("/com/grp5/view/bikeReservationView.fxml")
             ); 
             Parent root = fxmlLoader.load();
 
