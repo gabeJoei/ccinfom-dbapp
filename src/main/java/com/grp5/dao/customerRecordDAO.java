@@ -12,7 +12,7 @@ public class customerRecordDAO {
 
     // CREATE 
     public boolean addCustomerRecordData(customerRecordModel customer){
-        String query = "INSERT INTO customer (customerAccID,lastName,firstName,email,phoneNum,customerPass) VALUES (?,?,?,?,?,?)";
+        String query = "INSERT INTO customer (customerAccID,lastName,firstName,customerEmail,phoneNumber,customerPass) VALUES (?,?,?,?,?,?)";
         try (Connection connect=databaseConnection.getConnection();  
             PreparedStatement prepState=connect.prepareStatement(query)) {
             

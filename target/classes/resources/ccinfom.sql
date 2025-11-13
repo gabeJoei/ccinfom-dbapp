@@ -95,6 +95,7 @@ CREATE TABLE `customer` (
 
 LOCK TABLES `customer` WRITE;
 /*!40000 ALTER TABLE `customer` DISABLE KEYS */;
+INSERT INTO `customer` VALUES (100001,'Gabrielle','Bactong','gjbac@gmail.com','09761245576','jaifhe9872'),(100002,'Grant','Rosas','grantrosasc@gmail.com','09826123556','ndaki&827'),(100003,'Cath','Gunita','gunita@gmail.com','09726876596','ajshdakdsd'),(100004,'Ilagan','Ian','ilagan@gmail.com','09876752253','asdj*(*@(');
 /*!40000 ALTER TABLE `customer` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -200,4 +201,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-11-12  0:49:24
+-- Dump completed on 2025-11-13  9:49:54
