@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <?import javafx.scene.Group?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -7,24 +6,34 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.shape.Rectangle?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" 
+            prefHeight="400.0" prefWidth="600.0" 
+            xmlns="http://javafx.com/javafx/25" 
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.grp5.controller.adminOrUserController">
    <children>
       <Group layoutX="336.0" layoutY="96.0" />
       <HBox layoutX="72.0" layoutY="60.0" prefHeight="100.0" prefWidth="200.0" spacing="70.0">
          <children>
+            <!-- Admin Group -->
             <Group>
                <children>
                   <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="279.0" stroke="BLACK" strokeType="INSIDE" width="200.0" />
                   <Circle fill="DODGERBLUE" layoutX="99.0" layoutY="88.0" radius="64.0" stroke="BLACK" strokeType="INSIDE" />
-                  <Button layoutX="72.0" layoutY="205.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="55.0" text="Admin" />
+                  <Button fx:id="btnAdmin" layoutX="72.0" layoutY="205.0" mnemonicParsing="false" 
+                          prefHeight="25.0" prefWidth="55.0" text="Admin" 
+                          onAction="#handleAdminClick" />
                </children>
             </Group>
+            
+            <!-- User Group -->
             <Group layoutX="10.0" layoutY="10.0">
                <children>
                   <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="279.0" stroke="BLACK" strokeType="INSIDE" width="200.0" />
                   <Circle fill="DODGERBLUE" layoutX="99.0" layoutY="88.0" radius="64.0" stroke="BLACK" strokeType="INSIDE" />
-                  <Button layoutX="73.0" layoutY="204.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="55.0" text="User" />
+                  <Button fx:id="btnUser" layoutX="73.0" layoutY="204.0" mnemonicParsing="false" 
+                          prefHeight="25.0" prefWidth="55.0" text="User" 
+                          onAction="#handleUserClick" />
                </children>
             </Group>
          </children>

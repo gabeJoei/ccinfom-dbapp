@@ -129,4 +129,41 @@ public class customerRecordDAO {
         customerModel.setCustomerPass(result.getString("customerPass"));
         return customerModel;
     }
+
+    // Add to customerRecordDAO.java
+
+/**
+ * Authenticate customer by email and password
+ * @param email Customer email
+ * @param password Customer password
+ * @return customerRecordModel if authenticated, null otherwise
+ */
+public customerRecordModel authenticateCustomer(String email, String password) {
+    String sql = "SELECT * FROM customer WHERE customerEmail = ? AND customerPass = ?";
+    
+    try (Connection conn = databaseConnection.getConnection();
+         PreparedStatement pstmt = conn.prepareStatement(sql)) {
+        
+        pstmt.setString(1, email);
+        pstmt.setString(2, password); // In production, use hashed passwords!
+        
+        ResultSet rs = pstmt.executeQuery();
+        
+        if (rs.next()) {
+            customerRecordModel customer = new customerRecordModel();
+            customer.setCustomerAccID(rs.getInt("customerAccID"));
+            customer.setFirstName(rs.getString("firstName"));
+            customer.setLastName(rs.getString("lastName"));
+            customer.setEmail(rs.getString("customerEmail"));
+            customer.setPhoneNum(rs.getString("phoneNumber"));
+            return customer;
+        }
+        
+    } catch (SQLException e) {
+        System.err.println("Authentication error: " + e.getMessage());
+        e.printStackTrace();
+    }
+    
+    return null;
+}
 }
