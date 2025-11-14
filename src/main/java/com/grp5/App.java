@@ -8,39 +8,73 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 /**
- * Test Application for Login
+ * Test Application for Admin or User Selection Screen
+ * Tests the initial selection interface
  */
 public class App extends Application {
     
     @Override
     public void start(Stage primaryStage) {
         try {
-            // Test database connection
+            // Test database connection first
             System.out.println("Testing database connection...");
-            if (!databaseConnection.testConnection()) {
-                System.err.println("❌ Database connection failed!");
+            if (databaseConnection.testConnection()) {
+                System.out.println("✓ Database connected successfully!\n");
+            } else {
+                System.out.println("⚠️  Database not connected (optional for this screen)\n");
             }
             
-            Parent root = FXMLLoader.load(getClass().getResource("/com/grp5/view/login.fxml"));
+            // Load admin_or_user.fxml
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/grp5/view/admin_or_user.fxml"));
+            Parent root = loader.load();
             
+            // Setup scene
             Scene scene = new Scene(root, 600, 400);
-            primaryStage.setTitle("Login - Bike Rental System");
+            
+            primaryStage.setTitle("Bike Rental System - Select User Type");
             primaryStage.setScene(scene);
+            primaryStage.setResizable(false);
             primaryStage.show();
             
-            System.out.println("✓ Login screen loaded");
+            System.out.println("✓ Admin or User selection screen loaded successfully!");
+            System.out.println("\nInstructions:");
+            System.out.println("  - Click 'Admin' button to go to admin interface");
+            System.out.println("  - Click 'User' button to go to user interface");
             
         } catch (Exception e) {
-            System.err.println("❌ Error loading login.fxml:");
+            System.err.println("❌ Error loading admin_or_user.fxml:");
             e.printStackTrace();
+            
+            System.err.println("\nPossible issues:");
+            System.err.println("  1. File not found at: /com/grp5/view/admin_or_user.fxml");
+            System.err.println("  2. Controller class name mismatch");
+            System.err.println("  3. FXML syntax error");
         }
     }
     
+    @Override
+    public void stop() {
+        // Clean up when application closes
+        databaseConnection.closeConnection();
+        System.out.println("\n✓ Application closed.");
+    }
+    
     public static void main(String[] args) {
-        System.out.println("╔════════════════════════════════════════╗");
-        System.out.println("║         LOGIN SCREEN TEST              ║");
-        System.out.println("╚════════════════════════════════════════╝\n");
-        
+        printHeader();
         launch(args);
+    }
+    
+    /**
+     * Print application header
+     */
+    private static void printHeader() {
+        System.out.println("╔════════════════════════════════════════╗");
+        System.out.println("║   ADMIN OR USER SELECTION TEST         ║");
+        System.out.println("║                                        ║");
+        System.out.println("║   Testing: admin_or_user.fxml          ║");
+        System.out.println("║   Controller: AdminOrUserController    ║");
+        System.out.println("║                                        ║");
+        System.out.println("╚════════════════════════════════════════╝");
+        System.out.println();
     }
 }

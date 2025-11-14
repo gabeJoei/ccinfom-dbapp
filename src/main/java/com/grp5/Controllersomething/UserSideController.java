@@ -1,4 +1,4 @@
-package com.grp5.controller;
+package com.grp5.Controllersomething;
 import com.grp5.model.customerRecordModel;
 import com.grp5.utils.databaseConnection;
 import java.sql.*;
