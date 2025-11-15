@@ -43,7 +43,7 @@ public class loginController {
     public void initialize() {
         customerDAO = new customerRecordDAO();
         System.out.println("loginController initialized");
-        
+        lblMessage.setVisible(false);
         // Clear message on focus
         txtUsername.setOnMouseClicked(e -> lblMessage.setText(""));
         System.out.println("Connected");
@@ -172,6 +172,7 @@ public class loginController {
      * Show message to user
      */
     private void showMessage(String message, String type) {
+        lblMessage.setVisible(true);
         lblMessage.setText(message);
         
         if (type.equals("success")) {

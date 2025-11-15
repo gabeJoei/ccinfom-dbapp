@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1065.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="150.0" stroke="BLACK" strokeType="INSIDE" width="1065.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#88b9e6" height="43.0" layoutY="150.0" stroke="BLACK" strokeType="INSIDE" width="1065.0" />
+      <Text layoutX="14.0" layoutY="179.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Branch">
+         <font>
+            <Font name="Bodoni MT" size="24.0" />
+         </font>
+      </Text>
+      <VBox layoutX="14.0" layoutY="200.0" prefHeight="389.0" prefWidth="1041.0" spacing="20.0">
+         <children>
+            <HBox alignment="CENTER_LEFT" prefHeight="31.0" prefWidth="1041.0" spacing="20.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Enter branch ID:">
+                     <font>
+                        <Font name="Bell MT" size="18.0" />
+                     </font>
+                  </Text>
+                  <TextField />
+                  <Button mnemonicParsing="false" text="Enter" />
+               </children>
+            </HBox>
+            <TableView prefHeight="310.0" prefWidth="1041.0">
+               <columns>
+                  <TableColumn prefWidth="75.0" text="Branch ID" />
+                  <TableColumn prefWidth="75.0" text="Branch Name" />
+                  <TableColumn prefWidth="75.0" text="Branch Address" />
+                  <TableColumn prefWidth="75.0" text="Location ID" />
+               </columns>
+               <columnResizePolicy>
+                  <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+               </columnResizePolicy>
+            </TableView>
+            <HBox alignment="CENTER" layoutX="10.0" layoutY="110.0" prefHeight="30.0" prefWidth="1041.0" spacing="30.0">
+               <children>
+                  <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="95.0" text="Update" />
+                  <Button layoutX="65.0" layoutY="10.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="95.0" text="View Details" />
+                  <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="95.0" text="Delete" />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>
