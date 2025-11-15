@@ -22,7 +22,7 @@ public class customerRecordModel {
         this.customerPass = customerPass;
     }
 
-    // ============ Setters ============
+    //  Setters 
     public void setCustomerAccID(int customerAccID) {
         this.customerAccID = customerAccID;
     }
@@ -47,7 +47,7 @@ public class customerRecordModel {
         this.customerPass = customerPass;
     }
 
-    // ============ Getters ============
+    //  Getters 
     public int getCustomerAccID() { return this.customerAccID; }
     public String getFirstName() { return this.firstName; }
     public String getLastName() { return this.lastName; }
