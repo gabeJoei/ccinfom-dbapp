@@ -11,6 +11,11 @@ public class customerRecordModel {
     // empty constructor
     public customerRecordModel() {}
 
+    public customerRecordModel(int customerAccID) {
+    this.customerAccID = customerAccID;
+}
+
+
     // full constructor
     public customerRecordModel(int customerAccID, String firstName, String lastName, 
                                 String email, String phoneNum, String customerPass){
