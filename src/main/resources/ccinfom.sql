@@ -72,6 +72,28 @@ LOCK TABLES `branch` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table 'admin'
+--
+DROP TABLE IF EXISTS `admin`;
+CREATE TABLE `admin` (
+  `adminID` int NOT NULL AUTO_INCREMENT,
+  `adminUsername` varchar(45) NOT NULL UNIQUE,
+  `adminPassword` varchar(255) NOT NULL,
+  `adminEmail` varchar(45) NOT NULL,
+  `adminFirstName` varchar(45) NOT NULL,
+  `adminLastName` varchar(45) NOT NULL,
+  PRIMARY KEY (`adminID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+
+-- Insert default admin accounts
+INSERT INTO `admin` (adminUsername, adminPassword, adminEmail, adminFirstName, adminLastName) VALUES
+('admin', 'admin123', 'admin@bikerental.com', 'System', 'Administrator'),
+('manager1', 'manager123', 'manager1@bikerental.com', 'Branch', 'Manager'),
+('staff1', 'staff123', 'staff1@bikerental.com', 'Staff', 'Member');
+
+
+
+--
 -- Table structure for table `customer`
 --
 
