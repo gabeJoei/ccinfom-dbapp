@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="242.0" 
+xmlns="http://javafx.com/javafx" 
+xmlns:fx="http://javafx.com/fxml"
+fx:controller="com.grp5.controller.MainDashBoardUserController">
+   <children>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e1dbdb" height="600.0" stroke="BLACK" strokeType="INSIDE" width="242.0" />
+      <Button layoutX="24.0" layoutY="354.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="203.0" text="Profile" />
+      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="47.0" layoutY="98.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@images/userProfile.png" />
+         </image>
+      </ImageView>
+      <Button layoutX="24.0" layoutY="398.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="203.0" text="Reservations" />
+      <Button layoutX="24.0" layoutY="447.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="203.0" text="Rental History" />
+      <Button layoutX="18.0" layoutY="552.0" mnemonicParsing="false" text="Log Out" />
+      <Text layoutX="24.0" layoutY="289.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name:">
+         <font>
+            <Font name="Bodoni MT" size="14.0" />
+         </font>
+      </Text>
+      <Text layoutX="24.0" layoutY="314.0" strokeType="OUTSIDE" strokeWidth="0.0" text="User Id:">
+         <font>
+            <Font name="Bodoni MT" size="14.0" />
+         </font>
+      </Text>
+      <ImageView fitHeight="118.0" fitWidth="178.0" layoutX="32.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@images/MainLogo.png" />
+         </image>
+      </ImageView>
+      <Text layoutX="80.0" layoutY="289.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text Holder for UserName">
+         <font>
+            <Font name="Bell MT" size="12.0" />
+         </font>
+      </Text>
+      <Text layoutX="80.0" layoutY="314.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text Holder for UserID">
+         <font>
+            <Font name="Bell MT" size="12.0" />
+         </font>
+      </Text>
+   </children>
+</AnchorPane>

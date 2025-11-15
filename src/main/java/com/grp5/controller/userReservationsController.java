@@ -1,5 +1,5 @@
 package com.grp5.controller;
 
-public class settingUserController {
+public class userReservationsController {
     //checked
 }

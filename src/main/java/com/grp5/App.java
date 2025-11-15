@@ -25,13 +25,13 @@ public class App extends Application {
             }
             
             // Load admin_or_user.fxml
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/grp5/view/admin_or_user.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/grp5/view/logIn.fxml"));
             Parent root = loader.load();
             
             // Setup scene
-            Scene scene = new Scene(root, 600, 400);
+            Scene scene = new Scene(root, 1065, 600);
             
-            primaryStage.setTitle("Bike Rental System - Select User Type");
+            primaryStage.setTitle("Bike Rental System Log-In");
             primaryStage.setScene(scene);
             primaryStage.setResizable(false);
             primaryStage.show();
@@ -42,11 +42,11 @@ public class App extends Application {
             System.out.println("  - Click 'User' button to go to user interface");
             
         } catch (Exception e) {
-            System.err.println("❌ Error loading admin_or_user.fxml:");
+            System.err.println("❌ Error loading logIn.fxml:");
             e.printStackTrace();
             
             System.err.println("\nPossible issues:");
-            System.err.println("  1. File not found at: /com/grp5/view/admin_or_user.fxml");
+            System.err.println("  1. File not found at: /com/grp5/view/logIn.fxml");
             System.err.println("  2. Controller class name mismatch");
             System.err.println("  3. FXML syntax error");
         }

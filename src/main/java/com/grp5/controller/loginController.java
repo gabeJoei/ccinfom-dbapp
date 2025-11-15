@@ -38,6 +38,7 @@ public class loginController {
     /**
      * Initialize method
      */
+    
     @FXML
     public void initialize() {
         customerDAO = new customerRecordDAO();
@@ -45,7 +46,9 @@ public class loginController {
         
         // Clear message on focus
         txtUsername.setOnMouseClicked(e -> lblMessage.setText(""));
+        System.out.println("Connected");
         txtPassword.setOnMouseClicked(e -> lblMessage.setText(""));
+        System.out.println("Connected");
         
         // Enter key to login
         txtPassword.setOnAction(e -> handleLogin());
@@ -124,11 +127,11 @@ public class loginController {
             
             if (userType.equals("admin")) {
                 // Load admin dashboard
-                root = FXMLLoader.load(getClass().getResource("/com/grp5/view/adminDashboard.fxml"));
+                root = FXMLLoader.load(getClass().getResource("/com/grp5/view/RentBike.fxml"));
                 title = "Admin Dashboard";
             } else {
                 // Load user main page
-                root = FXMLLoader.load(getClass().getResource("/com/grp5/view/userMainPage.fxml"));
+                root = FXMLLoader.load(getClass().getResource("/com/grp5/view/RentBike.fxml"));
                 title = "User Dashboard";
             }
             
@@ -152,7 +155,7 @@ public class loginController {
             Stage stage = (Stage) btnSignUp.getScene().getWindow();
             
             // Load sign-up page
-            Parent root = FXMLLoader.load(getClass().getResource("/com/grp5/view/signUp.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/com/grp5/view/RentBike.fxml"));
             
             Scene scene = new Scene(root);
             stage.setTitle("Sign Up");
