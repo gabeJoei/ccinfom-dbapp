@@ -69,12 +69,11 @@ public class rentBikeController {
             AnchorPane sidebarPane = loader.load();
             sidebarController = loader.getController();
             
-            // This line now works because 'sidebar' is no longer null 
-            // after the fix in RentBike.fxml
+            
             sidebar.getChildren().setAll(sidebarPane);
 
             // Setup user info
-            sidebarController.setUserName("John Doe");  // replace with actual logged-in user
+            sidebarController.setUserName("joe  Mama");  // replace with actual logged-in user
             sidebarController.setUserId("U12345");      // replace with actual user ID
 
             // Setup sidebar button actions
