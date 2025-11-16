@@ -16,10 +16,11 @@ public class branchRecordDAO {
     public int addBranchRecordData(branchRecordModel branch){
         try{
             Connection connect=databaseConnection.getConnection();
-            PreparedStatement prepState=connect.prepareStatement("INSERT INTO branch (branchName,branchAddress,locationID) VALUES (?,?,?) ");
-            prepState.setString(1,branch.getBranchName());
-            prepState.setString(2,branch.getBranchAddress());
-            prepState.setInt(3,branch.getLocationID());
+            PreparedStatement prepState=connect.prepareStatement("INSERT INTO branch (branchID, branchName,branchAddress,locationID) VALUES (?,?,?,?) ");
+            prepState.setInt(1, branch.getBranchID());
+            prepState.setString(2,branch.getBranchName());
+            prepState.setString(3,branch.getBranchAddress());
+            prepState.setInt(4,branch.getLocationID());
             prepState.executeUpdate();
             prepState.close();
             connect.close();
