@@ -1,5 +1,6 @@
 package com.grp5.controller_gui;
 
+import com.grp5.session.Admin_session;
 import com.grp5.dao.adminDAO;
 import com.grp5.model.adminModel;
 import javafx.fxml.FXML;
@@ -38,6 +39,7 @@ public class Admin_logInController {
         }
 
         adminModel admin = dao.authenticateAdmin(username, password);
+        Admin_session.setCurrentAdmin(admin); // Current admin bro :D
         if (admin != null) {
             loadNextScene("/com/grp5/view/Admin_dashBoard.fxml", "Admin Dashboard", logInBtn);
         } else {
@@ -64,7 +66,7 @@ public class Admin_logInController {
             currentStage.show();
 
         } catch (Exception e) {
-            e.getStackTrace();
+            e.printStackTrace();
             showError("Navigation error", "Could not load the next screen.");
         }
     }

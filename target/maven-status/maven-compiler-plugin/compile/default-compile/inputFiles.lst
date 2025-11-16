@@ -1,38 +1,3 @@
-<<<<<<< HEAD
-/Users/gabriellejoeibactong/Desktop/INFOM-DBAPP/ccinfom-dbapp/src/main/java/com/grp5/model/transactionRecordModel.java
-/Users/gabriellejoeibactong/Desktop/INFOM-DBAPP/ccinfom-dbapp/src/main/java/com/grp5/dao/bikeReservationDAO.java
-/Users/gabriellejoeibactong/Desktop/INFOM-DBAPP/ccinfom-dbapp/src/main/java/com/grp5/controller_gui/AdminOrUserController.java
-/Users/gabriellejoeibactong/Desktop/INFOM-DBAPP/ccinfom-dbapp/src/main/java/com/grp5/model/customerRecordModel.java
-/Users/gabriellejoeibactong/Desktop/INFOM-DBAPP/ccinfom-dbapp/src/main/java/com/grp5/dao/adminDAO.java
-/Users/gabriellejoeibactong/Desktop/INFOM-DBAPP/ccinfom-dbapp/src/main/java/com/grp5/controller_backend/returningTransactionController.java
-/Users/gabriellejoeibactong/Desktop/INFOM-DBAPP/ccinfom-dbapp/src/main/java/com/grp5/utils/databaseConnection.java
-/Users/gabriellejoeibactong/Desktop/INFOM-DBAPP/ccinfom-dbapp/src/main/java/com/grp5/controller_gui/User_dashBoardController.java
-/Users/gabriellejoeibactong/Desktop/INFOM-DBAPP/ccinfom-dbapp/src/main/java/com/grp5/reports/rentalSalesReport.java
-/Users/gabriellejoeibactong/Desktop/INFOM-DBAPP/ccinfom-dbapp/src/main/java/com/grp5/utils/sessionManager.java
-/Users/gabriellejoeibactong/Desktop/INFOM-DBAPP/ccinfom-dbapp/src/main/java/com/grp5/controller_gui/User_bikeReservationController.java
-/Users/gabriellejoeibactong/Desktop/INFOM-DBAPP/ccinfom-dbapp/src/main/java/com/grp5/module-info.java
-/Users/gabriellejoeibactong/Desktop/INFOM-DBAPP/ccinfom-dbapp/src/main/java/com/grp5/controller_backend/rentingTransactionController.java
-/Users/gabriellejoeibactong/Desktop/INFOM-DBAPP/ccinfom-dbapp/src/main/java/com/grp5/controller_gui/Admin_dashboardControl.java
-/Users/gabriellejoeibactong/Desktop/INFOM-DBAPP/ccinfom-dbapp/src/main/java/com/grp5/SystemInfo.java
-/Users/gabriellejoeibactong/Desktop/INFOM-DBAPP/ccinfom-dbapp/src/main/java/com/grp5/model/adminModel.java
-/Users/gabriellejoeibactong/Desktop/INFOM-DBAPP/ccinfom-dbapp/src/main/java/com/grp5/controller_gui/User_loginController.java
-/Users/gabriellejoeibactong/Desktop/INFOM-DBAPP/ccinfom-dbapp/src/main/java/com/grp5/reports/branchPerformanceReport.java
-/Users/gabriellejoeibactong/Desktop/INFOM-DBAPP/ccinfom-dbapp/src/main/java/com/grp5/controller_backend/AdminSideController.java
-/Users/gabriellejoeibactong/Desktop/INFOM-DBAPP/ccinfom-dbapp/src/main/java/com/grp5/controller_backend/paymentTransactionController.java
-/Users/gabriellejoeibactong/Desktop/INFOM-DBAPP/ccinfom-dbapp/src/main/java/com/grp5/transactions/RentingTransaction.java
-/Users/gabriellejoeibactong/Desktop/INFOM-DBAPP/ccinfom-dbapp/src/main/java/com/grp5/utils/generalUtilities.java
-/Users/gabriellejoeibactong/Desktop/INFOM-DBAPP/ccinfom-dbapp/src/main/java/com/grp5/model/branchRecordModel.java
-/Users/gabriellejoeibactong/Desktop/INFOM-DBAPP/ccinfom-dbapp/src/main/java/com/grp5/controller_gui/User_rentBikeController.java
-/Users/gabriellejoeibactong/Desktop/INFOM-DBAPP/ccinfom-dbapp/src/main/java/com/grp5/dao/branchRecordDAO.java
-/Users/gabriellejoeibactong/Desktop/INFOM-DBAPP/ccinfom-dbapp/src/main/java/com/grp5/model/bikeReservation.java
-/Users/gabriellejoeibactong/Desktop/INFOM-DBAPP/ccinfom-dbapp/src/main/java/com/grp5/controller_backend/MainController.java
-/Users/gabriellejoeibactong/Desktop/INFOM-DBAPP/ccinfom-dbapp/src/main/java/com/grp5/model/bikeRecordModel.java
-/Users/gabriellejoeibactong/Desktop/INFOM-DBAPP/ccinfom-dbapp/src/main/java/com/grp5/dao/bikeRecordDAO.java
-/Users/gabriellejoeibactong/Desktop/INFOM-DBAPP/ccinfom-dbapp/src/main/java/com/grp5/dao/transactionRecordDAO.java
-/Users/gabriellejoeibactong/Desktop/INFOM-DBAPP/ccinfom-dbapp/src/main/java/com/grp5/reports/customerEngagementReport.java
-/Users/gabriellejoeibactong/Desktop/INFOM-DBAPP/ccinfom-dbapp/src/main/java/com/grp5/dao/customerRecordDAO.java
-/Users/gabriellejoeibactong/Desktop/INFOM-DBAPP/ccinfom-dbapp/src/main/java/com/grp5/App.java
-=======
 C:\Users\ACER\ccinfom-dbapp\src\main\java\com\grp5\controller_backend\AdminSideController.java
 C:\Users\ACER\ccinfom-dbapp\src\main\java\com\grp5\model\branchRecordModel.java
 C:\Users\ACER\ccinfom-dbapp\src\main\java\com\grp5\dao\bikeRecordDAO.java
@@ -67,4 +32,3 @@ C:\Users\ACER\ccinfom-dbapp\src\main\java\com\grp5\transactions\RentingTransacti
 C:\Users\ACER\ccinfom-dbapp\src\main\java\com\grp5\controller_gui\AdminOrUserController.java
 C:\Users\ACER\ccinfom-dbapp\src\main\java\com\grp5\model\bikeRecordModel.java
 C:\Users\ACER\ccinfom-dbapp\src\main\java\com\grp5\utils\generalUtilities.java
->>>>>>> refs/remotes/origin/main
