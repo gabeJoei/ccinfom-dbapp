@@ -22,6 +22,7 @@ public class App extends Application {
             Scene scene = new Scene(root,1065,600); // Set - up new scene :D
               
             stage.setScene(scene);
+            stage.setResizable(false);
             stage.setTitle("Pick?");
             stage.show();
             

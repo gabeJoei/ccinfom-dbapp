@@ -1,26 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Text?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" 
-            minHeight="-Infinity" minWidth="-Infinity" 
-            prefHeight="400.0" prefWidth="600.0" 
-            xmlns="http://javafx.com/javafx/25" 
-            xmlns:fx="http://javafx.com/fxml/1" 
-            fx:controller="com.grp5.controller_gui.AdminOrUserController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.grp5.controller_gui.AdminOrUserController">
    <children>
-      <Button fx:id="btnAdmin2" 
-      layoutX="131.0" layoutY="200.0" 
-      mnemonicParsing="false" 
-      text="Admin" 
-      onAction="#handleAdminClick"/>
+      <Button fx:id="btnAdmin2" layoutX="268.0" layoutY="269.0" mnemonicParsing="false" onAction="#handleAdminClick" prefHeight="26.0" prefWidth="63.0" text="Admin" />
 
-      <Button fx:id="btnUser2" 
-      layoutX="410.0" layoutY="200.0" 
-      mnemonicParsing="false" 
-      text="User" 
-      onAction="#handleUserClick"/>
+      <Button fx:id="btnUser2" layoutX="268.0" layoutY="237.0" mnemonicParsing="false" onAction="#handleUserClick" prefHeight="26.0" prefWidth="63.0" text="User" />
+      <ImageView fitHeight="199.0" fitWidth="333.0" layoutX="140.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@images/MainLogo.png" />
+         </image>
+      </ImageView>
+      <Text layoutX="266.0" layoutY="218.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Log-in Type:" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#5e5b5b" height="26.0" layoutX="-5.0" layoutY="378.0" stroke="#5e5b5b" strokeType="INSIDE" width="606.0" />
    </children>
 </AnchorPane>
