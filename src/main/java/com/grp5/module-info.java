@@ -7,4 +7,6 @@ module com.grp5 {
     opens com.grp5 to javafx.graphics;
    
     exports com.grp5;
+    exports com.grp5.model;
+    exports com.grp5.controller;
 }
