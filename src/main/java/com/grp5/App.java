@@ -25,7 +25,7 @@ public class App extends Application {
             }
             
             // Load rentBike.fxml
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/grp5/view/RentBike.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/grp5/view/MainDashBoardUser.fxml"));
             Parent root = loader.load();
             
             // Setup scene

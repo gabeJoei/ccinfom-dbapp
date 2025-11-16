@@ -44,6 +44,7 @@
                   <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="95.0" text="Branch" />
                   <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="95.0" text="Bike" />
                   <Button layoutX="63.0" layoutY="10.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="95.0" text="Reservations" />
+                  <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="95.0" text="Transactions" />
                   <Button layoutX="101.0" layoutY="10.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="95.0" text="Users" />
                   <SplitMenuButton mnemonicParsing="false" text="View Reports">
                     <items>

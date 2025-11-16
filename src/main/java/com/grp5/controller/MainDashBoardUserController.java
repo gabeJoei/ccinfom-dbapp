@@ -1,24 +1,72 @@
 package com.grp5.controller;
 
+import java.io.IOException;
+
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 
 /**
  * Controller for Main Dashboard Sidebar (included via fx:include)
  */
+
 public class MainDashBoardUserController {
 
-    //  Sidebar UI Components 
     @FXML private Text txtUserName;
     @FXML private Text txtUserID;
     @FXML private Button btnProfile;
     @FXML private Button btnReservations;
     @FXML private Button btnRentalHistory;
     @FXML private Button btnLogout;
-    
 
-    //  Getters and Setters 
+    @FXML private AnchorPane contentArea;
+
+    @FXML
+    public void initialize() {
+        loadUI("/com/grp5/view/RentBike.fxml");
+        setupSidebarButtons();
+    }
+
+    private void setupSidebarButtons() {
+
+        btnProfile.setOnAction(e -> handleProfile());
+        btnReservations.setOnAction(e -> handleReservations());
+        btnRentalHistory.setOnAction(e -> handleRentBike());
+        btnLogout.setOnAction(e -> handleLogout());
+    }
+
+    //  Loads any FXML into the content area
+    private void loadUI(String fxmlPath) {
+        try {
+            AnchorPane pane = FXMLLoader.load(getClass().getResource(fxmlPath));
+            contentArea.getChildren().setAll(pane);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void handleProfile() {
+        System.out.println("Profile clicked");
+        // loadUI("/com/grp5/view/profile.fxml");
+    }
+
+    private void handleReservations() {
+        System.out.println("Reservations clicked");
+        loadUI("/com/grp5/view/paymentSumarry.fxml");
+    }
+
+    private void handleRentBike() {
+        System.out.println("RentBike clicked");
+        // loadUI("/com/grp5/view/rentalHistory.fxml");
+    }
+
+    private void handleLogout() {
+        System.out.println("Log Out clicked");
+        // Load login screen here
+    }
+    
     public void setUserName(String userName) {
         if (txtUserName != null) {
             txtUserName.setText(userName);
@@ -54,4 +102,7 @@ public class MainDashBoardUserController {
     public Button getBtnLogout() {
         return btnLogout;
     }
+
+
 }
+  

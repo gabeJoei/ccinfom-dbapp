@@ -63,57 +63,10 @@ public class rentBikeController {
         bikeDAO = new bikeRecordDAO();
         branchDAO = new branchRecordDAO();
 
-        //  Load Sidebar 
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/grp5/view/MainDashBoardUser.fxml"));
-            AnchorPane sidebarPane = loader.load();
-            sidebarController = loader.getController();
-            
-            
-            sidebar.getChildren().setAll(sidebarPane);
-
-            // Setup user info
-            sidebarController.setUserName("joe  Mama");  // replace with actual logged-in user
-            sidebarController.setUserId("U12345");      // replace with actual user ID
-
-            // Setup sidebar button actions
-            setupSidebarButtons();
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        //  Load Branches 
         loadBranches();
     }
 
-    /** Setup sidebar button actions */
-    private void setupSidebarButtons() {
-        sidebarController.getBtnProfile().setOnAction(e -> handleProfile());
-        sidebarController.getBtnReservations().setOnAction(e -> handleReservations());
-        sidebarController.getBtnRentalHistory().setOnAction(e -> handleRentalHistory());
-        sidebarController.getBtnLogout().setOnAction(e -> handleLogout());
-    }
-
-    private void handleProfile() {
-        System.out.println("Profile clicked");
-        // TODO: Load Profile Scene
-    }
-
-    private void handleReservations() {
-        System.out.println("Reservations clicked");
-        // TODO: Load Reservations Scene
-    }
-
-    private void handleRentalHistory() {
-        System.out.println("Rental History clicked");
-        // TODO: Load Rental History Scene
-    }
-
-    private void handleLogout() {
-        System.out.println("Log Out clicked");
-        // TODO: Return to Login Scene
-    }
+    
 
     /** Load all branches into the ChoiceBox */
     private void loadBranches() {
