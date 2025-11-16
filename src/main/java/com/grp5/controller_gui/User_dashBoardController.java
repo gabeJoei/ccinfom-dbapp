@@ -45,7 +45,7 @@ public class User_dashBoardController {
     }
 
     // Loads any FXML into the content area
-    private void loadUI(String fxmlPath) {
+    public void loadUI(String fxmlPath) {
         try {
             AnchorPane pane = FXMLLoader.load(getClass().getResource(fxmlPath));
             contentArea.getChildren().setAll(pane);

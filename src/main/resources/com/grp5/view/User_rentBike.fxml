@@ -37,7 +37,7 @@
 
         <!-- Mountain Bike -->
         <AnchorPane>
-            <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="14.0" layoutY="14.0" preserveRatio="true">
+            <ImageView fx:id="imgMountainBike" fitHeight="150.0" fitWidth="200.0" layoutX="14.0" layoutY="14.0" onMouseClicked="#onBikeImageClick" preserveRatio="true">
                 <image>
                     <Image url="@images/mountainBike-.png" />
                 </image>
@@ -49,7 +49,7 @@
 
         <!-- Road Bike -->
         <AnchorPane GridPane.rowIndex="1">
-            <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="14.0" layoutY="9.0" preserveRatio="true">
+            <ImageView fx:id="imgRoadBike" fitHeight="150.0" fitWidth="200.0" layoutX="14.0" layoutY="9.0" onMouseClicked="#onBikeImageClick" preserveRatio="true">
                 <image>
                     <Image url="@images/RoadBike-.png" />
                 </image>
@@ -61,7 +61,7 @@
 
         <!-- E-Assists Bike -->
         <AnchorPane GridPane.rowIndex="2">
-            <ImageView fitHeight="124.0" fitWidth="223.0" layoutX="14.0" layoutY="10.0" preserveRatio="true">
+            <ImageView fx:id="imgEAssistBike" fitHeight="124.0" fitWidth="223.0" layoutX="14.0" layoutY="10.0" onMouseClicked="#onBikeImageClick" preserveRatio="true">
                 <image>
                     <Image url="@images/E-Bike-.png" />
                 </image>
@@ -73,7 +73,7 @@
 
         <!-- Tandem Bike -->
         <AnchorPane GridPane.columnIndex="1">
-            <ImageView fitHeight="124.0" fitWidth="203.0" layoutX="13.0" layoutY="13.0" preserveRatio="true">
+            <ImageView fx:id="imgTandemBike" fitHeight="124.0" fitWidth="203.0" layoutX="13.0" layoutY="13.0" onMouseClicked="#onBikeImageClick" preserveRatio="true">
                 <image>
                     <Image url="@images/TandemBike-.png" />
                 </image>
@@ -85,7 +85,7 @@
 
         <!-- E-Bike -->
         <AnchorPane GridPane.columnIndex="1" GridPane.rowIndex="1">
-            <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="15.0" layoutY="12.0" preserveRatio="true">
+            <ImageView fx:id="imgEBike" fitHeight="150.0" fitWidth="200.0" layoutX="15.0" layoutY="12.0" onMouseClicked="#onBikeImageClick" preserveRatio="true">
                 <image>
                     <Image url="@images/Electric_Bike-.png" />
                 </image>
@@ -97,7 +97,7 @@
 
         <!-- BMX Bike -->
         <AnchorPane GridPane.columnIndex="1" GridPane.rowIndex="2">
-            <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="14.0" preserveRatio="true">
+            <ImageView fx:id="imgBMXBike" fitHeight="150.0" fitWidth="200.0" layoutX="14.0" onMouseClicked="#onBikeImageClick" preserveRatio="true">
                 <image>
                     <Image url="@images/BMX%20bike.png" />
                 </image>

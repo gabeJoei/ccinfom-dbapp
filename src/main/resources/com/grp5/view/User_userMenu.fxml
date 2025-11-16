@@ -8,7 +8,6 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
 <AnchorPane maxWidth="-Infinity" minWidth="-Infinity" prefWidth="1065.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.grp5.controller_gui.User_dashBoardController">
    <children>
       <AnchorPane fx:id="contentArea" layoutX="242.0" prefHeight="600.0" prefWidth="827.0" />
@@ -50,7 +49,7 @@
                       <Font name="Bell MT" size="12.0" />
                   </font>
               </Text>
-              <Text fx:id="txtUserID" layoutX="80.0" layoutY="314.0" text="Text Holder for UserID">
+              <Text fx:id="txtUserID" layoutX="80.0" layoutY="314.0" text="1000000">
                   <font>
                       <Font name="Bell MT" size="12.0" />
                   </font>
