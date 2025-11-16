@@ -32,7 +32,7 @@ public class User_dashBoardController {
 
     @FXML
     public void initialize() {
-        loadUI("/com/grp5/view/RentBike.fxml");
+        loadUI("/com/grp5/view/User_rentBike.fxml");
         setupSidebarButtons();
     }
 
@@ -56,17 +56,17 @@ public class User_dashBoardController {
 
     private void handleProfile() {
         System.out.println("Profile clicked");
-         loadUI("/com/grp5/view/Settings.fxml");
+         loadUI("/com/grp5/view/Profile_settings.fxml");
     }
 
     private void handleReservations() {
         System.out.println("Reservations clicked");
-        loadUI("/com/grp5/view/reserveBike.fxml");
+        loadUI("/com/grp5/view/User_reserveBike.fxml");
     }
 
     private void handleRentBike() {
         System.out.println("RentBike clicked");
-        loadUI("/com/grp5/view/RentBike.fxml");
+        loadUI("/com/grp5/view/User_rentBike.fxml");
     }
 
     private void handleLogout() {

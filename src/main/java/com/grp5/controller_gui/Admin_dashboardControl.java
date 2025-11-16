@@ -60,66 +60,52 @@ public class Admin_dashboardControl {
     }
 
    public void handleBikeReport(){
-     loadUI("/com/grp5/view/adminRentalBikeTrendReport.fxml");
+     loadUI("/com/grp5/view/Admin_rentalBikeTrendReport.fxml");
    }
 
    public void handleBranchReport(){
-     loadUI("/com/grp5/view/adminReportBranch.fxml");
+     loadUI("/com/grp5/view/Admin_reportBranch.fxml");
    }
    public void handleCustomerReport(){
-     loadUI("/com/grp5/view/adminCustomerReport.fxml");
+     loadUI("/com/grp5/view/Admin_customerReport.fxml");
    }
    public void handleSalesReport(){
-     loadUI("/com/grp5/view/adminRentalSalesReport.fxml");
+     loadUI("/com/grp5/view/Admin_rentalSalesReport.fxml");
    }
     
 
     private void handleBike(){
-        loadUI("/com/grp5/view/adminBike.fxml");
+        loadUI("/com/grp5/view/Admin_bike.fxml");
     }
     private void handleUsers(){
-        loadUI("/com/grp5/view/adminCustomers.fxml");
+        loadUI("/com/grp5/view/Admin_customers.fxml");
     }
     private void handleProfile() {
-        loadUI("/com/grp5/view/Settings.fxml");
+        loadUI("/com/grp5/view/Profile_settings.fxml");
     }
 
     private void handleReservations() {
-        loadUI("/com/grp5/view/adminReservation.fxml");
+        loadUI("/com/grp5/view/Admin_reservation.fxml");
     }
 
     private void handleTransactions() {
-        loadUI("/com/grp5/view/adminTransaction.fxml");
+        loadUI("/com/grp5/view/Admin_transaction.fxml");
     }
 
     private void handleBranch() {
-        loadUI("/com/grp5/view/adminBranch.fxml");
+        loadUI("/com/grp5/view/Admin_branch.fxml");
     }
 
     private void handleLogout() {
         System.out.println("Log Out clicked");
     }
-    public Button getBtnUsers(){
-        return btnUsers;
-    }
-    public Button getBtnBike(){
-        return btnBike;
-    }
-    public Button getBtnBranch(){
-        return btnBranch;
-    }
-    public Button getBtnProfile() {
-        return btnProfile;
-    }
-    public Button getBtnReservations() {
-        return btnReservation;
-    }
-    public Button getBtnTransaction() {
-        return btnTransaction;
-    }
-    public Button getBtnLogout() {
-        return btnLogOut;
-    }
+    public Button getBtnUsers(){return btnUsers;}
+    public Button getBtnBike(){return btnBike;}
+    public Button getBtnBranch(){return btnBranch;}
+    public Button getBtnProfile() {return btnProfile;}
+    public Button getBtnReservations() {return btnReservation;}
+    public Button getBtnTransaction() {return btnTransaction;}
+    public Button getBtnLogout() {return btnLogOut;}
 
 
 }

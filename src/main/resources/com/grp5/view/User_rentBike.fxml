@@ -10,7 +10,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxWidth="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="827.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.grp5.controller_gui.rentBikeController">
+<AnchorPane maxWidth="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="827.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.grp5.controller_gui.User_rentBikeController">
 
     <!-- Branch Selection -->
     <ChoiceBox fx:id="cmbBranch" layoutX="118.0" layoutY="83.0" prefWidth="150.0" />

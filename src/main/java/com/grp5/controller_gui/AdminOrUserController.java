@@ -2,14 +2,10 @@ package com.grp5.controller_gui;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
-import javafx.scene.input.MouseButton;
 import javafx.stage.Stage;
-import javafx.scene.input.MouseEvent;
 import javafx.event.ActionEvent;
 
 import java.io.IOException;
@@ -24,7 +20,7 @@ public class AdminOrUserController {
     @FXML
     private void handleAdminClick(ActionEvent e) {
         System.out.println("Admin Clicked");
-        loadNextScene("/com/grp5/view/AdminLogIn.fxml", "Admin Log In", btnAdmin2);
+        loadNextScene("/com/grp5/view/Admin_login.fxml", "Admin Log In", btnAdmin2);
     }
 
     @FXML
