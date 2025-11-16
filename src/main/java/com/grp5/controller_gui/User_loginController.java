@@ -16,7 +16,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class UserLogInController {
+public class User_loginController {
 
     @FXML
     private TextField txtUsername;

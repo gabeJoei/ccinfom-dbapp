@@ -9,7 +9,7 @@
 <?import javafx.scene.text.Text?>
 
 
-<AnchorPane maxWidth="-Infinity" minWidth="-Infinity" prefWidth="1065.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.grp5.controller.MainDashBoardUserController">
+<AnchorPane maxWidth="-Infinity" minWidth="-Infinity" prefWidth="1065.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.grp5.controller_gui.MainDashBoardUserController">
    <children>
       <AnchorPane fx:id="contentArea" layoutX="242.0" prefHeight="600.0" prefWidth="827.0" />
       <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="242.0">

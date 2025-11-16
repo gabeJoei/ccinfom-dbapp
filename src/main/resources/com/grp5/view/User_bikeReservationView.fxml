@@ -6,7 +6,7 @@
 
 <BorderPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.grp5.controller.BikeReservationController">
+            fx:controller="com.grp5.controller_gui.BikeReservationController">
     
     <top>
         <VBox spacing="10" styleClass="header">

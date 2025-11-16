@@ -16,12 +16,8 @@ import java.util.ArrayList;
 /**
  * Rent Bike Controller with Sidebar Integration
  */
-public class rentBikeController {
+public class User_rentBikeController {
 
-    // Sidebar
-    @FXML
-    private AnchorPane sidebar;
-    private MainDashBoardUserController sidebarController;
 
     // Branch Selection
     @FXML

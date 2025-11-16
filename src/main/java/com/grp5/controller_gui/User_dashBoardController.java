@@ -12,7 +12,7 @@ import javafx.scene.text.Text;
  * Controller for Main Dashboard Sidebar (included via fx:include)
  */
 
-public class MainDashBoardUserController {
+public class User_dashBoardController {
 
     @FXML
     private Text txtUserName;
