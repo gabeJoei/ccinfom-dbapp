@@ -14,7 +14,7 @@ import javafx.event.ActionEvent;
 
 import java.io.IOException;
 
-public class AdminOrUserControllerv2 {
+public class AdminOrUserController {
 
     @FXML
     private Button btnAdmin2;
