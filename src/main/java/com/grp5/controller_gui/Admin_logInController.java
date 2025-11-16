@@ -20,14 +20,15 @@ public class Admin_logInController {
     private Button bckBtn;
 
     @FXML
-    private TextField emailField;
+    private TextField usernameField;
     @FXML
     private PasswordField passwordField;
 
     private final adminDAO dao = new adminDAO();
 
+    @FXML
     private void handleAdminLogIn() {
-        String username = emailField.getText() != null ? emailField.getText().trim() : "";
+        String username = usernameField.getText() != null ? usernameField.getText().trim() : "";
         String password = passwordField.getText() != null ? passwordField.getText() : "";
 
         // check if either of the fields are empty
@@ -45,6 +46,7 @@ public class Admin_logInController {
 
     }
 
+    @FXML
     private void handleBckBtn() {
         System.out.println("Back button clicked!");
         loadNextScene("/com/grp5/view/AdminOrUser.fxml", "Home", bckBtn);
@@ -65,6 +67,15 @@ public class Admin_logInController {
             e.getStackTrace();
             showError("Navigation error", "Could not load the next screen.");
         }
+    }
+
+    // Add this helper so the earlier calls compile
+    private void showError(String header, String content) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Error");
+        alert.setHeaderText(header);
+        alert.setContentText(content);
+        alert.showAndWait();
     }
 
 }
