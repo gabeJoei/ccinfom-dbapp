@@ -1,6 +1,8 @@
 package com.grp5.controller_gui;
 
 import static java.lang.Integer.parseInt;
+
+import java.io.IOException;
 import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.util.Date;
@@ -59,11 +61,26 @@ public class User_reserveBikeController {
 
     @FXML
     protected void onReservationClick() {
-        Timestamp startDate = Timestamp.valueOf(startDateSelection.getValue().atStartOfDay());
-        Timestamp endDate = Timestamp.valueOf(endDateSelection.getValue().atStartOfDay());
+        Timestamp startDate;
+        Timestamp endDate;
+        try {
+            startDate = Timestamp.valueOf(startDateSelection.getValue().atStartOfDay());
+            endDate = Timestamp.valueOf(endDateSelection.getValue().atStartOfDay());
 
-        // Warn user for any reservation errors
-        validateReservation(startDate, endDate);
+            // Warn user for any reservation errors
+            validateReservation(startDate, endDate);
+        } catch (Exception e) {
+            generalUtilities.showAlert(Alert.AlertType.WARNING, "Input Error", "No startDate or endDate selected.");
+        }
+    
+        // Reservation Process
+        // idk if nagawa na ni enzo sa rentingTransactionController.java so ill make this empty for now..
+
+        try {
+            goToPayment();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private void validateReservation(Timestamp startDate, Timestamp endDate) {
@@ -87,5 +104,12 @@ public class User_reserveBikeController {
         }
     }
 
-    
+    private void goToPayment() throws IOException {
+        AnchorPane dashboardContentArea = (AnchorPane) reserveButton.getScene().lookup("#contentArea");
+        if (dashboardContentArea != null) {
+            // Load rentBike.fxml
+            AnchorPane newPane = FXMLLoader.load(getClass().getResource("/com/grp5/view/User_paymentSummary.fxml"));
+            dashboardContentArea.getChildren().setAll(newPane);
+        }
+    }
 }
