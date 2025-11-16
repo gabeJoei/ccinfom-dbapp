@@ -18,7 +18,8 @@ public class App extends Application {
     @Override
     public void start(Stage stage) {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("/com/grp5/view/AdminOrUser.fxml")); // Get the resources :D
+            Parent root = FXMLLoader.load(getClass().getResource("/com/grp5/view/AdminOrUser.fxml")); // Get the
+                                                                                                      // resources :D
             Scene scene = new Scene(root); // Set - up new scene :D
 
             stage.setScene(scene);
@@ -41,13 +42,5 @@ public class App extends Application {
     public static void main(String[] args) {
         launch(args);
     }
-    
-    /**
-     * Print application header
-     */
-    private static void printHeader() {
-        System.out.println("         RENT BIKE UI TEST            ");
-        System.out.println("   Testing: rentBike.fxml             ");
 
-    }
 }
