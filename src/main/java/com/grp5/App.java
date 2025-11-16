@@ -18,16 +18,16 @@ public class App extends Application {
     @Override
     public void start(Stage stage) {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("/com/grp5/view/MainDashBoardUser.fxml")); // Get the resources :D
+            Parent root = FXMLLoader.load(getClass().getResource("/com/grp5/view/User_userMenu.fxml")); // Get the resources :D
             Scene scene = new Scene(root,1065,600); // Set - up new scene :D
               
             stage.setScene(scene);
             stage.setTitle("Pick?");
             stage.show();
-
+            
         } catch (IOException e) {
+            System.out.println(e.getMessage());
             e.getStackTrace();
-            System.err.println("Tite");
         }
     }
 
@@ -40,6 +40,7 @@ public class App extends Application {
 
     public static void main(String[] args) {
         launch(args);
+      
     }
     
     /**
