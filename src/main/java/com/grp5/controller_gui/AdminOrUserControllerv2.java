@@ -1,4 +1,4 @@
-package com.grp5.controller;
+package com.grp5.controller_gui;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
