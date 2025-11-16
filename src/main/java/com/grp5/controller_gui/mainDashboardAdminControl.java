@@ -1,4 +1,4 @@
-package com.grp5.controller;
+package com.grp5.controller_gui;
 
 import java.io.IOException;
 import javafx.fxml.FXML;
@@ -6,14 +6,13 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.SplitMenuButton;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.text.Text;
 import javafx.scene.control.MenuItem;
 
 /**
  * Controller for Main Dashboard Sidebar (included via fx:include)
  */
 
-public class mainDashboardUserControl {
+public class mainDashboardAdminControl {
 
     @FXML private Button btnBranch;
     @FXML private Button btnBike;
@@ -61,17 +60,17 @@ public class mainDashboardUserControl {
     }
 
    public void handleBikeReport(){
-       // loadUI("/com/grp5/view/.fxml")
+     loadUI("/com/grp5/view/adminRentalBikeTrendReport.fxml");
    }
 
    public void handleBranchReport(){
-
+     loadUI("/com/grp5/view/adminReportBranch.fxml");
    }
    public void handleCustomerReport(){
-
+     loadUI("/com/grp5/view/adminCustomerReport.fxml");
    }
    public void handleSalesReport(){
-    
+     loadUI("/com/grp5/view/adminRentalSalesReport.fxml");
    }
     
 
