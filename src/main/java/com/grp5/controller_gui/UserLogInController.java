@@ -1,10 +1,12 @@
-package com.grp5.controller;
+package com.grp5.controller_gui;
 
 import com.grp5.dao.adminDAO;
 import com.grp5.dao.customerRecordDAO;
 import com.grp5.model.adminModel;
 import com.grp5.model.customerRecordModel;
-import com.grp5.utils.sessionManager; 
+import com.grp5.utils.sessionManager;
+
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -14,8 +16,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-
-public class loginController {
+public class UserLogInController {
 
     @FXML
     private TextField txtUsername;
@@ -32,21 +33,27 @@ public class loginController {
     @FXML
     private Button btnSignUp;
 
+    @FXML
+    private Button btnBack;
+
     private customerRecordDAO customerDAO;
-    private adminDAO adminDAO; 
-    private String userType = "user"; 
+    private adminDAO adminDAO;
+    private String userType = "user";
+
     @FXML
     public void initialize() {
         customerDAO = new customerRecordDAO();
-        adminDAO = new adminDAO(); 
+        adminDAO = new adminDAO();
         System.out.println("loginController initialized");
         lblMessage.setVisible(false);
         // Clear message on focus
         txtUsername.focusedProperty().addListener((obs, oldVal, newVal) -> {
-            if (newVal) lblMessage.setText("");
+            if (newVal)
+                lblMessage.setText("");
         });
         txtPassword.focusedProperty().addListener((obs, oldVal, newVal) -> {
-            if (newVal) lblMessage.setText("");
+            if (newVal)
+                lblMessage.setText("");
         });
 
         // Enter key to login
@@ -54,15 +61,13 @@ public class loginController {
         System.out.println("Connection initialization complete.");
     }
 
-
     public void setUserType(String userType) {
         if (userType != null && (userType.equals("admin") || userType.equals("user"))) {
             this.userType = userType;
             System.out.println("User type set to: " + userType);
         }
     }
-    
- 
+
     @FXML
     private void handleLogin() {
         String username = txtUsername.getText().trim();
@@ -95,11 +100,10 @@ public class loginController {
         }
     }
 
-
     private boolean authenticateUser(String username, String password) {
         // Clear previous session data
-        sessionManager.clearSession(); 
-        
+        sessionManager.clearSession();
+
         if (userType.equals("admin")) {
             adminModel admin = adminDAO.authenticateAdmin(username, password);
             if (admin != null) {
@@ -120,7 +124,6 @@ public class loginController {
         return false;
     }
 
- 
     private void navigateToDashboard() {
         try {
             Stage stage = (Stage) btnLogin.getScene().getWindow();
@@ -133,13 +136,13 @@ public class loginController {
                 loader.setLocation(getClass().getResource(fxmlPath));
                 root = loader.load();
                 // If you had a dedicated AdminController, you would access it here:
-                // AdminController adminController = loader.getController(); 
+                // AdminController adminController = loader.getController();
                 title = "Admin Dashboard";
             } else {
                 loader.setLocation(getClass().getResource(fxmlPath));
                 root = loader.load();
                 // If you had a dedicated UserController, you would access it here:
-                // UserController userController = loader.getController(); 
+                // UserController userController = loader.getController();
                 title = "User Dashboard";
             }
 
@@ -154,14 +157,13 @@ public class loginController {
         }
     }
 
-
     @FXML
     private void handleSignUp() {
         try {
             Stage stage = (Stage) btnSignUp.getScene().getWindow();
 
             // Load sign-up page ( FXML as a placeholder for the next screen)
-            Parent root = FXMLLoader.load(getClass().getResource("/com/grp5/view/RentBike.fxml")); 
+            Parent root = FXMLLoader.load(getClass().getResource("/com/grp5/view/RentBike.fxml"));
 
             Scene scene = new Scene(root);
             stage.setTitle("Sign Up");
@@ -174,6 +176,25 @@ public class loginController {
         }
     }
 
+    @FXML
+    public void handleBackBtnClick(ActionEvent click) {
+        System.out.println("Back button clicked!");
+        try {
+
+            Parent nextSceneRoot = FXMLLoader
+                    .load(getClass().getResource("/com/grp5/view/AdminOrUser.fxml"));
+            Scene nextScene = new Scene(nextSceneRoot); //
+            Stage currentStage = (Stage) btnBack.getScene().getWindow();
+
+            currentStage.setScene(nextScene);
+            currentStage.setTitle("Home");
+            currentStage.show();
+
+        } catch (IOException e) {
+            e.getStackTrace();
+            System.err.println("Tite");
+        }
+    }
 
     private void showMessage(String message, String type) {
         lblMessage.setVisible(true);

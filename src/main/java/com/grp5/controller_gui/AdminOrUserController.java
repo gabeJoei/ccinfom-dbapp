@@ -1,4 +1,4 @@
-package com.grp5.controller;
+package com.grp5.controller_gui;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -10,10 +10,11 @@ import javafx.scene.control.Button;
 import javafx.scene.input.MouseButton;
 import javafx.stage.Stage;
 import javafx.scene.input.MouseEvent;
+import javafx.event.ActionEvent;
 
 import java.io.IOException;
 
-public class AdminOrUserControllerv2 {
+public class AdminOrUserController {
 
     @FXML
     private Button btnAdmin2;
@@ -21,15 +22,15 @@ public class AdminOrUserControllerv2 {
     private Button btnUser2;
 
     @FXML
-    private void handleAdminClick(MouseEvent e) {
+    private void handleAdminClick(ActionEvent e) {
         System.out.println("Admin Clicked");
-        loadNextScene("AdminLogIn", "Admin Log In", btnAdmin2);
+        loadNextScene("/com/grp5/view/AdminLogIn.fxml", "Admin Log In", btnAdmin2);
     }
 
     @FXML
-    private void handleUserClick(MouseEvent e) {
+    private void handleUserClick(ActionEvent e) {
         System.out.println("User Clicked");
-        loadNextScene("UserLogIn", "User Log In", btnUser2);
+        loadNextScene("/com/grp5/view/UserLogIn.fxml", "User Log In", btnUser2);
     }
 
     private void loadNextScene(String fxmlFile, String title, Button button) {

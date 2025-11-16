@@ -1,4 +1,4 @@
-package com.grp5.Controllersomething;
+package com.grp5.controller_backend;
 
 import com.grp5.model.*;
 
@@ -7,12 +7,12 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+import com.grp5.controller_gui.*;
 import com.grp5.dao.*;
 
 import java.io.IOException;
 import java.util.ArrayList;
 
-import com.grp5.controller.*;
 import javafx.application.Application;
 
 public class MainController {

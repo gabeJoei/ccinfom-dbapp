@@ -1,4 +1,4 @@
-package com.grp5.controller;
+package com.grp5.controller_gui;
 
 import com.grp5.dao.bikeRecordDAO;
 import com.grp5.dao.branchRecordDAO;
@@ -18,42 +18,62 @@ import java.util.ArrayList;
  */
 public class rentBikeController {
 
-    //  Sidebar 
-    @FXML private AnchorPane sidebar; 
+    // Sidebar
+    @FXML
+    private AnchorPane sidebar;
     private MainDashBoardUserController sidebarController;
 
-    //  Branch Selection 
-    @FXML private ChoiceBox<String> cmbBranch;
+    // Branch Selection
+    @FXML
+    private ChoiceBox<String> cmbBranch;
 
-    //  Mountain Bike 
-    @FXML private Text txtMountainModel;
-    @FXML private Text txtMountainAvailable;
-    @FXML private Text txtMountainCost;
+    // Mountain Bike
+    @FXML
+    private Text txtMountainModel;
+    @FXML
+    private Text txtMountainAvailable;
+    @FXML
+    private Text txtMountainCost;
 
-    //  Road Bike 
-    @FXML private Text txtRoadModel;
-    @FXML private Text txtRoadAvailable;
-    @FXML private Text txtRoadCost;
+    // Road Bike
+    @FXML
+    private Text txtRoadModel;
+    @FXML
+    private Text txtRoadAvailable;
+    @FXML
+    private Text txtRoadCost;
 
-    //  E-Assists Bike 
-    @FXML private Text txtEAssistsModel;
-    @FXML private Text txtEAssistsAvailable;
-    @FXML private Text txtEAssistsCost;
+    // E-Assists Bike
+    @FXML
+    private Text txtEAssistsModel;
+    @FXML
+    private Text txtEAssistsAvailable;
+    @FXML
+    private Text txtEAssistsCost;
 
-    //  Tandem Bike 
-    @FXML private Text txtTandemModel;
-    @FXML private Text txtTandemAvailable;
-    @FXML private Text txtTandemCost;
+    // Tandem Bike
+    @FXML
+    private Text txtTandemModel;
+    @FXML
+    private Text txtTandemAvailable;
+    @FXML
+    private Text txtTandemCost;
 
-    //  E-Bike 
-    @FXML private Text txtEBikeModel;
-    @FXML private Text txtEBikeAvailable;
-    @FXML private Text txtEBikeCost;
+    // E-Bike
+    @FXML
+    private Text txtEBikeModel;
+    @FXML
+    private Text txtEBikeAvailable;
+    @FXML
+    private Text txtEBikeCost;
 
-    //  BMX Bike 
-    @FXML private Text txtBMXModel;
-    @FXML private Text txtBMXAvailable;
-    @FXML private Text txtBMXCost;
+    // BMX Bike
+    @FXML
+    private Text txtBMXModel;
+    @FXML
+    private Text txtBMXAvailable;
+    @FXML
+    private Text txtBMXCost;
 
     private bikeRecordDAO bikeDAO;
     private branchRecordDAO branchDAO;
@@ -65,8 +85,6 @@ public class rentBikeController {
 
         loadBranches();
     }
-
-    
 
     /** Load all branches into the ChoiceBox */
     private void loadBranches() {
@@ -85,14 +103,15 @@ public class rentBikeController {
         cmbBranch.setOnAction(e -> loadBikesForBranch());
     }
 
-    // Load bikes for the selected branch 
+    // Load bikes for the selected branch
     private void loadBikesForBranch() {
         String selectedBranch = cmbBranch.getValue();
-        if (selectedBranch == null) return;
+        if (selectedBranch == null)
+            return;
 
-        
         branchRecordModel branch = branchDAO.getBranch(selectedBranch);
-        if (branch == null) return;
+        if (branch == null)
+            return;
 
         int branchID = branch.getBranchID();
         ArrayList<bikeRecordModel> bikes = bikeDAO.getBikesByBranch(branchID);
@@ -109,22 +128,28 @@ public class rentBikeController {
             if (bike.getBikeAvailability()) {
                 if (model.contains("mountain")) {
                     mountainCount++;
-                    if (mountainBike == null) mountainBike = bike;
+                    if (mountainBike == null)
+                        mountainBike = bike;
                 } else if (model.contains("road")) {
                     roadCount++;
-                    if (roadBike == null) roadBike = bike;
+                    if (roadBike == null)
+                        roadBike = bike;
                 } else if (model.contains("e-assist")) {
                     eAssistsCount++;
-                    if (eAssistsBike == null) eAssistsBike = bike;
+                    if (eAssistsBike == null)
+                        eAssistsBike = bike;
                 } else if (model.contains("tandem")) {
                     tandemCount++;
-                    if (tandemBike == null) tandemBike = bike;
+                    if (tandemBike == null)
+                        tandemBike = bike;
                 } else if (model.contains("e-bike") || model.contains("electric")) {
                     eBikeCount++;
-                    if (eBike == null) eBike = bike;
+                    if (eBike == null)
+                        eBike = bike;
                 } else if (model.contains("bmx")) {
                     bmxCount++;
-                    if (bmxBike == null) bmxBike = bike;
+                    if (bmxBike == null)
+                        bmxBike = bike;
                 }
             }
         }
@@ -139,7 +164,7 @@ public class rentBikeController {
 
     /** Update individual bike display */
     private void updateBikeDisplay(bikeRecordModel bike, int count,
-                                   Text modelText, Text availableText, Text costText) {
+            Text modelText, Text availableText, Text costText) {
         if (bike != null) {
             modelText.setText("Bike Model: " + bike.getBikeModel());
             availableText.setText("Amount Of Available Bikes: " + count);

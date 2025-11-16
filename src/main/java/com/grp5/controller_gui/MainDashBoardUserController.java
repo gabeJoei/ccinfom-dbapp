@@ -1,4 +1,4 @@
-package com.grp5.controller;
+package com.grp5.controller_gui;
 
 import java.io.IOException;
 
@@ -14,14 +14,21 @@ import javafx.scene.text.Text;
 
 public class MainDashBoardUserController {
 
-    @FXML private Text txtUserName;
-    @FXML private Text txtUserID;
-    @FXML private Button btnProfile;
-    @FXML private Button btnReservations;
-    @FXML private Button btnRentalHistory;
-    @FXML private Button btnLogout;
+    @FXML
+    private Text txtUserName;
+    @FXML
+    private Text txtUserID;
+    @FXML
+    private Button btnProfile;
+    @FXML
+    private Button btnReservations;
+    @FXML
+    private Button btnRentalHistory;
+    @FXML
+    private Button btnLogout;
 
-    @FXML private AnchorPane contentArea;
+    @FXML
+    private AnchorPane contentArea;
 
     @FXML
     public void initialize() {
@@ -37,7 +44,7 @@ public class MainDashBoardUserController {
         btnLogout.setOnAction(e -> handleLogout());
     }
 
-    //  Loads any FXML into the content area
+    // Loads any FXML into the content area
     private void loadUI(String fxmlPath) {
         try {
             AnchorPane pane = FXMLLoader.load(getClass().getResource(fxmlPath));
@@ -66,7 +73,7 @@ public class MainDashBoardUserController {
         System.out.println("Log Out clicked");
         // Load login screen here
     }
-    
+
     public void setUserName(String userName) {
         if (txtUserName != null) {
             txtUserName.setText(userName);
@@ -103,6 +110,4 @@ public class MainDashBoardUserController {
         return btnLogout;
     }
 
-
 }
-  
