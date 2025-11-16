@@ -6,6 +6,7 @@ module com.grp5 {
     opens com.grp5.controller_gui to javafx.fxml;
     opens com.grp5.model to javafx.base;
     opens com.grp5 to javafx.graphics;
+    opens com.grp5.controller_backend to javafx.fxml;
 
     exports com.grp5;
     exports com.grp5.model;
