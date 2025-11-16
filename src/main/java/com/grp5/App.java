@@ -1,7 +1,5 @@
 package com.grp5;
 
-import java.io.IOException;
-
 import com.grp5.utils.databaseConnection;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -16,14 +14,9 @@ import javafx.stage.Stage;
 public class App extends Application {
 
     @Override
-    public void start(Stage stage) {
+    public void start(Stage primaryStage) {
         try {
-<<<<<<< HEAD
-            Parent root = FXMLLoader.load(getClass().getResource("/com/grp5/view/AdminOrUser.fxml")); // Get the //
-                                                                                                      // resources :D
-=======
             Parent root = FXMLLoader.load(getClass().getResource("/com/grp5/view/AdminOrUser.fxml")); // Get the resources :D
->>>>>>> d70d4ff56e1f76148ded4b9d76813e86613f4053
             Scene scene = new Scene(root); // Set - up new scene :D
 
             stage.setScene(scene);
@@ -33,6 +26,9 @@ public class App extends Application {
         } catch (IOException e) {
             e.getStackTrace();
             System.err.println("Tite");
+=======
+
+>>>>>>> d70d4ff56e1f76148ded4b9d76813e86613f4053
         }
     }
 
@@ -44,7 +40,16 @@ public class App extends Application {
     }
 
     public static void main(String[] args) {
+        printHeader();
         launch(args);
     }
 
+    /**
+     * Print application header
+     */
+    private static void printHeader() {
+        System.out.println("         RENT BIKE UI TEST            ");
+        System.out.println("   Testing: rentBike.fxml             ");
+
+    }
 }

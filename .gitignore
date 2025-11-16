@@ -1,10 +1,4 @@
-# --- Build outputs ---
-/target/                 # Maven build dir
-/bin/
-/build/
-/out/
-
-# --- Compiled/packaged artifacts ---
+# --- Build & Compiled Files ---
 *.class
 *.log
 *.ctxt
@@ -12,44 +6,8 @@
 *.war
 *.ear
 
-# Keep the Maven wrapper JAR even though *.jar is ignored
-!.mvn/wrapper/maven-wrapper.jar
-
-# --- Test & reports (usually under target anyway) ---
-*.hprof
-hs_err_pid*
-replay_pid*
-jacoco.exec
-
-# --- IDEs & editors ---
-# IntelliJ IDEA
-.idea/
-*.iml
-.idea_modules/
-
-# Eclipse
-.project
-.classpath
-.settings/
-.metadata/
-.factorypath
-
-# NetBeans
-nbproject/private/
-build/
-dist/
-nbbuild/
-nbdist/
-.nb-gradle/
-
-# VS Code
-.vscode/
-
-# --- OS junk ---
-.DS_Store
-Thumbs.db
-
-# --- Env/config (optional; uncomment if you use them) ---
-#.env
-#.env.local
+# Build directories
+/bin/
+/build/
 /target/
+/out/
