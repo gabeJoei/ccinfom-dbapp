@@ -30,7 +30,7 @@ public class AdminOrUserController {
     @FXML
     private void handleUserClick(ActionEvent e) {
         System.out.println("User Clicked");
-        loadNextScene("/com/grp5/view/AdminLogIn.fxml", "User Log In", btnUser2);
+        loadNextScene("/com/grp5/view/UserLogIn.fxml", "User Log In", btnUser2);
     }
 
     private void loadNextScene(String fxmlFile, String title, Button button) {

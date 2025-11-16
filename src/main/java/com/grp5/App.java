@@ -18,9 +18,8 @@ public class App extends Application {
     @Override
     public void start(Stage stage) {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("/com/grp5/view/AdminOrUser.fxml")); // Get the
-                                                                                                      // resources :D
-            Scene scene = new Scene(root); // Set - up new scene :D
+            Parent root = FXMLLoader.load(getClass().getResource("/com/grp5/view/AdminOrUser.fxml"));
+            Scene scene = new Scene(root);
 
             stage.setScene(scene);
             stage.setTitle("Pick?");
