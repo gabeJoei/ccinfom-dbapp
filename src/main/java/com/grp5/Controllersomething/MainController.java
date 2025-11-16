@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import com.grp5.controller.*;
 import javafx.application.Application;
 
-public class MainController extends Application {
+public class MainController {
 
     public static void main(String[] args) {
         // System.out.println("Hello WOrld");
@@ -23,8 +23,6 @@ public class MainController extends Application {
         // customerRecordModel user=new customerRecordModel();
         // customerRecordDAO userD=new customerRecordDAO();
         // ArrayList<customerRecordModel> userM=new ArrayList<>();
-
-        launch();
 
     }
 
