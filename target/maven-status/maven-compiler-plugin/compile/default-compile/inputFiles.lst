@@ -21,11 +21,11 @@ C:\Users\ACER\ccinfom-dbapp\src\main\java\com\grp5\model\transactionRecordModel.
 C:\Users\ACER\ccinfom-dbapp\src\main\java\com\grp5\reports\customerEngagementReport.java
 C:\Users\ACER\ccinfom-dbapp\src\main\java\com\grp5\dao\branchRecordDAO.java
 C:\Users\ACER\ccinfom-dbapp\src\main\java\com\grp5\dao\transactionRecordDAO.java
-C:\Users\ACER\ccinfom-dbapp\src\main\java\com\grp5\controller_gui\loginController.java
 C:\Users\ACER\ccinfom-dbapp\src\main\java\com\grp5\module-info.java
 C:\Users\ACER\ccinfom-dbapp\src\main\java\com\grp5\controller_backend\MainController.java
 C:\Users\ACER\ccinfom-dbapp\src\main\java\com\grp5\dao\bikeReservationDAO.java
 C:\Users\ACER\ccinfom-dbapp\src\main\java\com\grp5\transactions\RentingTransaction.java
 C:\Users\ACER\ccinfom-dbapp\src\main\java\com\grp5\controller_gui\AdminOrUserController.java
 C:\Users\ACER\ccinfom-dbapp\src\main\java\com\grp5\model\bikeRecordModel.java
+C:\Users\ACER\ccinfom-dbapp\src\main\java\com\grp5\controller_gui\UserLogInController.java
 C:\Users\ACER\ccinfom-dbapp\src\main\java\com\grp5\utils\generalUtilities.java

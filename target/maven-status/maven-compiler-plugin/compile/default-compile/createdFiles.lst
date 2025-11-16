@@ -4,6 +4,7 @@ com\grp5\controller_backend\MainController.class
 com\grp5\controller_backend\AdminSideController.class
 com\grp5\controller_backend\returningTransactionController.class
 com\grp5\controller_gui\rentBikeController.class
+com\grp5\controller_gui\UserLogInController.class
 com\grp5\model\transactionRecordModel.class
 com\grp5\utils\databaseConnection.class
 com\grp5\reports\rentalSalesReport$RentalSales.class
@@ -31,4 +32,3 @@ com\grp5\model\customerRecordModel.class
 com\grp5\dao\customerRecordDAO.class
 com\grp5\dao\bikeReservationDAO.class
 com\grp5\model\adminModel.class
-com\grp5\controller_gui\loginController.class

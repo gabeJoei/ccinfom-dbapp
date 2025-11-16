@@ -5,6 +5,8 @@ import com.grp5.dao.customerRecordDAO;
 import com.grp5.model.adminModel;
 import com.grp5.model.customerRecordModel;
 import com.grp5.utils.sessionManager;
+
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -14,7 +16,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class loginController {
+public class UserLogInController {
 
     @FXML
     private TextField txtUsername;
@@ -30,6 +32,9 @@ public class loginController {
 
     @FXML
     private Button btnSignUp;
+
+    @FXML
+    private Button btnBack;
 
     private customerRecordDAO customerDAO;
     private adminDAO adminDAO;
@@ -168,6 +173,26 @@ public class loginController {
         } catch (IOException e) {
             e.printStackTrace();
             showMessage("Error loading sign-up page", "error");
+        }
+    }
+
+    @FXML
+    public void handleBackBtnClick(ActionEvent click) {
+        System.out.println("Back button clicked!");
+        try {
+
+            Parent nextSceneRoot = FXMLLoader
+                    .load(getClass().getResource("/com/grp5/view/AdminOrUser.fxml"));
+            Scene nextScene = new Scene(nextSceneRoot); //
+            Stage currentStage = (Stage) btnBack.getScene().getWindow();
+
+            currentStage.setScene(nextScene);
+            currentStage.setTitle("Home");
+            currentStage.show();
+
+        } catch (IOException e) {
+            e.getStackTrace();
+            System.err.println("Tite");
         }
     }
 
