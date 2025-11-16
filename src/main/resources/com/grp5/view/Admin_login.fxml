@@ -1,11 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
-
+<?import javafx.scene.text.Font?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Button layoutX="234.0" layoutY="169.0" mnemonicParsing="false" text="Tite :D" />
+      <Button layoutX="275.0" layoutY="301.0" mnemonicParsing="false" text="Log-In" />
+      <Label layoutX="227.0" layoutY="39.0" text="Admin Log-In">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <TextField layoutX="226.0" layoutY="156.0" />
+      <Label layoutX="226.0" layoutY="136.0" text="Email:">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="226.0" layoutY="190.0" text="Password:">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <PasswordField layoutX="226.0" layoutY="210.0" />
+      <Button layoutX="14.0" layoutY="361.0" mnemonicParsing="false" text="Back" />
    </children>
 </AnchorPane>
