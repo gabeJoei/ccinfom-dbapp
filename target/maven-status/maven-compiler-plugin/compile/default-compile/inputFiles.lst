@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /Users/gabriellejoeibactong/Desktop/INFOM-DBAPP/ccinfom-dbapp/src/main/java/com/grp5/model/transactionRecordModel.java
 /Users/gabriellejoeibactong/Desktop/INFOM-DBAPP/ccinfom-dbapp/src/main/java/com/grp5/dao/bikeReservationDAO.java
 /Users/gabriellejoeibactong/Desktop/INFOM-DBAPP/ccinfom-dbapp/src/main/java/com/grp5/controller_gui/AdminOrUserController.java
@@ -33,3 +34,38 @@
 /Users/gabriellejoeibactong/Desktop/INFOM-DBAPP/ccinfom-dbapp/src/main/java/com/grp5/reports/customerEngagementReport.java
 /Users/gabriellejoeibactong/Desktop/INFOM-DBAPP/ccinfom-dbapp/src/main/java/com/grp5/dao/customerRecordDAO.java
 /Users/gabriellejoeibactong/Desktop/INFOM-DBAPP/ccinfom-dbapp/src/main/java/com/grp5/App.java
+=======
+C:\Users\Kat\Downloads\ccinfom_final\ccinfom-dbapp\src\main\java\com\grp5\controller_gui\User_rentBikeController.java
+C:\Users\Kat\Downloads\ccinfom_final\ccinfom-dbapp\src\main\java\com\grp5\model\adminModel.java
+C:\Users\Kat\Downloads\ccinfom_final\ccinfom-dbapp\src\main\java\com\grp5\utils\databaseConnection.java
+C:\Users\Kat\Downloads\ccinfom_final\ccinfom-dbapp\src\main\java\com\grp5\utils\generalUtilities.java
+C:\Users\Kat\Downloads\ccinfom_final\ccinfom-dbapp\src\main\java\com\grp5\model\bikeReservation.java
+C:\Users\Kat\Downloads\ccinfom_final\ccinfom-dbapp\src\main\java\com\grp5\dao\transactionRecordDAO.java
+C:\Users\Kat\Downloads\ccinfom_final\ccinfom-dbapp\src\main\java\com\grp5\model\branchRecordModel.java
+C:\Users\Kat\Downloads\ccinfom_final\ccinfom-dbapp\src\main\java\com\grp5\controller_backend\paymentTransactionController.java
+C:\Users\Kat\Downloads\ccinfom_final\ccinfom-dbapp\src\main\java\com\grp5\dao\bikeReservationDAO.java
+C:\Users\Kat\Downloads\ccinfom_final\ccinfom-dbapp\src\main\java\com\grp5\dao\branchRecordDAO.java
+C:\Users\Kat\Downloads\ccinfom_final\ccinfom-dbapp\src\main\java\com\grp5\controller_gui\User_dashBoardController.java
+C:\Users\Kat\Downloads\ccinfom_final\ccinfom-dbapp\src\main\java\com\grp5\reports\branchPerformanceReport.java
+C:\Users\Kat\Downloads\ccinfom_final\ccinfom-dbapp\src\main\java\com\grp5\controller_gui\Admin_dashboardControl.java
+C:\Users\Kat\Downloads\ccinfom_final\ccinfom-dbapp\src\main\java\com\grp5\transactions\RentingTransaction.java
+C:\Users\Kat\Downloads\ccinfom_final\ccinfom-dbapp\src\main\java\com\grp5\controller_backend\AdminSideController.java
+C:\Users\Kat\Downloads\ccinfom_final\ccinfom-dbapp\src\main\java\com\grp5\controller_gui\User_bikeReservationController.java
+C:\Users\Kat\Downloads\ccinfom_final\ccinfom-dbapp\src\main\java\com\grp5\controller_backend\MainController.java
+C:\Users\Kat\Downloads\ccinfom_final\ccinfom-dbapp\src\main\java\com\grp5\reports\rentalSalesReport.java
+C:\Users\Kat\Downloads\ccinfom_final\ccinfom-dbapp\src\main\java\com\grp5\model\bikeRecordModel.java
+C:\Users\Kat\Downloads\ccinfom_final\ccinfom-dbapp\src\main\java\com\grp5\dao\adminDAO.java
+C:\Users\Kat\Downloads\ccinfom_final\ccinfom-dbapp\src\main\java\com\grp5\controller_gui\User_loginController.java
+C:\Users\Kat\Downloads\ccinfom_final\ccinfom-dbapp\src\main\java\com\grp5\module-info.java
+C:\Users\Kat\Downloads\ccinfom_final\ccinfom-dbapp\src\main\java\com\grp5\SystemInfo.java
+C:\Users\Kat\Downloads\ccinfom_final\ccinfom-dbapp\src\main\java\com\grp5\reports\customerEngagementReport.java
+C:\Users\Kat\Downloads\ccinfom_final\ccinfom-dbapp\src\main\java\com\grp5\model\customerRecordModel.java
+C:\Users\Kat\Downloads\ccinfom_final\ccinfom-dbapp\src\main\java\com\grp5\controller_backend\returningTransactionController.java
+C:\Users\Kat\Downloads\ccinfom_final\ccinfom-dbapp\src\main\java\com\grp5\controller_gui\AdminOrUserController.java
+C:\Users\Kat\Downloads\ccinfom_final\ccinfom-dbapp\src\main\java\com\grp5\model\transactionRecordModel.java
+C:\Users\Kat\Downloads\ccinfom_final\ccinfom-dbapp\src\main\java\com\grp5\controller_backend\rentingTransactionController.java
+C:\Users\Kat\Downloads\ccinfom_final\ccinfom-dbapp\src\main\java\com\grp5\dao\bikeRecordDAO.java
+C:\Users\Kat\Downloads\ccinfom_final\ccinfom-dbapp\src\main\java\com\grp5\App.java
+C:\Users\Kat\Downloads\ccinfom_final\ccinfom-dbapp\src\main\java\com\grp5\utils\sessionManager.java
+C:\Users\Kat\Downloads\ccinfom_final\ccinfom-dbapp\src\main\java\com\grp5\dao\customerRecordDAO.java
+>>>>>>> refs/remotes/origin/main

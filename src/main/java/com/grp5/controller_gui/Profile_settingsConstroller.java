@@ -13,40 +13,15 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
-public class Admin_logInController {
-
+public class Profile_settingsConstroller {
     @FXML
-    private Button logInBtn;
+    private Button changePassBtn;
+    @FXML
+    private Button updtInfoBtn;
+    @FXML
+    private Button deleteAccountBtn;
     @FXML
     private Button backBtn;
-
-    @FXML
-    private TextField usernameField;
-    @FXML
-    private PasswordField passwordField;
-
-    private final adminDAO dao = new adminDAO();
-
-    @FXML
-    private void handleAdminLogIn() {
-        String username = usernameField.getText() != null ? usernameField.getText().trim() : "";
-        String password = passwordField.getText() != null ? passwordField.getText() : "";
-
-        // check if either of the fields are empty
-        if (username.isEmpty() || password.isEmpty()) {
-            showError("Missing info", "Please enter both username and password.");
-            return;
-        }
-
-        adminModel admin = dao.authenticateAdmin(username, password);
-        Admin_session.setCurrentAdmin(admin); // Current admin bro :D
-        if (admin != null) {
-            loadNextScene("/com/grp5/view/Admin_dashBoard.fxml", "Admin Dashboard", logInBtn);
-        } else {
-            showError("Login failed", "Invalid username or password.");
-        }
-
-    }
 
     @FXML
     private void handleBckBtn() {
@@ -79,5 +54,4 @@ public class Admin_logInController {
         alert.setContentText(content);
         alert.showAndWait();
     }
-
 }

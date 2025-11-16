@@ -12,7 +12,7 @@ import javafx.scene.control.MenuItem;
  * Controller for Main Dashboard Sidebar (included via fx:include)
  */
 
-public class Admin_dashboardControl {
+public class Admin_dashboardController {
 
     @FXML private Button btnBranch;
     @FXML private Button btnBike;
@@ -31,12 +31,7 @@ public class Admin_dashboardControl {
 
     private void setupSidebarButtons() {
 
-        iBike.setText("Rental Bike Trend");
-        iCustomer.setText("Customer Engagement Report");
-        iBranch.setText("Branch Performance");
-        iSales.setText("Rental Sales");
-        smbViewReports.getItems().addAll(iBike,iCustomer,iBranch,iSales);
-
+       
         btnProfile.setOnAction(e -> handleProfile());
         btnBranch.setOnAction(e -> handleBranch());
         btnReservation.setOnAction(e -> handleReservations());
@@ -58,13 +53,13 @@ public class Admin_dashboardControl {
             e.printStackTrace();
         }
     }
+ 
 
    public void handleBikeReport(){
      loadUI("/com/grp5/view/Admin_rentalBikeTrendReport.fxml");
    }
-
    public void handleBranchReport(){
-     loadUI("/com/grp5/view/Admin_reportBranch.fxml");
+     loadUI("/com/grp5/view/Admin_branchReport.fxml");
    }
    public void handleCustomerReport(){
      loadUI("/com/grp5/view/Admin_customerReport.fxml");
@@ -73,15 +68,14 @@ public class Admin_dashboardControl {
      loadUI("/com/grp5/view/Admin_rentalSalesReport.fxml");
    }
     
-
     private void handleBike(){
         loadUI("/com/grp5/view/Admin_bike.fxml");
     }
     private void handleUsers(){
-        loadUI("/com/grp5/view/Admin_customers.fxml");
+        loadUI("/com/grp5/view/Admin_customer.fxml");
     }
     private void handleProfile() {
-        loadUI("/com/grp5/view/Profile_settings.fxml");
+        loadUI("/com/grp5/view/Admin_settings.fxml");
     }
 
     private void handleReservations() {

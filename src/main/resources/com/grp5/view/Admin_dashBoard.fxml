@@ -12,7 +12,7 @@
 <?import javafx.scene.text.Text?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="150.0" prefWidth="1065.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1"
-fx:controller="com.grp5.controller_gui.mainDashboardAdminControl">
+fx:controller="com.grp5.controller_gui.Admin_dashboardController">
    <children>
       <VBox prefHeight="150.0" prefWidth="1065.0" spacing="20.0">
          <children>
@@ -34,28 +34,31 @@ fx:controller="com.grp5.controller_gui.mainDashboardAdminControl">
                   </HBox>
                   <VBox alignment="CENTER" prefHeight="91.0" prefWidth="87.0" spacing="15.0" style="-fx-background-color: lightblue;">
                      <children>
-                        <Button mnemonicParsing="false" prefHeight="28.0" prefWidth="60.0" text="Profile" />
-                        <Button lineSpacing="20.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="60.0" text="Log Out" textAlignment="CENTER" />
+                        <Button fx:id="btnProfile" mnemonicParsing="false" prefHeight="28.0" prefWidth="60.0" text="Profile" />
+                        <Button fx:id="btnLogOut" lineSpacing="20.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="60.0" text="Log Out" textAlignment="CENTER" />
                      </children>
                   </VBox>
                </children>
             </HBox>
             <HBox alignment="CENTER" prefHeight="49.0" prefWidth="1065.0" spacing="20.0">
                <children>
-                  <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="95.0" text="Branch" />
-                  <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="95.0" text="Bike" />
-                  <Button layoutX="63.0" layoutY="10.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="95.0" text="Reservations" />
-                  <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="95.0" text="Transactions" />
-                  <Button layoutX="101.0" layoutY="10.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="95.0" text="Users" />
-                  <SplitMenuButton mnemonicParsing="false" text="View Reports">
+                  <Button fx:id="btnBranch" mnemonicParsing="false" prefHeight="26.0" prefWidth="95.0" text="Branch" />
+                  <Button fx:id="btnBike" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="95.0" text="Bike" />
+                  <Button fx:id="btnReservation" layoutX="63.0" layoutY="10.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="95.0" text="Reservations" />
+                  <Button fx:id="btnTransaction" mnemonicParsing="false" prefHeight="25.0" prefWidth="95.0" text="Transactions" />
+                  <Button fx:id="btnUsers" layoutX="101.0" layoutY="10.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="95.0" text="Users" />
+                  <SplitMenuButton fx:id="smbViewReports" mnemonicParsing="false" text="View Reports">
                     <items>
-                      <MenuItem mnemonicParsing="false" text="Action 1" />
-                      <MenuItem mnemonicParsing="false" text="Action 2" />
+                      <MenuItem fx:id="iBike" mnemonicParsing="false" text="Rental Bike Trend" />
+                      <MenuItem fx:id="iCustomer" mnemonicParsing="false" text="Customer Engagement Report" />
+                        <MenuItem fx:id="iBranch" mnemonicParsing="false" text="Branch Performance" />
+                        <MenuItem fx:id="iSales" mnemonicParsing="false" text="Rental Sales" />
                     </items>
                   </SplitMenuButton>
                </children>
             </HBox>
          </children>
       </VBox>
+      <AnchorPane fx:id="contentArea" layoutY="150.0" prefHeight="446.0" prefWidth="1065.0" />
    </children>
 </AnchorPane>
