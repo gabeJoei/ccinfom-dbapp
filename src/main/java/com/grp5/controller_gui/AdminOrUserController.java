@@ -26,7 +26,7 @@ public class AdminOrUserController {
     @FXML
     private void handleUserClick(ActionEvent e) {
         System.out.println("User Clicked");
-        loadNextScene("/com/grp5/view/UserLogIn.fxml", "User Log In", btnUser2);
+        loadNextScene("/com/grp5/view/User_logIn.fxml", "User Log In", btnUser2);
     }
 
     private void loadNextScene(String fxmlFile, String title, Button button) {
@@ -42,7 +42,7 @@ public class AdminOrUserController {
 
         } catch (IOException e) {
             e.getStackTrace();
-            System.err.println("Tite");
+            System.err.println(e);
         }
     }
 
