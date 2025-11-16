@@ -12,7 +12,7 @@ import javafx.scene.control.MenuItem;
  * Controller for Main Dashboard Sidebar (included via fx:include)
  */
 
-public class mainDashboardAdminControl {
+public class Admin_dashboardControl {
 
     @FXML private Button btnBranch;
     @FXML private Button btnBike;
@@ -39,7 +39,7 @@ public class mainDashboardAdminControl {
 
         btnProfile.setOnAction(e -> handleProfile());
         btnBranch.setOnAction(e -> handleBranch());
-        btnTransaction.setOnAction(e -> handleReservations());
+        btnReservation.setOnAction(e -> handleReservations());
         btnTransaction.setOnAction(e -> handleTransactions());
         btnUsers.setOnAction(e->handleUsers());
         btnLogOut.setOnAction(e->handleLogout());
