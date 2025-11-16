@@ -187,5 +187,31 @@ public class bikeRecordDAO {
     return bikeList;
 }
 
+public ArrayList<bikeRecordModel> getBikesByBranch(int branchID) {
+    ArrayList<bikeRecordModel> bikes = new ArrayList<>();
+
+    try {
+        Connection connect = databaseConnection.getConnection();
+        PreparedStatement prepState = connect.prepareStatement(
+            "SELECT * FROM bike WHERE branchIDNum = ?"
+        );
+        prepState.setInt(1, branchID);
+        ResultSet result = prepState.executeQuery();
+
+        while (result.next()) {
+            bikes.add(extractBikeFromResultSet(result));
+
+        }
+
+        result.close();
+        prepState.close();
+        connect.close();
+
+    } catch (SQLException e) {
+        System.out.println(e.getMessage());
+    }
+
+    return bikes;
+}
 
 }

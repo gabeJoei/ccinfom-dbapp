@@ -14,7 +14,9 @@ import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.math.BigDecimal;
 
-
+/**
+ * Returning Transaction Controller (
+ */
 public class returningTransactionController {
     
     @FXML private TextField txtReservationRef;
@@ -27,6 +29,7 @@ public class returningTransactionController {
     @FXML private TextArea txtNotes;
     @FXML private Label lblLateFee;
     @FXML private Label lblMessage;
+    @FXML private Button btnLoad;
     @FXML private Button btnProcessReturn;
     @FXML private Button btnCancel;
     
@@ -48,11 +51,13 @@ public class returningTransactionController {
         
         dateReturn.setValue(LocalDate.now());
         clearForm();
+        
+        btnLoad.setOnAction(e -> handleLoadReservation());
+        btnProcessReturn.setOnAction(e -> handleProcessReturn());
+        btnCancel.setOnAction(e -> handleCancel());
+        dateReturn.setOnAction(e -> calculateLateFee());
     }
     
-    /**
-     * Handle load reservation button
-     */
     @FXML
     private void handleLoadReservation() {
         String refText = txtReservationRef.getText().trim();
@@ -65,7 +70,7 @@ public class returningTransactionController {
         try {
             int refNum = Integer.parseInt(refText);
             
-            //Check reservation record
+            // Check reservation record
             currentReservation = reservationDAO.getReservation(refNum);
             
             if (currentReservation == null) {
@@ -82,11 +87,10 @@ public class returningTransactionController {
                 return;
             }
             
-            // Get customer and bike info
+            //  Get customer and bike info
             currentCustomer = customerDAO.getCustomer(currentReservation.getCustomerAccID());
             currentBike = bikeDAO.getBikeRecord(currentReservation.getBikeID());
             
-            // Load details
             loadReservationDetails();
             calculateLateFee();
             showMessage("Reservation loaded successfully!", "success");
@@ -96,9 +100,6 @@ public class returningTransactionController {
         }
     }
     
-    /**
-     * Load reservation details
-     */
     private void loadReservationDetails() {
         if (currentCustomer != null) {
             lblCustomerName.setText(currentCustomer.getFirstName() + " " + 
@@ -115,9 +116,6 @@ public class returningTransactionController {
         lblStatus.setStyle("-fx-text-fill: #3498db; -fx-font-weight: bold;");
     }
     
-    /**
-     * Calculate late fee if applicable
-     */
     private void calculateLateFee() {
         if (currentReservation == null) return;
         
@@ -127,7 +125,6 @@ public class returningTransactionController {
         long daysLate = ChronoUnit.DAYS.between(endDate, returnDate);
         
         if (daysLate > 0) {
-            // Late fee: 50 pesos per day
             BigDecimal lateFee = new BigDecimal(daysLate * 50);
             lblLateFee.setText(String.format("₱%.2f (%d days late)", lateFee, daysLate));
             lblLateFee.setStyle("-fx-text-fill: #e74c3c; -fx-font-weight: bold;");
@@ -137,9 +134,6 @@ public class returningTransactionController {
         }
     }
     
-    /**
-     * Process bike return
-     */
     @FXML
     private void handleProcessReturn() {
         if (currentReservation == null) {
@@ -147,7 +141,6 @@ public class returningTransactionController {
             return;
         }
         
-        // Confirm return
         Alert confirmAlert = new Alert(Alert.AlertType.CONFIRMATION);
         confirmAlert.setTitle("Confirm Return");
         confirmAlert.setHeaderText("Process Bike Return");
@@ -166,19 +159,16 @@ public class returningTransactionController {
         });
     }
     
-    /**
-     * Execute return transaction
-     */
     private void processReturn() {
         try {
-            // Update bike availability to "True"
-            currentBike.setBikeAvailability(true);
-            if (bikeDAO.updateBikeRecord(currentBike) == 0) {
+            //  Update bike availability to true
+            int result = bikeDAO.updateBikeAvailability(currentBike, true);
+            if (result == 0) {
                 showMessage("Failed to update bike availability!", "error");
                 return;
             }
             
-            // SRecord return date
+            // Record return date
             currentReservation.setDateReturned(Timestamp.valueOf(dateReturn.getValue().atStartOfDay()));
             
             // Update reservation status to "completed"
@@ -186,8 +176,7 @@ public class returningTransactionController {
             
             if (!reservationDAO.updateReservation(currentReservation)) {
                 // Rollback bike availability
-                currentBike.setBikeAvailability(false);
-                bikeDAO.updateBikeRecord(currentBike);
+                bikeDAO.updateBikeAvailability(currentBike, false);
                 showMessage("Failed to update reservation!", "error");
                 return;
             }
@@ -197,7 +186,6 @@ public class returningTransactionController {
                 recordLateFee();
             }
             
-            // Success!
             showReturnSummary();
             clearForm();
             currentReservation = null;
@@ -211,9 +199,6 @@ public class returningTransactionController {
         }
     }
     
-    /**
-     * Record late fee payment
-     */
     private void recordLateFee() {
         try {
             String feeText = lblLateFee.getText();
@@ -235,9 +220,6 @@ public class returningTransactionController {
         }
     }
     
-    /**
-     * Show return summary
-     */
     private void showReturnSummary() {
         Alert summaryAlert = new Alert(Alert.AlertType.INFORMATION);
         summaryAlert.setTitle("Return Summary");
@@ -262,26 +244,20 @@ public class returningTransactionController {
         summaryAlert.setContentText(summary);
         summaryAlert.showAndWait();
         
-        showMessage("✓ Bike returned successfully!", "success");
+        showMessage(" Bike returned successfully!", "success");
     }
     
-    /**
-     * Handle cancel button
-     */
     @FXML
     private void handleCancel() {
         try {
             Stage stage = (Stage) txtReservationRef.getScene().getWindow();
-            Parent root = FXMLLoader.load(getClass().getResource("/com/grp5/view/userMainPage.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/com/grp5/view/userMainPage.fxml")); //to be changed later
             stage.setScene(new Scene(root));
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
     
-    /**
-     * Clear form
-     */
     private void clearForm() {
         lblCustomerName.setText("-");
         lblBikeModel.setText("-");
@@ -295,9 +271,6 @@ public class returningTransactionController {
         lblMessage.setText("");
     }
     
-    /**
-     * Show message
-     */
     private void showMessage(String message, String type) {
         lblMessage.setText(message);
         

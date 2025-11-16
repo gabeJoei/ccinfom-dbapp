@@ -82,9 +82,7 @@ public class rentingTransactionController {
         cmbRentalType.setOnAction(e -> calculateTotalAmount());
     }
     
-    /**
-     * Load available bikes for selected branch
-     */
+
     private void loadAvailableBikes() {
         cmbBikeID.getItems().clear();
         lblBikeModel.setText("-");
@@ -105,9 +103,7 @@ public class rentingTransactionController {
         }
     }
     
-    /**
-     * Display selected bike details
-     */
+    
     private void displayBikeDetails() {
         if (cmbBikeID.getValue() == null) return;
         
@@ -125,9 +121,7 @@ public class rentingTransactionController {
         }
     }
     
-    /**
-     * Calculate total rental amount
-     */
+
     private void calculateTotalAmount() {
         if (selectedBike == null || dateStart.getValue() == null || dateEnd.getValue() == null) {
             return;
@@ -157,8 +151,8 @@ public class rentingTransactionController {
         lblTotalAmount.setText(String.format("₱%.2f", amount));
     }
     
-    /**
-     * Process the rental transaction
+    /*
+     Process the rental transaction
      */
     @FXML
     private void handleProcessRental() {
@@ -186,9 +180,7 @@ public class rentingTransactionController {
         });
     }
     
-    /**
-     * Execute the rental transaction
-     */
+     
     private void processRental() {
     try {
         customerRecordModel customer = customerDAO.getCustomerRecordData(
@@ -241,12 +233,10 @@ public class rentingTransactionController {
     }
 }
     
-    /**
-     * Get last inserted reservation ID (simplified - use proper method in production)
-     */
+    // Get last inserted reservation ID (=
+     
     private int getLastReservationID() {
-        // This is a simplified version
-        // In production, modify addReservation to return generated key
+        //  modify addReservation to return generated key
         ArrayList<bikeReservation> all = reservationDAO.getAllReservations();
         if (!all.isEmpty()) {
             return all.get(all.size() - 1).getReservationReferenceNum();
@@ -254,9 +244,7 @@ public class rentingTransactionController {
         return 1;
     }
     
-    /**
-     * Validate all inputs
-     */
+     
     private boolean validateInputs() {
         if (cmbCustomerID.getValue() == null) {
             showMessage("Please select a customer", "error");
@@ -286,9 +274,7 @@ public class rentingTransactionController {
         return true;
     }
     
-    /**
-     * Show rental summary
-     */
+
     private void showRentalSummary(customerRecordModel customer, 
                                    bikeReservation reservation, 
                                    transactionRecordModel payment) {
@@ -316,9 +302,7 @@ public class rentingTransactionController {
         summaryAlert.showAndWait();
     }
     
-    /**
-     * Clear form
-     */
+
     private void clearForm() {
         cmbCustomerID.setValue(null);
         cmbBranchID.setValue(null);
@@ -333,23 +317,19 @@ public class rentingTransactionController {
         lblMessage.setText("");
     }
     
-    /**
-     * Handle cancel button
-     */
+
     @FXML
     private void handleCancel() {
         try {
             Stage stage = (Stage) btnCancel.getScene().getWindow();
-            Parent root = FXMLLoader.load(getClass().getResource("/com/grp5/view/userMainPage.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/com/grp5/view/userMainPage.fxml")); //will be changed later
             stage.setScene(new Scene(root));
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
     
-    /**
-     * Show message
-     */
+
     private void showMessage(String message, String type) {
         lblMessage.setText(message);
         

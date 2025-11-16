@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.grp5.model.bikeRecordModel;
 import com.grp5.model.branchRecordModel;
 import com.grp5.utils.databaseConnection;
 
@@ -126,5 +127,24 @@ public class branchRecordDAO {
     }
     return branches;
 }
+public branchRecordModel getBranch(String branchName) {
+    try (Connection connect = databaseConnection.getConnection();
+         PreparedStatement prepState = connect.prepareStatement(
+            "SELECT * FROM branch WHERE branchName = ?")) {
+
+        prepState.setString(1, branchName);
+        ResultSet result = prepState.executeQuery();
+
+        if (result.next()) {
+            return extractFromBranchTable(result);
+        }
+
+    } catch (SQLException e) {
+        System.out.println("Error getting branch: " + e.getMessage());
+    }
+    return null;
+}
+
+
 
 }
