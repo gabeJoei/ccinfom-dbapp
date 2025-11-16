@@ -32,8 +32,8 @@ public class MainDashBoardUserController {
     private void setupSidebarButtons() {
 
         btnProfile.setOnAction(e -> handleProfile());
-        btnReservations.setOnAction(e -> handleReservations());
-        btnRentalHistory.setOnAction(e -> handleRentBike());
+        btnReservations.setOnAction(e -> handleRentBike());
+        btnRentalHistory.setOnAction(e -> handleReservations());
         btnLogout.setOnAction(e -> handleLogout());
     }
 
@@ -49,17 +49,17 @@ public class MainDashBoardUserController {
 
     private void handleProfile() {
         System.out.println("Profile clicked");
-        // loadUI("/com/grp5/view/profile.fxml");
+         loadUI("/com/grp5/view/Settings.fxml");
     }
 
     private void handleReservations() {
         System.out.println("Reservations clicked");
-        loadUI("/com/grp5/view/paymentSumarry.fxml");
+        loadUI("/com/grp5/view/reserveBike.fxml");
     }
 
     private void handleRentBike() {
         System.out.println("RentBike clicked");
-        // loadUI("/com/grp5/view/rentalHistory.fxml");
+        loadUI("/com/grp5/view/RentBike.fxml");
     }
 
     private void handleLogout() {
