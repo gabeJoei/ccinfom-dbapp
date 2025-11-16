@@ -14,7 +14,7 @@ prefHeight="400.0" prefWidth="600.0"
 xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1"
 fx:controller="com.grp5.controller_gui.Admin_logInController">
    <children>
-      <Button fx:id="logInBtn" layoutX="275.0" layoutY="301.0" mnemonicParsing="false" text="Log-In" />
+      <Button fx:id="logInBtn" layoutX="275.0" layoutY="301.0" mnemonicParsing="false" text="Log-In" onAction="#handleAdminLogIn"/>
 
       <Label layoutX="227.0" layoutY="39.0" text="Admin Log-In">
          <font>
@@ -22,7 +22,7 @@ fx:controller="com.grp5.controller_gui.Admin_logInController">
          </font>
       </Label>
 
-      <TextField fx:id="usernameField" layoutX="226.0" layoutY="156.0" />
+      <TextField fx:id="usernameField" layoutX="226.0" layoutY="156.0" onAction="#handleAdminLogIn"/>
       <Label layoutX="226.0" layoutY="136.0" text="Username:">
          <font>
             <Font size="14.0" />
@@ -34,9 +34,14 @@ fx:controller="com.grp5.controller_gui.Admin_logInController">
             <Font size="14.0" />
          </font>
       </Label>
-      <PasswordField fx:id="passwordField" layoutX="226.0" layoutY="210.0" />
+      <PasswordField fx:id="passwordField" layoutX="226.0" layoutY="210.0" onAction="#handleAdminLogIn"/>
 
-      <Button fx:id="backBtn" layoutX="14.0" layoutY="361.0" mnemonicParsing="false" text="Back" />
+      <Button 
+      fx:id="backBtn" 
+      layoutX="14.0" layoutY="361.0" 
+      mnemonicParsing="false" 
+      text="Back" 
+      onAction="#handleBckBtn"/>
 
    </children>
 </AnchorPane>
