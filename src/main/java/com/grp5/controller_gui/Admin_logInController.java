@@ -17,7 +17,7 @@ public class Admin_logInController {
     @FXML
     private Button logInBtn;
     @FXML
-    private Button bckBtn;
+    private Button backBtn;
 
     @FXML
     private TextField usernameField;
@@ -33,7 +33,7 @@ public class Admin_logInController {
 
         // check if either of the fields are empty
         if (username.isEmpty() || password.isEmpty()) {
-            showError("Missing info", "Please enter both email and password.");
+            showError("Missing info", "Please enter both username and password.");
             return;
         }
 
@@ -49,7 +49,7 @@ public class Admin_logInController {
     @FXML
     private void handleBckBtn() {
         System.out.println("Back button clicked!");
-        loadNextScene("/com/grp5/view/AdminOrUser.fxml", "Home", bckBtn);
+        loadNextScene("/com/grp5/view/AdminOrUser.fxml", "Home", backBtn);
     }
 
     private void loadNextScene(String fxmlFile, String title, Button button) {
