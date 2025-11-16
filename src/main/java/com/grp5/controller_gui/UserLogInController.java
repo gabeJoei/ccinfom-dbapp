@@ -163,7 +163,7 @@ public class UserLogInController {
             Stage stage = (Stage) btnSignUp.getScene().getWindow();
 
             // Load sign-up page ( FXML as a placeholder for the next screen)
-            Parent root = FXMLLoader.load(getClass().getResource("/com/grp5/view/RentBike.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/com/grp5/view/UserSignUp.fxml"));
 
             Scene scene = new Scene(root);
             stage.setTitle("Sign Up");
