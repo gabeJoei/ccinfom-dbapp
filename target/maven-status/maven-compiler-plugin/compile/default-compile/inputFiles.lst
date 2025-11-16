@@ -7,7 +7,9 @@ C:\Users\ACER\ccinfom-dbapp\src\main\java\com\grp5\model\adminModel.java
 C:\Users\ACER\ccinfom-dbapp\src\main\java\com\grp5\controller_gui\User_dashBoardController.java
 C:\Users\ACER\ccinfom-dbapp\src\main\java\com\grp5\model\bikeReservation.java
 C:\Users\ACER\ccinfom-dbapp\src\main\java\com\grp5\SystemInfo.java
+C:\Users\ACER\ccinfom-dbapp\src\main\java\com\grp5\session\Admin_session.java
 C:\Users\ACER\ccinfom-dbapp\src\main\java\com\grp5\controller_gui\User_bikeReservationController.java
+C:\Users\ACER\ccinfom-dbapp\src\main\java\com\grp5\controller_gui\Admin_dashboardController.java
 C:\Users\ACER\ccinfom-dbapp\src\main\java\com\grp5\dao\customerRecordDAO.java
 C:\Users\ACER\ccinfom-dbapp\src\main\java\com\grp5\utils\databaseConnection.java
 C:\Users\ACER\ccinfom-dbapp\src\main\java\com\grp5\controller_backend\rentingTransactionController.java
@@ -23,7 +25,6 @@ C:\Users\ACER\ccinfom-dbapp\src\main\java\com\grp5\model\transactionRecordModel.
 C:\Users\ACER\ccinfom-dbapp\src\main\java\com\grp5\reports\customerEngagementReport.java
 C:\Users\ACER\ccinfom-dbapp\src\main\java\com\grp5\dao\branchRecordDAO.java
 C:\Users\ACER\ccinfom-dbapp\src\main\java\com\grp5\dao\transactionRecordDAO.java
-C:\Users\ACER\ccinfom-dbapp\src\main\java\com\grp5\controller_gui\Admin_dashboardControl.java
 C:\Users\ACER\ccinfom-dbapp\src\main\java\com\grp5\module-info.java
 C:\Users\ACER\ccinfom-dbapp\src\main\java\com\grp5\controller_backend\MainController.java
 C:\Users\ACER\ccinfom-dbapp\src\main\java\com\grp5\dao\bikeReservationDAO.java

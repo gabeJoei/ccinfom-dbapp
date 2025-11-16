@@ -1,6 +1,7 @@
 com\grp5\dao\branchRecordDAO.class
 com\grp5\dao\transactionRecordDAO.class
 com\grp5\controller_backend\MainController.class
+com\grp5\controller_gui\Admin_dashboardController.class
 com\grp5\controller_gui\Admin_logInController.class
 com\grp5\controller_backend\AdminSideController.class
 com\grp5\controller_backend\returningTransactionController.class
@@ -12,6 +13,7 @@ com\grp5\reports\rentalSalesReport$RentalSales.class
 com\grp5\controller_gui\AdminOrUserController.class
 com\grp5\reports\customerEngagementReport.class
 com\grp5\controller_backend\rentingTransactionController.class
+com\grp5\session\Admin_session.class
 com\grp5\utils\generalUtilities.class
 com\grp5\model\bikeReservation.class
 com\grp5\dao\bikeRecordDAO.class
@@ -30,7 +32,6 @@ com\grp5\controller_gui\User_dashBoardController.class
 com\grp5\model\branchRecordModel.class
 com\grp5\reports\rentalSalesReport.class
 com\grp5\model\customerRecordModel.class
-com\grp5\controller_gui\Admin_dashboardControl.class
 com\grp5\dao\customerRecordDAO.class
 com\grp5\dao\bikeReservationDAO.class
 com\grp5\model\adminModel.class
