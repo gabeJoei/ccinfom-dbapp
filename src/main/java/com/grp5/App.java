@@ -1,5 +1,7 @@
 package com.grp5;
 
+import java.io.IOException;
+
 import com.grp5.utils.databaseConnection;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -14,7 +16,7 @@ import javafx.stage.Stage;
 public class App extends Application {
 
     @Override
-    public void start(Stage primaryStage) {
+    public void start(Stage stage) {
         try {
             Parent root = FXMLLoader.load(getClass().getResource("/com/grp5/view/AdminOrUser.fxml")); // Get the resources :D
             Scene scene = new Scene(root); // Set - up new scene :D
@@ -26,9 +28,6 @@ public class App extends Application {
         } catch (IOException e) {
             e.getStackTrace();
             System.err.println("Tite");
-=======
-
->>>>>>> d70d4ff56e1f76148ded4b9d76813e86613f4053
         }
     }
 
@@ -40,10 +39,9 @@ public class App extends Application {
     }
 
     public static void main(String[] args) {
-        printHeader();
         launch(args);
     }
-
+    
     /**
      * Print application header
      */
