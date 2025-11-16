@@ -18,6 +18,7 @@ com\grp5\dao\bikeRecordDAO.class
 com\grp5\controller\rentBikeController.class
 com\grp5\controller\userReservationsController.class
 com\grp5\reports\branchPerformanceReport.class
+com\grp5\utils\sessionManager.class
 com\grp5\dao\adminDAO.class
 com\grp5\controller\updateInfoController.class
 com\grp5\transactions\RentingTransaction.class

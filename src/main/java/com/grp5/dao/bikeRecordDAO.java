@@ -135,7 +135,7 @@ public class bikeRecordDAO {
     }
 
     public int updateBikeBranch(bikeRecordModel bikeRecord, int branchIDNum) {
-        String query = "UPDATE bike SET branchIDNum= WHERE bikeID=?";
+        String query = "UPDATE bike SET branchIDNum= ? WHERE bikeID=?";
         try (Connection connect = databaseConnection.getConnection();
                 PreparedStatement prepState = connect.prepareStatement(query)) {
 
