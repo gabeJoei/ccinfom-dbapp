@@ -14,15 +14,13 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1065.0" style="-fx-background-color: White;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1"
-fx:controller="com.grp5.controller.userRentalHistoryController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="827.0" style="-fx-background-color: White;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.grp5.controller.userRentalHistoryController">
    <children>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="600.0" stroke="BLACK" strokeType="INSIDE" width="242.0" />
-      <VBox layoutX="241.0" layoutY="-7.0" prefHeight="610.0" prefWidth="837.0">
+      <VBox prefHeight="610.0" prefWidth="837.0">
          <children>
             <AnchorPane maxHeight="-Infinity" minHeight="-Infinity" prefHeight="168.0" prefWidth="824.0" VBox.vgrow="ALWAYS">
                <children>
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#9cabba" height="121.0" layoutY="48.0" stroke="BLACK" strokeType="INSIDE" width="824.0" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#9cabba" height="121.0" layoutY="48.0" stroke="BLACK" strokeType="INSIDE" width="827.0" />
                   <ImageView fitHeight="113.0" fitWidth="97.0" layoutX="14.0" layoutY="60.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@images/userProfile.png" />
@@ -30,7 +28,7 @@ fx:controller="com.grp5.controller.userRentalHistoryController">
                   </ImageView>
                   <Text layoutX="121.0" layoutY="97.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name:" />
                   <Text layoutX="121.0" layoutY="122.0" strokeType="OUTSIDE" strokeWidth="0.0" text="User Id:" />
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#97b7d4" height="49.0" stroke="BLACK" strokeType="INSIDE" width="824.0" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#97b7d4" height="49.0" stroke="BLACK" strokeType="INSIDE" width="827.0" />
                   <Text layoutX="14.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="User Reservations Log - History">
                      <font>
                         <Font name="Bodoni MT" size="23.0" />

@@ -90,16 +90,14 @@ public class rentalSalesReport {
         }
 
         StringBuilder generatedSummary = new StringBuilder();
-        generatedSummary.append("\n========================================\n");
         generatedSummary.append(String.format("RENTAL SALES REPORT - %02d/%d\n", month, year));
-        generatedSummary.append("========================================\n");
         generatedSummary.append(String.format("Total Rentals: %d%n\n", totalRentals));
         generatedSummary.append(String.format("Unit Sales: %d%n\n", unitSales));
         generatedSummary.append(String.format("Total Revenue: $%.2f\n", totalRevenue));
         generatedSummary.append("\nTop Performing Rental:\n");
         generatedSummary.append(String.format("  %s \n", topRental.getBikeModel()));
         generatedSummary.append(String.format("  Revenue: $%.2f\n", topRental.getRevenue()));
-        generatedSummary.append("========================================\n");
+
 
         return generatedSummary.toString();
     }

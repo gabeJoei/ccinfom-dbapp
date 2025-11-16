@@ -129,11 +129,8 @@ public class branchPerformanceReport {
         }
         
         double avgRevenue = totalRevenue / performances.size();
-        
         StringBuilder summary = new StringBuilder();
-        summary.append("\n========================================\n");
         summary.append(String.format("BRANCH PERFORMANCE SUMMARY - %02d/%d\n", month, year));
-        summary.append("========================================\n");
         summary.append(String.format("Total Branches: %d\n", performances.size()));
         summary.append(String.format("Total Rentals: %d\n", totalRentals));
         summary.append(String.format("Total Reservations: %d\n", totalReservations));
@@ -145,7 +142,7 @@ public class branchPerformanceReport {
                                      topBranch.getBranchName(), 
                                      topBranch.getBranchId()));
         summary.append(String.format("  Revenue: $%.2f\n", topBranch.getTotalRevenue()));
-        summary.append("========================================\n");
+
         
         return summary.toString();
     }

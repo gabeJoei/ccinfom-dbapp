@@ -11,7 +11,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1065.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.grp5.controller.loginController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1065.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.grp5.controller_gui.UserLogInController">
    <children>
       <ImageView fitHeight="600.0" fitWidth="1081.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -41,8 +41,29 @@
             <Font name="Bodoni MT Bold" size="18.0" />
          </font>
       </Text>
-      <Button fx:id="btnSignUp" layoutX="560.0" layoutY="522.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="172.0" text="SIGN UP" />
-      <Button fx:id="btnLogin" layoutX="473.0" layoutY="479.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="159.0" text="LOGIN" />
-      <Label fx:id="lblMessage" alignment="CENTER" layoutX="521.0" layoutY="446.0" text="Message" />
+
+      <Button fx:id="btnSignUp" 
+      layoutX="560.0" layoutY="522.0" 
+      mnemonicParsing="false" 
+      prefHeight="25.0" prefWidth="172.0" 
+      text="SIGN UP" />
+
+      <Button fx:id="btnLogin" 
+      layoutX="473.0" layoutY="479.0" 
+      mnemonicParsing="false" 
+      prefHeight="34.0" prefWidth="159.0" 
+      text="LOGIN" />
+
+      <Label fx:id="lblMessage" 
+      alignment="CENTER" 
+      layoutX="521.0" layoutY="446.0" 
+      text="Message" />
+
+      <Button fx:id="btnBack" 
+      layoutX="338.0" layoutY="27.0" 
+      mnemonicParsing="false" 
+      text="Back" 
+      onAction="#handleBackBtnClick"/>
+      
    </children>
 </AnchorPane>

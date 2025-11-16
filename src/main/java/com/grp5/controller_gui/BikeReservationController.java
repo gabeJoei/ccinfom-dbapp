@@ -1,4 +1,4 @@
-package com.grp5.controller;
+package com.grp5.controller_gui;
 
 import com.grp5.dao.bikeReservationDAO;
 import com.grp5.model.bikeReservation;
@@ -22,17 +22,26 @@ import java.util.ArrayList;
  */
 public class BikeReservationController {
 
-    @FXML private TableView<bikeReservation> reservationTable;
-    @FXML private TextField searchField;
+    @FXML
+    private TableView<bikeReservation> reservationTable;
+    @FXML
+    private TextField searchField;
 
     // Table columns
-    @FXML private TableColumn<bikeReservation, Integer> colRefNum;
-    @FXML private TableColumn<bikeReservation, Integer> colCustomer;
-    @FXML private TableColumn<bikeReservation, Integer> colBike;
-    @FXML private TableColumn<bikeReservation, Integer> colBranch;
-    @FXML private TableColumn<bikeReservation, Timestamp> colStartDate;
-    @FXML private TableColumn<bikeReservation, Timestamp> colEndDate;
-    @FXML private TableColumn<bikeReservation, String> colStatus;
+    @FXML
+    private TableColumn<bikeReservation, Integer> colRefNum;
+    @FXML
+    private TableColumn<bikeReservation, Integer> colCustomer;
+    @FXML
+    private TableColumn<bikeReservation, Integer> colBike;
+    @FXML
+    private TableColumn<bikeReservation, Integer> colBranch;
+    @FXML
+    private TableColumn<bikeReservation, Timestamp> colStartDate;
+    @FXML
+    private TableColumn<bikeReservation, Timestamp> colEndDate;
+    @FXML
+    private TableColumn<bikeReservation, String> colStatus;
 
     private bikeReservationDAO reservationDAO;
     private ObservableList<bikeReservation> reservationList;
@@ -331,8 +340,7 @@ public class BikeReservationController {
                 selected.getStartDate(),
                 selected.getEndDate(),
                 selected.getDateReturned() != null ? selected.getDateReturned() : "Not yet returned",
-                selected.getStatus()
-        );
+                selected.getStatus());
 
         detailsAlert.setContentText(details);
         detailsAlert.showAndWait();
