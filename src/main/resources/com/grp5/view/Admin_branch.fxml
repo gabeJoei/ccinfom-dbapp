@@ -11,17 +11,15 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1065.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="446.0" prefWidth="1065.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="150.0" stroke="BLACK" strokeType="INSIDE" width="1065.0" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#88b9e6" height="43.0" layoutY="150.0" stroke="BLACK" strokeType="INSIDE" width="1065.0" />
-      <Text layoutX="14.0" layoutY="179.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Branch">
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#88b9e6" height="43.0" stroke="BLACK" strokeType="INSIDE" width="1065.0" />
+      <Text layoutX="14.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Branch">
          <font>
             <Font name="Bodoni MT" size="24.0" />
          </font>
       </Text>
-      <VBox layoutX="14.0" layoutY="200.0" prefHeight="389.0" prefWidth="1041.0" spacing="20.0">
+      <VBox layoutX="14.0" layoutY="50.0" prefHeight="389.0" prefWidth="1041.0" spacing="20.0">
          <children>
             <HBox alignment="CENTER_LEFT" prefHeight="31.0" prefWidth="1041.0" spacing="20.0">
                <children>
