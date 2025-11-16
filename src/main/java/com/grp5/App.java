@@ -41,5 +41,13 @@ public class App extends Application {
     public static void main(String[] args) {
         launch(args);
     }
+    
+    /**
+     * Print application header
+     */
+    private static void printHeader() {
+        System.out.println("         RENT BIKE UI TEST            ");
+        System.out.println("   Testing: rentBike.fxml             ");
 
+    }
 }
