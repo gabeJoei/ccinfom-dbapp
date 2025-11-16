@@ -8,8 +8,8 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 /**
- * Test Application for Admin or User Selection Screen
- * Tests the initial selection interface
+ * Test Application for Rent Bike Screen
+ * Loads the rentBike.fxml to test UI and controller functionality
  */
 public class App extends Application {
     
@@ -19,36 +19,37 @@ public class App extends Application {
             // Test database connection first
             System.out.println("Testing database connection...");
             if (databaseConnection.testConnection()) {
-                System.out.println("✓ Database connected successfully!\n");
+                System.out.println("Database connected successfully!\n");
             } else {
-                System.out.println("⚠️  Database not connected (optional for this screen)\n");
+                System.out.println("  Database connection failed (UI loading may still work if no DB access required)\n");
             }
             
-            // Load admin_or_user.fxml
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/grp5/view/logIn.fxml"));
+            // Load rentBike.fxml
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/grp5/view/RentBike.fxml"));
             Parent root = loader.load();
             
             // Setup scene
             Scene scene = new Scene(root, 1065, 600);
             
-            primaryStage.setTitle("Bike Rental System Log-In");
+            primaryStage.setTitle("Rent a Bike");
             primaryStage.setScene(scene);
             primaryStage.setResizable(false);
             primaryStage.show();
             
-            System.out.println("✓ Admin or User selection screen loaded successfully!");
+            System.out.println("✓ rentBike.fxml loaded successfully!");
             System.out.println("\nInstructions:");
-            System.out.println("  - Click 'Admin' button to go to admin interface");
-            System.out.println("  - Click 'User' button to go to user interface");
+            System.out.println("  - Select a branch from the dropdown");
+            System.out.println("  - Observe bike availability and details update");
             
         } catch (Exception e) {
-            System.err.println("❌ Error loading logIn.fxml:");
+            System.err.println(" Error loading rentBike.fxml:");
             e.printStackTrace();
             
             System.err.println("\nPossible issues:");
-            System.err.println("  1. File not found at: /com/grp5/view/logIn.fxml");
-            System.err.println("  2. Controller class name mismatch");
+            System.err.println("  1. File not found at: /com/grp5/view/rentBike.fxml");
+            System.err.println("  2. Controller class name mismatch in FXML");
             System.err.println("  3. FXML syntax error");
+            System.err.println("  4. Database isn't seeded with branch/bike data");
         }
     }
     
@@ -56,7 +57,7 @@ public class App extends Application {
     public void stop() {
         // Clean up when application closes
         databaseConnection.closeConnection();
-        System.out.println("\n✓ Application closed.");
+        System.out.println("\n Application closed. Database connection closed.");
     }
     
     public static void main(String[] args) {
@@ -68,13 +69,8 @@ public class App extends Application {
      * Print application header
      */
     private static void printHeader() {
-        System.out.println("╔════════════════════════════════════════╗");
-        System.out.println("║   ADMIN OR USER SELECTION TEST         ║");
-        System.out.println("║                                        ║");
-        System.out.println("║   Testing: admin_or_user.fxml          ║");
-        System.out.println("║   Controller: AdminOrUserController    ║");
-        System.out.println("║                                        ║");
-        System.out.println("╚════════════════════════════════════════╝");
-        System.out.println();
+        System.out.println("         RENT BIKE UI TEST            ");
+        System.out.println("   Testing: rentBike.fxml             ");
+
     }
 }

@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.grp5.model.customerRecordModel;
 import com.grp5.utils.databaseConnection;
@@ -79,7 +81,7 @@ public class customerRecordDAO {
 
     // UPDATE
     public boolean modifyCustomerRecordData(customerRecordModel customer) {
-        String query = "UPDATE Customer SET lastName=?, firstName=?, customerEmail=?, phoneNumber=?, customerPass=?, WHERE customerAccID=?";
+        String query = "UPDATE Customer SET lastName=?, firstName=?, customerEmail=?, phoneNumber=?, customerPass=? WHERE customerAccID=?";
         try (Connection connect = databaseConnection.getConnection();
                 PreparedStatement prepState = connect.prepareStatement(query)) {
 
@@ -166,4 +168,41 @@ public customerRecordModel authenticateCustomer(String email, String password) {
     
     return null;
 }
+public List<customerRecordModel> getAllCustomers() {
+    List<customerRecordModel> customers = new ArrayList<>();
+    String query = "SELECT * FROM customer";
+
+    try (Connection connect = databaseConnection.getConnection();
+         PreparedStatement prepState = connect.prepareStatement(query);
+         ResultSet result = prepState.executeQuery()) {
+
+        while (result.next()) {
+            customerRecordModel customer = extractCustomerFromResultSet(result);
+            customers.add(customer);
+        }
+    } catch (SQLException e) {
+        System.out.println("Error loading customers: " + e.getMessage());
+    }
+    return customers;
 }
+
+public customerRecordModel getCustomer(int customerAccID) {
+    String query = "SELECT * FROM customer WHERE customerAccID=?";
+    try (Connection connect = databaseConnection.getConnection();
+         PreparedStatement prepState = connect.prepareStatement(query)) {
+
+        prepState.setInt(1, customerAccID);
+
+        try (ResultSet result = prepState.executeQuery()) {
+            if (result.next()) {
+                return extractCustomerFromResultSet(result);
+            }
+        }
+
+    } catch (SQLException e) {
+        System.out.println(e.getMessage());
+    }
+    return null;
+}
+}
+

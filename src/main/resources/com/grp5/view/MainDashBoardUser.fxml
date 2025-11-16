@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -8,46 +7,59 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
+<AnchorPane xmlns="http://javafx.com/javafx" 
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.grp5.controller.MainDashBoardUserController"
+            prefWidth="242.0" prefHeight="600.0"
+            minWidth="-Infinity" minHeight="-Infinity"
+            maxWidth="-Infinity" maxHeight="-Infinity">
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="242.0" 
-xmlns="http://javafx.com/javafx" 
-xmlns:fx="http://javafx.com/fxml"
-fx:controller="com.grp5.controller.MainDashBoardUserController">
-   <children>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e1dbdb" height="600.0" stroke="BLACK" strokeType="INSIDE" width="242.0" />
-      <Button layoutX="24.0" layoutY="354.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="203.0" text="Profile" />
-      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="47.0" layoutY="98.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@images/userProfile.png" />
-         </image>
-      </ImageView>
-      <Button layoutX="24.0" layoutY="398.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="203.0" text="Reservations" />
-      <Button layoutX="24.0" layoutY="447.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="203.0" text="Rental History" />
-      <Button layoutX="18.0" layoutY="552.0" mnemonicParsing="false" text="Log Out" />
-      <Text layoutX="24.0" layoutY="289.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name:">
-         <font>
-            <Font name="Bodoni MT" size="14.0" />
-         </font>
-      </Text>
-      <Text layoutX="24.0" layoutY="314.0" strokeType="OUTSIDE" strokeWidth="0.0" text="User Id:">
-         <font>
-            <Font name="Bodoni MT" size="14.0" />
-         </font>
-      </Text>
-      <ImageView fitHeight="118.0" fitWidth="178.0" layoutX="32.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@images/MainLogo.png" />
-         </image>
-      </ImageView>
-      <Text layoutX="80.0" layoutY="289.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text Holder for UserName">
-         <font>
-            <Font name="Bell MT" size="12.0" />
-         </font>
-      </Text>
-      <Text layoutX="80.0" layoutY="314.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text Holder for UserID">
-         <font>
-            <Font name="Bell MT" size="12.0" />
-         </font>
-      </Text>
-   </children>
+    <children>
+        <!-- Sidebar Background -->
+        <Rectangle width="242.0" height="600.0" fill="#e1dbdb" stroke="BLACK" strokeType="INSIDE" arcWidth="5.0" arcHeight="5.0"/>
+
+        <!-- Logo -->
+        <ImageView layoutX="32.0" fitWidth="178.0" fitHeight="118.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@images/MainLogo.png"/>
+            </image>
+        </ImageView>
+
+        <!-- User Profile Image -->
+        <ImageView layoutX="47.0" layoutY="98.0" fitWidth="200.0" fitHeight="150.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@images/userProfile.png"/>
+            </image>
+        </ImageView>
+
+        <!-- User Info Labels -->
+        <Text layoutX="24.0" layoutY="289.0" text="Name:">
+            <font>
+                <Font name="Bodoni MT" size="14.0"/>
+            </font>
+        </Text>
+        <Text layoutX="24.0" layoutY="314.0" text="User Id:">
+            <font>
+                <Font name="Bodoni MT" size="14.0"/>
+            </font>
+        </Text>
+
+        <!-- User Info Values -->
+        <Text layoutX="80.0" layoutY="289.0" fx:id="txtUserName" text="Text Holder for UserName">
+            <font>
+                <Font name="Bell MT" size="12.0"/>
+            </font>
+        </Text>
+        <Text layoutX="80.0" layoutY="314.0" fx:id="txtUserID" text="Text Holder for UserID">
+            <font>
+                <Font name="Bell MT" size="12.0"/>
+            </font>
+        </Text>
+
+        <!-- Buttons -->
+        <Button fx:id="btnProfile" layoutX="24.0" layoutY="354.0" prefWidth="203.0" prefHeight="25.0" text="Profile" mnemonicParsing="false"/>
+        <Button fx:id="btnReservations" layoutX="24.0" layoutY="398.0" prefWidth="203.0" prefHeight="25.0" text="Reservations" mnemonicParsing="false"/>
+        <Button fx:id="btnRentalHistory" layoutX="24.0" layoutY="447.0" prefWidth="203.0" prefHeight="25.0" text="Rental History" mnemonicParsing="false"/>
+        <Button fx:id="btnLogout" layoutX="18.0" layoutY="552.0" text="Log Out" mnemonicParsing="false"/>
+    </children>
 </AnchorPane>

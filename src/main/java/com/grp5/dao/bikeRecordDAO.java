@@ -5,6 +5,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.grp5.model.bikeRecordModel;
 import com.grp5.utils.databaseConnection;
@@ -133,7 +135,7 @@ public class bikeRecordDAO {
     }
 
     public int updateBikeBranch(bikeRecordModel bikeRecord, int branchIDNum) {
-        String query = "UPDATE bike SET branchIDNum= WHERE bikeID=?";
+        String query = "UPDATE bike SET branchIDNum= ? WHERE bikeID=?";
         try (Connection connect = databaseConnection.getConnection();
                 PreparedStatement prepState = connect.prepareStatement(query)) {
 
@@ -167,11 +169,49 @@ public class bikeRecordDAO {
             return false;
         }
     }
+    public List<bikeRecordModel> getAllBikes() {
+    List<bikeRecordModel> bikeList = new ArrayList<>();
+    String query = "SELECT * FROM bike";
 
-    // TO-DO: Create "nice-to-have" methods
-    // [/] updateRates()
-    // [/] updateBikeAvailability
-    // [/] updateBranch
-    // [/] checkBikeAvailability
-    // [] updateBikeModel
+    try (Connection conn = databaseConnection.getConnection();
+         PreparedStatement pstmt = conn.prepareStatement(query);
+         ResultSet result = pstmt.executeQuery()) {
+
+        while (result.next()) {
+            bikeRecordModel bike = extractBikeFromResultSet(result);
+            bikeList.add(bike);
+        }
+    } catch (SQLException e) {
+        System.out.println("Error fetching bikes: " + e.getMessage());
+    }
+    return bikeList;
+}
+
+public ArrayList<bikeRecordModel> getBikesByBranch(int branchID) {
+    ArrayList<bikeRecordModel> bikes = new ArrayList<>();
+
+    try {
+        Connection connect = databaseConnection.getConnection();
+        PreparedStatement prepState = connect.prepareStatement(
+            "SELECT * FROM bike WHERE branchIDNum = ?"
+        );
+        prepState.setInt(1, branchID);
+        ResultSet result = prepState.executeQuery();
+
+        while (result.next()) {
+            bikes.add(extractBikeFromResultSet(result));
+
+        }
+
+        result.close();
+        prepState.close();
+        connect.close();
+
+    } catch (SQLException e) {
+        System.out.println(e.getMessage());
+    }
+
+    return bikes;
+}
+
 }

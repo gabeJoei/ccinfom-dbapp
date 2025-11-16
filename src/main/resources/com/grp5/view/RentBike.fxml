@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -7,136 +6,112 @@
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
+<AnchorPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.grp5.controller.rentBikeController"
+            prefWidth="1065.0" prefHeight="600.0" style="-fx-background-color: white;">
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1065.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1"
-fx:controller="com.grp5.controller.rentBikeController">
-   <children>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e1dbdb" height="37.0" layoutX="1.0" stroke="BLACK" strokeType="INSIDE" width="1064.0" />
-      <ChoiceBox layoutX="343.0" layoutY="86.0" prefWidth="150.0" />
-      <Text layoutX="259.0" layoutY="104.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Select Branch:" />
-      <Text layoutX="248.0" layoutY="26.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome To CIGE Bike Rentals..." textAlignment="CENTER" wrappingWidth="805.2779693603516">
-         <font>
-            <Font name="Bodoni MT" size="24.0" />
-         </font>
-      </Text>
-      <GridPane alignment="TOP_RIGHT" layoutX="255.0" layoutY="138.0" prefHeight="430.0" prefWidth="777.0">
+    <!-- Sidebar placeholder -->
+    <AnchorPane fx:id="sidebar" prefWidth="242.0" prefHeight="600.0" 
+                AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0"/>
+
+    <!-- Branch Selection -->
+    <ChoiceBox fx:id="cmbBranch" layoutX="343.0" layoutY="86.0" prefWidth="150.0"/>
+    <Text layoutX="259.0" layoutY="104.0" text="Select Branch:"/>
+
+    <!-- Header -->
+    <Text layoutX="248.0" layoutY="26.0" text="Welcome To CIGE Bike Rentals..." 
+          textAlignment="CENTER" wrappingWidth="805.0">
+        <font>
+            <Font name="Bodoni MT" size="24.0"/>
+        </font>
+    </Text>
+
+    <!-- Bikes Grid -->
+    <GridPane layoutX="255.0" layoutY="138.0" prefWidth="777.0" prefHeight="430.0" alignment="TOP_RIGHT">
         <columnConstraints>
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints prefWidth="100.0" minWidth="10.0" hgrow="SOMETIMES"/>
+            <ColumnConstraints prefWidth="100.0" minWidth="10.0" hgrow="SOMETIMES"/>
         </columnConstraints>
         <rowConstraints>
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints prefHeight="30.0" minHeight="10.0" vgrow="SOMETIMES"/>
+            <RowConstraints prefHeight="30.0" minHeight="10.0" vgrow="SOMETIMES"/>
+            <RowConstraints prefHeight="30.0" minHeight="10.0" vgrow="SOMETIMES"/>
         </rowConstraints>
-         <children>
-            <AnchorPane>
-               <children>
-                  <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@images/mountainBike-.png" />
-                     </image>
-                  </ImageView>
-                  <Text layoutX="228.0" layoutY="102.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rental Cost:" />
-                  <Text layoutX="225.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Mountain Bike" wrappingWidth="134.138671875">
-                     <font>
-                        <Font size="21.0" />
-                     </font>
-                  </Text>
-                  <Text layoutX="227.0" layoutY="84.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Amount Of Available Bikes:" />
-                  <Text layoutX="228.0" layoutY="65.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bike Model:" />
-               </children>
-            </AnchorPane>
-            <AnchorPane GridPane.rowIndex="1">
-               <children>
-                  <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="14.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@images/RoadBike-.png" />
-                     </image>
-                  </ImageView>
-                  <Text layoutX="225.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Road Bike" wrappingWidth="134.138671875">
-                     <font>
-                        <Font size="21.0" />
-                     </font>
-                  </Text>
-                  <Text layoutX="229.0" layoutY="65.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bike Model:" />
-                  <Text layoutX="229.0" layoutY="84.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Amount Of Available Bikes:" />
-                  <Text layoutX="228.0" layoutY="102.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rental Cost:" />
-               </children>
-            </AnchorPane>
-            <AnchorPane GridPane.rowIndex="2">
-               <children>
-                  <Text layoutX="228.0" layoutY="44.0" strokeType="OUTSIDE" strokeWidth="0.0" text="E-Assists Bike" wrappingWidth="134.138671875">
-                     <font>
-                        <Font size="21.0" />
-                     </font>
-                  </Text>
-                  <ImageView fitHeight="124.0" fitWidth="223.0" layoutX="14.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@images/E-Bike-.png" />
-                     </image>
-                  </ImageView>
-                  <Text layoutX="231.0" layoutY="70.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bike Model:" />
-                  <Text layoutX="231.0" layoutY="88.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Amount Of Available Bikes:" />
-                  <Text layoutX="231.0" layoutY="106.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rental Cost:" />
-               </children>
-            </AnchorPane>
-            <AnchorPane GridPane.columnIndex="1">
-               <children>
-                  <ImageView fitHeight="124.0" fitWidth="203.0" layoutX="13.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@images/TandemBike-.png" />
-                     </image>
-                  </ImageView>
-                  <Text layoutX="218.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tandem Bike" wrappingWidth="134.138671875">
-                     <font>
-                        <Font size="21.0" />
-                     </font>
-                  </Text>
-                  <Text layoutX="224.0" layoutY="65.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bike Model:" />
-                  <Text layoutX="224.0" layoutY="84.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Amount Of Available Bikes:" />
-                  <Text layoutX="225.0" layoutY="102.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rental Cost:" />
-               </children>
-            </AnchorPane>
-            <AnchorPane GridPane.columnIndex="1" GridPane.rowIndex="1">
-               <children>
-                  <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="15.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@images/Electric_Bike-.png" />
-                     </image>
-                  </ImageView>
-                  <Text layoutX="227.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="E-Bike" wrappingWidth="134.138671875">
-                     <font>
-                        <Font size="21.0" />
-                     </font>
-                  </Text>
-                  <Text layoutX="229.0" layoutY="65.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bike Model:" />
-                  <Text layoutX="230.0" layoutY="84.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Amount Of Available Bikes:" />
-                  <Text layoutX="230.0" layoutY="102.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rental Cost:" />
-               </children>
-            </AnchorPane>
-            <AnchorPane GridPane.columnIndex="1" GridPane.rowIndex="2">
-               <children>
-                  <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="14.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@images/BMX%20bike.png" />
-                     </image>
-                  </ImageView>
-                  <Text layoutX="231.0" layoutY="44.0" strokeType="OUTSIDE" strokeWidth="0.0" text="BMX Bike" wrappingWidth="134.138671875">
-                     <font>
-                        <Font size="21.0" />
-                     </font>
-                  </Text>
-                  <Text layoutX="234.0" layoutY="70.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bike Model:" />
-                  <Text layoutX="235.0" layoutY="88.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Amount Of Available Bikes:" />
-                  <Text layoutX="235.0" layoutY="106.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rental Cost:" />
-               </children>
-            </AnchorPane>
-         </children>
-      </GridPane>
-   </children>
+
+        <!-- Mountain Bike -->
+        <AnchorPane>
+            <ImageView fitWidth="200.0" fitHeight="150.0" layoutX="14.0" layoutY="14.0" preserveRatio="true">
+                <image>
+                    <Image url="@images/mountainBike-.png"/>
+                </image>
+            </ImageView>
+            <Text fx:id="txtMountainModel" layoutX="228.0" layoutY="65.0" text="Bike Model:"/>
+            <Text fx:id="txtMountainAvailable" layoutX="227.0" layoutY="84.0" text="Amount Of Available Bikes:"/>
+            <Text fx:id="txtMountainCost" layoutX="228.0" layoutY="102.0" text="Rental Cost:"/>
+        </AnchorPane>
+
+        <!-- Road Bike -->
+        <AnchorPane GridPane.rowIndex="1">
+            <ImageView fitWidth="200.0" fitHeight="150.0" layoutX="14.0" layoutY="9.0" preserveRatio="true">
+                <image>
+                    <Image url="@images/RoadBike-.png"/>
+                </image>
+            </ImageView>
+            <Text fx:id="txtRoadModel" layoutX="229.0" layoutY="65.0" text="Bike Model:"/>
+            <Text fx:id="txtRoadAvailable" layoutX="229.0" layoutY="84.0" text="Amount Of Available Bikes:"/>
+            <Text fx:id="txtRoadCost" layoutX="228.0" layoutY="102.0" text="Rental Cost:"/>
+        </AnchorPane>
+
+        <!-- E-Assists Bike -->
+        <AnchorPane GridPane.rowIndex="2">
+            <ImageView fitWidth="223.0" fitHeight="124.0" layoutX="14.0" layoutY="10.0" preserveRatio="true">
+                <image>
+                    <Image url="@images/E-Bike-.png"/>
+                </image>
+            </ImageView>
+            <Text fx:id="txtEAssistsModel" layoutX="231.0" layoutY="70.0" text="Bike Model:"/>
+            <Text fx:id="txtEAssistsAvailable" layoutX="231.0" layoutY="88.0" text="Amount Of Available Bikes:"/>
+            <Text fx:id="txtEAssistsCost" layoutX="231.0" layoutY="106.0" text="Rental Cost:"/>
+        </AnchorPane>
+
+        <!-- Tandem Bike -->
+        <AnchorPane GridPane.columnIndex="1">
+            <ImageView fitWidth="203.0" fitHeight="124.0" layoutX="13.0" layoutY="13.0" preserveRatio="true">
+                <image>
+                    <Image url="@images/TandemBike-.png"/>
+                </image>
+            </ImageView>
+            <Text fx:id="txtTandemModel" layoutX="224.0" layoutY="65.0" text="Bike Model:"/>
+            <Text fx:id="txtTandemAvailable" layoutX="224.0" layoutY="84.0" text="Amount Of Available Bikes:"/>
+            <Text fx:id="txtTandemCost" layoutX="225.0" layoutY="102.0" text="Rental Cost:"/>
+        </AnchorPane>
+
+        <!-- E-Bike -->
+        <AnchorPane GridPane.columnIndex="1" GridPane.rowIndex="1">
+            <ImageView fitWidth="200.0" fitHeight="150.0" layoutX="15.0" layoutY="12.0" preserveRatio="true">
+                <image>
+                    <Image url="@images/Electric_Bike-.png"/>
+                </image>
+            </ImageView>
+            <Text fx:id="txtEBikeModel" layoutX="229.0" layoutY="65.0" text="Bike Model:"/>
+            <Text fx:id="txtEBikeAvailable" layoutX="230.0" layoutY="84.0" text="Amount Of Available Bikes:"/>
+            <Text fx:id="txtEBikeCost" layoutX="230.0" layoutY="102.0" text="Rental Cost:"/>
+        </AnchorPane>
+
+        <!-- BMX Bike -->
+        <AnchorPane GridPane.columnIndex="1" GridPane.rowIndex="2">
+            <ImageView fitWidth="200.0" fitHeight="150.0" layoutX="14.0" preserveRatio="true">
+                <image>
+                    <Image url="@images/BMX%20bike.png"/>
+                </image>
+            </ImageView>
+            <Text fx:id="txtBMXModel" layoutX="234.0" layoutY="70.0" text="Bike Model:"/>
+            <Text fx:id="txtBMXAvailable" layoutX="235.0" layoutY="88.0" text="Amount Of Available Bikes:"/>
+            <Text fx:id="txtBMXCost" layoutX="235.0" layoutY="106.0" text="Rental Cost:"/>
+        </AnchorPane>
+
+    </GridPane>
 </AnchorPane>
