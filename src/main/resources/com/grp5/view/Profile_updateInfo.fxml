@@ -10,7 +10,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="827.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.grp5.controller_gui.Profile_updateInfoController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1065.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.grp5.controller_gui.Profile_updateInfoController">
    <children>
       <Text layoutX="253.0" layoutY="144.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name:" wrappingWidth="64.00002034505223">
          <font>
@@ -23,7 +23,7 @@
             <Image url="@images/userProfile.png" />
          </image>
       </ImageView>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#97b7d4" height="49.0" stroke="BLACK" strokeType="INSIDE" width="827.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#97b7d4" height="49.0" stroke="BLACK" strokeType="INSIDE" width="1065.0" />
       <Text layoutX="10.0" layoutY="32.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Update Information">
          <font>
             <Font name="Bodoni MT" size="24.0" />
@@ -35,25 +35,25 @@
          </font>
       </Text>
       <Text layoutX="317.0" layoutY="171.0" strokeType="OUTSIDE" strokeWidth="0.0" text="HolderForUSerID" wrappingWidth="97.33333333333348" />
-      <Text layoutX="229.0" layoutY="332.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Update Phone Number:" wrappingWidth="150.1611328125">
+      <Text layoutX="427.0" layoutY="331.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Update Phone Number:" wrappingWidth="150.1611328125">
          <font>
             <Font name="Bodoni MT" size="15.0" />
          </font>
       </Text>
-      <Button fx:id="confirmBtn" layoutX="331.0" layoutY="447.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="165.0" text="Confirm Changes" />
-      <Button fx:id="backBtn" layoutX="772.0" layoutY="561.0" mnemonicParsing="false" text="Back" onAction="#handleBackBtn"/>
-      <Text layoutX="231.0" layoutY="293.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Update Email Address:">
+      <Button fx:id="confirmBtn" layoutX="544.0" layoutY="435.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="165.0" text="Confirm Changes" />
+      <Button fx:id="backBtn" layoutX="1010.0" layoutY="560.0" mnemonicParsing="false" onAction="#handleBackBtn" text="Back" />
+      <Text layoutX="429.0" layoutY="292.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Update Email Address:">
          <font>
             <Font name="Bodoni MT" size="15.0" />
          </font>
       </Text>
-      <PasswordField fx:id="passwordField" layoutX="402.0" layoutY="356.0" prefHeight="25.0" prefWidth="225.0" />
-      <Text layoutX="233.0" layoutY="374.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Enter Password:">
+      <PasswordField fx:id="passwordField" layoutX="600.0" layoutY="355.0" prefHeight="25.0" prefWidth="225.0" />
+      <Text layoutX="431.0" layoutY="373.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Enter Password:">
          <font>
             <Font name="Bodoni MT" size="15.0" />
          </font>
       </Text>
-      <TextField fx:id="newEmailField" layoutX="402.0" layoutY="276.0" prefHeight="25.0" prefWidth="225.0" />
-      <TextField fx:id="newContctField" layoutX="402.0" layoutY="315.0" prefHeight="25.0" prefWidth="225.0" />
+      <TextField fx:id="newEmailField" layoutX="600.0" layoutY="275.0" prefHeight="25.0" prefWidth="225.0" />
+      <TextField fx:id="newContctField" layoutX="600.0" layoutY="314.0" prefHeight="25.0" prefWidth="225.0" />
    </children>
 </AnchorPane>

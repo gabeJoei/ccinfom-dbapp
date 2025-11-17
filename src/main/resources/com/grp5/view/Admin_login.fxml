@@ -12,22 +12,22 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400" prefWidth="600" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.grp5.controller_gui.Admin_logInController">
+<AnchorPane prefHeight="600.0" prefWidth="1065.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.grp5.controller_gui.Admin_logInController">
 
     <children>
 
         <!-- Gray Rounded Rectangle -->
-        <Rectangle arcHeight="20" arcWidth="20" fill="#bcb8b8" height="314" opacity="0.85" width="385" AnchorPane.leftAnchor="108" AnchorPane.topAnchor="43" />
+        <Rectangle arcHeight="20" arcWidth="20" fill="#bcb8b8" height="511.0" opacity="0.85" width="850.0" AnchorPane.leftAnchor="108" AnchorPane.topAnchor="43" />
 
          <!-- Logo -->
-         <ImageView fitHeight="114.0" fitWidth="144.0" layoutX="228.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true">
+         <ImageView fitHeight="144.0" fitWidth="208.0" layoutX="428.0" layoutY="57.0" pickOnBounds="true" preserveRatio="true">
              <image>
                  <Image url="@images/AdminLogo.png" />
              </image>
          </ImageView>
 
         <!-- Login Form -->
-        <VBox alignment="TOP_CENTER" layoutX="150.0" layoutY="98.0" prefHeight="308.0" prefWidth="300" spacing="15" AnchorPane.leftAnchor="150.0" AnchorPane.topAnchor="98.0">
+        <VBox alignment="TOP_CENTER" layoutX="382.0" layoutY="199.0" prefHeight="308.0" prefWidth="300" spacing="15" AnchorPane.leftAnchor="382.0" AnchorPane.topAnchor="199.0">
 
             <Label text="Admin Log-In">
                 <font>
