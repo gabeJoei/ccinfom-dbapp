@@ -1,8 +1,6 @@
 package com.grp5.controller_gui;
 
-import com.grp5.dao.adminDAO;
 import com.grp5.dao.customerRecordDAO;
-import com.grp5.model.adminModel;
 import com.grp5.model.customerRecordModel;
 import com.grp5.utils.sessionManager;
 
@@ -37,15 +35,13 @@ public class User_loginController {
     private Button btnBack;
 
     private customerRecordDAO customerDAO;
-    private adminDAO adminDAO;
-    private String userType = "user";
 
     @FXML
     public void initialize() {
         customerDAO = new customerRecordDAO();
-        adminDAO = new adminDAO();
-        System.out.println("loginController initialized");
+        System.out.println("User loginController initialized");
         lblMessage.setVisible(false);
+        
         // Clear message on focus
         txtUsername.focusedProperty().addListener((obs, oldVal, newVal) -> {
             if (newVal)
@@ -58,20 +54,19 @@ public class User_loginController {
 
         // Enter key to login
         txtPassword.setOnAction(e -> handleLogin());
+        
+        // Add button action handler
+        btnLogin.setOnAction(e -> handleLogin());
+        
         System.out.println("Connection initialization complete.");
-    }
-
-    public void setUserType(String userType) {
-        if (userType != null && (userType.equals("admin") || userType.equals("user"))) {
-            this.userType = userType;
-            System.out.println("User type set to: " + userType);
-        }
     }
 
     @FXML
     private void handleLogin() {
         String username = txtUsername.getText().trim();
         String password = txtPassword.getText().trim();
+
+        System.out.println("Login attempt with username: " + username);
 
         // Validate input
         if (username.isEmpty() || password.isEmpty()) {
@@ -83,6 +78,7 @@ public class User_loginController {
         if (authenticateUser(username, password)) {
             showMessage("Login successful!", "success");
 
+            // Small delay for user to see success message
             new Thread(() -> {
                 try {
                     Thread.sleep(500);
@@ -104,55 +100,71 @@ public class User_loginController {
         // Clear previous session data
         sessionManager.clearSession();
 
-        if (userType.equals("admin")) {
-            adminModel admin = adminDAO.authenticateAdmin(username, password);
-            if (admin != null) {
-                System.out.println("Logged in as Admin: " + admin.getAdminUsername());
-                sessionManager.setLoggedInAdmin(admin); // Store admin in session
-                return true;
-            }
-        } else {
-            customerRecordModel customer = customerDAO.authenticateCustomer(username, password);
+        // Authenticate customer only
+        customerRecordModel customer = customerDAO.authenticateCustomer(username, password);
 
-            if (customer != null) {
-                System.out.println("Logged in as Customer: " + customer.getFirstName() + " " + customer.getLastName());
-                sessionManager.setLoggedInCustomer(customer); // Store customer in session
-                return true;
-            }
+        if (customer != null) {
+            System.out.println("Logged in as Customer: " + customer.getFirstName() + " " + customer.getLastName());
+            System.out.println("Customer ID: " + customer.getCustomerAccID());
+            System.out.println("Customer Acc ID: " + customer.getCustomerAccID());
+            sessionManager.setLoggedInCustomer(customer);
+            return true;
         }
 
+        System.out.println("Authentication failed for username: " + username);
         return false;
     }
 
     private void navigateToDashboard() {
         try {
             Stage stage = (Stage) btnLogin.getScene().getWindow();
-            FXMLLoader loader = new FXMLLoader();
-            Parent root;
-            String title;
-            String fxmlPath = "/com/grp5/view/RentBike.fxml"; // Example FXML path
-
-            if (userType.equals("admin")) {
-                loader.setLocation(getClass().getResource(fxmlPath));
-                root = loader.load();
-                // If you had a dedicated AdminController, you would access it here:
-                // AdminController adminController = loader.getController();
-                title = "Admin Dashboard";
+            
+            // Load User Dashboard
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/grp5/view/User_userMenu.fxml"));
+            Parent root = loader.load();
+            
+            // Get customer info from session
+            customerRecordModel customer = sessionManager.getLoggedInCustomer();
+            
+            // Set user info in dashboard
+            User_dashBoardController userController = loader.getController();
+            if (userController != null && customer != null) {
+                String fullName = customer.getFirstName() + " " + customer.getLastName();
+                String userId = String.valueOf(customer.getCustomerAccID());
+                
+                userController.setUserName(fullName);
+                userController.setUserId(userId);
+                
+                System.out.println("User dashboard loaded for: " + fullName + " (ID: " + userId + ")");
             } else {
-                loader.setLocation(getClass().getResource(fxmlPath));
-                root = loader.load();
-                // If you had a dedicated UserController, you would access it here:
-                // UserController userController = loader.getController();
-                title = "User Dashboard";
+                System.err.println("Controller or customer is null!");
+                if (userController == null) {
+                    System.err.println("User controller is null");
+                }
+                if (customer == null) {
+                    System.err.println("Customer is null");
+                }
             }
-
+            
             Scene scene = new Scene(root);
-            stage.setTitle(title);
+            stage.setTitle("User Dashboard - CIGE Bike Rentals");
             stage.setScene(scene);
+            
+            // Set minimum window size for dashboard
+            stage.setMinWidth(1065);
+            stage.setMinHeight(600);
+            stage.setResizable(true);
+            
+            // Center on screen
+            stage.centerOnScreen();
+            
             stage.show();
+            
+            System.out.println("Dashboard displayed successfully");
 
         } catch (IOException e) {
             e.printStackTrace();
+            System.err.println("Error loading dashboard: " + e.getMessage());
             showMessage("Error loading dashboard: " + e.getMessage(), "error");
         }
     }
@@ -162,12 +174,17 @@ public class User_loginController {
         try {
             Stage stage = (Stage) btnSignUp.getScene().getWindow();
 
-            // Load sign-up page ( FXML as a placeholder for the next screen)
-            Parent root = FXMLLoader.load(getClass().getResource("/com/grp5/view/UserSignUp.fxml"));
+            // Load sign-up page
+            Parent root = FXMLLoader.load(getClass().getResource("/com/grp5/view/User_signUp.fxml"));
 
             Scene scene = new Scene(root);
-            stage.setTitle("Sign Up");
+            stage.setTitle("Sign Up - CIGE Bike Rentals");
             stage.setScene(scene);
+            
+            // Set window size for sign-up
+            stage.setMinWidth(1065);
+            stage.setMinHeight(600);
+            
             stage.show();
 
         } catch (IOException e) {
@@ -180,19 +197,24 @@ public class User_loginController {
     public void handleBackBtnClick(ActionEvent click) {
         System.out.println("Back button clicked!");
         try {
-
-            Parent nextSceneRoot = FXMLLoader
-                    .load(getClass().getResource("/com/grp5/view/AdminOrUser.fxml"));
-            Scene nextScene = new Scene(nextSceneRoot); //
+            Parent nextSceneRoot = FXMLLoader.load(getClass().getResource("/com/grp5/view/AdminOrUser.fxml"));
+            Scene nextScene = new Scene(nextSceneRoot);
             Stage currentStage = (Stage) btnBack.getScene().getWindow();
 
             currentStage.setScene(nextScene);
-            currentStage.setTitle("Home");
+            currentStage.setTitle("CIGE Bike Rentals - Login Selection");
+            
+            // Reset window size for login selection
+            currentStage.setMinWidth(600);
+            currentStage.setMinHeight(400);
+            currentStage.setResizable(false);
+            currentStage.centerOnScreen();
+            
             currentStage.show();
 
         } catch (IOException e) {
-            e.getStackTrace();
-            System.err.println("Tite");
+            e.printStackTrace();
+            System.err.println("Error loading AdminOrUser page: " + e.getMessage());
         }
     }
 

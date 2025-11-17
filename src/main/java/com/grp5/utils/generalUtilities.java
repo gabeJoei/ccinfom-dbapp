@@ -4,6 +4,8 @@ import java.util.concurrent.ThreadLocalRandom;
 
 import com.grp5.model.customerRecordModel;
 
+import javafx.scene.control.Alert;
+
 /*Generates long numbers with 11 characters. */
 public class generalUtilities{
     private generalUtilities(){}
@@ -80,5 +82,14 @@ public class generalUtilities{
         return null;
     }
 
-
+    /**
+     * Helper method to show a simple alert dialog.
+     */
+    public static void showAlert(Alert.AlertType alertType, String title, String message) {
+        Alert alert = new Alert(alertType);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
 }
