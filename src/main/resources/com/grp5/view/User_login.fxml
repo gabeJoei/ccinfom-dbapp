@@ -13,57 +13,73 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1065.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.grp5.controller_gui.User_loginController">
    <children>
+      <!-- Background Image -->
       <ImageView fitHeight="600.0" fitWidth="1081.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@images/loginBG.png" />
          </image>
       </ImageView>
+      
+      <!-- Login Box Background -->
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e1dbdb" height="561.0" layoutX="328.0" layoutY="16.0" stroke="BLACK" strokeType="INSIDE" width="464.0" />
+      
+      <!-- Logo -->
       <ImageView fitHeight="272.0" fitWidth="483.0" layoutX="342.0" layoutY="71.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@images/MainLogo.png" />
          </image>
       </ImageView>
-      <TextField fx:id="txtUsername" layoutX="355.0" layoutY="353.0" prefHeight="25.0" prefWidth="410.0" promptText="EMAIL ADDRESS" />
-      <PasswordField fx:id="txtPassword" layoutX="355.0" layoutY="413.0" prefHeight="25.0" prefWidth="410.0" promptText="PASSWORD" />
+      
+      <!-- Username Label -->
       <Text layoutX="356.0" layoutY="348.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Enter your Email Address:">
          <font>
             <Font name="Bodoni MT Bold" size="18.0" />
          </font>
       </Text>
+      
+      <!-- Username Field -->
+      <TextField fx:id="txtUsername" layoutX="355.0" layoutY="353.0" prefHeight="25.0" prefWidth="410.0" promptText="EMAIL ADDRESS" />
+      
+      <!-- Password Label -->
       <Text layoutX="355.0" layoutY="407.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Enter your Password:">
          <font>
             <Font name="Bodoni MT Bold" size="18.0" />
          </font>
       </Text>
-      <Text layoutX="364.0" layoutY="541.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Dont Have An Account?">
+      
+      <!-- Password Field -->
+      <PasswordField fx:id="txtPassword" layoutX="355.0" layoutY="413.0" prefHeight="25.0" prefWidth="410.0" promptText="PASSWORD" />
+      
+      <!-- Message Label -->
+      <Label fx:id="lblMessage" alignment="CENTER" layoutX="355.0" layoutY="446.0" prefWidth="410.0" text="Message" textAlignment="CENTER" visible="false">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      
+      <!-- Login Button -->
+      <Button fx:id="btnLogin" layoutX="473.0" layoutY="479.0" mnemonicParsing="false" onAction="#handleLogin" prefHeight="34.0" prefWidth="159.0" text="LOGIN" style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-size: 14px; -fx-font-weight: bold; -fx-cursor: hand;">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Button>
+      
+      <!-- Don't Have Account Text -->
+      <Text layoutX="364.0" layoutY="541.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Don't Have An Account?">
          <font>
             <Font name="Bodoni MT Bold" size="18.0" />
          </font>
       </Text>
-
-      <Button fx:id="btnSignUp" 
-      layoutX="560.0" layoutY="522.0" 
-      mnemonicParsing="false" 
-      prefHeight="25.0" prefWidth="172.0" 
-      text="SIGN UP" />
-
-      <Button fx:id="btnLogin" 
-      layoutX="473.0" layoutY="479.0" 
-      mnemonicParsing="false" 
-      prefHeight="34.0" prefWidth="159.0" 
-      text="LOGIN" />
-
-      <Label fx:id="lblMessage" 
-      alignment="CENTER" 
-      layoutX="521.0" layoutY="446.0" 
-      text="Message" />
-
-      <Button fx:id="btnBack" 
-      layoutX="338.0" layoutY="27.0" 
-      mnemonicParsing="false" 
-      text="Back" 
-      onAction="#handleBackBtnClick"/>
+      
+      <!-- Sign Up Button -->
+      <Button fx:id="btnSignUp" layoutX="560.0" layoutY="522.0" mnemonicParsing="false" onAction="#handleSignUp" prefHeight="25.0" prefWidth="172.0" text="SIGN UP" style="-fx-background-color: #2196F3; -fx-text-fill: white; -fx-font-size: 12px; -fx-cursor: hand;">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Button>
+      
+      <!-- Back Button -->
+      <Button fx:id="btnBack" layoutX="338.0" layoutY="27.0" mnemonicParsing="false" onAction="#handleBackBtnClick" text="Back" style="-fx-cursor: hand;" />
       
    </children>
 </AnchorPane>
