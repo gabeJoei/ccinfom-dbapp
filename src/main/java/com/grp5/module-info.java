@@ -4,10 +4,11 @@ module com.grp5 {
     requires java.sql;
     requires javafx.graphics;
 
-    opens com.grp5.controller_gui to javafx.fxml;
+    opens com.grp5.controller_gui to javafx.fxml, javafx.graphics;
     opens com.grp5.model to javafx.base;
     opens com.grp5 to javafx.graphics;
     opens com.grp5.controller_backend to javafx.fxml;
+    opens com.grp5.reports to javafx.base; 
 
     exports com.grp5;
     exports com.grp5.model;

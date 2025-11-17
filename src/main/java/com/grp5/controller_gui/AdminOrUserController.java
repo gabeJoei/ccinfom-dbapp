@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.stage.Screen; // Import Screen
 import javafx.stage.Stage;
 import javafx.event.ActionEvent;
 import java.io.IOException;
@@ -32,11 +33,25 @@ public class AdminOrUserController {
     private void loadNextScene(String fxmlFile, String title, Button button) {
         try {
             Parent nextSceneRoot = FXMLLoader.load(getClass().getResource(fxmlFile));
-            Scene nextScene = new Scene(nextSceneRoot);
+            
+            // Get preferred dimensions from the FXML root
+            double sceneWidth = nextSceneRoot.prefWidth(-1);
+            double sceneHeight = nextSceneRoot.prefHeight(-1);
+
+            Scene nextScene = new Scene(nextSceneRoot, sceneWidth, sceneHeight);
             Stage currentStage = (Stage) button.getScene().getWindow();
+            
+            javafx.geometry.Rectangle2D screenBounds = Screen.getPrimary().getVisualBounds();
+            
+            // Calculate center position
+            currentStage.setX((screenBounds.getWidth() - sceneWidth) / 2);
+            currentStage.setY((screenBounds.getHeight() - sceneHeight) / 2);
+            
+
             currentStage.setScene(nextScene);
             currentStage.setTitle(title);
             currentStage.show();
+            
         } catch (IOException e) {
             e.printStackTrace();
             System.err.println("Error loading scene: " + fxmlFile);
