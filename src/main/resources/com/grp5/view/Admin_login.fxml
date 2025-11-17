@@ -7,41 +7,31 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane 
-maxHeight="-Infinity" maxWidth="-Infinity" 
-minHeight="-Infinity" minWidth="-Infinity" 
-prefHeight="400.0" prefWidth="600.0" 
-xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1"
-fx:controller="com.grp5.controller_gui.Admin_logInController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1065.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.grp5.controller_gui.Admin_logInController">
    <children>
-      <Button fx:id="logInBtn" layoutX="275.0" layoutY="301.0" mnemonicParsing="false" text="Log-In" onAction="#handleAdminLogIn"/>
+      <Button fx:id="logInBtn" layoutX="494.0" layoutY="343.0" mnemonicParsing="false" onAction="#handleAdminLogIn" prefHeight="35.0" prefWidth="77.0" text="Log-In" />
 
-      <Label layoutX="227.0" layoutY="39.0" text="Admin Log-In">
+      <Label layoutX="458.0" layoutY="104.0" prefHeight="63.0" prefWidth="149.0" text="Admin Log-In">
          <font>
             <Font size="24.0" />
          </font>
       </Label>
 
-      <TextField fx:id="usernameField" layoutX="226.0" layoutY="156.0" onAction="#handleAdminLogIn"/>
-      <Label layoutX="226.0" layoutY="136.0" text="Username:">
+      <TextField fx:id="usernameField" layoutX="457.0" layoutY="221.0" onAction="#handleAdminLogIn" />
+      <Label layoutX="457.0" layoutY="201.0" text="Username:">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
 
-      <Label layoutX="226.0" layoutY="190.0" text="Password:">
+      <Label layoutX="457.0" layoutY="255.0" text="Password:">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
-      <PasswordField fx:id="passwordField" layoutX="226.0" layoutY="210.0" onAction="#handleAdminLogIn"/>
+      <PasswordField fx:id="passwordField" layoutX="457.0" layoutY="275.0" onAction="#handleAdminLogIn" />
 
-      <Button 
-      fx:id="backBtn" 
-      layoutX="14.0" layoutY="361.0" 
-      mnemonicParsing="false" 
-      text="Back" 
-      onAction="#handleBckBtn"/>
+      <Button fx:id="backBtn" layoutX="14.0" layoutY="550.0" mnemonicParsing="false" onAction="#handleBckBtn" prefHeight="35.0" prefWidth="51.0" text="Back" />
 
    </children>
 </AnchorPane>

@@ -28,7 +28,7 @@
                         <Font name="Bell MT" size="18.0" />
                      </font>
                   </Text>
-                  <TextField fx:id="searchField" promptText="Enter Reference Number" />
+                  <TextField fx:id="searchField" promptText="Enter Customer Number" />
                   <Button fx:id="btnEnter" mnemonicParsing="false" onAction="#handleSearch" text="Enter" />
                </children>
             </HBox>
