@@ -1,13 +1,73 @@
-# --- Build & Compiled Files ---
+# =============================================
+# General
+# =============================================
+# Compiled source
 *.class
+
+# Log files
 *.log
-*.ctxt
+
+# Archives
 *.jar
 *.war
 *.ear
+*.zip
+*.tar.gz
 
-# Build directories
-/bin/
-/build/
+# Operating System files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# =============================================
+# Maven
+# =============================================
+# The most important rule: Maven's build output directory
 /target/
-/out/
+
+# Maven-specific files
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+dependency-reduced-pom.xml
+buildNumber.properties
+.mvn/
+
+# =============================================
+# IDEs
+# =============================================
+
+# IntelliJ IDEA
+.idea/
+*.iml
+*.iws
+
+# Eclipse
+.project
+.classpath
+.settings/
+
+# VS Code
+.vscode/
+
+# NetBeans
+nbproject/
+build/
+dist/
+
+# =w============================================
+# Secrets & Configuration
+# =============================================
+# !! IMPORTANT !!
+# Never commit your database credentials.
+# Store them in a file like this and add it here.
+config.properties
+local.properties
+.env
+
+# Database dumps or local backups
+*.sql
+*.sql.backup
+dump.sql

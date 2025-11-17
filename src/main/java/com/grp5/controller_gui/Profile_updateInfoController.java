@@ -34,8 +34,19 @@ public class Profile_updateInfoController {
     @FXML
     private void handleConfirmBtn() {
         System.out.println("Confirm button clicked!");
-        String newEmail = newEmailField.getText().trim();
-        String newContactNo = newContctField.getText().trim();
+        String newEmail = null;
+        String newContactNo = null;
+
+        if (newEmailField != null) {
+            newEmail = newEmailField.getText().trim();
+            newEmail = newEmail.isEmpty() ? null : newEmail;
+        }
+
+        if (newContctField != null) {
+            newContactNo = newContctField.getText().trim();
+            newContactNo = newContactNo.isEmpty() ? null : newContactNo;
+        }
+
         int flag = -1;
 
         if (newEmail == null && newContactNo == null) {
@@ -57,12 +68,18 @@ public class Profile_updateInfoController {
                 if (newEmail != null) {
                     admin.setAdminEmail(newEmail);
                     dao.updateAdmin(admin);
-                    newEmailField.clear();
+                    if (newEmailField != null)
+                        newEmailField.clear();
+                    if (passwordField != null)
+                        passwordField.clear();
                     showInfo("Success", "Email successfully updated!");
                 } else {
                     passwordField.clear();
                     showError("Error!", "Incorrect Password!");
                 }
+            } else {
+                passwordField.clear();
+                showError("Incorrect Password", "Input correct password!");
             }
         } else if (AccountSession.isUser()) {
             if (isUserPasswordCorrect()) {
@@ -72,25 +89,38 @@ public class Profile_updateInfoController {
                     case 1: // Only new contact num is available
                         user.setPhoneNum(newContactNo);
                         dao.modifyCustomerRecordData(user);
-                        newContctField.clear();
+                        if (newContctField != null)
+                            newContctField.clear();
+                        if (passwordField != null)
+                            passwordField.clear();
                         showInfo("Success", "Phone number successfully updated!");
                         break;
                     case 2: // Only new email is avail.able
                         user.setEmail(newEmail);
                         dao.modifyCustomerRecordData(user);
-                        newEmailField.clear();
+                        if (newEmailField != null)
+                            newEmailField.clear();
+                        if (passwordField != null)
+                            passwordField.clear();
                         showInfo("Success", "Email successfully updated!");
                         break;
                     case 3: // Both are available
                         user.setPhoneNum(newContactNo);
                         user.setEmail(newEmail);
                         dao.modifyCustomerRecordData(user);
-                        newContctField.clear();
-                        newEmailField.clear();
+                        if (newContctField != null)
+                            newContctField.clear();
+                        if (newEmailField != null)
+                            newEmailField.clear();
+                        if (passwordField != null)
+                            passwordField.clear();
                         showInfo("Success", "Email and phone number successfully updated!");
                     default:
                         break;
                 }
+            } else {
+                passwordField.clear();
+                showError("Incorrect Password", "Input correct password!");
             }
         } else {
             System.out.println("There is an error around here :/");
