@@ -1,7 +1,17 @@
+/*
+ * Model for admin in the Bike Rental System.
+ * 
+ * This model stores key information related to admin,
+ * including the admin username, admin password, 
+ * admin email address, admin first name, admin last name.  
+ * It provides getters and setters for all fields,and a toString method.
+ * 
+ */
 package com.grp5.model;
 
 
 public class adminModel {
+    //variable declaration
     private int adminID;
     private String adminUsername;
     private String adminPassword;

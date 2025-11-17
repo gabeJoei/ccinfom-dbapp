@@ -14,6 +14,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 public class Admin_logInController {
@@ -70,6 +71,8 @@ public class Admin_logInController {
             Scene nextScene = new Scene(nextSceneRoot);
             Stage currentStage = (Stage) button.getScene().getWindow();
 
+            javafx.geometry.Rectangle2D screenBounds = Screen.getPrimary().getVisualBounds();
+
             currentStage.setScene(nextScene);
             currentStage.setTitle(title);
             currentStage.show();
@@ -80,7 +83,6 @@ public class Admin_logInController {
         }
     }
 
-    // Add this helper so the earlier calls compile
     private void showError(String header, String content) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Error");

@@ -1,6 +1,9 @@
 package com.grp5.controller_gui;
 
 import java.io.IOException;
+
+import com.grp5.session.AccountSession;
+
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
@@ -110,7 +113,8 @@ public class Admin_dashboardController {
     }
 
     private void handleLogout() {
-        System.out.println("Log Out clicked");
+        AccountSession.cleanSession();
+        loadUI("/com/grp5/view/AdminOrUser.fxml");
     }
 
     public Button getBtnUsers() {
