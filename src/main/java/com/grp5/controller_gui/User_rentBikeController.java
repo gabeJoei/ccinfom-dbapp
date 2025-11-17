@@ -5,11 +5,15 @@ import com.grp5.dao.branchRecordDAO;
 import com.grp5.model.bikeRecordModel;
 import com.grp5.model.branchRecordModel;
 
+import javafx.animation.FadeTransition;
+import javafx.animation.ScaleTransition;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
+import javafx.util.Duration;
+
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -27,7 +31,7 @@ public class User_rentBikeController {
 
     // Mountain Bike
     @FXML
-    private ImageView imgMountainBike;
+    private ImageView imgMountainBike,imgTandemBike,imgRoadBike,imgEBike,imgEAssistBike,imgBMXBike;
     @FXML
     private Text txtMountainModel;
     @FXML
@@ -91,6 +95,7 @@ public class User_rentBikeController {
         branchDAO = new branchRecordDAO();
 
         loadBranches();
+        highlightEffect();
     }
 
     /** Load all branches into the ChoiceBox */
@@ -233,6 +238,35 @@ public class User_rentBikeController {
         }
     }
     
+    private void highlightEffect(){
+        ImageView[] bImages={imgMountainBike,imgTandemBike,imgRoadBike,imgEBike,imgEAssistBike,imgBMXBike};
+        for(ImageView b:bImages){
+            ScaleTransition scaleTrans=new ScaleTransition(Duration.millis(500),b);
+            FadeTransition fadeTrans=new FadeTransition(Duration.millis(500),b);
+            b.setOnMouseEntered(e->{
+                scaleTrans.stop();
+                scaleTrans.setToX(1.2);
+                scaleTrans.setToY(1.2);
+                scaleTrans.play();
+
+                fadeTrans.stop();
+                fadeTrans.setToValue(0.8);
+                fadeTrans.play();
+            });
+
+            b.setOnMouseExited(e->{
+                scaleTrans.stop();
+                scaleTrans.setToX(1.0);
+                scaleTrans.setToY(1.0);
+                scaleTrans.play();
+
+                fadeTrans.stop();
+                fadeTrans.setToValue(1.0);
+                fadeTrans.play();
+            });
+        }
+    }
+
     private void loadBikeReservationPage(String userID, bikeRecordModel bikeToLoad) throws IOException {
         // Use any FXML element (imgMountainBike) to get the scene
         AnchorPane dashboardContentArea = (AnchorPane) imgMountainBike.getScene().lookup("#contentArea");
