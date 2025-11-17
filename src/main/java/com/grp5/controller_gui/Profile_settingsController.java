@@ -23,13 +23,13 @@ public class Profile_settingsController {
     @FXML
     void handleChangePassBtn() {
         System.out.println("Change password button clicked!");
-        loadNextScene("/com/grp5/view/Profile_updateInfo.fxml", "Update Information", changePassBtn);
+        loadNextScene("/com/grp5/view/Profile_changePassword.fxml", "Update Information", changePassBtn);
     }
 
     @FXML
     void handleUpdtInfoBtn() {
-        System.out.print("Update Info button clicked!");
-        loadNextScene("/com/grp5/view/Profile_changePassword.fxml", null, updtInfoBtn);
+        System.out.println("Update Info button clicked!");
+        loadNextScene("/com/grp5/view/Profile_updateInfo.fxml", null, updtInfoBtn);
     }
 
     @FXML

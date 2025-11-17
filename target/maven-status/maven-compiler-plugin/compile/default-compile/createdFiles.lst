@@ -54,6 +54,7 @@ com\grp5\controller_gui\Admin_BranchPerfReportController$1.class
 com\grp5\session\AccountSession$AccountType.class
 com\grp5\controller_gui\Profile_settingsController.class
 com\grp5\model\customerRecordModel.class
+com\grp5\controller_gui\Profile_changePassController.class
 com\grp5\controller_gui\Admin_RentalSalesReportController$1.class
 com\grp5\dao\customerRecordDAO.class
 com\grp5\dao\bikeReservationDAO.class

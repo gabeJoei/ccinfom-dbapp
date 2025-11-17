@@ -2,6 +2,9 @@ package com.grp5.controller_gui;
 
 import com.grp5.dao.customerRecordDAO;
 import com.grp5.model.customerRecordModel;
+import com.grp5.session.AccountSession;
+import com.grp5.session.ProfileSnapshot;
+import com.grp5.session.AccountSession.AccountType;
 import com.grp5.utils.sessionManager;
 
 import javafx.event.ActionEvent;
@@ -41,7 +44,7 @@ public class User_loginController {
         customerDAO = new customerRecordDAO();
         System.out.println("User loginController initialized");
         lblMessage.setVisible(false);
-        
+
         // Clear message on focus
         txtUsername.focusedProperty().addListener((obs, oldVal, newVal) -> {
             if (newVal)
@@ -54,10 +57,10 @@ public class User_loginController {
 
         // Enter key to login
         txtPassword.setOnAction(e -> handleLogin());
-        
+
         // Add button action handler
         btnLogin.setOnAction(e -> handleLogin());
-        
+
         System.out.println("Connection initialization complete.");
     }
 
@@ -108,6 +111,9 @@ public class User_loginController {
             System.out.println("Customer ID: " + customer.getCustomerAccID());
             System.out.println("Customer Acc ID: " + customer.getCustomerAccID());
             sessionManager.setLoggedInCustomer(customer);
+            ProfileSnapshot snap = new ProfileSnapshot(customer.getFirstName(), customer.getLastName(),
+                    customer.getEmail());
+            AccountSession.setAccount(AccountType.USER, customer.getCustomerAccID(), snap);
             return true;
         }
 
@@ -118,23 +124,23 @@ public class User_loginController {
     private void navigateToDashboard() {
         try {
             Stage stage = (Stage) btnLogin.getScene().getWindow();
-            
+
             // Load User Dashboard
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/grp5/view/User_userMenu.fxml"));
             Parent root = loader.load();
-            
+
             // Get customer info from session
             customerRecordModel customer = sessionManager.getLoggedInCustomer();
-            
+
             // Set user info in dashboard
             User_dashBoardController userController = loader.getController();
             if (userController != null && customer != null) {
                 String fullName = customer.getFirstName() + " " + customer.getLastName();
                 String userId = String.valueOf(customer.getCustomerAccID());
-                
+
                 userController.setUserName(fullName);
                 userController.setUserId(userId);
-                
+
                 System.out.println("User dashboard loaded for: " + fullName + " (ID: " + userId + ")");
             } else {
                 System.err.println("Controller or customer is null!");
@@ -145,21 +151,21 @@ public class User_loginController {
                     System.err.println("Customer is null");
                 }
             }
-            
+
             Scene scene = new Scene(root);
             stage.setTitle("User Dashboard - CIGE Bike Rentals");
             stage.setScene(scene);
-            
+
             // Set minimum window size for dashboard
             stage.setMinWidth(1065);
             stage.setMinHeight(600);
             stage.setResizable(true);
-            
+
             // Center on screen
             stage.centerOnScreen();
-            
+
             stage.show();
-            
+
             System.out.println("Dashboard displayed successfully");
 
         } catch (IOException e) {
@@ -180,11 +186,11 @@ public class User_loginController {
             Scene scene = new Scene(root);
             stage.setTitle("Sign Up - CIGE Bike Rentals");
             stage.setScene(scene);
-            
+
             // Set window size for sign-up
             stage.setMinWidth(1065);
             stage.setMinHeight(600);
-            
+
             stage.show();
 
         } catch (IOException e) {
@@ -203,13 +209,13 @@ public class User_loginController {
 
             currentStage.setScene(nextScene);
             currentStage.setTitle("CIGE Bike Rentals - Login Selection");
-            
+
             // Reset window size for login selection
             currentStage.setMinWidth(600);
             currentStage.setMinHeight(400);
             currentStage.setResizable(false);
             currentStage.centerOnScreen();
-            
+
             currentStage.show();
 
         } catch (IOException e) {
