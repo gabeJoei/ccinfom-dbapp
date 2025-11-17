@@ -3,14 +3,19 @@ package com.grp5.controller_gui;
 import java.io.IOException;
 
 import com.grp5.session.AccountSession;
-
+import com.grp5.utils.sessionManager;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.SplitMenuButton;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.control.MenuItem;
 import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 /**
  * Controller for Main Dashboard Sidebar (included via fx:include)
  */
@@ -113,9 +118,23 @@ public class Admin_dashboardController {
     }
 
     private void handleLogout() {
-        AccountSession.cleanSession();
-        loadUI("/com/grp5/view/AdminOrUser.fxml");
+    System.out.println("Log Out clicked");
+
+    // Show confirmation dialog
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        sessionManager session=new sessionManager();
+        alert.setTitle("Logout Confirmation");
+        alert.setHeaderText("Are you sure you want to logout?");
+        alert.setContentText("You will be returned to the login selection screen.");
+
+        alert.showAndWait().ifPresent(response -> {
+            if (response == ButtonType.OK) {
+                session.performLogout(btnLogOut);
+            }
+        });
+
     }
+
 
     public Button getBtnUsers() {
         return btnUsers;

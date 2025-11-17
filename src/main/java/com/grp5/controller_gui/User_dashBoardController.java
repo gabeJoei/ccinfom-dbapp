@@ -85,57 +85,19 @@ public class User_dashBoardController {
 
         // Show confirmation dialog
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        sessionManager session=new sessionManager();
         alert.setTitle("Logout Confirmation");
         alert.setHeaderText("Are you sure you want to logout?");
         alert.setContentText("You will be returned to the login selection screen.");
 
         alert.showAndWait().ifPresent(response -> {
             if (response == ButtonType.OK) {
-                performLogout();
+                session.performLogout(btnLogout);
             }
         });
     }
 
-    private void performLogout() {
-        try {
-            // Clear session data
-            sessionManager.clearSession();
-            System.out.println("Session cleared");
-
-            // Get current stage
-            Stage stage = (Stage) btnLogout.getScene().getWindow();
-
-            // Load AdminOrUser selection screen
-            Parent root = FXMLLoader.load(getClass().getResource("/com/grp5/view/AdminOrUser.fxml"));
-            Scene scene = new Scene(root);
-
-            // Update stage
-            stage.setScene(scene);
-            stage.setTitle("CIGE Bike Rentals - Login Selection");
-
-            // Reset window size for login selection
-            stage.setMinWidth(600);
-            stage.setMinHeight(400);
-            stage.setResizable(false);
-            stage.centerOnScreen();
-
-            stage.show();
-
-            System.out.println("Logged out successfully");
-
-        } catch (IOException e) {
-            e.printStackTrace();
-            System.err.println("Error during logout: " + e.getMessage());
-
-            // Show error dialog
-            Alert errorAlert = new Alert(Alert.AlertType.ERROR);
-            errorAlert.setTitle("Logout Error");
-            errorAlert.setHeaderText("Failed to logout");
-            errorAlert.setContentText("An error occurred while logging out. Please try again.");
-            errorAlert.showAndWait();
-        }
-    }
-
+   
     public void setUserName(String userName) {
         if (txtUserName != null) {
             txtUserName.setText(userName);
