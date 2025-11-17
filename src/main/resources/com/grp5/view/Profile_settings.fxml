@@ -13,9 +13,9 @@
    <children>
       <HBox layoutX="75.0" layoutY="455.0" prefHeight="40.0" prefWidth="691.0" spacing="100.0">
          <children>
-            <Button fx:id="changePassBtn" mnemonicParsing="false" prefHeight="47.0" prefWidth="158.0" text="Change Password" onAction="#handleChangePassBtn" />
-            <Button fx:id="updtInfoBtn" mnemonicParsing="false" prefHeight="47.0" prefWidth="158.0" text="Update Information" onAction="#handleUpdtInfoBtn" />
-            <Button fx:id="deleteAccountBtn" mnemonicParsing="false" prefHeight="47.0" prefWidth="158.0" text="Delete Account" onAction="#handleDeleteAccountBtn" />
+            <Button fx:id="changePassBtn" mnemonicParsing="false" onAction="#handleChangePassBtn" prefHeight="47.0" prefWidth="158.0" text="Change Password" />
+            <Button fx:id="updtInfoBtn" mnemonicParsing="false" onAction="#handleUpdtInfoBtn" prefHeight="47.0" prefWidth="158.0" text="Update Information" />
+            <Button fx:id="deleteAccountBtn" mnemonicParsing="false" onAction="#handleDeleteAccountBtn" prefHeight="47.0" prefWidth="158.0" text="Delete Account" />
          </children>
       </HBox>
       <Text layoutX="244.0" layoutY="134.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name:" wrappingWidth="64.00002034505223">
@@ -60,13 +60,6 @@
          </font>
       </Text>
       <Text layoutX="308.0" layoutY="161.0" strokeType="OUTSIDE" strokeWidth="0.0" text="HolderForUSerID" wrappingWidth="97.33333333333348" />
-      
-      <Button fx:id="backBtn"
-      layoutX="775.0" layoutY="567.0" 
-      mnemonicParsing="false" 
-      text="Back" 
-      onAction="#handleBckBtn"
-      />
 
    </children>
 </AnchorPane>

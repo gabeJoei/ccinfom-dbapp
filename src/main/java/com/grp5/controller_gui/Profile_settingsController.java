@@ -19,8 +19,6 @@ public class Profile_settingsController {
     private Button updtInfoBtn;
     @FXML
     private Button deleteAccountBtn;
-    @FXML
-    private Button backBtn;
 
     @FXML
     void handleChangePassBtn() {
@@ -38,12 +36,6 @@ public class Profile_settingsController {
     void handleDeleteAccountBtn() {
         System.out.print("Delete account button clicked!");
         // add the gui where the account will be deleted :v
-    }
-
-    @FXML
-    private void handleBckBtn() {
-        System.out.println("Back button clicked!");
-        loadNextScene("/com/grp5/view/AdminOrUser.fxml", "Home", backBtn);
     }
 
     private void loadNextScene(String fxmlFile, String title, Button button) {
