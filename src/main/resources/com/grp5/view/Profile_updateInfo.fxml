@@ -40,7 +40,7 @@
             <Font name="Bodoni MT" size="15.0" />
          </font>
       </Text>
-      <Button fx:id="confirmBtn" layoutX="544.0" layoutY="435.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="165.0" text="Confirm Changes" />
+      <Button fx:id="confirmBtn" layoutX="544.0" layoutY="435.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="165.0" onAction="#handleConfirmBtn" text="Confirm Changes" />
       <Button fx:id="backBtn" layoutX="1010.0" layoutY="560.0" mnemonicParsing="false" onAction="#handleBackBtn" text="Back" />
       <Text layoutX="429.0" layoutY="292.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Update Email Address:">
          <font>
