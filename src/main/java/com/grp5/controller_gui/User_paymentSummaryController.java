@@ -115,6 +115,7 @@ public class User_paymentSummaryController {
                 priceToPay
             );
             transactionDAO.addTransactionRecordData(transaction);
+
             goToRentPage();
         }
     }

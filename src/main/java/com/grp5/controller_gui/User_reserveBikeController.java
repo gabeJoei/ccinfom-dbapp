@@ -115,7 +115,7 @@ public class User_reserveBikeController {
             LocalDateTime endDateTime = endDate.atTime(eHour, eMin);
 
             // Warn user for any reservation errors. If fails, stop
-            if (!validateReservation(startDate, endDate)) {
+            if (!validateReservation(startDateTime, endDateTime)) {
                 return; 
             }
 
@@ -189,28 +189,28 @@ public class User_reserveBikeController {
         }
     }
 
-    private boolean validateReservation(LocalDate startDate, LocalDate endDate) {
+    private boolean validateReservation(LocalDateTime startDateTime, LocalDateTime endDateTime) {
 
-        LocalDate today = LocalDate.now(); // Get today date
+        LocalDateTime now = LocalDateTime.now(); // Get today's date and time
 
         if (selectedBike == null) {
             generalUtilities.showAlert(
-                Alert.AlertType.ERROR, "Error", "No bike selected.");
+                Alert.AlertType.ERROR, "Error", "No Bike Selected.");
             return false;
         }
-        if (startDate == null || endDate == null) {
+        if (startDateTime == null || endDateTime == null) {
             generalUtilities.showAlert(
-                Alert.AlertType.WARNING, "Input Error", "Please select both a start and end date.");
+                Alert.AlertType.WARNING, "Input Error", "Please select a start and end time.");
             return false;
         }
-        if (startDate.isBefore(today)) {
+        if (startDateTime.isBefore(now)) {
             generalUtilities.showAlert(
-                Alert.AlertType.WARNING, "Input Error", "Start date cannot be in the past.");
+                Alert.AlertType.WARNING, "Input Error", "Start date and time cannot be in the past.");
             return false;
         }
-        if (endDate.isBefore(startDate)) {
+        if (endDateTime.isBefore(startDateTime) || endDateTime.isEqual(startDateTime)) {
             generalUtilities.showAlert(
-                Alert.AlertType.WARNING, "Input Error", "End date must be after the start date.");
+                Alert.AlertType.WARNING, "Input Error", "End time must be after the start time.");
             return false;
         }
         // No errors

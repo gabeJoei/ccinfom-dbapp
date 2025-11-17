@@ -49,11 +49,9 @@
             
             <!-- Button Bar -->
             <HBox alignment="CENTER" spacing="10">
-                <Button onAction="#handleAdd" styleClass="btn-primary" text="Add Reservation" />
                 <Button onAction="#handleUpdate" styleClass="btn-success" text="Update" />
                 <Button onAction="#handleDelete" styleClass="btn-danger" text="Delete" />
                 <Button onAction="#handleViewDetails" styleClass="btn-info" text="View Details" />
-                <Button onAction="#handleBack" styleClass="btn-secondary" text="Back" />
             </HBox>
         </VBox>
     </center>

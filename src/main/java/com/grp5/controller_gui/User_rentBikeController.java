@@ -9,13 +9,20 @@ import javafx.animation.FadeTransition;
 import javafx.animation.ScaleTransition;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Alert;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
 
+
 import java.io.IOException;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+
+import com.grp5.dao.bikeReservationDAO;
+import com.grp5.utils.generalUtilities;
 
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -81,6 +88,7 @@ public class User_rentBikeController {
 
     private bikeRecordDAO bikeDAO;
     private branchRecordDAO branchDAO;
+    private bikeReservationDAO reservationDAO;
 
     private bikeRecordModel mountainBike;
     private bikeRecordModel roadBike;
@@ -93,6 +101,7 @@ public class User_rentBikeController {
     public void initialize() {
         bikeDAO = new bikeRecordDAO();
         branchDAO = new branchRecordDAO();
+        reservationDAO = new bikeReservationDAO();
 
         loadBranches();
         highlightEffect();
@@ -117,6 +126,7 @@ public class User_rentBikeController {
     // Load bikes for the selected branch
     private void loadBikesForBranch() {
         String selectedBranch = cmbBranch.getValue();
+
         if (selectedBranch == null)
             return;
 
@@ -133,7 +143,13 @@ public class User_rentBikeController {
         this.bmxBike = null;
 
         int branchID = branch.getBranchID();
+
+        // Get bikes
         ArrayList<bikeRecordModel> bikes = bikeDAO.getBikesByBranch(branchID);
+        
+        // Get the current time and time one hour from current time
+        Timestamp now = Timestamp.valueOf(LocalDateTime.now());
+        Timestamp timeAfterOneHour = Timestamp.valueOf(LocalDateTime.now().plusHours(1));
 
         int mountainCount = 0, roadCount = 0, eAssistsCount = 0;
         int tandemCount = 0, eBikeCount = 0, bmxCount = 0;
@@ -141,7 +157,12 @@ public class User_rentBikeController {
         for (bikeRecordModel bike : bikes) {
             String model = bike.getBikeModel().toLowerCase();
 
-            if (bike.getBikeAvailability()) {
+            // Check if bike is being used
+            boolean isCurrentlyReserved = reservationDAO.hasOverlappingReservation(
+                bike.getBikeID(), now, timeAfterOneHour
+            );
+
+            if (!isCurrentlyReserved) {
                 if (model.contains("mountain")) {
                     mountainCount++;
                     if (mountainBike == null)
@@ -229,12 +250,12 @@ public class User_rentBikeController {
             } catch (IOException e) {
                 e.printStackTrace();
                 System.out.println("Error in loading reservation page.");
-                // alert
+                generalUtilities.showAlert(Alert.AlertType.ERROR, "Error", "Error in loading reservation page.");
             }
 
         } else {
             System.out.println("No bike data available for the selected image.");
-            // alert
+            generalUtilities.showAlert(Alert.AlertType.WARNING, "No bike data available for the selected model.", "Select a different bike.");
         }
     }
     
