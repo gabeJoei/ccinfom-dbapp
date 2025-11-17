@@ -10,6 +10,7 @@ com\grp5\utils\databaseConnection.class
 com\grp5\controller_gui\User_signupController.class
 com\grp5\controller_gui\Admin_customerController.class
 com\grp5\controller_gui\User_loginController.class
+com\grp5\controller_gui\Profile_deleteController.class
 com\grp5\reports\customerEngagementReport.class
 com\grp5\controller_backend\rentingTransactionController.class
 com\grp5\model\BikeRentalMonthReportModel.class

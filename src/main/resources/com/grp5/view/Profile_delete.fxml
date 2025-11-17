@@ -10,7 +10,7 @@
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1"
    fx:controller="com.grp5.controller_gui.Profile_deleteController">
    <children>
-      <Button fx:id="backBtn" layoutX="545.0" layoutY="361.0" mnemonicParsing="false" text="Back" />
+      <Button fx:id="backBtn" layoutX="545.0" layoutY="361.0" mnemonicParsing="false" text="Back" onAction="#handleBackBtn" />
       <Text layoutX="165.0" layoutY="100.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Are you sure that you want to delete your account!" />
       <Text layoutX="203.0" layoutY="158.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Be warned">
          <font>
