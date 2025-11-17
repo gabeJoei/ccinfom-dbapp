@@ -20,7 +20,7 @@ public class App extends Application {
         try {
             Parent root = FXMLLoader.load(getClass().getResource("/com/grp5/view/AdminOrUser.fxml")); // Get the
                                                                                                       // resources :D
-            Scene scene = new Scene(root, 600, 400); // Set - up new scene :D
+            Scene scene = new Scene(root, 1065, 600); // Set - up new scene :D
 
             stage.setScene(scene);
             stage.setResizable(false);
