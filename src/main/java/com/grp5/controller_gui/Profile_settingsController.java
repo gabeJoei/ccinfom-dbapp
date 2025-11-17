@@ -12,7 +12,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
-public class Profile_settingsConstroller {
+public class Profile_settingsController {
     @FXML
     private Button changePassBtn;
     @FXML
@@ -36,6 +36,7 @@ public class Profile_settingsConstroller {
 
     @FXML
     void handleDeleteAccountBtn() {
+        System.out.print("Delete account button clicked!");
         // add the gui where the account will be deleted :v
     }
 
