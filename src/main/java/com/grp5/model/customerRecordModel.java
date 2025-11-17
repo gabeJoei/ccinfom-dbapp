@@ -1,6 +1,7 @@
 package com.grp5.model;
+
 public class customerRecordModel {
-    /*Declare Variables: Make it String */
+    /* Declare Variables: Make it String */
     private int customerAccID;
     private String firstName;
     private String lastName;
@@ -9,16 +10,16 @@ public class customerRecordModel {
     private String customerPass;
 
     // empty constructor
-    public customerRecordModel() {}
+    public customerRecordModel() {
+    }
 
     public customerRecordModel(int customerAccID) {
-    this.customerAccID = customerAccID;
-}
-
+        this.customerAccID = customerAccID;
+    }
 
     // full constructor
-    public customerRecordModel(int customerAccID, String firstName, String lastName, 
-                                String email, String phoneNum, String customerPass){
+    public customerRecordModel(int customerAccID, String firstName, String lastName,
+            String email, String phoneNum, String customerPass) {
         this.customerAccID = customerAccID;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -27,7 +28,7 @@ public class customerRecordModel {
         this.customerPass = customerPass;
     }
 
-    //  Setters 
+    // Setters
     public void setCustomerAccID(int customerAccID) {
         this.customerAccID = customerAccID;
     }
@@ -52,15 +53,32 @@ public class customerRecordModel {
         this.customerPass = customerPass;
     }
 
-    //  Getters 
-    public int getCustomerAccID() { return this.customerAccID; }
-    public String getFirstName() { return this.firstName; }
-    public String getLastName() { return this.lastName; }
-    public String getEmail() { return this.email; }
-    public String getPhoneNum() { return this.phoneNum; }
-    public String getCustomerPass() { return this.customerPass; }
-    
-    public static void main(String[] args){
-
+    // Getters
+    public int getCustomerAccID() {
+        return this.customerAccID;
     }
+
+    public String getFirstName() {
+        return this.firstName;
+    }
+
+    public String getLastName() {
+        return this.lastName;
+    }
+
+    public String getEmail() {
+        return this.email;
+    }
+
+    public String getPhoneNum() {
+        return this.phoneNum;
+    }
+
+    public String getCustomerPass() {
+        return this.customerPass;
+    }
+
+    public static void main(String[] args) {
+    }
+
 }

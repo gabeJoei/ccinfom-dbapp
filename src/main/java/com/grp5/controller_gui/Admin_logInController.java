@@ -1,8 +1,11 @@
 package com.grp5.controller_gui;
 
-import com.grp5.session.Admin_session;
 import com.grp5.dao.adminDAO;
 import com.grp5.model.adminModel;
+import com.grp5.session.AccountSession;
+import com.grp5.session.ProfileSnapshot;
+import com.grp5.session.AccountSession.AccountType;
+
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -39,8 +42,14 @@ public class Admin_logInController {
         }
 
         adminModel admin = dao.authenticateAdmin(username, password);
-        Admin_session.setCurrentAdmin(admin); // Current admin bro :D
+        // Admin_session.setCurrentAdmin(admin); // Current admin bro :D
         if (admin != null) {
+
+            ProfileSnapshot snap = new ProfileSnapshot(admin.getAdminFirstName(), admin.getAdminLastName(),
+                    admin.getAdminEmail());
+
+            AccountSession.setAccount(AccountType.ADMIN, admin.getAdminID(), snap);
+
             loadNextScene("/com/grp5/view/Admin_dashBoard.fxml", "Admin Dashboard", logInBtn);
         } else {
             showError("Login failed", "Invalid username or password.");
