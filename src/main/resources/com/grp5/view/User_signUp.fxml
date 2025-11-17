@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
@@ -10,58 +11,109 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1065.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.grp5.controller_gui.signUpController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1065.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.grp5.controller_gui.User_signupController">
    <children>
+      <!-- Background Image -->
       <ImageView fitHeight="600.0" fitWidth="1081.0" layoutX="-1.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@images/loginBG.png" />
          </image>
       </ImageView>
+      
+      <!-- Form Background -->
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e1dbdb" height="561.0" layoutX="327.0" layoutY="16.0" stroke="BLACK" strokeType="INSIDE" width="464.0" />
-      <ImageView fitHeight="111.0" fitWidth="181.0" layoutX="469.0" layoutY="96.0" pickOnBounds="true" preserveRatio="true">
+      
+      <!-- Logo -->
+      <ImageView fitHeight="111.0" fitWidth="181.0" layoutX="469.0" layoutY="35.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@images/MainLogo.png" />
          </image>
       </ImageView>
-      <TextField fx:id="txtUsername" layoutX="353.0" layoutY="229.0" prefHeight="25.0" prefWidth="410.0" promptText="EMAIL ADDRESS" />
-      <PasswordField fx:id="txtPassword" layoutX="355.0" layoutY="284.0" prefHeight="25.0" prefWidth="410.0" promptText="PASSWORD" />
-      <Text layoutX="355.0" layoutY="224.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Enter your Email Address:">
+      
+      <!-- Sign Up Title -->
+      <Text layoutX="429.0" layoutY="155.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sign Up" textAlignment="CENTER" wrappingWidth="245.0579833984375">
          <font>
-            <Font name="Bodoni MT Bold" size="18.0" />
+            <Font name="Bodoni MT" size="48.0" />
          </font>
       </Text>
-      <Text layoutX="355.0" layoutY="278.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Enter your Name:">
+      
+      <!-- Email Label -->
+      <Text layoutX="355.0" layoutY="199.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Enter your Email Address:">
          <font>
-            <Font name="Bodoni MT Bold" size="18.0" />
+            <Font name="Bodoni MT Bold" size="16.0" />
          </font>
       </Text>
-      <Text layoutX="429.0" layoutY="92.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sign Up" textAlignment="CENTER" wrappingWidth="245.0579833984375">
+      
+      <!-- Email Field -->
+      <TextField fx:id="txtUsername" layoutX="353.0" layoutY="204.0" prefHeight="25.0" prefWidth="410.0" promptText="example@email.com" />
+      
+      <!-- Name Label -->
+      <Text layoutX="355.0" layoutY="252.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Enter your Full Name:">
          <font>
-            <Font name="Bodoni MT" size="72.0" />
+            <Font name="Bodoni MT Bold" size="16.0" />
          </font>
       </Text>
-      <PasswordField fx:id="txtPassword1" layoutX="355.0" layoutY="340.0" prefHeight="25.0" prefWidth="410.0" promptText="PASSWORD" />
-      <Text layoutX="355.0" layoutY="334.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Enter your Phone Number:">
+      
+      <!-- Name Field -->
+      <TextField fx:id="txtName" layoutX="355.0" layoutY="257.0" prefHeight="25.0" prefWidth="410.0" promptText="Juan Dela Cruz" />
+      
+      <!-- Phone Number Label -->
+      <Text layoutX="355.0" layoutY="305.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Enter your Phone Number:">
          <font>
-            <Font name="Bodoni MT Bold" size="18.0" />
+            <Font name="Bodoni MT Bold" size="16.0" />
          </font>
       </Text>
-      <PasswordField fx:id="txtPassword2" layoutX="355.0" layoutY="397.0" prefHeight="25.0" prefWidth="410.0" promptText="PASSWORD" />
-      <Text layoutX="355.0" layoutY="391.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Enter your Password:">
+      
+      <!-- Phone Number Field -->
+      <TextField fx:id="txtPhoneNumber" layoutX="355.0" layoutY="310.0" prefHeight="25.0" prefWidth="410.0" promptText="09XXXXXXXXX" />
+      
+      <!-- Password Label -->
+      <Text layoutX="355.0" layoutY="358.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Enter your Password:">
          <font>
-            <Font name="Bodoni MT Bold" size="18.0" />
+            <Font name="Bodoni MT Bold" size="16.0" />
          </font>
       </Text>
-      <PasswordField fx:id="txtPassword3" layoutX="355.0" layoutY="452.0" prefHeight="25.0" prefWidth="410.0" promptText="PASSWORD" />
-      <Text layoutX="355.0" layoutY="446.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Re-enter your Password:">
+      
+      <!-- Password Field -->
+      <PasswordField fx:id="txtPassword" layoutX="355.0" layoutY="363.0" prefHeight="25.0" prefWidth="410.0" promptText="Minimum 6 characters" />
+      
+      <!-- Confirm Password Label -->
+      <Text layoutX="355.0" layoutY="411.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Re-enter your Password:">
          <font>
-            <Font name="Bodoni MT Bold" size="18.0" />
+            <Font name="Bodoni MT Bold" size="16.0" />
          </font>
       </Text>
-      <Button layoutX="523.0" layoutY="505.0" mnemonicParsing="false" text="Sign Up">
+      
+      <!-- Confirm Password Field -->
+      <PasswordField fx:id="txtConfirmPassword" layoutX="355.0" layoutY="416.0" prefHeight="25.0" prefWidth="410.0" promptText="Re-enter password" />
+      
+      <!-- Message Label -->
+      <Label fx:id="lblMessage" alignment="CENTER" layoutX="355.0" layoutY="447.0" prefWidth="410.0" text="Message" textAlignment="CENTER" visible="false">
          <font>
-            <Font size="14.0" />
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      
+      <!-- Sign Up Button -->
+      <Button fx:id="btnSignUp" layoutX="460.0" layoutY="480.0" mnemonicParsing="false" onAction="#handleSignUp" prefHeight="35.0" prefWidth="200.0" text="SIGN UP" style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-size: 14px; -fx-font-weight: bold; -fx-cursor: hand;">
+         <font>
+            <Font name="System Bold" size="14.0" />
          </font>
       </Button>
+      
+      <!-- Already Have Account Text -->
+      <Text layoutX="405.0" layoutY="543.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Already have an account?">
+         <font>
+            <Font name="Bodoni MT" size="14.0" />
+         </font>
+      </Text>
+      
+      <!-- Back to Login Button -->
+      <Button fx:id="btnBack" layoutX="585.0" layoutY="528.0" mnemonicParsing="false" onAction="#handleBack" text="Login" style="-fx-background-color: transparent; -fx-text-fill: #2196F3; -fx-underline: true; -fx-cursor: hand;">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Button>
+      
    </children>
 </AnchorPane>

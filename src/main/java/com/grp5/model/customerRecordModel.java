@@ -61,6 +61,6 @@ public class customerRecordModel {
     public String getCustomerPass() { return this.customerPass; }
     
     public static void main(String[] args){
-
     }
+    
 }

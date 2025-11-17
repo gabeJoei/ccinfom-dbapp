@@ -175,7 +175,7 @@ public class User_loginController {
             Stage stage = (Stage) btnSignUp.getScene().getWindow();
 
             // Load sign-up page
-            Parent root = FXMLLoader.load(getClass().getResource("/com/grp5/view/UserSignUp.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/com/grp5/view/User_signUp.fxml"));
 
             Scene scene = new Scene(root);
             stage.setTitle("Sign Up - CIGE Bike Rentals");

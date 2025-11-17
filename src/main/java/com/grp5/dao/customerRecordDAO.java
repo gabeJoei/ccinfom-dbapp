@@ -204,5 +204,47 @@ public customerRecordModel getCustomer(int customerAccID) {
     }
     return null;
 }
+
+public boolean emailExists(String email) {
+    String query = "SELECT COUNT(*) FROM customer WHERE customerEmail = ?";
+    try (Connection connect = databaseConnection.getConnection();
+         PreparedStatement prepState = connect.prepareStatement(query)) {
+
+        prepState.setString(1, email);
+        ResultSet result = prepState.executeQuery();
+        
+        if (result.next()) {
+            return result.getInt(1) > 0;
+        }
+
+    } catch (SQLException e) {
+        System.out.println("Error checking email existence: " + e.getMessage());
+    }
+    return false;
+}
+
+
+public int getNextCustomerAccID() {
+    String query = "SELECT MAX(customerAccID) as maxID FROM customer";
+    try (Connection connect = databaseConnection.getConnection();
+         PreparedStatement prepState = connect.prepareStatement(query)) {
+
+        ResultSet result = prepState.executeQuery();
+        
+        if (result.next()) {
+            int maxId = result.getInt("maxID");
+            return maxId > 0 ? maxId + 1 : 100000; // Start from 100000 if no records
+        }
+
+    } catch (SQLException e) {
+        System.out.println("Error getting next customer ID: " + e.getMessage());
+    }
+    return 100000; // Default starting ID
+}
+
+
+public boolean createCustomer(customerRecordModel customer) {
+    return addCustomerRecordData(customer);
+}
 }
 
