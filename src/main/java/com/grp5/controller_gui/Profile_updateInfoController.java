@@ -27,9 +27,9 @@ public class Profile_updateInfoController {
     private void handleBackBtn() {
         System.out.println("Back button clicked!");
         if (AccountSession.isAdmin()) {
-            loadNextScene("/com/grp5/view/Admin_settings.fxml", "Dashboard", backBtn);
+            loadNextScene("/com/grp5/view/Admin_dashBoard.fxml", "Dashboard", backBtn);
         } else if (AccountSession.isUser()) {
-            loadNextScene("/com/grp5/view/Profile_settings.fxml", "Dashboard", backBtn);
+            loadNextScene("/com/grp5/view/User_userMenu.fxml", "Dashboard", backBtn);
         } else {
             System.out.println("There is an error around here :P");
         }

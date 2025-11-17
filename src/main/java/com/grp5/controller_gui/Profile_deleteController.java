@@ -1,7 +1,7 @@
 package com.grp5.controller_gui;
 
-import com.grp5.dao.adminDAO;
-import com.grp5.model.adminModel;
+import com.grp5.session.AccountSession;
+
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -9,33 +9,27 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
-public class Profile_settingsController {
-    @FXML
-    private Button changePassBtn;
-    @FXML
-    private Button updtInfoBtn;
-    @FXML
-    private Button deleteAccountBtn;
+public class Profile_deleteController {
 
     @FXML
-    void handleChangePassBtn() {
-        System.out.println("Change password button clicked!");
-        loadNextScene("/com/grp5/view/Profile_changePassword.fxml", "Change Password", changePassBtn);
-    }
+    Button backBtn;
+    @FXML
+    Button confirmBtn;
+    @FXML
+    PasswordField passwordField;
 
     @FXML
-    void handleUpdtInfoBtn() {
-        System.out.println("Update Info button clicked!");
-        loadNextScene("/com/grp5/view/Profile_updateInfo.fxml", "Update Information", updtInfoBtn);
-    }
-
-    @FXML
-    void handleDeleteAccountBtn() {
-        System.out.print("Delete account button clicked!");
-        loadNextScene("/com/grp5/view/Profile_delete.fxml", "Account Deletion", deleteAccountBtn);
+    private void handleBackBtn() {
+        System.out.println("Back button clicked!");
+        if (AccountSession.isAdmin()) {
+            loadNextScene("/com/grp5/view/Admin_dashBoard.fxml", "Dashboard", backBtn);
+        } else if (AccountSession.isUser()) {
+            loadNextScene("/com/grp5/view/User_userMenu.fxml", "Dashboard", backBtn);
+        } else {
+            System.out.println("There is an error around here :P");
+        }
     }
 
     private void loadNextScene(String fxmlFile, String title, Button button) {

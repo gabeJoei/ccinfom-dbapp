@@ -13,9 +13,9 @@
    <children>
       <HBox layoutX="207.0" layoutY="325.0" prefHeight="40.0" prefWidth="721.0" spacing="100.0">
          <children>
-            <Button mnemonicParsing="false" prefHeight="47.0" prefWidth="158.0" text="Change Password" />
-            <Button mnemonicParsing="false" prefHeight="47.0" prefWidth="158.0" text="Update Information" />
-            <Button mnemonicParsing="false" prefHeight="47.0" prefWidth="158.0" text="Delete Account" />
+            <Button fx:id="changePassBtn" mnemonicParsing="false" prefHeight="47.0" prefWidth="158.0" text="Change Password" onAction="#handleChangePassBtn" />
+            <Button fx:id="updtInfoBtn" mnemonicParsing="false" prefHeight="47.0" prefWidth="158.0" text="Update Information" onAction="#handleUpdtInfoBtn" />
+            <Button fx:id="deleteAccountBtn" mnemonicParsing="false" prefHeight="47.0" prefWidth="158.0" text="Delete Account" onAction="#handleDeleteAccountBtn" />
          </children>
       </HBox>
       <Text layoutX="150.0" layoutY="95.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name:" wrappingWidth="64.00002034505223">
