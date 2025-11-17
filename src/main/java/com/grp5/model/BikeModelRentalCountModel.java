@@ -12,8 +12,8 @@ public class BikeModelRentalCountModel {
     public String getBikeModel() {
         return this.bikeModel;
     }
-
-    public int rentalCount() {
+    public int getRentalCount() {
         return this.rentalCount;
     }
+
 }

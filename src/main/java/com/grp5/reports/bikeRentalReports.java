@@ -89,4 +89,36 @@ public class bikeRentalReports {
         return models;
     }
 
+    public List<BikeModelRentalCountModel> getBikeModelTotalsByDateRange(LocalDate fromDate, LocalDate toDate) {
+        List<BikeModelRentalCountModel> models = new ArrayList<>();
+
+        String sql = "SELECT b.bikeModel AS bike_model, COUNT(*) AS rental_count " +
+                    "FROM reservation r " +
+                    "JOIN bike b ON r.bikeID = b.bikeID " +
+                    "WHERE DATE(r.reservationDate) BETWEEN ? AND ? " +
+                    "  AND r.reservationStatus IN ('ongoing', 'completed') " +
+                    "GROUP BY b.bikeModel " +
+                    "ORDER BY rental_count DESC";
+
+        try (Connection conn = databaseConnection.getConnection();
+            PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            // Set the date parameters
+            pstmt.setDate(1, java.sql.Date.valueOf(fromDate));
+            pstmt.setDate(2, java.sql.Date.valueOf(toDate));
+
+            try (ResultSet rs = pstmt.executeQuery()) {
+                while (rs.next()) {
+                    String model = rs.getString("bike_model");
+                    int count = rs.getInt("rental_count");
+                    models.add(new BikeModelRentalCountModel(model, count));
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println("Error in getBikeModelTotalsByDateRange: " + e.getMessage());
+        }
+
+        return models;
+    }
+
 }
