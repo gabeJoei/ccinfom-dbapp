@@ -14,6 +14,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 public class Admin_logInController {
@@ -69,6 +70,10 @@ public class Admin_logInController {
             Parent nextSceneRoot = FXMLLoader.load(getClass().getResource(fxmlFile));
             Scene nextScene = new Scene(nextSceneRoot);
             Stage currentStage = (Stage) button.getScene().getWindow();
+
+            javafx.geometry.Rectangle2D screenBounds = Screen.getPrimary().getVisualBounds();
+            
+     
 
             currentStage.setScene(nextScene);
             currentStage.setTitle(title);
