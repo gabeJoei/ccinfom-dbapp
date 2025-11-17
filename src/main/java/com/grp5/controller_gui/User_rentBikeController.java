@@ -13,10 +13,8 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
-<<<<<<< HEAD
-=======
 import javafx.util.Duration;
->>>>>>> refs/remotes/origin/main
+
 
 import java.io.IOException;
 import java.sql.Timestamp;
