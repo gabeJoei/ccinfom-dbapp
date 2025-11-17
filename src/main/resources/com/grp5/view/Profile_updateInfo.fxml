@@ -40,8 +40,8 @@
             <Font name="Bodoni MT" size="15.0" />
          </font>
       </Text>
-      <Button layoutX="331.0" layoutY="447.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="165.0" text="Confirm Changes" />
-      <Button layoutX="772.0" layoutY="561.0" mnemonicParsing="false" text="Back" />
+      <Button fx:id="confirmBtn" layoutX="331.0" layoutY="447.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="165.0" text="Confirm Changes" />
+      <Button fx:id="backBtn" layoutX="772.0" layoutY="561.0" mnemonicParsing="false" text="Back" />
       <Text layoutX="231.0" layoutY="293.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Update Email Address:">
          <font>
             <Font name="Bodoni MT" size="15.0" />
@@ -53,7 +53,7 @@
             <Font name="Bodoni MT" size="15.0" />
          </font>
       </Text>
-      <TextField layoutX="402.0" layoutY="276.0" prefHeight="25.0" prefWidth="225.0" />
-      <TextField layoutX="402.0" layoutY="315.0" prefHeight="25.0" prefWidth="225.0" />
+      <TextField fx:id="newEmailField" layoutX="402.0" layoutY="276.0" prefHeight="25.0" prefWidth="225.0" />
+      <TextField fx:id="newContctField" layoutX="402.0" layoutY="315.0" prefHeight="25.0" prefWidth="225.0" />
    </children>
 </AnchorPane>

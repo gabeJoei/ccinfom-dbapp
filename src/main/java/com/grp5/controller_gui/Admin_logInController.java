@@ -72,8 +72,6 @@ public class Admin_logInController {
             Stage currentStage = (Stage) button.getScene().getWindow();
 
             javafx.geometry.Rectangle2D screenBounds = Screen.getPrimary().getVisualBounds();
-            
-     
 
             currentStage.setScene(nextScene);
             currentStage.setTitle(title);
@@ -85,7 +83,6 @@ public class Admin_logInController {
         }
     }
 
-    // Add this helper so the earlier calls compile
     private void showError(String header, String content) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Error");
