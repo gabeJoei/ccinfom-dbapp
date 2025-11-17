@@ -6,8 +6,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import com.grp5.utils.databaseConnection;
 import com.grp5.model.transactionRecordModel;
+import com.grp5.utils.databaseConnection;
 
 public class transactionRecordDAO {
 
@@ -15,16 +15,15 @@ public class transactionRecordDAO {
     try {
         Connection connect=databaseConnection.getConnection();
         PreparedStatement prepState = connect.prepareStatement(
- "INSERT INTO payment (paymentReferenceNum,customerID,reservationReferenceNum,bikeID,branchID,paymentDate,paymentAmount) VALUES (?,?,?,?,?,?,?)"
+ "INSERT INTO payment (customerID,reservationReferenceNum,bikeID,branchID,paymentDate,paymentAmount) VALUES (?,?,?,?,?,?)"
         );
 
-        prepState.setInt(1, transaction.getPaymentReferenceNumber());
-        prepState.setInt(2, transaction.getCustomerAccountID());
-        prepState.setInt(3, transaction.getReservationReferenceNumber());
-        prepState.setInt(4, transaction.getBikeID());
-        prepState.setInt(5, transaction.getBrachID());
-        prepState.setTimestamp(6, transaction.getpaymentDate());
-        prepState.setBigDecimal(7, transaction.getPaymentAmount());
+        prepState.setInt(1, transaction.getCustomerAccountID());
+        prepState.setInt(2, transaction.getReservationReferenceNumber());
+        prepState.setInt(3, transaction.getBikeID());
+        prepState.setInt(4, transaction.getBrachID());
+        prepState.setTimestamp(5, transaction.getpaymentDate());
+        prepState.setBigDecimal(6, transaction.getPaymentAmount());
 
         prepState.executeUpdate();
 

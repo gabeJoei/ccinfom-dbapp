@@ -1,9 +1,8 @@
 package com.grp5.model;
 
 import java.math.BigDecimal;
-//package
-import java.sql.*;
-import java.time.*;
+import java.sql.Timestamp;
+import java.time.Duration;
 
 import com.grp5.utils.generalUtilities;
 
@@ -23,10 +22,9 @@ private BigDecimal dailyRate;
     
     public transactionRecordModel(){}
 
-    public transactionRecordModel(int paymentReferenceNumber,int customerAccountID,
+    public transactionRecordModel(int customerAccountID,
     int reservationReferenceNumber, int branchID, int bikeID,Timestamp startDate, 
     Timestamp endDate,Timestamp paymentDate, BigDecimal hourlyRate, BigDecimal dailyRate,BigDecimal paymentAmount){
-        this.paymentReferenceNumber=paymentReferenceNumber;
         this.customerAccountID=customerAccountID;
         this.reservationReferenceNumber=reservationReferenceNumber;
         this.branchID=branchID;
@@ -42,16 +40,15 @@ private BigDecimal dailyRate;
     public transactionRecordModel create(int customerAccountID,
     int reservationReferenceNumber, int branchID,int bikeID, Timestamp startDate, 
     Timestamp endDate,Timestamp paymentDate, BigDecimal hourlyRate, BigDecimal dailyRate){
-    paymentReferenceNumber=generalUtilities.primaryNumChecker(
-        generalUtilities.generateRandIntNum(),
-        "paymentReferenceNum","payment");
-    paymentAmount=computePayement(startDate, endDate, hourlyRate, dailyRate);
+        paymentReferenceNumber=generalUtilities.primaryNumChecker(
+            generalUtilities.generateRandIntNum(),
+            "paymentReferenceNum","payment");
+        paymentAmount=computePayement(startDate, endDate, hourlyRate, dailyRate);
 
-    return new transactionRecordModel(paymentReferenceNumber,customerAccountID,
-    reservationReferenceNumber, branchID,bikeID,startDate, 
-    endDate,paymentDate, hourlyRate, dailyRate,paymentAmount);
-
-}
+        return new transactionRecordModel(customerAccountID,
+        reservationReferenceNumber, branchID,bikeID,startDate, 
+        endDate,paymentDate, hourlyRate, dailyRate,paymentAmount);
+    }
 
 public int getPaymentReferenceNumber(){return paymentReferenceNumber;}
 public int getCustomerAccountID(){return customerAccountID;}
