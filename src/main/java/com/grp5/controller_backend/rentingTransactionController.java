@@ -201,7 +201,7 @@ public class rentingTransactionController {
             reservation.setReservationDate(Timestamp.valueOf(LocalDateTime.now()));
             reservation.setStartDate(Timestamp.valueOf(dateStart.getValue().atStartOfDay()));
             reservation.setEndDate(Timestamp.valueOf(dateEnd.getValue().atStartOfDay()));
-            reservation.setStatus("ongoing");
+            reservation.setStatus("pending");
 
             if (reservationDAO.addReservation(reservation) == 0) {
                 showMessage("Failed to create reservation!", "error");
