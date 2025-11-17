@@ -5,6 +5,7 @@ import com.grp5.model.adminModel;
 import com.grp5.session.AccountSession;
 import com.grp5.session.ProfileSnapshot;
 import com.grp5.session.AccountSession.AccountType;
+import com.grp5.utils.sessionManager;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -50,6 +51,7 @@ public class Admin_logInController {
                     admin.getAdminEmail());
 
             AccountSession.setAccount(AccountType.ADMIN, admin.getAdminID(), snap);
+            sessionManager.setLoggedInAdmin(admin);
 
             loadNextScene("/com/grp5/view/Admin_dashBoard.fxml", "Admin Dashboard", logInBtn);
         } else {

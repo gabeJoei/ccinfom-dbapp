@@ -132,119 +132,135 @@ public class customerRecordDAO {
         return customerModel;
     }
 
+    // Updates a customer's password
+    public boolean updateCustomerPassword(int customerAccID, String newPass) {
+        String sql = "UPDATE customer SET customerPass=? WHERE customerAccID=?";
+        try (Connection connect = databaseConnection.getConnection();
+                PreparedStatement prepState = connect.prepareStatement(sql)) {
+
+            prepState.setString(1, newPass);
+            prepState.setInt(2, customerAccID);
+
+            int updated = prepState.executeUpdate();
+            return updated == 1;
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            return false;
+        }
+    }
+
     // Add to customerRecordDAO.java
 
-/**
- * Authenticate customer by email and password
- * @param email Customer email
- * @param password Customer password
- * @return customerRecordModel if authenticated, null otherwise
- */
-public customerRecordModel authenticateCustomer(String email, String password) {
-    String sql = "SELECT * FROM customer WHERE customerEmail = ? AND customerPass = ?";
-    
-    try (Connection conn = databaseConnection.getConnection();
-         PreparedStatement pstmt = conn.prepareStatement(sql)) {
-        
-        pstmt.setString(1, email);
-        pstmt.setString(2, password); // In production, use hashed passwords!
-        
-        ResultSet rs = pstmt.executeQuery();
-        
-        if (rs.next()) {
-            customerRecordModel customer = new customerRecordModel();
-            customer.setCustomerAccID(rs.getInt("customerAccID"));
-            customer.setFirstName(rs.getString("firstName"));
-            customer.setLastName(rs.getString("lastName"));
-            customer.setEmail(rs.getString("customerEmail"));
-            customer.setPhoneNum(rs.getString("phoneNumber"));
-            return customer;
-        }
-        
-    } catch (SQLException e) {
-        System.err.println("Authentication error: " + e.getMessage());
-        e.printStackTrace();
-    }
-    
-    return null;
-}
-public List<customerRecordModel> getAllCustomers() {
-    List<customerRecordModel> customers = new ArrayList<>();
-    String query = "SELECT * FROM customer";
+    /**
+     * Authenticate customer by email and password
+     * 
+     * @param email    Customer email
+     * @param password Customer password
+     * @return customerRecordModel if authenticated, null otherwise
+     */
+    public customerRecordModel authenticateCustomer(String email, String password) {
+        String sql = "SELECT * FROM customer WHERE customerEmail = ? AND customerPass = ?";
 
-    try (Connection connect = databaseConnection.getConnection();
-         PreparedStatement prepState = connect.prepareStatement(query);
-         ResultSet result = prepState.executeQuery()) {
+        try (Connection conn = databaseConnection.getConnection();
+                PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
-        while (result.next()) {
-            customerRecordModel customer = extractCustomerFromResultSet(result);
-            customers.add(customer);
-        }
-    } catch (SQLException e) {
-        System.out.println("Error loading customers: " + e.getMessage());
-    }
-    return customers;
-}
+            pstmt.setString(1, email);
+            pstmt.setString(2, password); // In production, use hashed passwords!
 
-public customerRecordModel getCustomer(int customerAccID) {
-    String query = "SELECT * FROM customer WHERE customerAccID=?";
-    try (Connection connect = databaseConnection.getConnection();
-         PreparedStatement prepState = connect.prepareStatement(query)) {
+            ResultSet rs = pstmt.executeQuery();
 
-        prepState.setInt(1, customerAccID);
-
-        try (ResultSet result = prepState.executeQuery()) {
-            if (result.next()) {
-                return extractCustomerFromResultSet(result);
+            if (rs.next()) {
+                customerRecordModel customer = new customerRecordModel();
+                customer.setCustomerAccID(rs.getInt("customerAccID"));
+                customer.setFirstName(rs.getString("firstName"));
+                customer.setLastName(rs.getString("lastName"));
+                customer.setEmail(rs.getString("customerEmail"));
+                customer.setPhoneNum(rs.getString("phoneNumber"));
+                return customer;
             }
+
+        } catch (SQLException e) {
+            System.err.println("Authentication error: " + e.getMessage());
+            e.printStackTrace();
         }
 
-    } catch (SQLException e) {
-        System.out.println(e.getMessage());
+        return null;
     }
-    return null;
-}
 
-public boolean emailExists(String email) {
-    String query = "SELECT COUNT(*) FROM customer WHERE customerEmail = ?";
-    try (Connection connect = databaseConnection.getConnection();
-         PreparedStatement prepState = connect.prepareStatement(query)) {
+    public List<customerRecordModel> getAllCustomers() {
+        List<customerRecordModel> customers = new ArrayList<>();
+        String query = "SELECT * FROM customer";
 
-        prepState.setString(1, email);
-        ResultSet result = prepState.executeQuery();
-        
-        if (result.next()) {
-            return result.getInt(1) > 0;
+        try (Connection connect = databaseConnection.getConnection();
+                PreparedStatement prepState = connect.prepareStatement(query);
+                ResultSet result = prepState.executeQuery()) {
+
+            while (result.next()) {
+                customerRecordModel customer = extractCustomerFromResultSet(result);
+                customers.add(customer);
+            }
+        } catch (SQLException e) {
+            System.out.println("Error loading customers: " + e.getMessage());
         }
-
-    } catch (SQLException e) {
-        System.out.println("Error checking email existence: " + e.getMessage());
+        return customers;
     }
-    return false;
-}
 
+    public customerRecordModel getCustomer(int customerAccID) {
+        String query = "SELECT * FROM customer WHERE customerAccID=?";
+        try (Connection connect = databaseConnection.getConnection();
+                PreparedStatement prepState = connect.prepareStatement(query)) {
 
-public int getNextCustomerAccID() {
-    String query = "SELECT MAX(customerAccID) as maxID FROM customer";
-    try (Connection connect = databaseConnection.getConnection();
-         PreparedStatement prepState = connect.prepareStatement(query)) {
+            prepState.setInt(1, customerAccID);
 
-        ResultSet result = prepState.executeQuery();
-        
-        if (result.next()) {
-            int maxId = result.getInt("maxID");
-            return maxId > 0 ? maxId + 1 : 100000; // Start from 100000 if no records
+            try (ResultSet result = prepState.executeQuery()) {
+                if (result.next()) {
+                    return extractCustomerFromResultSet(result);
+                }
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
         }
-
-    } catch (SQLException e) {
-        System.out.println("Error getting next customer ID: " + e.getMessage());
+        return null;
     }
-    return 100000; // Default starting ID
-}
 
+    public boolean emailExists(String email) {
+        String query = "SELECT COUNT(*) FROM customer WHERE customerEmail = ?";
+        try (Connection connect = databaseConnection.getConnection();
+                PreparedStatement prepState = connect.prepareStatement(query)) {
 
-public boolean createCustomer(customerRecordModel customer) {
-    return addCustomerRecordData(customer);
-}
-}
+            prepState.setString(1, email);
+            ResultSet result = prepState.executeQuery();
 
+            if (result.next()) {
+                return result.getInt(1) > 0;
+            }
+
+        } catch (SQLException e) {
+            System.out.println("Error checking email existence: " + e.getMessage());
+        }
+        return false;
+    }
+
+    public int getNextCustomerAccID() {
+        String query = "SELECT MAX(customerAccID) as maxID FROM customer";
+        try (Connection connect = databaseConnection.getConnection();
+                PreparedStatement prepState = connect.prepareStatement(query)) {
+
+            ResultSet result = prepState.executeQuery();
+
+            if (result.next()) {
+                int maxId = result.getInt("maxID");
+                return maxId > 0 ? maxId + 1 : 100000; // Start from 100000 if no records
+            }
+
+        } catch (SQLException e) {
+            System.out.println("Error getting next customer ID: " + e.getMessage());
+        }
+        return 100000; // Default starting ID
+    }
+
+    public boolean createCustomer(customerRecordModel customer) {
+        return addCustomerRecordData(customer);
+    }
+}
