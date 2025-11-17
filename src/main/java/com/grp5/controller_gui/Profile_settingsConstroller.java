@@ -1,6 +1,5 @@
 package com.grp5.controller_gui;
 
-import com.grp5.session.Admin_session;
 import com.grp5.dao.adminDAO;
 import com.grp5.model.adminModel;
 import javafx.fxml.FXML;
@@ -22,6 +21,11 @@ public class Profile_settingsConstroller {
     private Button deleteAccountBtn;
     @FXML
     private Button backBtn;
+
+    @FXML
+    void handleDeleteAccountBtn() {
+
+    }
 
     @FXML
     private void handleBckBtn() {
