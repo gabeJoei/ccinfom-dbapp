@@ -37,6 +37,7 @@ com/grp5/controller_backend/MainController.class
 com/grp5/reports/branchPerformanceReport$branchPerformance.class
 com/grp5/controller_gui/Admin_CustomerEngagementReportController.class
 com/grp5/controller_gui/User_reserveBikeController.class
+com/grp5/controller_gui/BikeRecordController.class
 com/grp5/controller_gui/AdminOrUserController.class
 com/grp5/dao/customerRecordDAO.class
 com/grp5/controller_gui/Admin_RentalSalesReportController.class

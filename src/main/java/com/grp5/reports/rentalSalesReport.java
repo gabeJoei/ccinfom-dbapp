@@ -43,6 +43,7 @@ public class rentalSalesReport {
                        JOIN reservation r ON p.reservationReferenceNum = r.reservationReferenceNum
                        JOIN bike b ON r.bikeID = b.bikeID
                        WHERE YEAR(p.paymentDate) = ? AND MONTH(p.paymentDate) = ?
+                       AND r.reservationStatus = 'completed'
                        GROUP BY b.bikeModel
                        ORDER BY date DESC
                        """;
