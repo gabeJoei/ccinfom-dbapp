@@ -23,8 +23,20 @@ public class Profile_settingsConstroller {
     private Button backBtn;
 
     @FXML
-    void handleDeleteAccountBtn() {
+    void handleChangePassBtn() {
+        System.out.println("Change password button clicked!");
+        loadNextScene("/com/grp5/view/Profile_updateInfo.fxml", "Update Information", changePassBtn);
+    }
 
+    @FXML
+    void handleUpdtInfoBtn() {
+        System.out.print("Update Info button clicked!");
+        loadNextScene("/com/grp5/view/Profile_changePassword.fxml", null, updtInfoBtn);
+    }
+
+    @FXML
+    void handleDeleteAccountBtn() {
+        // add the gui where the account will be deleted :v
     }
 
     @FXML
