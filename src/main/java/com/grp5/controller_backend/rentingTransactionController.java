@@ -203,7 +203,7 @@ public class rentingTransactionController {
             reservation.setEndDate(Timestamp.valueOf(dateEnd.getValue().atStartOfDay()));
             reservation.setStatus("ongoing");
 
-            if (!reservationDAO.addReservation(reservation)) {
+            if (reservationDAO.addReservation(reservation) == 0) {
                 showMessage("Failed to create reservation!", "error");
                 return;
             }

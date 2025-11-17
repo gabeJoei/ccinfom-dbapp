@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 
 import com.grp5.model.bikeReservation;
@@ -13,11 +14,11 @@ import com.grp5.utils.databaseConnection;
 public class bikeReservationDAO {
 
     // CREATE - Add new reservation
-    public boolean addReservation(bikeReservation reservation) {
+    public int addReservation(bikeReservation reservation) {
         String sql = "INSERT INTO reservation (customerAccID, bikeID, reservationDate, startDate, endDate, reservationStatus, branchID) " +
                      "VALUES (?, ?, ?, ?, ?, ?, ?)";
         try (Connection conn = databaseConnection.getConnection();
-             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+             PreparedStatement pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
 
             pstmt.setInt(1, reservation.getCustomerAccID());
             pstmt.setInt(2, reservation.getBikeID());
@@ -28,11 +29,20 @@ public class bikeReservationDAO {
             pstmt.setInt(7, reservation.getBranchID());
 
             int rowsAffected = pstmt.executeUpdate();
-            return rowsAffected > 0;
+            if (rowsAffected == 0) { return 0; }  // Insert failed
+            
+            // Get the generated ID
+            try (ResultSet generatedKeys = pstmt.getGeneratedKeys()) {
+                if (generatedKeys.next()) {
+                    return generatedKeys.getInt(1); // Return auto-incremented ID
+                } else {
+                    return 0; // Failed to get ID
+                }
+            }
 
         } catch (SQLException e) {
             e.printStackTrace();
-            return false;
+            return 0;
         }
     }
 
@@ -111,6 +121,32 @@ public class bikeReservationDAO {
             e.printStackTrace();
         }
         return reservations;
+    }
+
+    // CHECK FOR OVERLAPPING
+    public boolean hasOverlappingReservation(int bikeID, Timestamp newStart, Timestamp newEnd) {
+        String sql = "SELECT COUNT(*) FROM reservation " +
+                    "WHERE bikeID = ? " +
+                    "AND reservationStatus = 'ongoing' " +
+                    "AND startDate <= ? " +  // Check for overlapping startDate
+                    "AND endDate >= ?";     // Check for overlapping endDate
+        try (Connection conn = databaseConnection.getConnection(); 
+            PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            
+            pstmt.setInt(1, bikeID);
+            pstmt.setTimestamp(2, newEnd);   
+            pstmt.setTimestamp(3, newStart); 
+            
+            try (ResultSet rs = pstmt.executeQuery()) {
+                if (rs.next()) {
+                    int count = rs.getInt(1);
+                    return count > 0; // overlap exists if count != 0
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false; 
     }
 
     // Helper to extract from ResultSet

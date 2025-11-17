@@ -22,7 +22,7 @@ import java.time.LocalDateTime;
 import java.util.Optional;
 import java.util.List;
 
-public class Admin_customer {
+public class Admin_customerController {
     @FXML
     private TableView<customerRecordModel> customerTable;
     @FXML
@@ -39,9 +39,7 @@ public class Admin_customer {
     private TableColumn<customerRecordModel, String> colCustomerEmail;
     @FXML
     private TableColumn<customerRecordModel, String> colPhoneNumber;
-    //@FXML
-   // private TableColumn<customerRecordModel, String> colCustomerPass;
-   
+ 
     private customerRecordDAO customerD;
     private ObservableList<customerRecordModel> customerLists;
 
@@ -60,7 +58,6 @@ public class Admin_customer {
         colLastN.setCellValueFactory(new PropertyValueFactory<>("lastName"));
         colCustomerEmail.setCellValueFactory(new PropertyValueFactory<>("email"));
         colPhoneNumber.setCellValueFactory(new PropertyValueFactory<>("phoneNum"));
-       // colCustomerPass.setCellValueFactory(new PropertyValueFactory<>("customerPass"));
         
     }
     private void loadAllCustomers(){
@@ -218,7 +215,7 @@ public class Admin_customer {
         detailsAlert.showAndWait();
     }
 
- private void showAlert(Alert.AlertType type, String title, String content) {
+ public void showAlert(Alert.AlertType type, String title, String content) {
         Alert alert = new Alert(type);
         alert.setTitle(title);
         alert.setHeaderText(null);

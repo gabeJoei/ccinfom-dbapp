@@ -7,7 +7,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.grp5.model.bikeRecordModel;
 import com.grp5.model.branchRecordModel;
 import com.grp5.utils.databaseConnection;
 
@@ -73,7 +72,7 @@ public class branchRecordDAO {
             prepState.setInt(1,branchID);
             ResultSet result=prepState.executeQuery();
             if (result.next()){
-                
+                return extractFromBranchTable(result);
             }
             result.close();
             prepState.close();
@@ -94,6 +93,9 @@ public class branchRecordDAO {
             while(result.next()){
                 branch.add(extractFromBranchTable(result));
             }
+            result.close();
+            prepState.close();
+            connect.close();
         }catch(SQLException e){
             System.out.println(e.getMessage());
         }
