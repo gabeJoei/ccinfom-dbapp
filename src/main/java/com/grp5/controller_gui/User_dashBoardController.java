@@ -10,9 +10,10 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
-import javafx.scene.layout.AnchorPane;
+
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.scene.layout.Pane;
 
 /**
  * Controller for Main Dashboard Sidebar (included via fx:include)
@@ -38,7 +39,7 @@ public class User_dashBoardController {
     private Button btnLogout;
 
     @FXML
-    private AnchorPane contentArea;
+    private Pane contentArea;
 
     @FXML
     public void initialize() {
@@ -56,7 +57,7 @@ public class User_dashBoardController {
     // Loads any FXML into the content area
     public void loadUI(String fxmlPath) {
         try {
-            AnchorPane pane = FXMLLoader.load(getClass().getResource(fxmlPath));
+            Parent pane = FXMLLoader.load(getClass().getResource(fxmlPath));
             contentArea.getChildren().setAll(pane);
         } catch (IOException e) {
             e.printStackTrace();

@@ -2,7 +2,7 @@
 --
 -- Host: localhost    Database: ccinfom
 -- ------------------------------------------------------
--- Server version	9.4.0
+-- Server version 9.4.0
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -54,7 +54,7 @@ DROP TABLE IF EXISTS `bike`;
 CREATE TABLE `bike` (
   `bikeID` int NOT NULL AUTO_INCREMENT,
   `branchIDNum` int NOT NULL,
-  `bikeAvailability` enum('Yes','No') NOT NULL DEFAULT 'Yes',
+  **`bikeAvailability` BOOLEAN NOT NULL DEFAULT 1,** -- FIX 1: Changed from ENUM('Yes', 'No') to BOOLEAN
   `bikeModel` varchar(50) NOT NULL,
   `hourlyRate` decimal(7,2) DEFAULT NULL,
   `dailyRate` decimal(7,2) DEFAULT NULL,
@@ -68,7 +68,9 @@ CREATE TABLE `bike` (
 
 LOCK TABLES `bike` WRITE;
 /*!40000 ALTER TABLE `bike` DISABLE KEYS */;
-INSERT INTO `bike` VALUES (1,1,'Yes','Mountain Bike',25.00,150.00),(2,1,'Yes','Road Bike',20.00,120.00),(3,2,'Yes','Bike with E-assist',30.00,180.00),(4,3,'Yes','tandem Bike',22.50,135.00),(5,2,'Yes','E-Bike',28.00,160.00),(6,1,'Yes','BMX bike',18.00,100.00),(7,1,'Yes','Mountain Bike',25.00,150.00),(8,2,'Yes','Mountain Bike',25.00,150.00),(9,4,'Yes','Mountain Bike',25.00,150.00),(10,4,'Yes','Mountain Bike',25.00,150.00),(11,5,'Yes','Mountain Bike',25.00,150.00),(12,5,'Yes','Mountain Bike',25.00,150.00),(13,3,'Yes','Mountain Bike',25.00,150.00),(14,3,'Yes','Mountain Bike',25.00,150.00),(15,2,'Yes','Bike with E-assist',30.00,180.00),(16,3,'Yes','Bike with E-assist',30.00,180.00),(17,1,'Yes','Bike with E-assist',30.00,180.00),(18,2,'Yes','Bike with E-assist',30.00,180.00),(19,3,'Yes','tandem Bike',22.50,135.00),(20,2,'Yes','E-Bike',28.00,160.00),(21,1,'Yes','BMX bike',18.00,100.00);
+-- NOTE: The boolean data type treats 1 as TRUE and 0 as FALSE. 
+-- Since all bikes were 'Yes', we insert 1 (TRUE).
+INSERT INTO `bike` VALUES (1,1,1,'Mountain Bike',25.00,150.00),(2,1,1,'Road Bike',20.00,120.00),(3,2,1,'Bike with E-assist',30.00,180.00),(4,3,1,'tandem Bike',22.50,135.00),(5,2,1,'E-Bike',28.00,160.00),(6,1,1,'BMX bike',18.00,100.00),(7,1,1,'Mountain Bike',25.00,150.00),(8,2,1,'Mountain Bike',25.00,150.00),(9,4,1,'Mountain Bike',25.00,150.00),(10,4,1,'Mountain Bike',25.00,150.00),(11,5,1,'Mountain Bike',25.00,150.00),(12,5,1,'Mountain Bike',25.00,150.00),(13,3,1,'Mountain Bike',25.00,150.00),(14,3,1,'Mountain Bike',25.00,150.00),(15,2,1,'Bike with E-assist',30.00,180.00),(16,3,1,'Bike with E-assist',30.00,180.00),(17,1,1,'Bike with E-assist',30.00,180.00),(18,2,1,'Bike with E-assist',30.00,180.00),(19,3,1,'tandem Bike',22.50,135.00),(20,2,1,'E-Bike',28.00,160.00),(21,1,1,'BMX bike',18.00,100.00);
 /*!40000 ALTER TABLE `bike` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -178,7 +180,7 @@ CREATE TABLE `reservation` (
   KEY `customerAccID_idx` (`customerAccID`),
   KEY `bikeID_idx` (`bikeID`),
   KEY `branchID_idx` (`branchID`),
-  CONSTRAINT `reservation_bikeID` FOREIGN KEY (`bikeID`) REFERENCES `bike` (`bikeID`),
+  CONSTRAINT `reservation_bikeID` FOREIGN KEY (`bikeID`) REFERENCES `bike` (`bikeID`) **ON DELETE CASCADE**, -- FIX 2: Added ON DELETE CASCADE
   CONSTRAINT `reservation_branchID` FOREIGN KEY (`branchID`) REFERENCES `branch` (`branchID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;

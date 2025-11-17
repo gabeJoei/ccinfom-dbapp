@@ -11,48 +11,48 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="446.0" prefWidth="1065.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1">
-   <children>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#88b9e6" height="43.0" stroke="BLACK" strokeType="INSIDE" width="1065.0" />
-      <Text layoutX="14.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bike">
-         <font>
-            <Font name="Bodoni MT" size="24.0" />
-         </font>
-      </Text>
-      <VBox layoutX="14.0" layoutY="50.0" prefHeight="389.0" prefWidth="1041.0" spacing="20.0">
-         <children>
-            <HBox alignment="CENTER_LEFT" prefHeight="31.0" prefWidth="1041.0" spacing="20.0">
-               <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Enter Bike ID:">
-                     <font>
-                        <Font name="Bell MT" size="18.0" />
-                     </font>
-                  </Text>
-                  <TextField />
-                  <Button mnemonicParsing="false" text="Enter" />
-               </children>
-            </HBox>
-            <TableView prefHeight="310.0" prefWidth="1041.0">
-               <columns>
-                  <TableColumn prefWidth="75.0" text="Bike ID" />
-                  <TableColumn prefWidth="75.0" text="Branch ID" />
-                  <TableColumn prefWidth="75.0" text="Bike Model" />
-                  <TableColumn prefWidth="75.0" text="Bike Availability" />
-                  <TableColumn prefWidth="108.66668701171875" text="Hourly Rate" />
-                  <TableColumn prefWidth="70.0" text="Daily Rate" />
-               </columns>
-               <columnResizePolicy>
-                  <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-               </columnResizePolicy>
-            </TableView>
-            <HBox alignment="CENTER" layoutX="10.0" layoutY="110.0" prefHeight="30.0" prefWidth="1041.0" spacing="30.0">
-               <children>
-                  <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="95.0" text="Update" />
-                  <Button layoutX="65.0" layoutY="10.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="95.0" text="View Details" />
-                  <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="95.0" text="Delete" />
-               </children>
-            </HBox>
-         </children>
-      </VBox>
-   </children>
+<AnchorPane fx:controller="com.grp5.controller_gui.BikeRecordController" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="446.0" prefWidth="1065.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#88b9e6" height="43.0" stroke="BLACK" strokeType="INSIDE" width="1065.0" />
+        <Text layoutX="14.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bike">
+            <font>
+                <Font name="Bodoni MT" size="24.0" />
+            </font>
+        </Text>
+        <VBox layoutX="14.0" layoutY="50.0" prefHeight="389.0" prefWidth="1041.0" spacing="20.0">
+            <children>
+                <HBox alignment="CENTER_LEFT" prefHeight="31.0" prefWidth="1041.0" spacing="20.0">
+                    <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Enter Bike ID:">
+                            <font>
+                                <Font name="Bell MT" size="18.0" />
+                            </font>
+                        </Text>
+                        <TextField fx:id="bikeIDTextField" />
+                        <Button fx:id="enterButton" mnemonicParsing="false" onAction="#handleEnterButtonAction" text="Enter" />
+                    </children>
+                </HBox>
+                <TableView fx:id="bikeTableView" prefHeight="310.0" prefWidth="1041.0">
+                    <columns>
+                        <TableColumn fx:id="bikeIDColumn" prefWidth="75.0" text="Bike ID" />
+                        <TableColumn fx:id="branchIDColumn" prefWidth="75.0" text="Branch ID" />
+                        <TableColumn fx:id="bikeModelColumn" prefWidth="75.0" text="Bike Model" />
+                        <TableColumn fx:id="bikeAvailabilityColumn" prefWidth="75.0" text="Bike Availability" />
+                        <TableColumn fx:id="hourlyRateColumn" prefWidth="108.66668701171875" text="Hourly Rate" />
+                        <TableColumn fx:id="dailyRateColumn" prefWidth="70.0" text="Daily Rate" />
+                    </columns>
+                    <columnResizePolicy>
+                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                    </columnResizePolicy>
+                </TableView>
+                <HBox alignment="CENTER" layoutX="10.0" layoutY="110.0" prefHeight="30.0" prefWidth="1041.0" spacing="30.0">
+                    <children>
+                        <Button fx:id="updateButton" mnemonicParsing="false" onAction="#handleUpdateButtonAction" prefHeight="25.0" prefWidth="95.0" text="Update" />
+                        <Button fx:id="viewDetailsButton" layoutX="65.0" layoutY="10.0" mnemonicParsing="false" onAction="#handleViewDetailsButtonAction" prefHeight="25.0" prefWidth="95.0" text="View Details" />
+                        <Button fx:id="deleteButton" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#handleDeleteButtonAction" prefHeight="25.0" prefWidth="95.0" text="Delete" />
+                    </children>
+                </HBox>
+            </children>
+        </VBox>
+    </children>
 </AnchorPane>
