@@ -4,34 +4,60 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1065.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.grp5.controller_gui.Admin_logInController">
-   <children>
-      <Button fx:id="logInBtn" layoutX="494.0" layoutY="343.0" mnemonicParsing="false" onAction="#handleAdminLogIn" prefHeight="35.0" prefWidth="77.0" text="Log-In" />
+<AnchorPane prefHeight="400" prefWidth="600" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.grp5.controller_gui.Admin_logInController">
 
-      <Label layoutX="458.0" layoutY="104.0" prefHeight="63.0" prefWidth="149.0" text="Admin Log-In">
-         <font>
-            <Font size="24.0" />
-         </font>
-      </Label>
+    <children>
 
-      <TextField fx:id="usernameField" layoutX="457.0" layoutY="221.0" onAction="#handleAdminLogIn" />
-      <Label layoutX="457.0" layoutY="201.0" text="Username:">
-         <font>
-            <Font size="14.0" />
-         </font>
-      </Label>
+        <!-- Gray Rounded Rectangle -->
+        <Rectangle arcHeight="20" arcWidth="20" fill="#bcb8b8" height="314" opacity="0.85" width="385" AnchorPane.leftAnchor="108" AnchorPane.topAnchor="43" />
 
-      <Label layoutX="457.0" layoutY="255.0" text="Password:">
-         <font>
-            <Font size="14.0" />
-         </font>
-      </Label>
-      <PasswordField fx:id="passwordField" layoutX="457.0" layoutY="275.0" onAction="#handleAdminLogIn" />
+         <!-- Logo -->
+         <ImageView fitHeight="114.0" fitWidth="144.0" layoutX="228.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true">
+             <image>
+                 <Image url="@images/AdminLogo.png" />
+             </image>
+         </ImageView>
 
-      <Button fx:id="backBtn" layoutX="14.0" layoutY="550.0" mnemonicParsing="false" onAction="#handleBckBtn" prefHeight="35.0" prefWidth="51.0" text="Back" />
+        <!-- Login Form -->
+        <VBox alignment="TOP_CENTER" layoutX="150.0" layoutY="98.0" prefHeight="308.0" prefWidth="300" spacing="15" AnchorPane.leftAnchor="150.0" AnchorPane.topAnchor="98.0">
 
-   </children>
+            <Label text="Admin Log-In">
+                <font>
+                    <Font size="28" />
+                </font>
+            </Label>
+
+            <VBox alignment="CENTER_LEFT" spacing="5">
+                <Label text="Username:">
+                    <font>
+                        <Font size="14" />
+                    </font>
+                </Label>
+                <TextField fx:id="usernameField" onAction="#handleAdminLogIn" promptText="Enter your username" />
+            </VBox>
+
+            <VBox alignment="CENTER_LEFT" spacing="5">
+                <Label text="Password:">
+                    <font>
+                        <Font size="14" />
+                    </font>
+                </Label>
+                <PasswordField fx:id="passwordField" onAction="#handleAdminLogIn" promptText="Enter your password" />
+            </VBox>
+
+            <HBox alignment="CENTER" spacing="20">
+                <Button fx:id="logInBtn" onAction="#handleAdminLogIn" prefWidth="100" text="Log In" />
+                <Button fx:id="backBtn" onAction="#handleBckBtn" prefWidth="100" text="Back" />
+            </HBox>
+
+        </VBox>
+    </children>
 </AnchorPane>
