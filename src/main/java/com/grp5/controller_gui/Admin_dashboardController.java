@@ -14,16 +14,27 @@ import javafx.scene.control.MenuItem;
 
 public class Admin_dashboardController {
 
-    @FXML private Button btnBranch;
-    @FXML private Button btnBike;
-    @FXML private Button btnReservation;
-    @FXML private Button btnTransaction;
-    @FXML private Button btnUsers;
-    @FXML private Button btnProfile;
-    @FXML private Button btnLogOut;
-    @FXML private AnchorPane contentArea;
-    @FXML private SplitMenuButton smbViewReports;
-    @FXML private MenuItem iCustomer,iBike,iSales,iBranch;
+    @FXML
+    private Button btnBranch;
+    @FXML
+    private Button btnBike;
+    @FXML
+    private Button btnReservation;
+    @FXML
+    private Button btnTransaction;
+    @FXML
+    private Button btnUsers;
+    @FXML
+    private Button btnProfile;
+    @FXML
+    private Button btnLogOut;
+    @FXML
+    private AnchorPane contentArea;
+    @FXML
+    private SplitMenuButton smbViewReports;
+    @FXML
+    private MenuItem iCustomer, iBike, iSales, iBranch;
+
     @FXML
     public void initialize() {
         setupSidebarButtons();
@@ -31,49 +42,57 @@ public class Admin_dashboardController {
 
     private void setupSidebarButtons() {
 
-       
         btnProfile.setOnAction(e -> handleProfile());
         btnBranch.setOnAction(e -> handleBranch());
         btnReservation.setOnAction(e -> handleReservations());
         btnTransaction.setOnAction(e -> handleTransactions());
-        btnUsers.setOnAction(e->handleUsers());
-        btnLogOut.setOnAction(e->handleLogout());
-        btnBike.setOnAction(e->handleBike());
-        iBike.setOnAction(e->handleBikeReport());
-        iCustomer.setOnAction(e->handleCustomerReport());
-        iBranch.setOnAction(e->handleBranchReport());
-        iSales.setOnAction(e->handleSalesReport());
+        btnUsers.setOnAction(e -> handleUsers());
+        btnLogOut.setOnAction(e -> handleLogout());
+        btnBike.setOnAction(e -> handleBike());
+        iBike.setOnAction(e -> handleBikeReport());
+        iCustomer.setOnAction(e -> handleCustomerReport());
+        iBranch.setOnAction(e -> handleBranchReport());
+        iSales.setOnAction(e -> handleSalesReport());
     }
-    
+
     private void loadUI(String fxmlPath) {
         try {
             AnchorPane pane = FXMLLoader.load(getClass().getResource(fxmlPath));
             contentArea.getChildren().setAll(pane);
+
+            AnchorPane.setTopAnchor(pane, 0.0);
+            AnchorPane.setRightAnchor(pane, 0.0);
+            AnchorPane.setBottomAnchor(pane, 0.0);
+            AnchorPane.setLeftAnchor(pane, 0.0);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
- 
 
-   public void handleBikeReport(){
-     loadUI("/com/grp5/view/Admin_rentalBikeTrendReport.fxml");
-   }
-   public void handleBranchReport(){
-     loadUI("/com/grp5/view/Admin_branchReport.fxml");
-   }
-   public void handleCustomerReport(){
-     loadUI("/com/grp5/view/Admin_customerReport.fxml");
-   }
-   public void handleSalesReport(){
-     loadUI("/com/grp5/view/Admin_rentalSalesReport.fxml");
-   }
-    
-    private void handleBike(){
+    public void handleBikeReport() {
+        loadUI("/com/grp5/view/Admin_rentalBikeTrendReport.fxml");
+    }
+
+    public void handleBranchReport() {
+        loadUI("/com/grp5/view/Admin_branchReport.fxml");
+    }
+
+    public void handleCustomerReport() {
+        loadUI("/com/grp5/view/Admin_customerReport.fxml");
+    }
+
+    public void handleSalesReport() {
+        loadUI("/com/grp5/view/Admin_rentalSalesReport.fxml");
+    }
+
+    private void handleBike() {
         loadUI("/com/grp5/view/Admin_bike.fxml");
     }
-    private void handleUsers(){
+
+    private void handleUsers() {
         loadUI("/com/grp5/view/Admin_customer.fxml");
     }
+
     private void handleProfile() {
         loadUI("/com/grp5/view/Admin_settings.fxml");
     }
@@ -93,14 +112,33 @@ public class Admin_dashboardController {
     private void handleLogout() {
         System.out.println("Log Out clicked");
     }
-    public Button getBtnUsers(){return btnUsers;}
-    public Button getBtnBike(){return btnBike;}
-    public Button getBtnBranch(){return btnBranch;}
-    public Button getBtnProfile() {return btnProfile;}
-    public Button getBtnReservations() {return btnReservation;}
-    public Button getBtnTransaction() {return btnTransaction;}
-    public Button getBtnLogout() {return btnLogOut;}
 
+    public Button getBtnUsers() {
+        return btnUsers;
+    }
+
+    public Button getBtnBike() {
+        return btnBike;
+    }
+
+    public Button getBtnBranch() {
+        return btnBranch;
+    }
+
+    public Button getBtnProfile() {
+        return btnProfile;
+    }
+
+    public Button getBtnReservations() {
+        return btnReservation;
+    }
+
+    public Button getBtnTransaction() {
+        return btnTransaction;
+    }
+
+    public Button getBtnLogout() {
+        return btnLogOut;
+    }
 
 }
-  
