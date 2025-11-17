@@ -21,7 +21,6 @@ import javafx.scene.layout.AnchorPane;
  */
 public class User_rentBikeController {
 
-
     // Branch Selection
     @FXML
     private ChoiceBox<String> cmbBranch;
@@ -96,7 +95,6 @@ public class User_rentBikeController {
 
     /** Load all branches into the ChoiceBox */
     private void loadBranches() {
-        // Assuming branchDAO and branchRecordModel are functional
         ArrayList<branchRecordModel> branches = branchDAO.getAllBranch();
 
         for (branchRecordModel branch : branches) {
@@ -120,6 +118,14 @@ public class User_rentBikeController {
         branchRecordModel branch = branchDAO.getBranch(selectedBranch);
         if (branch == null)
             return;
+
+        // Reset all bike references when loading a new branch
+        this.mountainBike = null;
+        this.roadBike = null;
+        this.eAssistsBike = null;
+        this.tandemBike = null;
+        this.eBike = null;
+        this.bmxBike = null;
 
         int branchID = branch.getBranchID();
         ArrayList<bikeRecordModel> bikes = bikeDAO.getBikesByBranch(branchID);
@@ -232,7 +238,7 @@ public class User_rentBikeController {
         AnchorPane dashboardContentArea = (AnchorPane) imgMountainBike.getScene().lookup("#contentArea");
         if (dashboardContentArea != null) {
             
-            // Load the new FXMLfile and controller
+            // Load the new FXML file and controller
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/grp5/view/User_reserveBike.fxml"));
             AnchorPane newPane = loader.load();
             User_reserveBikeController reserveController = loader.getController();
@@ -247,5 +253,5 @@ public class User_rentBikeController {
         } else {
             System.err.println("Error in finding contentArea");
         }
-}
+    }
 }
