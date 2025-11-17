@@ -107,6 +107,11 @@ public class User_loginController {
         customerRecordModel customer = customerDAO.authenticateCustomer(username, password);
 
         if (customer != null) {
+
+            if (customer.getCustomerPass() == null) {
+                customer.setCustomerPass(password);
+            }
+
             System.out.println("Logged in as Customer: " + customer.getFirstName() + " " + customer.getLastName());
             System.out.println("Customer ID: " + customer.getCustomerAccID());
             System.out.println("Customer Acc ID: " + customer.getCustomerAccID());

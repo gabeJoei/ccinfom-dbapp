@@ -47,6 +47,7 @@ com\grp5\dao\bikeRecordDAO.class
 com\grp5\controller_gui\Admin_BranchPerfReportController.class
 com\grp5\reports\branchPerformanceReport.class
 com\grp5\controller_gui\User_bikeReservationController$1.class
+com\grp5\controller_gui\BranchController.class
 com\grp5\transactions\RentingTransaction.class
 com\grp5\controller_gui\User_rentBikeController.class
 com\grp5\model\bikeRecordModel.class
