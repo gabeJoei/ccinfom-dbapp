@@ -10,7 +10,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.SplitMenuButton;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.control.MenuItem;
-
+import javafx.scene.layout.Pane;
 /**
  * Controller for Main Dashboard Sidebar (included via fx:include)
  */
@@ -32,7 +32,7 @@ public class Admin_dashboardController {
     @FXML
     private Button btnLogOut;
     @FXML
-    private AnchorPane contentArea;
+    private Pane contentArea;
     @FXML
     private SplitMenuButton smbViewReports;
     @FXML

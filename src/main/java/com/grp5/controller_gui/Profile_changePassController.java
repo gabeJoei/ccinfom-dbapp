@@ -1,6 +1,11 @@
 package com.grp5.controller_gui;
 
+import com.grp5.dao.adminDAO;
+import com.grp5.dao.customerRecordDAO;
 import com.grp5.session.AccountSession;
+import com.grp5.utils.sessionManager;
+import com.grp5.model.adminModel;
+import com.grp5.model.customerRecordModel;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -15,6 +20,8 @@ import javafx.stage.Stage;
 public class Profile_changePassController {
 
     @FXML
+    private PasswordField oldPassField;
+    @FXML
     private PasswordField newPassField;
     @FXML
     private PasswordField confirmPassField;
@@ -22,6 +29,49 @@ public class Profile_changePassController {
     private Button confirmBtn;
     @FXML
     private Button backBtn;
+
+    @FXML
+    private void handleConfirmBtn() {
+        if (AccountSession.isAdmin()) {
+            adminModel admin = sessionManager.getLoggedInAdmin();
+            String oldPass = oldPassField.getText();
+            if (oldPass.trim().equals(admin.getAdminPassword().trim())) {
+                if (passwordsMatch()) {
+                    adminDAO dao = new adminDAO();
+                    admin.setAdminPassword(newPassField.getText());
+                    dao.updateAdminPassword(admin.getAdminID(), newPassField.getText());
+                    showInfo("Password changed", "Your password was updated successfully.");
+                    oldPassField.clear();
+                    newPassField.clear();
+                    confirmPassField.clear();
+                } else {
+                    showError("Error", "Passwords doesn't match!");
+                }
+            } else {
+                showError("Error", "Incorrect current password!");
+            }
+        } else if (AccountSession.isUser()) {
+            customerRecordModel customer = sessionManager.getLoggedInCustomer();
+            String oldPass = oldPassField.getText();
+            if (oldPass.trim().equals(customer.getCustomerPass().trim())) {
+                if (passwordsMatch()) {
+                    customerRecordDAO dao = new customerRecordDAO();
+                    customer.setCustomerPass(newPassField.getText());
+                    dao.updateCustomerPassword(customer.getCustomerAccID(), newPassField.getText());
+                    showInfo("Password changed", "Your password was updated successfully.");
+                    oldPassField.clear();
+                    newPassField.clear();
+                    confirmPassField.clear();
+                } else {
+                    showError("Error", "Passwords doesn't match!");
+                }
+            } else {
+                showError("Error", "Incorrect current password!");
+            }
+        } else {
+            System.out.printf("Something is wrong here :/");
+        }
+    }
 
     @FXML
     private void handleBackBtn() {
@@ -33,6 +83,12 @@ public class Profile_changePassController {
         if (AccountSession.isUser()) {
             loadNextScene("/com/grp5/view/User_userMenu.fxml", "Dashboard", backBtn);
         }
+    }
+
+    private boolean passwordsMatch() {
+        String newPass = newPassField.getText();
+        String confirmPass = confirmPassField.getText();
+        return newPass != null && confirmPass != null && newPass.trim().equals(confirmPass.trim());
     }
 
     private void loadNextScene(String fxmlFile, String title, Button button) {
@@ -60,4 +116,11 @@ public class Profile_changePassController {
         alert.showAndWait();
     }
 
+    private void showInfo(String header, String content) {
+        Alert a = new Alert(Alert.AlertType.INFORMATION);
+        a.setTitle("Success");
+        a.setHeaderText(header);
+        a.setContentText(content);
+        a.showAndWait();
+    }
 }
