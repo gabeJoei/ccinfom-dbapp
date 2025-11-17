@@ -31,4 +31,5 @@ public class BikeRentalMonthReportModel {
     public BikeModelRentalCountModel getMostRentedBike() {
         return this.mostRentedModel;
     }
+    
 }
