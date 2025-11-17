@@ -39,7 +39,7 @@ public class branchRecordDAO {
                 "UPDATE branch SET branchName=?,branchAddress=? WHERE branchID=?"); 
             prepState.setString(1,branch.getBranchName());
             prepState.setString(2,branch.getBranchAddress());
-            prepState.setInt(4,branch.getBranchID());
+            prepState.setInt(3,branch.getBranchID());  // FIXED: Changed from 4 to 3
             
             int rowsAffected = prepState.executeUpdate();
             
@@ -102,18 +102,35 @@ public class branchRecordDAO {
             connect = databaseConnection.getConnection();
             connect.setAutoCommit(false); // Start transaction for atomicity
 
-            String deletePaymentsSQL = "DELETE FROM payment WHERE reservationReferenceNum IN (SELECT reservationReferenceNum FROM reservation WHERE bikeID IN (SELECT bikeID FROM bike WHERE branchIDNum = ?))";
-            try (PreparedStatement prepState = connect.prepareStatement(deletePaymentsSQL)) {
+            // Delete payments for reservations linked to bikes at this branch
+            String deletePaymentsViaBikeSQL = "DELETE FROM payment WHERE reservationReferenceNum IN (SELECT reservationReferenceNum FROM reservation WHERE bikeID IN (SELECT bikeID FROM bike WHERE branchIDNum = ?))";
+            try (PreparedStatement prepState = connect.prepareStatement(deletePaymentsViaBikeSQL)) {
                 prepState.setInt(1, branchID);
                 prepState.executeUpdate();
             }
 
-            String deleteReservationsSQL = "DELETE FROM reservation WHERE bikeID IN (SELECT bikeID FROM bike WHERE branchIDNum = ?)";
-            try (PreparedStatement prepState = connect.prepareStatement(deleteReservationsSQL)) {
+            // Delete payments for reservations directly linked to this branch
+            String deletePaymentsViaBranchSQL = "DELETE FROM payment WHERE reservationReferenceNum IN (SELECT reservationReferenceNum FROM reservation WHERE branchID = ?)";
+            try (PreparedStatement prepState = connect.prepareStatement(deletePaymentsViaBranchSQL)) {
                 prepState.setInt(1, branchID);
                 prepState.executeUpdate();
             }
 
+            // Delete reservations linked to bikes at this branch
+            String deleteReservationsViaBikeSQL = "DELETE FROM reservation WHERE bikeID IN (SELECT bikeID FROM bike WHERE branchIDNum = ?)";
+            try (PreparedStatement prepState = connect.prepareStatement(deleteReservationsViaBikeSQL)) {
+                prepState.setInt(1, branchID);
+                prepState.executeUpdate();
+            }
+
+            // Delete reservations directly linked to this branch
+            String deleteReservationsViaBranchSQL = "DELETE FROM reservation WHERE branchID = ?";
+            try (PreparedStatement prepState = connect.prepareStatement(deleteReservationsViaBranchSQL)) {
+                prepState.setInt(1, branchID);
+                prepState.executeUpdate();
+            }
+
+            // Delete bikes at this branch
             String deleteBikesSQL = "DELETE FROM bike WHERE branchIDNum = ?";
             try (PreparedStatement prepState = connect.prepareStatement(deleteBikesSQL)) {
                 prepState.setInt(1, branchID);

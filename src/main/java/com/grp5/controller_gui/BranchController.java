@@ -33,9 +33,6 @@ public class BranchController {
     private TableColumn<branchRecordModel, String> branchAddressColumn;
 
     @FXML
-    private TableColumn<branchRecordModel, Integer> locationIDColumn;
-
-    @FXML
     private Button updateButton;
 
     @FXML
@@ -47,23 +44,18 @@ public class BranchController {
     private branchRecordDAO branchDAO = new branchRecordDAO();
     private ObservableList<branchRecordModel> branchList = FXCollections.observableArrayList();
 
-    /**
-     * Initializes the controller class.
-     */
+
     @FXML
     public void initialize() {
         // Set up the cell value factories for the TableView columns
         branchIDColumn.setCellValueFactory(new PropertyValueFactory<>("branchID"));
         branchNameColumn.setCellValueFactory(new PropertyValueFactory<>("branchName"));
         branchAddressColumn.setCellValueFactory(new PropertyValueFactory<>("branchAddress"));
-        locationIDColumn.setCellValueFactory(new PropertyValueFactory<>("locationID"));
 
         loadBranchData();
     }
 
-    /**
-     * Loads all branch records from the database and populates the TableView.
-     */
+
     private void loadBranchData() {
         ArrayList<branchRecordModel> allBranches = branchDAO.getAllBranch();
 
@@ -79,7 +71,7 @@ public class BranchController {
         try {
             String idText = branchIDTextField.getText().trim();
             if (idText.isEmpty()) {
-                loadBranchData(); // Show all if search field is empty
+                loadBranchData(); 
                 return;
             }
 
@@ -120,37 +112,23 @@ public class BranchController {
 
         TextField txtName = new TextField(selectedBranch.getBranchName());
         TextField txtAddress = new TextField(selectedBranch.getBranchAddress());
-        TextField txtLocationID = new TextField(String.valueOf(selectedBranch.getLocationID()));
 
         grid.add(new Label("Branch Name:"), 0, 0);
         grid.add(txtName, 1, 0);
         grid.add(new Label("Branch Address:"), 0, 1);
         grid.add(txtAddress, 1, 1);
-        grid.add(new Label("Location ID:"), 0, 2);
-        grid.add(txtLocationID, 1, 2);
 
         dialog.getDialogPane().setContent(grid);
 
-        // 3. Setup the buttons
         ButtonType btnUpdate = new ButtonType("Update", ButtonBar.ButtonData.OK_DONE);
         dialog.getDialogPane().getButtonTypes().addAll(btnUpdate, ButtonType.CANCEL);
 
-        // 4. Convert the result
         dialog.setResultConverter(dialogButton -> {
             if (dialogButton == btnUpdate) {
-                try {
-                    int newLocationID = Integer.parseInt(txtLocationID.getText().trim());
+                selectedBranch.setBranchName(txtName.getText().trim());
+                selectedBranch.setBranchAddress(txtAddress.getText().trim());
 
-                    // Update the selected model's properties (in-memory)
-                    selectedBranch.setBranchName(txtName.getText().trim());
-                    selectedBranch.setBranchAddress(txtAddress.getText().trim());
-                    selectedBranch.setLocationID(newLocationID);
-
-                    return selectedBranch;
-                } catch (NumberFormatException e) {
-                    showAlert(Alert.AlertType.ERROR, "Input Error", "Location ID must be a valid number.");
-                    return null; 
-                }
+                return selectedBranch;
             }
             return null;
         });
@@ -174,11 +152,10 @@ public class BranchController {
         branchRecordModel selectedBranch = branchTableView.getSelectionModel().getSelectedItem();
         if (selectedBranch != null) {
             String details = String.format(
-                "ID: %d\nName: %s\nAddress: %s\nLocation ID: %d",
+                "ID: %d\nName: %s\nAddress: %s",
                 selectedBranch.getBranchID(),
                 selectedBranch.getBranchName(),
-                selectedBranch.getBranchAddress(),
-                selectedBranch.getLocationID()
+                selectedBranch.getBranchAddress()
             );
             showAlert(Alert.AlertType.INFORMATION, "Branch Details", details);
         } else {
