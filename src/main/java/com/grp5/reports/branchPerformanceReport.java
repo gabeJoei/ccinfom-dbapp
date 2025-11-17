@@ -52,39 +52,41 @@ public class branchPerformanceReport {
      */
     public ArrayList<branchPerformance> generateReport(int year, int month) {
         ArrayList<branchPerformance> performances = new ArrayList<>();
-        
+
+        // SQL query to generate branch performance report
         String sql = 
             "SELECT " +
-            "    b.branch_id, " +
-            "    b.branch_name, " +
-            "    COUNT(DISTINCT rt.payment_reference_number) AS number_of_rentals, " +
-            "    COUNT(DISTINCT br.reservation_reference_number) AS number_of_reservations, " +
-            "    COUNT(DISTINCT rt.customer_account_id) AS customer_engagement, " +
-            "    COALESCE(SUM(rt.payment_amount), 0) AS total_revenue " +
+            "    b.branchID, " +
+            "    b.branchName, " +
+            "    COUNT(DISTINCT rt.paymentReferenceNum) AS number_of_rentals, " +
+            "    COUNT(DISTINCT br.reservationReferenceNum) AS number_of_reservations, " +
+            "    COUNT(DISTINCT rt.customerID) AS customer_engagement, " +
+            "    COALESCE(SUM(rt.paymentAmount), 0) AS total_revenue " +
             "FROM branch b " +
-            "LEFT JOIN rental_transaction rt ON b.branch_id = rt.branch_id " +
-            "    AND YEAR(rt.payment_date) = ? " +
-            "    AND MONTH(rt.payment_date) = ? " +
-            "LEFT JOIN bike_reservation br ON b.branch_id = br.branch_id " +
-            "    AND YEAR(br.reservation_date) = ? " +
-            "    AND MONTH(br.reservation_date) = ? " +
-            "GROUP BY b.branch_id, b.branch_name " +
+            "LEFT JOIN payment rt ON b.branchID = rt.branchID " +
+            "    AND YEAR(rt.paymentDate) = ? " +
+            "    AND MONTH(rt.paymentDate) = ? " +
+            "LEFT JOIN reservation br ON b.branchID = br.branchID " +
+            "    AND YEAR(br.reservationDate) = ? " +
+            "    AND MONTH(br.reservationDate) = ? " +
+            "GROUP BY b.branchID, b.branchName " +
             "ORDER BY total_revenue DESC";
-        
+
         try (Connection conn = databaseConnection.getConnection();
-             PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            
+            PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            // Set parameters for the prepared statement
             pstmt.setInt(1, year);
             pstmt.setInt(2, month);
             pstmt.setInt(3, year);
             pstmt.setInt(4, month);
-            
+
             ResultSet rs = pstmt.executeQuery();
-            
+
             while (rs.next()) {
                 branchPerformance performance = new branchPerformance(
-                    rs.getInt("branch_id"),
-                    rs.getString("branch_name"),
+                    rs.getInt("branchID"),
+                    rs.getString("branchName"),
                     rs.getInt("number_of_rentals"),
                     rs.getInt("number_of_reservations"),
                     rs.getInt("customer_engagement"),
@@ -92,15 +94,14 @@ public class branchPerformanceReport {
                 );
                 performances.add(performance);
             }
-            
+
         } catch (SQLException e) {
-            System.out.println("Error generating branch performance report: " + e.getMessage());
             e.printStackTrace();
         }
-        
+
         return performances;
     }
-    
+
     /**
      * Generate summary statistics for all branches
      * @param year The year
@@ -177,4 +178,5 @@ public class branchPerformanceReport {
         
         return underperforming;
     }
+    
 }
