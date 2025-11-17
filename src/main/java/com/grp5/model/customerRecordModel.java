@@ -1,7 +1,17 @@
+/*
+ * Model for customer record in the Bike Rental System.
+ * 
+ * This model stores key information related to a customer record,
+ * including the first name, last name, 
+ * email address, phone number, and customer password.
+ * It provides getters and setters for all fields.
+ * 
+ */
+
 package com.grp5.model;
 
 public class customerRecordModel {
-    /* Declare Variables: Make it String */
+    /* Variable Declarations*/
     private int customerAccID;
     private String firstName;
     private String lastName;

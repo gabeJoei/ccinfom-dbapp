@@ -1,9 +1,20 @@
+/*
+ * Model for bike record in the Bike Rental System.
+ * 
+ * This model stores key information related to bike record,
+ * including the branch id, bike availability, bike model
+ * hourly rate, and daily rate. It provides getters and setters for 
+ * all fields.
+ * 
+ */
+
 package com.grp5.model;
 
 import java.math.BigDecimal;
 
 public class bikeRecordModel {
 
+    //variable declaration
     private final int bikeID;
     private int branchIDNum;
     private boolean bikeAvailability = false;
