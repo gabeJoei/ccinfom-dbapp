@@ -32,6 +32,7 @@ com\grp5\controller_gui\Admin_RentalSalesReportController$RentalSalesDisplay.cla
 com\grp5\controller_gui\Admin_transactionController.class
 com\grp5\controller_gui\Admin_RentalBikeTrendReportController.class
 com\grp5\model\adminModel.class
+com\grp5\controller_gui\Profile_updateInfoController.class
 com\grp5\dao\transactionRecordDAO.class
 com\grp5\reports\bikeRentalReports.class
 com\grp5\model\transactionRecordModel.class

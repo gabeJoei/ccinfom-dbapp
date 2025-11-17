@@ -1,41 +1,38 @@
 package com.grp5.controller_gui;
 
-import com.grp5.dao.adminDAO;
-import com.grp5.model.adminModel;
+import com.grp5.session.AccountSession;
+
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
-import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 
-public class Profile_settingsController {
-    @FXML
-    private Button changePassBtn;
-    @FXML
-    private Button updtInfoBtn;
-    @FXML
-    private Button deleteAccountBtn;
+public class Profile_updateInfoController {
 
     @FXML
-    void handleChangePassBtn() {
-        System.out.println("Change password button clicked!");
-        loadNextScene("/com/grp5/view/Profile_updateInfo.fxml", "Update Information", changePassBtn);
-    }
+    private TextField newEmailField;
+    @FXML
+    private TextField newContctField;
+    @FXML
+    private Button confirmBtn;
+    @FXML
+    private Button backBtn;
 
     @FXML
-    void handleUpdtInfoBtn() {
-        System.out.print("Update Info button clicked!");
-        loadNextScene("/com/grp5/view/Profile_changePassword.fxml", null, updtInfoBtn);
-    }
-
-    @FXML
-    void handleDeleteAccountBtn() {
-        System.out.print("Delete account button clicked!");
-        // add the gui where the account will be deleted :v
+    private void handleBackBtn() {
+        System.out.println("Back button clicked!");
+        if (AccountSession.isAdmin()) {
+            loadNextScene("/com/grp5/view/Admin_settings.fxml", "Dashboard", backBtn);
+        } else if (AccountSession.isUser()) {
+            loadNextScene("/com/grp5/view/Profile_settings.fxml", "Dashboard", backBtn);
+        } else {
+            System.out.println("There is an error around here :P");
+        }
     }
 
     private void loadNextScene(String fxmlFile, String title, Button button) {
@@ -44,6 +41,8 @@ public class Profile_settingsController {
             Parent nextSceneRoot = FXMLLoader.load(getClass().getResource(fxmlFile));
             Scene nextScene = new Scene(nextSceneRoot);
             Stage currentStage = (Stage) button.getScene().getWindow();
+
+            javafx.geometry.Rectangle2D screenBounds = Screen.getPrimary().getVisualBounds();
 
             currentStage.setScene(nextScene);
             currentStage.setTitle(title);
