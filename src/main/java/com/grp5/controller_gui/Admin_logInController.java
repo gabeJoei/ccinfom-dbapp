@@ -44,8 +44,12 @@ public class Admin_logInController {
         }
 
         adminModel admin = dao.authenticateAdmin(username, password);
-        // Admin_session.setCurrentAdmin(admin); // Current admin bro :D
+
         if (admin != null) {
+
+            if (admin.getAdminPassword() == null) {
+                admin.setAdminPassword(password);
+            }
 
             ProfileSnapshot snap = new ProfileSnapshot(admin.getAdminFirstName(), admin.getAdminLastName(),
                     admin.getAdminEmail());

@@ -17,11 +17,10 @@ public class branchRecordDAO {
     public int addBranchRecordData(branchRecordModel branch){
         try{
             Connection connect=databaseConnection.getConnection();
-            PreparedStatement prepState=connect.prepareStatement("INSERT INTO branch (branchID, branchName,branchAddress,locationID) VALUES (?,?,?,?) ");
+            PreparedStatement prepState=connect.prepareStatement("INSERT INTO branch (branchID, branchName,branchAddress) VALUES (?,?,?) ");
             prepState.setInt(1, branch.getBranchID());
             prepState.setString(2,branch.getBranchName());
             prepState.setString(3,branch.getBranchAddress());
-            prepState.setInt(4,branch.getLocationID());
             prepState.executeUpdate();
             prepState.close();
             connect.close();
@@ -37,10 +36,9 @@ public class branchRecordDAO {
         try{
             Connection connect=databaseConnection.getConnection();
             PreparedStatement prepState=connect.prepareStatement(
-                "UPDATE branch SET branchName=?,branchAddress=?,locationID=? WHERE branchID=?"); 
+                "UPDATE branch SET branchName=?,branchAddress=? WHERE branchID=?"); 
             prepState.setString(1,branch.getBranchName());
             prepState.setString(2,branch.getBranchAddress());
-            prepState.setInt(3,branch.getLocationID());
             prepState.setInt(4,branch.getBranchID());
             
             int rowsAffected = prepState.executeUpdate();
@@ -179,7 +177,6 @@ public class branchRecordDAO {
            branch.setBranchID(rs.getInt("branchID"));
            branch.setBranchName(rs.getString("branchName"));
            branch.setBranchAddress(rs.getString("branchAddress"));
-           branch.setLocationID(rs.getInt("locationID")); 
            return branch;
       }
 
@@ -196,7 +193,6 @@ public class branchRecordDAO {
                 branch.setBranchID(result.getInt("branchID"));
                 branch.setBranchName(result.getString("branchName"));
                 branch.setBranchAddress(result.getString("branchAddress"));
-                branch.setLocationID(result.getInt("locationID")); 
                 branches.add(branch);
             }
         } catch (SQLException e) {

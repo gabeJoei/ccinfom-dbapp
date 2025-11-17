@@ -40,6 +40,10 @@ public class Profile_changePassController {
                     adminDAO dao = new adminDAO();
                     admin.setAdminPassword(newPassField.getText());
                     dao.updateAdminPassword(admin.getAdminID(), newPassField.getText());
+                    showInfo("Password changed", "Your password was updated successfully.");
+                    oldPassField.clear();
+                    newPassField.clear();
+                    confirmPassField.clear();
                 } else {
                     showError("Error", "Passwords doesn't match!");
                 }
@@ -54,6 +58,10 @@ public class Profile_changePassController {
                     customerRecordDAO dao = new customerRecordDAO();
                     customer.setCustomerPass(newPassField.getText());
                     dao.updateCustomerPassword(customer.getCustomerAccID(), newPassField.getText());
+                    showInfo("Password changed", "Your password was updated successfully.");
+                    oldPassField.clear();
+                    newPassField.clear();
+                    confirmPassField.clear();
                 } else {
                     showError("Error", "Passwords doesn't match!");
                 }
@@ -108,4 +116,11 @@ public class Profile_changePassController {
         alert.showAndWait();
     }
 
+    private void showInfo(String header, String content) {
+        Alert a = new Alert(Alert.AlertType.INFORMATION);
+        a.setTitle("Success");
+        a.setHeaderText(header);
+        a.setContentText(content);
+        a.showAndWait();
+    }
 }

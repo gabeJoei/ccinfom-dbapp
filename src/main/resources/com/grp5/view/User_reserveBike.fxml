@@ -61,8 +61,8 @@
             <Image url="@images/MainLogo.png" />
          </image>
       </ImageView>
-      <Spinner layoutX="153.0" layoutY="366.0" prefHeight="25.0" prefWidth="58.0" />
-      <Spinner layoutX="240.0" layoutY="366.0" prefHeight="25.0" prefWidth="58.0" />
+      <Spinner fx:id="startHour" layoutX="153.0" layoutY="366.0" prefHeight="25.0" prefWidth="58.0" />
+      <Spinner fx:id="startMinute" layoutX="240.0" layoutY="366.0" prefHeight="25.0" prefWidth="58.0" />
       <Text layoutX="101.0" layoutY="384.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Time:">
          <font>
             <Font name="Bodoni MT" size="17.0" />
@@ -73,18 +73,18 @@
             <Font size="19.0" />
          </font>
       </Text>
-      <Text layoutX="155.0" layoutY="403.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hours" wrappingWidth="34.604827880859375">
+      <Text layoutX="155.0" layoutY="403.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hour" wrappingWidth="34.604827880859375">
          <font>
             <Font size="10.0" />
          </font>
       </Text>
-      <Text layoutX="241.0" layoutY="403.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Minutes" wrappingWidth="48.7255859375">
+      <Text layoutX="241.0" layoutY="403.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Minute" wrappingWidth="48.7255859375">
          <font>
             <Font size="10.0" />
          </font>
       </Text>
-      <Spinner layoutX="525.0" layoutY="362.0" prefHeight="25.0" prefWidth="58.0" />
-      <Spinner layoutX="608.0" layoutY="362.0" prefHeight="25.0" prefWidth="58.0" />
+      <Spinner fx:id="endHour" layoutX="525.0" layoutY="362.0" prefHeight="25.0" prefWidth="58.0" />
+      <Spinner fx:id="endMinute" layoutX="608.0" layoutY="362.0" prefHeight="25.0" prefWidth="58.0" />
       <Text layoutX="475.0" layoutY="385.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Time:">
          <font>
             <Font name="Bodoni MT" size="17.0" />
@@ -95,12 +95,12 @@
             <Font size="19.0" />
          </font>
       </Text>
-      <Text layoutX="525.0" layoutY="400.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hours" wrappingWidth="34.604827880859375">
+      <Text layoutX="525.0" layoutY="400.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hour" wrappingWidth="34.604827880859375">
          <font>
             <Font size="10.0" />
          </font>
       </Text>
-      <Text layoutX="612.0" layoutY="400.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Minutes" wrappingWidth="48.7255859375">
+      <Text layoutX="612.0" layoutY="400.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Minute" wrappingWidth="48.7255859375">
          <font>
             <Font size="10.0" />
          </font>
