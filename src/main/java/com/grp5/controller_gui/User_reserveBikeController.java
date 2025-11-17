@@ -27,6 +27,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.SpinnerValueFactory;
+import javafx.scene.image.ImageView;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 
@@ -37,6 +39,9 @@ public class User_reserveBikeController {
     @FXML
     private Text bikeCostText;
     
+    @FXML
+    private ImageView img;
+
     @FXML
     private DatePicker startDateSelection;
     @FXML
@@ -97,6 +102,27 @@ public class User_reserveBikeController {
 
         // Get User Details
         user = customerDAO.getCustomer(parseInt(userID));
+
+        changeImage();
+    }
+
+    private void changeImage(){
+        switch (selectedBike.getBikeModel()) {
+    case "Mountain Bike" -> img.setImage(new Image(
+        getClass().getResource("/com/grp5/view/images/MountainBike-.png").toExternalForm()));
+    case "Road Bike" -> img.setImage(new Image(
+        getClass().getResource("/com/grp5/view/images/RoadBike-.png").toExternalForm()));
+    case "Bike with E-assist" -> img.setImage(new Image(
+        getClass().getResource("/com/grp5/view/images/E-Bike-.png").toExternalForm()));
+    case "Tandem Bike" -> img.setImage(new Image(
+        getClass().getResource("/com/grp5/view/images/TandemBike-.png").toExternalForm()));
+    case "E-Bike" -> img.setImage(new Image(
+        getClass().getResource("/com/grp5/view/images/Electric_Bike-.png").toExternalForm()));
+    case "BMX bike" -> img.setImage(new Image(
+        getClass().getResource("/com/grp5/view/images/BMX bike.png").toExternalForm()));
+    default -> System.err.println("Unknown bike: " + selectedBike.getBikeModel());
+}
+
     }
 
     @FXML
