@@ -244,7 +244,6 @@ public class User_rentBikeController {
             User_reserveBikeController reserveController = loader.getController();
 
             // Pass bike data to the new controller
-            reserveController.initializePage();
             reserveController.initData(userID, bikeToLoad);
 
             // Replace the anchorPane (content) of dashboard

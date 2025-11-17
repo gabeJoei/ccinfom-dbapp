@@ -10,7 +10,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="827.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.grp5.controller_backend.rentingTransactionController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="827.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.grp5.controller_gui.User_paymentSummaryController">
    <children>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#afc6db" height="535.0" layoutX="256.0" layoutY="51.0" stroke="BLACK" strokeType="INSIDE" width="315.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e1dbdb" height="37.0" layoutX="2.0" layoutY="-1.0" stroke="BLACK" strokeType="INSIDE" width="824.0" />
@@ -34,25 +34,25 @@
             <HBox>
                <children>
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Customer's Name:" wrappingWidth="106.13671875" />
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="NameHolder" />
+                  <Text fx:id="customerNameTxt" strokeType="OUTSIDE" strokeWidth="0.0" text="NameHolder" />
                </children>
             </HBox>
             <HBox>
                <children>
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Bike Model:" wrappingWidth="106.13671875" />
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="BikeModelHolder" />
+                  <Text fx:id="bikeModelTxt" strokeType="OUTSIDE" strokeWidth="0.0" text="BikeModelHolder" />
                </children>
             </HBox>
             <HBox>
                <children>
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Branch:" wrappingWidth="106.13671875" />
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="BranchHolder" />
+                  <Text fx:id="branchTxt" strokeType="OUTSIDE" strokeWidth="0.0" text="BranchHolder" />
                </children>
             </HBox>
             <HBox>
                <children>
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Phone Number:" wrappingWidth="106.13671875" />
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="PNumHolder" />
+                  <Text fx:id="phoneNumTxt" strokeType="OUTSIDE" strokeWidth="0.0" text="PNumHolder" />
                </children>
             </HBox>
             <HBox>
@@ -64,23 +64,23 @@
             <HBox>
                <children>
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Start DateL:" wrappingWidth="106.13671875" />
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="SDateHolder" />
+                  <Text fx:id="startDateTxt" strokeType="OUTSIDE" strokeWidth="0.0" text="SDateHolder" />
                </children>
             </HBox>
             <HBox>
                <children>
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="EndDate" wrappingWidth="106.13671875" />
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="EndDateholder" />
+                  <Text fx:id="endDateTxt" strokeType="OUTSIDE" strokeWidth="0.0" text="EndDateholder" />
                </children>
             </HBox>
             <HBox>
                <children>
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Total" wrappingWidth="106.13671875" />
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="totalHolder" />
+                  <Text fx:id="totalPriceTxt" strokeType="OUTSIDE" strokeWidth="0.0" text="totalHolder" />
                </children>
             </HBox>
          </children>
       </VBox>
-      <Button layoutX="396.0" layoutY="530.0" mnemonicParsing="false" text="Pay" />
+      <Button fx:id="payButton" layoutX="396.0" layoutY="530.0" mnemonicParsing="false" onAction="#onPayClick" text="Pay" />
    </children>
 </AnchorPane>

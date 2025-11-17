@@ -209,7 +209,7 @@ public class User_bikeReservationController {
 
         Optional<bikeReservation> result = dialog.showAndWait();
         result.ifPresent(reservation -> {
-            if (reservationDAO.addReservation(reservation)) {
+            if (reservationDAO.addReservation(reservation) != 0) {
                 showAlert(Alert.AlertType.INFORMATION, "Success",
                         "Reservation added successfully!");
                 loadAllReservations();
