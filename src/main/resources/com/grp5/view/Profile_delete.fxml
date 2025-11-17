@@ -7,9 +7,10 @@
 <?import javafx.scene.text.Text?>
 
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1"
+   fx:controller="com.grp5.controller_gui.Profile_deleteController">
    <children>
-      <Button layoutX="545.0" layoutY="361.0" mnemonicParsing="false" text="Back" />
+      <Button fx:id="backBtn" layoutX="545.0" layoutY="361.0" mnemonicParsing="false" text="Back" />
       <Text layoutX="165.0" layoutY="100.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Are you sure that you want to delete your account!" />
       <Text layoutX="203.0" layoutY="158.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Be warned">
          <font>
@@ -17,7 +18,7 @@
          </font>
       </Text>
       <Text layoutX="172.0" layoutY="222.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Enter password to confirm deletion:" />
-      <PasswordField layoutX="172.0" layoutY="226.0" prefHeight="25.0" prefWidth="256.0" />
-      <Button layoutX="271.0" layoutY="293.0" mnemonicParsing="false" text="Confirm" />
+      <PasswordField fx:id="passwordField" layoutX="172.0" layoutY="226.0" prefHeight="25.0" prefWidth="256.0" />
+      <Button fx:id="confirmBtn" layoutX="271.0" layoutY="293.0" mnemonicParsing="false" text="Confirm" />
    </children>
 </AnchorPane>

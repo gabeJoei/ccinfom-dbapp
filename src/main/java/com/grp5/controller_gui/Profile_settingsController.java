@@ -23,19 +23,19 @@ public class Profile_settingsController {
     @FXML
     void handleChangePassBtn() {
         System.out.println("Change password button clicked!");
-        loadNextScene("/com/grp5/view/Profile_changePassword.fxml", "Update Information", changePassBtn);
+        loadNextScene("/com/grp5/view/Profile_changePassword.fxml", "Change Password", changePassBtn);
     }
 
     @FXML
     void handleUpdtInfoBtn() {
         System.out.println("Update Info button clicked!");
-        loadNextScene("/com/grp5/view/Profile_updateInfo.fxml", null, updtInfoBtn);
+        loadNextScene("/com/grp5/view/Profile_updateInfo.fxml", "Update Information", updtInfoBtn);
     }
 
     @FXML
     void handleDeleteAccountBtn() {
         System.out.print("Delete account button clicked!");
-        // add the gui where the account will be deleted :v
+        loadNextScene("/com/grp5/view/Profile_delete.fxml", "Account Deletion", deleteAccountBtn);
     }
 
     private void loadNextScene(String fxmlFile, String title, Button button) {
