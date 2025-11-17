@@ -1,8 +1,5 @@
 package com.grp5.session;
 
-import com.grp5.model.adminModel;
-import com.grp5.model.customerRecordModel;
-
 public class AccountSession {
 
     public enum AccountType {
@@ -10,46 +7,55 @@ public class AccountSession {
     };
 
     private static volatile AccountType accountType;
-    private static volatile int accountID;
+    private static volatile int accountID = -1;
     private static volatile ProfileSnapshot accountSnapshot;
 
     public AccountSession() {
 
     }
 
-    public void setAccount(AccountType type, int id, ProfileSnapshot snapshot) {
+    public static void setAccount(AccountType type, int id, ProfileSnapshot snapshot) {
         accountType = type;
         accountID = id;
         accountSnapshot = snapshot;
     }
 
-    public void cleanSession() {
+    public static void cleanSession() {
         accountType = null;
         accountID = -1;
         accountSnapshot = null;
     }
 
-    public boolean isLoggedIn() {
+    public static boolean isLoggedIn() {
         return accountType != null && accountID != -1;
     }
 
-    public AccountType getAccountType() {
+    public static AccountType getAccountType() {
         return accountType;
     }
 
-    public int getAccountID() {
+    public static int getAccountID() {
         return accountID;
     }
 
-    public ProfileSnapshot getSnapshot() {
+    public static ProfileSnapshot getSnapshot() {
         return accountSnapshot;
     }
 
-    public boolean isAdmin() {
+    public static void updateSnapshot(ProfileSnapshot snapshot) {
+        accountSnapshot = snapshot;
+    }
+
+    public static boolean isAdmin() {
         return accountType == AccountType.ADMIN;
     }
 
-    public boolean isUser() {
+    public static boolean isUser() {
         return accountType == AccountType.USER;
+    }
+
+    public static String getAccountFullName() {
+        String fullName = accountSnapshot.getFirstName() + " " + accountSnapshot.getLastName().trim();
+        return fullName;
     }
 }

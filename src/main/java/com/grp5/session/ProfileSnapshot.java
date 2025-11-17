@@ -1,9 +1,9 @@
 package com.grp5.session;
 
 public class ProfileSnapshot {
-    private String firstName;
-    private String lastName;
-    private String email;
+    private final String firstName;
+    private final String lastName;
+    private final String email;
 
     public ProfileSnapshot(String firstName, String lastName, String email) {
         this.firstName = firstName;
