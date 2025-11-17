@@ -2,6 +2,8 @@ package com.grp5.controller_gui;
 
 import com.grp5.dao.adminDAO;
 import com.grp5.model.adminModel;
+import com.grp5.session.AccountSession;
+
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -29,7 +31,12 @@ public class Profile_settingsController {
     @FXML
     void handleUpdtInfoBtn() {
         System.out.println("Update Info button clicked!");
-        loadNextScene("/com/grp5/view/Profile_updateInfo.fxml", "Update Information", updtInfoBtn);
+        if (AccountSession.isAdmin()) {
+            loadNextScene("/com/grp5/view/Profile_updateAdminInfo.fxml", "Update Information", updtInfoBtn);
+        } else if (AccountSession.isUser()) {
+            loadNextScene("/com/grp5/view/Profile_updateInfo.fxml", "Update Information", updtInfoBtn);
+        }
+
     }
 
     @FXML
