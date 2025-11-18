@@ -34,7 +34,6 @@ public class Profile_changePassController {
     @FXML
     private Button backBtn;
 
- 
     @FXML
     public void initialize() {
         // Load user data when the scene is initialized
@@ -47,7 +46,7 @@ public class Profile_changePassController {
                 // Get full name from AccountSession
                 String fullName = AccountSession.getAccountFullName();
                 nameText.setText(fullName);
-                
+
                 // Get account ID from AccountSession
                 int accountId = AccountSession.getAccountID();
                 userIdText.setText(String.valueOf(accountId));
@@ -70,13 +69,17 @@ public class Profile_changePassController {
             String oldPass = oldPassField.getText();
             if (oldPass.trim().equals(admin.getAdminPassword().trim())) {
                 if (passwordsMatch()) {
-                    adminDAO dao = new adminDAO();
-                    admin.setAdminPassword(newPassField.getText());
-                    dao.updateAdminPassword(admin.getAdminID(), newPassField.getText());
-                    showInfo("Password changed", "Your password was updated successfully.");
-                    oldPassField.clear();
-                    newPassField.clear();
-                    confirmPassField.clear();
+                    if (isEnough()) {
+                        adminDAO dao = new adminDAO();
+                        admin.setAdminPassword(newPassField.getText().trim());
+                        dao.updateAdminPassword(admin.getAdminID(), newPassField.getText().trim());
+                        showInfo("Password changed", "Your password was updated successfully.");
+                        oldPassField.clear();
+                        newPassField.clear();
+                        confirmPassField.clear();
+                    } else {
+                        showError("Error", "Password must be at least 6 characters long.");
+                    }
                 } else {
                     showError("Error", "Passwords doesn't match!");
                 }
@@ -88,13 +91,17 @@ public class Profile_changePassController {
             String oldPass = oldPassField.getText();
             if (oldPass.trim().equals(customer.getCustomerPass().trim())) {
                 if (passwordsMatch()) {
-                    customerRecordDAO dao = new customerRecordDAO();
-                    customer.setCustomerPass(newPassField.getText());
-                    dao.updateCustomerPassword(customer.getCustomerAccID(), newPassField.getText());
-                    showInfo("Password changed", "Your password was updated successfully.");
-                    oldPassField.clear();
-                    newPassField.clear();
-                    confirmPassField.clear();
+                    if (isEnough()) {
+                        customerRecordDAO dao = new customerRecordDAO();
+                        customer.setCustomerPass(newPassField.getText().trim());
+                        dao.updateCustomerPassword(customer.getCustomerAccID(), newPassField.getText().trim());
+                        showInfo("Password changed", "Your password was updated successfully.");
+                        oldPassField.clear();
+                        newPassField.clear();
+                        confirmPassField.clear();
+                    } else {
+                        showError("Error", "Password must be at least 6 characters long.");
+                    }
                 } else {
                     showError("Error", "Passwords doesn't match!");
                 }
@@ -122,6 +129,10 @@ public class Profile_changePassController {
         String newPass = newPassField.getText();
         String confirmPass = confirmPassField.getText();
         return newPass != null && confirmPass != null && newPass.trim().equals(confirmPass.trim());
+    }
+
+    private boolean isEnough() {
+        return newPassField.getText().trim().length() >= 6 && confirmPassField.getText().trim().length() >= 6;
     }
 
     private void loadNextScene(String fxmlFile, String title, Button button) {
