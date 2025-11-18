@@ -16,10 +16,16 @@ import com.grp5.utils.databaseConnection;
  * including inserting, retrieving, updating, and deleting payment transactions.
  * It also provides utility methods for joining related customer, reservation,
  * and branch data.
+ * @author [group 5]
+ * @version 1.0
  */
 public class transactionRecordDAO {
 
-    //A method used to insert new data into the payment transaction record. 
+    /**
+     * A method used to insert new data into the payment transaction record. 
+     * @param transaction, transactionRecordModel which has the values for the transaction record
+     * @return an interger value of 1 or 0, 1 to indicate success and 0 to indicate null/unsuccessfull.
+     */
     public int addTransactionRecordData(transactionRecordModel transaction) {
         try {
             Connection connect = databaseConnection.getConnection();
@@ -46,7 +52,11 @@ public class transactionRecordDAO {
         }
     }
 
-    // retrives a specific record that has the same payment reference number(pk) passed through the parameter.
+    /**
+     * retrieves a transaction record that equates to the paymentReferenceNum
+     * @param paymentReferenceNumber, the Primary key of a payment table/transaction record
+     * @return transactionRecordModel
+     */
     public transactionRecordModel getTransactionRecordData(int paymentReferenceNumber) {
         try {
             Connection connect = databaseConnection.getConnection();
@@ -66,7 +76,12 @@ public class transactionRecordDAO {
         return null;
     }
 
-    //deletes a transaction record
+
+    /**
+     * deletes a transaction record that equates to the paymentReferenceNum
+     * @param paymentReferenceNum, unique identifier for a specific transaction record
+     * @return int, 1 for true, and 0 false
+     */
     public int delTransactionRecordData(int paymentReferenceNum) {
         try {
             Connection connect = databaseConnection.getConnection();
@@ -82,7 +97,11 @@ public class transactionRecordDAO {
         }
     }
 
-    //Allows the modification of the transaction record. 
+    /**
+     * Allows the modification of the transaction record, with the new values of the transaction (parameter)
+     * @param transaction, new transactionRecordModel that can replace the values of a specific record. 
+     * @return int, 1 for true, and 0 false
+     */
     public int modifyTransactionRecordData(transactionRecordModel transaction) {
         String query = "UPDATE payment SET customerID=?, reservationReferenceNum=?, bikeID=?, branchID=?, paymentDate=?, paymentAmount=? WHERE paymentReferenceNum=?";
         try {
@@ -105,8 +124,15 @@ public class transactionRecordDAO {
         }
     }
 
-    /*a method used to retrieve a payment made by a specific customer. 
-    It joins payment with customer and branch table. */
+    
+    /**
+     * *a method used to retrieve a payment made by a specific customer. 
+     * It joins payment with customer and branch table.
+     * 
+     * @param columnName
+     * @param columnIVal
+     * @param columnSVal
+     */
     public void paymentJoinCustomer(String columnName, int columnIVal, String columnSVal) {
         try {
             Connection connect = databaseConnection.getConnection();
@@ -140,7 +166,10 @@ public class transactionRecordDAO {
         }
     }
 
-    //retrieves all payement transaction record in the transaction database. 
+    /**
+     * retrieves all payement transaction record in the transaction database.  
+     * @return transaction, ArrayLists of transactionRecordModel that contains all the record found in payment database
+     */
     public ArrayList<transactionRecordModel> getAllPayment() {
         ArrayList<transactionRecordModel> transaction = new ArrayList<>();
         try {
@@ -159,7 +188,12 @@ public class transactionRecordDAO {
         return transaction;
     }
 
-    //Converts the results of the query to become transactionRecordModel, then returns that transaction. 
+    /**
+     * Converts the results of the query to become transactionRecordModel, then returns that transaction. 
+     * @param rs
+     * @return transaction
+     * @throws SQLException
+     */
     private transactionRecordModel extractFromPaymentTable(ResultSet rs) throws SQLException {
         transactionRecordModel transaction = new transactionRecordModel();
         transaction.setPaymentReferenceNumber(rs.getInt("paymentReferenceNum"));
