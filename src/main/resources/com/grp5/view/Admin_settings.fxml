@@ -13,9 +13,9 @@
    <children>
       <HBox layoutX="207.0" layoutY="325.0" prefHeight="40.0" prefWidth="721.0" spacing="100.0">
          <children>
-            <Button fx:id="changePassBtn" mnemonicParsing="false" prefHeight="47.0" prefWidth="158.0" text="Change Password" onAction="#handleChangePassBtn" />
-            <Button fx:id="updtInfoBtn" mnemonicParsing="false" prefHeight="47.0" prefWidth="158.0" text="Update Information" onAction="#handleUpdtInfoBtn" />
-            <Button fx:id="deleteAccountBtn" mnemonicParsing="false" prefHeight="47.0" prefWidth="158.0" text="Delete Account" onAction="#handleDeleteAccountBtn" />
+            <Button fx:id="changePassBtn" mnemonicParsing="false" onAction="#handleChangePassBtn" prefHeight="47.0" prefWidth="158.0" text="Change Password" />
+            <Button fx:id="updtInfoBtn" mnemonicParsing="false" onAction="#handleUpdtInfoBtn" prefHeight="47.0" prefWidth="158.0" text="Update Information" />
+            <Button fx:id="deleteAccountBtn" mnemonicParsing="false" onAction="#handleDeleteAccountBtn" prefHeight="47.0" prefWidth="158.0" text="Delete Account" />
          </children>
       </HBox>
       <Text layoutX="150.0" layoutY="95.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name:" wrappingWidth="64.00002034505223">
@@ -23,7 +23,7 @@
             <Font size="14.0" />
          </font>
       </Text>
-      <Text layoutX="214.0" layoutY="94.0" strokeType="OUTSIDE" strokeWidth="0.0" text="HolderForname" wrappingWidth="97.33333333333348" />
+      <Text fx:id="nameText" layoutX="214.0" layoutY="94.0" strokeType="OUTSIDE" strokeWidth="0.0" text="HolderForname" wrappingWidth="97.33333333333348" />
       <ImageView fitHeight="118.0" fitWidth="97.0" layoutX="27.0" layoutY="58.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@images/userProfile.png" />
@@ -59,6 +59,6 @@
             <Font size="14.0" />
          </font>
       </Text>
-      <Text layoutX="214.0" layoutY="121.0" strokeType="OUTSIDE" strokeWidth="0.0" text="HolderForUSerID" wrappingWidth="97.33333333333348" />
+      <Text fx:id="userIdText" layoutX="214.0" layoutY="121.0" strokeType="OUTSIDE" strokeWidth="0.0" text="HolderForUSerID" wrappingWidth="97.33333333333348" />
    </children>
 </AnchorPane>

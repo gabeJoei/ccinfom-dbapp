@@ -17,7 +17,9 @@
             <Font size="14.0" />
          </font>
       </Text>
-      <Text layoutX="317.0" layoutY="143.0" strokeType="OUTSIDE" strokeWidth="0.0" text="HolderForname" wrappingWidth="97.33333333333348" />
+      
+      <Text fx:id="nameText" layoutX="317.0" layoutY="143.0" strokeType="OUTSIDE" strokeWidth="0.0" text="HolderForname" wrappingWidth="97.33333333333348" />
+      
       <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="84.0" layoutY="74.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@images/userProfile.png" />
@@ -34,8 +36,10 @@
             <Font size="14.0" />
          </font>
       </Text>
-      <Text layoutX="317.0" layoutY="171.0" strokeType="OUTSIDE" strokeWidth="0.0" text="HolderForUSerID" wrappingWidth="97.33333333333348" />
-      <Button fx:id="confirmBtn" layoutX="544.0" layoutY="435.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="165.0" onAction="#handleConfirmBtn" text="Confirm Changes" />
+      
+      <Text fx:id="userIdText" layoutX="317.0" layoutY="171.0" strokeType="OUTSIDE" strokeWidth="0.0" text="HolderForUSerID" wrappingWidth="97.33333333333348" />
+      
+      <Button fx:id="confirmBtn" layoutX="544.0" layoutY="435.0" mnemonicParsing="false" onAction="#handleConfirmBtn" prefHeight="35.0" prefWidth="165.0" text="Confirm Changes" />
       <Button fx:id="backBtn" layoutX="1010.0" layoutY="560.0" mnemonicParsing="false" onAction="#handleBackBtn" text="Back" />
       <Text layoutX="431.0" layoutY="335.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Update Email Address:">
          <font>
