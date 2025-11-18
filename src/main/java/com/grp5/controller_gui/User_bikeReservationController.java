@@ -46,6 +46,9 @@ public class User_bikeReservationController {
     @FXML
     private TableColumn<bikeReservation, String> colStatus;
 
+    @FXML
+    private Text uID,uName;
+
     private bikeReservationDAO reservationDAO;
     private ObservableList<bikeReservation> reservationList;
     private String userID;
@@ -77,8 +80,11 @@ public class User_bikeReservationController {
         
         try {
             Text userIdText = (Text) reservationTable.getScene().lookup("#txtUserID");
+            Text userNameText = (Text) reservationTable.getScene().lookup("#txtUserName");
             if (userIdText != null) {
                 userID = userIdText.getText();
+                uID.setText(userID);
+                uName.setText(userNameText.getText());
             } else {
                 userID = "0"; // Default fallback
                 generalUtilities.showAlert(Alert.AlertType.WARNING, "Warning", "Could not retrieve user ID.");

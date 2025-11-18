@@ -74,8 +74,8 @@
                   <Font name="Bodoni MT" size="23.0" />
                </font>
             </Text>
-            <Text layoutX="161.0" layoutY="97.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
-            <Text layoutX="172.0" layoutY="122.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
+            <Text fx:id="uName" layoutX="161.0" layoutY="97.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
+            <Text fx:id="uID" layoutX="172.0" layoutY="122.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
          </children>
       </AnchorPane>
    </top>
