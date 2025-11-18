@@ -14,11 +14,15 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 public class Profile_changePassController {
 
+    @FXML
+    private Text nameText;
+    @FXML
+    private Text userIdText;
     @FXML
     private PasswordField oldPassField;
     @FXML
@@ -29,6 +33,35 @@ public class Profile_changePassController {
     private Button confirmBtn;
     @FXML
     private Button backBtn;
+
+ 
+    @FXML
+    public void initialize() {
+        // Load user data when the scene is initialized
+        loadUserData();
+    }
+
+    private void loadUserData() {
+        try {
+            if (AccountSession.isLoggedIn()) {
+                // Get full name from AccountSession
+                String fullName = AccountSession.getAccountFullName();
+                nameText.setText(fullName);
+                
+                // Get account ID from AccountSession
+                int accountId = AccountSession.getAccountID();
+                userIdText.setText(String.valueOf(accountId));
+            } else {
+                nameText.setText("N/A");
+                userIdText.setText("N/A");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            nameText.setText("N/A");
+            userIdText.setText("N/A");
+            showError("Data Load Error", "Could not load user information.");
+        }
+    }
 
     @FXML
     private void handleConfirmBtn() {
@@ -93,7 +126,6 @@ public class Profile_changePassController {
 
     private void loadNextScene(String fxmlFile, String title, Button button) {
         try {
-
             Parent nextSceneRoot = FXMLLoader.load(getClass().getResource(fxmlFile));
             Scene nextScene = new Scene(nextSceneRoot);
             Stage currentStage = (Stage) button.getScene().getWindow();
