@@ -22,15 +22,15 @@ public class bikeRecordDAO {
 
     // Create
     public int addBikeRecord(bikeRecordModel bikeRecord) {
-        String query = "INSERT INTO bike (bikeID,branchIDNum,bikeAvailability,bikeModel,hourlyRate,dailyRate) VALUES (?,?,?,?,?,?)";
+        String query = "INSERT INTO bike (branchIDNum,bikeAvailability,bikeModel,hourlyRate,dailyRate) VALUES (?,?,?,?,?)";
         try (Connection connect = databaseConnection.getConnection();
                 PreparedStatement prepState = connect.prepareStatement(query);) {
-            prepState.setInt(1, bikeRecord.getBikeID());
-            prepState.setInt(2, bikeRecord.getBranchIDNum());
-            prepState.setBoolean(3, bikeRecord.getBikeAvailability());
-            prepState.setString(4, bikeRecord.getBikeModel());
-            prepState.setBigDecimal(5, bikeRecord.getHourlyRate());
-            prepState.setBigDecimal(6, bikeRecord.getDailyRate());
+
+            prepState.setInt(1, bikeRecord.getBranchIDNum());
+            prepState.setBoolean(2, bikeRecord.getBikeAvailability());
+            prepState.setString(3, bikeRecord.getBikeModel());
+            prepState.setBigDecimal(4, bikeRecord.getHourlyRate());
+            prepState.setBigDecimal(5, bikeRecord.getDailyRate());
 
             int rowsInserted = prepState.executeUpdate();
             return rowsInserted;
@@ -108,6 +108,27 @@ public class bikeRecordDAO {
 
     // ========== Just some additional methods =========
 
+    // Method to populate the Branch Dropdown
+    public List<String> getAllBranchesForDropdown() {
+        List<String> branches = new ArrayList<>();
+        String query = "SELECT branchID, branchName FROM branch";
+
+        try (Connection connect = databaseConnection.getConnection();
+                PreparedStatement prepState = connect.prepareStatement(query);
+                ResultSet result = prepState.executeQuery()) {
+
+            while (result.next()) {
+                int id = result.getInt("branchID");
+                String name = result.getString("branchName");
+                // Format: "2 - Main Branch"
+                branches.add(id + " - " + name);
+            }
+        } catch (SQLException e) {
+            System.out.println("Error fetching branches: " + e.getMessage());
+        }
+        return branches;
+    }
+
     public int updateBikeRates(bikeRecordModel bikeRecord, BigDecimal hourlyRate, BigDecimal dailyRate) {
         String query = "UPDATE bike SET hourlyRate=?, dailyRate=? WHERE bikeID=?";
         try (Connection connect = databaseConnection.getConnection();
@@ -176,49 +197,49 @@ public class bikeRecordDAO {
             return false;
         }
     }
+
     public List<bikeRecordModel> getAllBikes() {
-    List<bikeRecordModel> bikeList = new ArrayList<>();
-    String query = "SELECT * FROM bike";
+        List<bikeRecordModel> bikeList = new ArrayList<>();
+        String query = "SELECT * FROM bike";
 
-    try (Connection conn = databaseConnection.getConnection();
-         PreparedStatement pstmt = conn.prepareStatement(query);
-         ResultSet result = pstmt.executeQuery()) {
+        try (Connection conn = databaseConnection.getConnection();
+                PreparedStatement pstmt = conn.prepareStatement(query);
+                ResultSet result = pstmt.executeQuery()) {
 
-        while (result.next()) {
-            bikeRecordModel bike = extractBikeFromResultSet(result);
-            bikeList.add(bike);
+            while (result.next()) {
+                bikeRecordModel bike = extractBikeFromResultSet(result);
+                bikeList.add(bike);
+            }
+        } catch (SQLException e) {
+            System.out.println("Error fetching bikes: " + e.getMessage());
         }
-    } catch (SQLException e) {
-        System.out.println("Error fetching bikes: " + e.getMessage());
-    }
-    return bikeList;
-}
-
-public ArrayList<bikeRecordModel> getBikesByBranch(int branchID) {
-    ArrayList<bikeRecordModel> bikes = new ArrayList<>();
-
-    try {
-        Connection connect = databaseConnection.getConnection();
-        PreparedStatement prepState = connect.prepareStatement(
-            "SELECT * FROM bike WHERE branchIDNum = ?"
-        );
-        prepState.setInt(1, branchID);
-        ResultSet result = prepState.executeQuery();
-
-        while (result.next()) {
-            bikes.add(extractBikeFromResultSet(result));
-
-        }
-
-        result.close();
-        prepState.close();
-        connect.close();
-
-    } catch (SQLException e) {
-        System.out.println(e.getMessage());
+        return bikeList;
     }
 
-    return bikes;
-}
+    public ArrayList<bikeRecordModel> getBikesByBranch(int branchID) {
+        ArrayList<bikeRecordModel> bikes = new ArrayList<>();
+
+        try {
+            Connection connect = databaseConnection.getConnection();
+            PreparedStatement prepState = connect.prepareStatement(
+                    "SELECT * FROM bike WHERE branchIDNum = ?");
+            prepState.setInt(1, branchID);
+            ResultSet result = prepState.executeQuery();
+
+            while (result.next()) {
+                bikes.add(extractBikeFromResultSet(result));
+
+            }
+
+            result.close();
+            prepState.close();
+            connect.close();
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+
+        return bikes;
+    }
 
 }
