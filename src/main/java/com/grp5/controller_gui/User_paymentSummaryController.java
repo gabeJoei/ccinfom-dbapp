@@ -89,7 +89,7 @@ public class User_paymentSummaryController {
     protected void onPayClick() {
 
         if (confirmPayment()) {
-
+            System.out.println("CLICKED HERE");
             // ADD reservation to database
             int reservationID = reservationDAO.addReservation(reservation);
 
