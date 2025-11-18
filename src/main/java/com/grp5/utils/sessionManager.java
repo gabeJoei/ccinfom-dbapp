@@ -15,6 +15,7 @@ import javafx.scene.control.Button;
 
 /**
  * A simple utility class to manage the logged-in user/admin session data.
+ * 
  */
 public class sessionManager {
     private static customerRecordModel loggedInCustomer = null;
