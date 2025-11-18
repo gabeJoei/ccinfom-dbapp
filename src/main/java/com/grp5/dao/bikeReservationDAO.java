@@ -84,7 +84,7 @@ public class bikeReservationDAO {
             pstmt.setTimestamp(4, reservation.getStartDate());
             pstmt.setTimestamp(5, reservation.getEndDate());
             pstmt.setTimestamp(6, reservation.getDateReturned());
-            pstmt.setString(7, reservation.getStatus());  // FIXED: Added missing status parameter
+            pstmt.setString(7, reservation.getStatus()); 
             pstmt.setInt(8, reservation.getBranchID());
             pstmt.setInt(9, reservation.getReservationReferenceNum());
 

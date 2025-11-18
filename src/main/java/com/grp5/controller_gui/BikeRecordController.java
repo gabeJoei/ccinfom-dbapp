@@ -7,6 +7,8 @@ import java.util.Optional;
 import com.grp5.dao.bikeRecordDAO;
 import com.grp5.model.bikeRecordModel;
 
+import javafx.scene.control.ComboBox;
+import javafx.scene.layout.GridPane;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -51,6 +53,9 @@ public class BikeRecordController {
     private TableColumn<bikeRecordModel, BigDecimal> dailyRateColumn;
 
     @FXML
+    private Button addButton;
+
+    @FXML
     private Button enterButton;
 
     @FXML
@@ -64,7 +69,6 @@ public class BikeRecordController {
 
     private bikeRecordDAO bikeDAO = new bikeRecordDAO();
     private ObservableList<bikeRecordModel> bikeList = FXCollections.observableArrayList();
-
 
     @FXML
     public void initialize() {
@@ -82,7 +86,6 @@ public class BikeRecordController {
         dailyRateColumn.setCellValueFactory(new PropertyValueFactory<>("dailyRate"));
     }
 
-
     private void loadAllBikes() {
         List<bikeRecordModel> bikes = bikeDAO.getAllBikes();
         bikeList.clear();
@@ -90,13 +93,114 @@ public class BikeRecordController {
         bikeTableView.setItems(bikeList);
     }
 
-   
+    @FXML
+    void handleAddButtonAction(ActionEvent event) {
+        // 1. Create the Custom Dialog
+        Dialog<bikeRecordModel> dialog = new Dialog<>();
+        dialog.setTitle("Add New Bike");
+        dialog.setHeaderText("Enter details for the new bike record");
+
+        // 2. Set the button types
+        ButtonType addButtonType = new ButtonType("Add", ButtonBar.ButtonData.OK_DONE);
+        dialog.getDialogPane().getButtonTypes().addAll(addButtonType, ButtonType.CANCEL);
+
+        // 3. Create the UI Layout
+        GridPane grid = new GridPane();
+        grid.setHgap(10);
+        grid.setVgap(10);
+
+        // Form Fields
+        ComboBox<String> cmbBranch = new ComboBox<>();
+        cmbBranch.getItems().addAll(bikeDAO.getAllBranchesForDropdown());
+        cmbBranch.setPromptText("Select Branch");
+
+        ComboBox<String> cmbBikeModel = new ComboBox<>();
+        cmbBikeModel.getItems().addAll(
+                "Mountain Bike", "Road Bike", "Bike with E-assist",
+                "tandem Bike", "E-Bike", "BMX bike");
+        cmbBikeModel.setPromptText("Select Model");
+
+        CheckBox chkAvailability = new CheckBox("Is Available?");
+        chkAvailability.setSelected(true);
+
+        TextField txtHourlyRate = new TextField();
+        txtHourlyRate.setPromptText("0.00");
+
+        TextField txtDailyRate = new TextField();
+        txtDailyRate.setPromptText("0.00");
+
+        grid.add(new Label("Branch:"), 0, 0);
+        grid.add(cmbBranch, 1, 0);
+        grid.add(new Label("Bike Model:"), 0, 1);
+        grid.add(cmbBikeModel, 1, 1);
+        grid.add(new Label("Availability:"), 0, 2);
+        grid.add(chkAvailability, 1, 2);
+        grid.add(new Label("Hourly Rate:"), 0, 3);
+        grid.add(txtHourlyRate, 1, 3);
+        grid.add(new Label("Daily Rate:"), 0, 4);
+        grid.add(txtDailyRate, 1, 4);
+
+        dialog.getDialogPane().setContent(grid);
+
+        // 4. VALIDATION LOGIC
+        Button btnAdd = (Button) dialog.getDialogPane().lookupButton(addButtonType);
+        btnAdd.addEventFilter(ActionEvent.ACTION, ae -> {
+            String selectedBranch = cmbBranch.getValue();
+            String selectedModel = cmbBikeModel.getValue();
+            String hourlyText = txtHourlyRate.getText().trim();
+            String dailyText = txtDailyRate.getText().trim();
+
+            // Check for empty fields
+            if (selectedBranch == null || selectedModel == null || hourlyText.isEmpty() || dailyText.isEmpty()) {
+                ae.consume(); // Stop the dialog from closing
+                showAlert(Alert.AlertType.ERROR, "Input Error", "Please fill in all fields before adding.");
+                return;
+            }
+
+            // Check for valid numbers
+            try {
+                new BigDecimal(hourlyText);
+                new BigDecimal(dailyText);
+            } catch (NumberFormatException e) {
+                ae.consume(); // Stop the dialog from closing
+                showAlert(Alert.AlertType.ERROR, "Input Error", "Hourly and Daily rates must be valid numbers.");
+            }
+        });
+
+        // 5. Convert Result (Only runs if validation passed)
+        dialog.setResultConverter(dialogButton -> {
+            if (dialogButton == addButtonType) {
+                String branchIDPart = cmbBranch.getValue().split(" - ")[0];
+                int branchID = Integer.parseInt(branchIDPart);
+
+                return new bikeRecordModel(0, branchID, chkAvailability.isSelected(),
+                        cmbBikeModel.getValue(),
+                        new BigDecimal(txtHourlyRate.getText().trim()),
+                        new BigDecimal(txtDailyRate.getText().trim()));
+            }
+            return null;
+        });
+
+        // 6. Show Dialog and Process Result
+        Optional<bikeRecordModel> result = dialog.showAndWait();
+
+        result.ifPresent(newBike -> {
+            int rowsInserted = bikeDAO.addBikeRecord(newBike);
+            if (rowsInserted > 0) {
+                showAlert(Alert.AlertType.INFORMATION, "Success", "New bike added successfully!");
+                loadAllBikes();
+            } else {
+                showAlert(Alert.AlertType.ERROR, "Database Error", "Failed to add bike record.");
+            }
+        });
+    }
+
     @FXML
     void handleEnterButtonAction(ActionEvent event) {
         try {
             String idText = bikeIDTextField.getText().trim();
             if (idText.isEmpty()) {
-                loadAllBikes(); 
+                loadAllBikes();
                 return;
             }
 
@@ -176,7 +280,7 @@ public class BikeRecordController {
 
                     return selectedBike;
                 } catch (NumberFormatException e) {
-                    showAlert(Alert.AlertType.ERROR, "Input Error", 
+                    showAlert(Alert.AlertType.ERROR, "Input Error",
                             "Branch ID, Hourly Rate, and Daily Rate must be valid numbers.");
                     return null;
                 }
@@ -190,7 +294,7 @@ public class BikeRecordController {
             if (rowsAffected > 0) {
                 showAlert(Alert.AlertType.INFORMATION, "Success",
                         "Bike record updated successfully!");
-                loadAllBikes(); 
+                loadAllBikes();
             } else {
                 showAlert(Alert.AlertType.ERROR, "Error",
                         "Failed to update bike record. Please ensure all fields are valid.");
@@ -198,40 +302,37 @@ public class BikeRecordController {
         });
     }
 
-  
     @FXML
     void handleViewDetailsButtonAction(ActionEvent event) {
         bikeRecordModel selectedBike = bikeTableView.getSelectionModel().getSelectedItem();
 
         if (selectedBike != null) {
             String details = String.format(
-                "Bike ID: %d\n" +
-                "Branch ID: %d\n" +
-                "Model: %s\n" +
-                "Availability: %s\n" +
-                "Hourly Rate: $%s\n" +
-                "Daily Rate: $%s",
-                selectedBike.getBikeID(),
-                selectedBike.getBranchIDNum(),
-                selectedBike.getBikeModel(),
-                selectedBike.getBikeAvailability() ? "Available" : "Not Available",
-                selectedBike.getHourlyRate(),
-                selectedBike.getDailyRate()
-            );
+                    "Bike ID: %d\n" +
+                            "Branch ID: %d\n" +
+                            "Model: %s\n" +
+                            "Availability: %s\n" +
+                            "Hourly Rate: $%s\n" +
+                            "Daily Rate: $%s",
+                    selectedBike.getBikeID(),
+                    selectedBike.getBranchIDNum(),
+                    selectedBike.getBikeModel(),
+                    selectedBike.getBikeAvailability() ? "Available" : "Not Available",
+                    selectedBike.getHourlyRate(),
+                    selectedBike.getDailyRate());
             showAlert(Alert.AlertType.INFORMATION, "Bike Details", details);
         } else {
-            showAlert(Alert.AlertType.WARNING, "No Selection", 
+            showAlert(Alert.AlertType.WARNING, "No Selection",
                     "Please select a bike record to view details.");
         }
     }
-
 
     @FXML
     void handleDeleteButtonAction(ActionEvent event) {
         bikeRecordModel selectedBike = bikeTableView.getSelectionModel().getSelectedItem();
 
         if (selectedBike == null) {
-            showAlert(Alert.AlertType.WARNING, "No Selection", 
+            showAlert(Alert.AlertType.WARNING, "No Selection",
                     "Please select a bike record to delete.");
             return;
         }
@@ -241,26 +342,25 @@ public class BikeRecordController {
         confirmAlert.setTitle("Delete Confirmation");
         confirmAlert.setHeaderText("Are you sure you want to delete Bike ID: " + selectedBike.getBikeID() + "?");
         confirmAlert.setContentText("Model: " + selectedBike.getBikeModel() + "\nThis action cannot be undone.");
-        
+
         Optional<ButtonType> result = confirmAlert.showAndWait();
-        
+
         if (result.isPresent() && result.get() == ButtonType.OK) {
             int rowsDeleted = bikeDAO.deleteBikeRecord(selectedBike.getBikeID());
 
             if (rowsDeleted > 0) {
-                showAlert(Alert.AlertType.INFORMATION, "Success", 
+                showAlert(Alert.AlertType.INFORMATION, "Success",
                         "Bike record deleted successfully.");
                 loadAllBikes(); // Refresh table
             } else {
-                showAlert(Alert.AlertType.ERROR, "Delete Failed", 
+                showAlert(Alert.AlertType.ERROR, "Delete Failed",
                         "Failed to delete bike record.\n\n" +
-                        "This bike may be referenced in rental records or other tables.\n" +
-                        "Please check the console for detailed error information.");
+                                "This bike may be referenced in rental records or other tables.\n" +
+                                "Please check the console for detailed error information.");
             }
         }
     }
 
- 
     private void showAlert(Alert.AlertType type, String title, String message) {
         Alert alert = new Alert(type);
         alert.setTitle(title);
