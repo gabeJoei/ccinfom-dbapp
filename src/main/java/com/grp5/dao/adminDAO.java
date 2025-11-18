@@ -4,6 +4,7 @@ import com.grp5.model.adminModel;
 import com.grp5.utils.databaseConnection;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.concurrent.ThreadLocalRandom;
 
 /**
  * Data Access Object (DAO) for managing admin records.
@@ -144,7 +145,7 @@ public class adminDAO {
         try (Connection conn = databaseConnection.getConnection();
                 PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
-            pstmt.setString(1, "xxxxxxxxxxxxxxxxxxxx");
+            pstmt.setString(1, "deleted_" + generateSimpleRandomString());
             pstmt.setInt(2, adminID);
             return pstmt.executeUpdate() > 0;
 
@@ -182,5 +183,18 @@ public class adminDAO {
         admin.setAdminFirstName(rs.getString("adminFirstName"));
         admin.setAdminLastName(rs.getString("adminLastName"));
         return admin;
+    }
+
+    private String generateSimpleRandomString() {
+        int length = 20;
+        String chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+        StringBuilder sb = new StringBuilder(length);
+
+        for (int i = 0; i < length; i++) {
+            int index = ThreadLocalRandom.current().nextInt(chars.length());
+            sb.append(chars.charAt(index));
+        }
+
+        return sb.toString();
     }
 }

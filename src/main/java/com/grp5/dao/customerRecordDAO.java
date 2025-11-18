@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ThreadLocalRandom;
 
 import com.grp5.model.customerRecordModel;
 import com.grp5.utils.databaseConnection;
@@ -118,7 +119,7 @@ public class customerRecordDAO {
         try (Connection connect = databaseConnection.getConnection();
                 PreparedStatement prepState = connect.prepareStatement(query)) {
 
-            prepState.setString(1, "xxxxxxxxxxxxxxxxxxxx");
+            prepState.setString(1, "deleted_" + generateSimpleRandomString());
             prepState.setInt(2, customerAccID);
 
             prepState.executeUpdate();
@@ -279,5 +280,18 @@ public class customerRecordDAO {
     //
     public boolean createCustomer(customerRecordModel customer) {
         return addCustomerRecordData(customer);
+    }
+
+    private String generateSimpleRandomString() {
+        int length = 20;
+        String chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+        StringBuilder sb = new StringBuilder(length);
+
+        for (int i = 0; i < length; i++) {
+            int index = ThreadLocalRandom.current().nextInt(chars.length());
+            sb.append(chars.charAt(index));
+        }
+
+        return sb.toString();
     }
 }
