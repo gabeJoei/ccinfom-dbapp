@@ -3,6 +3,8 @@ package com.grp5.controller_gui;
 import com.grp5.dao.bikeReservationDAO;
 import com.grp5.model.bikeReservation;
 import com.grp5.utils.generalUtilities;
+import com.grp5.dao.bikeRecordDAO;
+import com.grp5.model.bikeRecordModel;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -56,6 +58,8 @@ public class User_bikeReservationController {
     private bikeReservationDAO reservationDAO;
     private ObservableList<bikeReservation> reservationList;
     private String userID;
+    private bikeRecordDAO bikeDao;
+    private bikeRecordModel bikeModel;
 
     /**
      * Initialize method - called automatically by JavaFX
@@ -366,7 +370,7 @@ public class User_bikeReservationController {
     @FXML
     private void handleCancelReservation() {
         bikeReservation selected = reservationTable.getSelectionModel().getSelectedItem();
-
+        
         if (selected == null) {
             generalUtilities.showAlert(Alert.AlertType.WARNING, "No Selection",
                                  "Please select a reservation to cancel.");
@@ -390,6 +394,9 @@ public class User_bikeReservationController {
         if (result.isPresent() && result.get() == ButtonType.OK) {
             selected.setStatus("cancelled");
             if (reservationDAO.updateReservation(selected)) {
+                bikeRecordDAO bikeDao=new bikeRecordDAO();
+                bikeRecordModel bike=bikeDao.getBikeRecord(selected.getBikeID());
+                bikeDao.updateBikeAvailability(bike, true);
                 generalUtilities.showAlert(Alert.AlertType.INFORMATION, "Success",
                                  "Reservation cancelled successfully!");
                 loadUserReservations();

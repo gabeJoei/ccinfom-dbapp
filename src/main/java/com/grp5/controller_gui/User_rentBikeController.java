@@ -185,7 +185,7 @@ public class User_rentBikeController {
                 bike.getBikeID(), now, timeAfterOneHour
             );
 
-            if (!isCurrentlyReserved) {
+            if (!(isCurrentlyReserved)&&bike.getBikeAvailability()==true) {
                 if (model.contains("mountain")) {
                     mountainCount++;
                     if (mountainBike == null)

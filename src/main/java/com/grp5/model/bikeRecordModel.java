@@ -23,6 +23,11 @@ public class bikeRecordModel {
     private BigDecimal dailyRate;
 
     // ============ Constructors ============
+    public bikeRecordModel(int bikeID){
+        this.bikeID=bikeID;
+    }
+
+
     public bikeRecordModel(int bikeID, int branchIDNum, boolean bikeAvailability,
             String bikeModel, BigDecimal hourlyRate, BigDecimal dailyRate) {
         this.bikeID = bikeID;
