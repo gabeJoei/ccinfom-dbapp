@@ -77,6 +77,7 @@ public class bikeReservationDAO {
             pstmt.setTimestamp(4, reservation.getStartDate());
             pstmt.setTimestamp(5, reservation.getEndDate());
             pstmt.setTimestamp(6, reservation.getDateReturned());
+            pstmt.setString(7, reservation.getStatus());  // FIXED: Added missing status parameter
             pstmt.setInt(8, reservation.getBranchID());
             pstmt.setInt(9, reservation.getReservationReferenceNum());
 
@@ -89,19 +90,54 @@ public class bikeReservationDAO {
         }
     }
 
-    // DELETE
+    // DELETE - Now handles foreign key constraint by deleting payments first
     public boolean deleteReservation(int reservationRefNumber) {
-        String sql = "DELETE FROM reservation WHERE reservationReferenceNum = ?";
-        try (Connection conn = databaseConnection.getConnection();
-             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+        Connection conn = null;
+        try {
+            conn = databaseConnection.getConnection();
+            conn.setAutoCommit(false); // Start transaction
 
-            pstmt.setInt(1, reservationRefNumber);
-            int rowsAffected = pstmt.executeUpdate();
-            return rowsAffected > 0;
+            // First, delete all payments associated with this reservation
+            String deletePaymentsSQL = "DELETE FROM payment WHERE reservationReferenceNum = ?";
+            try (PreparedStatement pstmt = conn.prepareStatement(deletePaymentsSQL)) {
+                pstmt.setInt(1, reservationRefNumber);
+                pstmt.executeUpdate();
+            }
+
+            // Then delete the reservation
+            String deleteReservationSQL = "DELETE FROM reservation WHERE reservationReferenceNum = ?";
+            try (PreparedStatement pstmt = conn.prepareStatement(deleteReservationSQL)) {
+                pstmt.setInt(1, reservationRefNumber);
+                int rowsAffected = pstmt.executeUpdate();
+                
+                if (rowsAffected > 0) {
+                    conn.commit();
+                    return true;
+                } else {
+                    conn.rollback();
+                    return false;
+                }
+            }
 
         } catch (SQLException e) {
+            try {
+                if (conn != null) {
+                    conn.rollback();
+                }
+            } catch (SQLException rollbackE) {
+                System.out.println("Rollback failed: " + rollbackE.getMessage());
+            }
             e.printStackTrace();
             return false;
+        } finally {
+            try {
+                if (conn != null) {
+                    conn.setAutoCommit(true);
+                    conn.close();
+                }
+            } catch (SQLException closeE) {
+                System.out.println("Error closing connection: " + closeE.getMessage());
+            }
         }
     }
 
