@@ -1,6 +1,9 @@
 package com.grp5.controller_gui;
 
+import com.grp5.dao.adminDAO;
+import com.grp5.dao.customerRecordDAO;
 import com.grp5.session.AccountSession;
+import com.grp5.utils.sessionManager;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -23,6 +26,44 @@ public class Profile_deleteController {
     @FXML
     void handleConfirmBtn() {
         System.out.println("Confirm Button Clicked!");
+        if (isCorrect()) {
+            if (AccountSession.isAdmin()) {
+                adminDAO dao = new adminDAO();
+                int accountId = sessionManager.getLoggedInAdmin().getAdminID();
+                dao.deleteAdmin(accountId);
+                showInfo("Goodbye :(", "Account successfully deleted!");
+                AccountSession.cleanSession();
+                sessionManager.clearSession();
+                loadNextScene("/com/grp5/view/AdminOrUser.fxml", "Pick?", confirmBtn);
+            } else if (AccountSession.isUser()) {
+                customerRecordDAO dao = new customerRecordDAO();
+                int accountId = sessionManager.getLoggedInCustomer().getCustomerAccID();
+                dao.delCustomerRecordData(accountId);
+                showInfo("Goodbye :(", "Account successfully deleted!");
+                AccountSession.cleanSession();
+                sessionManager.clearSession();
+                loadNextScene("/com/grp5/view/AdminOrUser.fxml", "Pick?", confirmBtn);
+            } else {
+                System.out.println("Something is wrong here.");
+            }
+        } else {
+            showError("Error", "Incorrect Password!");
+        }
+    }
+
+    private boolean isCorrect() {
+        String inputPass = passwordField.getText();
+        String accntPass;
+        if (AccountSession.isAdmin()) {
+            accntPass = sessionManager.getLoggedInAdmin().getAdminPassword();
+            return inputPass.trim().equals(accntPass.trim());
+        } else if (AccountSession.isUser()) {
+            accntPass = sessionManager.getLoggedInCustomer().getCustomerPass();
+            return inputPass.trim().equals(accntPass.trim());
+        } else {
+            System.out.println("Something is wrong here :/");
+        }
+        return false;
     }
 
     @FXML
@@ -60,5 +101,13 @@ public class Profile_deleteController {
         alert.setHeaderText(header);
         alert.setContentText(content);
         alert.showAndWait();
+    }
+
+    private void showInfo(String header, String content) {
+        Alert a = new Alert(Alert.AlertType.INFORMATION);
+        a.setTitle("Success");
+        a.setHeaderText(header);
+        a.setContentText(content);
+        a.showAndWait();
     }
 }

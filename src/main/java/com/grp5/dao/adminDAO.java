@@ -139,12 +139,13 @@ public class adminDAO {
      * Delete admin
      */
     public boolean deleteAdmin(int adminID) {
-        String sql = "DELETE FROM admin WHERE adminID = ?";
+        String sql = "UPDATE admin SET adminUsername=? WHERE adminID=?";
 
         try (Connection conn = databaseConnection.getConnection();
                 PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
-            pstmt.setInt(1, adminID);
+            pstmt.setString(1, "xxxxxxxxxxxxxxxxxxxx");
+            pstmt.setInt(2, adminID);
             return pstmt.executeUpdate() > 0;
 
         } catch (SQLException e) {

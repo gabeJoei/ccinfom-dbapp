@@ -44,7 +44,8 @@ public class customerRecordDAO {
         }
     }
 
-    // READ || it reads a record from the customer database that has the same customer ID. 
+    // READ || it reads a record from the customer database that has the same
+    // customer ID.
     public customerRecordModel getCustomerRecordData(customerRecordModel customer) {
         String query = "SELECT * FROM customer WHERE customerAccID=?";
         try (Connection connect = databaseConnection.getConnection();
@@ -66,7 +67,8 @@ public class customerRecordDAO {
         return null;
     }
 
-    // READ - CUSTOMER TRANSACTION || It retrieves all the payement transaction made by a customer
+    // READ - CUSTOMER TRANSACTION || It retrieves all the payement transaction made
+    // by a customer
     public customerRecordModel getCustomerTransaction(customerRecordModel customer) {
         String query = "SELECT * FROM customer C JOIN payment P ON C.customerAccID=P.customerAccID WHERE C.customerAccID=?";
         try (Connection connect = databaseConnection.getConnection();
@@ -112,11 +114,12 @@ public class customerRecordDAO {
 
     // DELETE || it deletes a record from the customer database
     public boolean delCustomerRecordData(int customerAccID) {
-        String query = "DELETE FROM Customer WHERE customerAccID=?";
+        String query = "UPDATE customer SET customerEmail=? WHERE customerAccID=?";
         try (Connection connect = databaseConnection.getConnection();
                 PreparedStatement prepState = connect.prepareStatement(query)) {
 
-            prepState.setInt(1, customerAccID);
+            prepState.setString(1, "xxxxxxxxxxxxxxxxxxxx");
+            prepState.setInt(2, customerAccID);
 
             prepState.executeUpdate();
             prepState.close();
@@ -140,7 +143,7 @@ public class customerRecordDAO {
         return customerModel;
     }
 
-    // Updates a customer's password 
+    // Updates a customer's password
     public boolean updateCustomerPassword(int customerAccID, String newPass) {
         String sql = "UPDATE customer SET customerPass=? WHERE customerAccID=?";
         try (Connection connect = databaseConnection.getConnection();
@@ -195,7 +198,7 @@ public class customerRecordDAO {
         return null;
     }
 
-    //retrieves all the records in the customer data base
+    // retrieves all the records in the customer data base
     public List<customerRecordModel> getAllCustomers() {
         List<customerRecordModel> customers = new ArrayList<>();
         String query = "SELECT * FROM customer";
@@ -214,7 +217,8 @@ public class customerRecordDAO {
         return customers;
     }
 
-    //gets a specific customer record in the database that matches the customerAccID passed through the parameter
+    // gets a specific customer record in the database that matches the
+    // customerAccID passed through the parameter
     public customerRecordModel getCustomer(int customerAccID) {
         String query = "SELECT * FROM customer WHERE customerAccID=?";
         try (Connection connect = databaseConnection.getConnection();
@@ -234,7 +238,7 @@ public class customerRecordDAO {
         return null;
     }
 
-    //checks if the email exists in the customer database. 
+    // checks if the email exists in the customer database.
     public boolean emailExists(String email) {
         String query = "SELECT COUNT(*) FROM customer WHERE customerEmail = ?";
         try (Connection connect = databaseConnection.getConnection();
@@ -253,7 +257,7 @@ public class customerRecordDAO {
         return false;
     }
 
-    //retrieves the next available customerAccID. 
+    // retrieves the next available customerAccID.
     public int getNextCustomerAccID() {
         String query = "SELECT MAX(customerAccID) as maxID FROM customer";
         try (Connection connect = databaseConnection.getConnection();
