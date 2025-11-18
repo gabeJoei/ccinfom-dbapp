@@ -3,6 +3,7 @@
 -- Host: localhost    Database: ccinfom
 -- ------------------------------------------------------
 -- Server version 9.4.0
+use ccinfom;
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
