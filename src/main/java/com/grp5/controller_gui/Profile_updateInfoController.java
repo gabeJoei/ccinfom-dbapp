@@ -15,6 +15,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.text.Text;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 
@@ -30,6 +31,38 @@ public class Profile_updateInfoController {
     private Button confirmBtn;
     @FXML
     private Button backBtn;
+    @FXML
+    private Text nameText;
+    @FXML
+    private Text userIdText;
+
+    @FXML
+    public void initialize() {
+        // Load user data when the scene is initialized
+        loadUserData();
+    }
+
+    private void loadUserData() {
+        try {
+            if (AccountSession.isLoggedIn()) {
+                // Get full name from AccountSession
+                String fullName = AccountSession.getAccountFullName();
+                nameText.setText(fullName);
+                
+                // Get account ID from AccountSession
+                int accountId = AccountSession.getAccountID();
+                userIdText.setText(String.valueOf(accountId));
+            } else {
+                nameText.setText("N/A");
+                userIdText.setText("N/A");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            nameText.setText("N/A");
+            userIdText.setText("N/A");
+            showError("Data Load Error", "Could not load user information.");
+        }
+    }
 
     @FXML
     private void handleConfirmBtn() {
@@ -51,6 +84,7 @@ public class Profile_updateInfoController {
 
         if (newEmail == null && newContactNo == null) {
             showError("Error!", "Fields are blank!");
+            return;
         }
 
         if (newEmail != null && newContactNo != null) { // both are available
@@ -73,9 +107,6 @@ public class Profile_updateInfoController {
                     if (passwordField != null)
                         passwordField.clear();
                     showInfo("Success", "Email successfully updated!");
-                } else {
-                    passwordField.clear();
-                    showError("Error!", "Incorrect Password!");
                 }
             } else {
                 passwordField.clear();
@@ -95,7 +126,7 @@ public class Profile_updateInfoController {
                             passwordField.clear();
                         showInfo("Success", "Phone number successfully updated!");
                         break;
-                    case 2: // Only new email is avail.able
+                    case 2: // Only new email is available
                         user.setEmail(newEmail);
                         dao.modifyCustomerRecordData(user);
                         if (newEmailField != null)
@@ -115,6 +146,7 @@ public class Profile_updateInfoController {
                         if (passwordField != null)
                             passwordField.clear();
                         showInfo("Success", "Email and phone number successfully updated!");
+                        break;
                     default:
                         break;
                 }
