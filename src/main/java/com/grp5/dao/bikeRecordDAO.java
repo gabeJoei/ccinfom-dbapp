@@ -27,7 +27,7 @@ public class bikeRecordDAO {
                 PreparedStatement prepState = connect.prepareStatement(query);) {
 
             prepState.setInt(1, bikeRecord.getBranchIDNum());
-            prepState.setBoolean(2, bikeRecord.getBikeAvailability());
+            prepState.setString(2, bikeRecord.getBikeAvailability() ? "Yes" : "No");
             prepState.setString(3, bikeRecord.getBikeModel());
             prepState.setBigDecimal(4, bikeRecord.getHourlyRate());
             prepState.setBigDecimal(5, bikeRecord.getDailyRate());
@@ -62,7 +62,8 @@ public class bikeRecordDAO {
     private bikeRecordModel extractBikeFromResultSet(ResultSet result) throws SQLException {
         bikeRecordModel bikeRecord = new bikeRecordModel(result.getInt("bikeID"), result.getString("bikeModel"));
         bikeRecord.setBranchIDNum(result.getInt("branchIDNum"));
-        bikeRecord.setBikeAvailability(result.getBoolean("bikeAvailability"));
+        String availability = result.getString("bikeAvailability");
+        bikeRecord.setBikeAvailability("Yes".equalsIgnoreCase(availability));
         bikeRecord.setHourlyRate(result.getBigDecimal("hourlyRate"));
         bikeRecord.setDailyRate(result.getBigDecimal("dailyRate"));
         return bikeRecord;
@@ -75,7 +76,7 @@ public class bikeRecordDAO {
                 PreparedStatement prepState = connect.prepareStatement(query)) {
 
             prepState.setInt(1, bikeRecord.getBranchIDNum());
-            prepState.setBoolean(2, bikeRecord.getBikeAvailability());
+            prepState.setString(2, bikeRecord.getBikeAvailability() ? "Yes" : "No");
             prepState.setString(3, bikeRecord.getBikeModel());
             prepState.setBigDecimal(4, bikeRecord.getHourlyRate());
             prepState.setBigDecimal(5, bikeRecord.getDailyRate());
