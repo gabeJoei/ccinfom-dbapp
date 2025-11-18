@@ -1,5 +1,4 @@
 package com.grp5.reports;
-
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -11,15 +10,28 @@ import java.util.List;
 
 import com.grp5.utils.databaseConnection;
 
+
+/**
+ * Generates rental sales reports based on payment, reservation, and bike data.
+ * This class provides methods to:
+ *   Retrieve rental sales statistics for a given month and year
+ *   Generate a formatted rental sales report summary
+ *   Retrieve rental sales data for a custom date range
+ * 
+ * The data is aggregated from the payment, reservation,
+ * and bike database tables.
+ */
 public class rentalSalesReport {
     
     public class RentalSales {
 
+        //variable declaraction
         private Date date;
         private String bikeModel;
         private long unitSales;
         private double revenue;
 
+        //constructor
         public RentalSales(Date date, String bikeModel, long unitSales, double revenue) {
             this.date = date;
             this.bikeModel = bikeModel;
@@ -34,6 +46,7 @@ public class rentalSalesReport {
         public double getRevenue() { return this.revenue; }
     }
 
+    //Retrieves aggregated rental sales data for a specific month and year.
     public ArrayList<RentalSales> generateRentalSalesData(int year, int month) { 
         ArrayList<RentalSales> rentalSales = new ArrayList<>();
 
@@ -74,6 +87,7 @@ public class rentalSalesReport {
         return rentalSales;
     }
 
+    //Generates a formatted rental sales report summary for a specific month and year.
     public String generateRentalSalesReport(int year, int month) {
         ArrayList<RentalSales> data = generateRentalSalesData(year, month);
 
@@ -106,7 +120,7 @@ public class rentalSalesReport {
         return generatedSummary.toString();
     }
     
-
+    //Generates rental sales data between two specific dates.
     public List<RentalSales> generateRentalSalesDataByDateRange(LocalDate fromDate, LocalDate toDate) {
         List<RentalSales> sales = new ArrayList<>();
 

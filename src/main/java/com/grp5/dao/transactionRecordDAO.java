@@ -1,12 +1,3 @@
-/**
- * Data Access Object (DAO) for managing payment transaction records.
- * 
- * This class handles all CRUD operations for the payment database table,
- * including inserting, retrieving, updating, and deleting payment transactions.
- * It also provides utility methods for joining related customer, reservation,
- * and branch data.
- */
-
 package com.grp5.dao;
 
 import java.sql.Connection;
@@ -18,6 +9,14 @@ import java.util.ArrayList;
 import com.grp5.model.transactionRecordModel;
 import com.grp5.utils.databaseConnection;
 
+/**
+ * Data Access Object (DAO) for managing payment transaction records.
+ * 
+ * This class handles all CRUD operations for the payment database table,
+ * including inserting, retrieving, updating, and deleting payment transactions.
+ * It also provides utility methods for joining related customer, reservation,
+ * and branch data.
+ */
 public class transactionRecordDAO {
 
     //A method used to insert new data into the payment transaction record. 

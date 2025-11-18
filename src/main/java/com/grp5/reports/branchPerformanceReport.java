@@ -4,6 +4,10 @@ import com.grp5.utils.databaseConnection;
 import java.sql.*;
 import java.util.ArrayList;
 
+
+/*Generates performance reports for all branches within a selected year and month.
+ * 
+ */
 public class branchPerformanceReport {
     
     public class branchPerformance {

@@ -1,3 +1,5 @@
+package com.grp5.model;
+
 /*
  * Model for customer record in the Bike Rental System.
  * 
@@ -7,9 +9,6 @@
  * It provides getters and setters for all fields.
  * 
  */
-
-package com.grp5.model;
-
 public class customerRecordModel {
     /* Variable Declarations*/
     private int customerAccID;

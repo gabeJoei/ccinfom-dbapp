@@ -1,3 +1,5 @@
+package com.grp5.model;
+
 /*
  * Model for bike model rental count.
  * 
@@ -6,8 +8,6 @@
  * It provides getters and setters for all fields,
  * 
  */
-package com.grp5.model;
-
 public class BikeModelRentalCountModel {
     //variable declaration
     private final String bikeModel;

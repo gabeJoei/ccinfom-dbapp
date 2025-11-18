@@ -1,3 +1,7 @@
+package com.grp5.model;
+
+import java.time.LocalDate;
+
 /*
  * Model for daily rent volume.
  * 
@@ -7,11 +11,6 @@
  * 
  * 
  */
-
-package com.grp5.model;
-
-import java.time.LocalDate;
-
 public class DailyRentalVolumeModel {
     //variable declaration
     private final LocalDate date;

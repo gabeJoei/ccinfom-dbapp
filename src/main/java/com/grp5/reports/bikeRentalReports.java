@@ -13,8 +13,10 @@ import com.grp5.model.BikeModelRentalCountModel;
 import com.grp5.model.BikeRentalMonthReportModel;
 import com.grp5.utils.databaseConnection;
 
+//Provides reporting utilities for analyzing bike rental activity.
 public class bikeRentalReports {
 
+    //Generates a complete rental report for a given month and year.
     public BikeRentalMonthReportModel generateReport(int year, int month) {
 
         List<DailyRentalVolumeModel> dailyVolumes = getDailyRentalVolume(year, month);
@@ -24,6 +26,7 @@ public class bikeRentalReports {
         return new BikeRentalMonthReportModel(year, month, dailyVolumes, mostRented);
     }
 
+    //Retrieves the number of rentals for each day in the specified month.
     private List<DailyRentalVolumeModel> getDailyRentalVolume(int year, int month) {
         List<DailyRentalVolumeModel> volumes = new ArrayList<>();
 
@@ -55,6 +58,7 @@ public class bikeRentalReports {
         return volumes;
     }
 
+    // Retrieves the top rented bike models for a given month and year.
     private List<BikeModelRentalCountModel> getTopBikeModels(int year, int month, int limit) {
         List<BikeModelRentalCountModel> models = new ArrayList<>();
 
@@ -89,6 +93,7 @@ public class bikeRentalReports {
         return models;
     }
 
+    //Retrieves the total rental count per bike model for a given date range.
     public List<BikeModelRentalCountModel> getBikeModelTotalsByDateRange(LocalDate fromDate, LocalDate toDate) {
         List<BikeModelRentalCountModel> models = new ArrayList<>();
 

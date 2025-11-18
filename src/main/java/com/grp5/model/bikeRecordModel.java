@@ -1,3 +1,7 @@
+package com.grp5.model;
+
+import java.math.BigDecimal;
+
 /*
  * Model for bike record in the Bike Rental System.
  * 
@@ -7,11 +11,6 @@
  * all fields.
  * 
  */
-
-package com.grp5.model;
-
-import java.math.BigDecimal;
-
 public class bikeRecordModel {
 
     //variable declaration

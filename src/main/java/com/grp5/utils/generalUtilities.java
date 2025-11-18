@@ -6,9 +6,13 @@ import com.grp5.model.customerRecordModel;
 
 import javafx.scene.control.Alert;
 
-/*Generates long numbers with 11 characters. */
+//General Utilities used as support
 public class generalUtilities{
+
+    //constructor
     private generalUtilities(){}
+
+    /*Generates long numbers with 11 characters. */
     public static int generateRandIntNum(){
         int randomNum;
         int min=1000000;
@@ -38,7 +42,9 @@ public class generalUtilities{
      
 
     }
-    
+    /*checks if the customer email address already exists in the database.
+    prevents duplicates.
+    */
     public boolean duplicateAccounts(String inputedEmail){
         String query="SELECT COUNT(customerEmail) FROM customer WHERE customerEmail=? LIMIT 1";
         try(Connection connect=databaseConnection.getConnection();

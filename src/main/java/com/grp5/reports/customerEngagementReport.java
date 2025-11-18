@@ -9,6 +9,13 @@ import java.util.ArrayList;
 
 import com.grp5.utils.databaseConnection;
 
+
+/**
+ * Generates customer engagement reports based on payment activity within a specified date range.
+ * This report calculates how many payments (engagements) each customer made, 
+ * including the customer's name and associated branch. 
+ * Results are sorted by highest engagement first.
+ **/
 public class customerEngagementReport {
     
     // Fields
@@ -27,7 +34,7 @@ public class customerEngagementReport {
         branchName=bName;
     }
 
-    // Getters (used by JavaFX TableView)
+    // Getters 
     public int getCustomerEngagement(){return customerEngagement;}
     public int getCustomerID(){return customerID;}
     public String getCustomerName(){return customerName;}
@@ -52,6 +59,8 @@ public class customerEngagementReport {
         customerEngagement,customerID,customerName);
     }
 
+    /*Retrieves customer engagement data based on payments between two dates. 
+    It counts the total engagement a customer has with the bike rental*/
     public ArrayList<customerEngagementReport> customerEngageReport(String startDate, String endDate){
 
         if(startDate == null || startDate.isEmpty()){
