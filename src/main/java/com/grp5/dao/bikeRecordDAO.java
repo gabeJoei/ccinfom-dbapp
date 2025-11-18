@@ -152,7 +152,7 @@ public class bikeRecordDAO {
         try (Connection connect = databaseConnection.getConnection();
                 PreparedStatement prepState = connect.prepareStatement(query)) {
 
-            prepState.setBoolean(1, bikeAvailability);
+            prepState.setString(1, bikeAvailability ? "Yes" : "No");
             prepState.setInt(2, bikeRecord.getBikeID());
 
             int rowsAffected = prepState.executeUpdate();
@@ -188,7 +188,8 @@ public class bikeRecordDAO {
 
             try (ResultSet result = prepState.executeQuery();) {
                 if (result.next()) {
-                    return result.getBoolean("bikeAvailability");
+                    String status = result.getString("bikeAvailability");
+                    return "Yes".equalsIgnoreCase(status);
                 }
             }
 
