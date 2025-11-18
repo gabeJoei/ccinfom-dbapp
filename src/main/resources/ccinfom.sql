@@ -1,9 +1,8 @@
--- MySQL dump 10.13  Distrib 9.5.0, for macos15.4 (arm64)
+-- MySQL dump 10.13  Distrib 8.0.43, for Win64 (x86_64)
 --
--- Host: localhost    Database: ccinfom
+-- Host: 127.0.0.1    Database: ccinfom
 -- ------------------------------------------------------
--- Server version 9.4.0
-use ccinfom;
+-- Server version	8.0.43
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -31,7 +30,8 @@ CREATE TABLE `admin` (
   `adminFirstName` varchar(45) NOT NULL,
   `adminLastName` varchar(45) NOT NULL,
   PRIMARY KEY (`adminID`),
-  UNIQUE KEY `adminUsername` (`adminUsername`)
+  UNIQUE KEY `adminUsername` (`adminUsername`),
+  UNIQUE KEY `adminEmail_UNIQUE` (`adminEmail`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -60,7 +60,7 @@ CREATE TABLE `bike` (
   `hourlyRate` decimal(7,2) DEFAULT NULL,
   `dailyRate` decimal(7,2) DEFAULT NULL,
   PRIMARY KEY (`bikeID`)
-) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -69,9 +69,7 @@ CREATE TABLE `bike` (
 
 LOCK TABLES `bike` WRITE;
 /*!40000 ALTER TABLE `bike` DISABLE KEYS */;
--- NOTE: The boolean data type treats 1 as TRUE and 0 as FALSE. 
--- Since all bikes were 'Yes', we insert 1 (TRUE).
-INSERT INTO `bike` VALUES (1,1,1,'Mountain Bike',25.00,150.00),(2,1,1,'Road Bike',20.00,120.00),(3,2,1,'Bike with E-assist',30.00,180.00),(4,3,1,'tandem Bike',22.50,135.00),(5,2,1,'E-Bike',28.00,160.00),(6,1,1,'BMX bike',18.00,100.00),(7,1,1,'Mountain Bike',25.00,150.00),(8,2,1,'Mountain Bike',25.00,150.00),(9,4,1,'Mountain Bike',25.00,150.00),(10,4,1,'Mountain Bike',25.00,150.00),(11,5,1,'Mountain Bike',25.00,150.00),(12,5,1,'Mountain Bike',25.00,150.00),(13,3,1,'Mountain Bike',25.00,150.00),(14,3,1,'Mountain Bike',25.00,150.00),(15,2,1,'Bike with E-assist',30.00,180.00),(16,3,1,'Bike with E-assist',30.00,180.00),(17,1,1,'Bike with E-assist',30.00,180.00),(18,2,1,'Bike with E-assist',30.00,180.00),(19,3,1,'tandem Bike',22.50,135.00),(20,2,1,'E-Bike',28.00,160.00),(21,1,1,'BMX bike',18.00,100.00);
+INSERT INTO `bike` VALUES (1,1,'No','Mountain Bike',25.00,150.00),(2,1,'Yes','Road Bike',20.00,120.00),(3,2,'Yes','Bike with E-assist',30.00,180.00),(4,3,'Yes','tandem Bike',22.50,135.00),(5,2,'Yes','E-Bike',28.00,160.00),(6,1,'Yes','BMX bike',18.00,100.00),(7,1,'No','Mountain Bike',25.00,150.00),(8,2,'Yes','Mountain Bike',25.00,150.00),(9,4,'Yes','Mountain Bike',25.00,150.00),(10,4,'Yes','Mountain Bike',25.00,150.00),(11,5,'Yes','Mountain Bike',25.00,150.00),(12,5,'Yes','Mountain Bike',25.00,150.00),(13,3,'Yes','Mountain Bike',25.00,150.00),(14,3,'Yes','Mountain Bike',25.00,150.00),(15,2,'Yes','Bike with E-assist',30.00,180.00),(16,3,'Yes','Bike with E-assist',30.00,180.00),(17,1,'No','Bike with E-assist',30.00,180.00),(18,2,'Yes','Bike with E-assist',30.00,180.00),(19,3,'Yes','tandem Bike',22.50,135.00),(20,2,'Yes','E-Bike',28.00,160.00),(21,1,'Yes','BMX bike',18.00,100.00),(25,1,'Yes','Mountain Bike',12.00,12.00),(26,1,'No','Mountain Bike',12.00,12.00),(27,1,'No','Mountain Bike',12.00,12.00);
 /*!40000 ALTER TABLE `bike` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -114,8 +112,9 @@ CREATE TABLE `customer` (
   `customerEmail` varchar(45) NOT NULL,
   `phoneNumber` varchar(15) NOT NULL,
   `customerPass` varchar(45) NOT NULL,
-  PRIMARY KEY (`customerAccID`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb3;
+  PRIMARY KEY (`customerAccID`),
+  UNIQUE KEY `customerEmail_UNIQUE` (`customerEmail`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -124,7 +123,7 @@ CREATE TABLE `customer` (
 
 LOCK TABLES `customer` WRITE;
 /*!40000 ALTER TABLE `customer` DISABLE KEYS */;
-INSERT INTO `customer` VALUES (1,'Test','User','test@gmail.com','09657387612','test'),(2,'John','Doe','johndoe@gmail.com','09761234567','pass');
+INSERT INTO `customer` VALUES (1,'Test','User','test@gmail.com','09657387612','test'),(2,'John','Doe','johndoe@gmail.com','09761234567','pass'),(3,'Catherine','G','catherine_g@gmail.com','09919919919','cathGcath');
 /*!40000 ALTER TABLE `customer` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -145,10 +144,9 @@ CREATE TABLE `payment` (
   `paymentAmount` double NOT NULL,
   PRIMARY KEY (`paymentReferenceNum`),
   KEY `customerAccID_idx` (`customerID`),
-  KEY `reservationReferenceNum_idx` (`reservationReferenceNum`,`customerID`),
-  CONSTRAINT `payment_customer_customerAccID` FOREIGN KEY (`customerID`) REFERENCES `customer` (`customerAccID`),
-  CONSTRAINT `payment_reservationReferenceNum` FOREIGN KEY (`reservationReferenceNum`) REFERENCES `reservation` (`reservationReferenceNum`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb3;
+  KEY `reservationReferenceNum_idx` (`reservationReferenceNum`,`customerID`) /*!80000 INVISIBLE */,
+  CONSTRAINT `payment_reservationReferenceNum` FOREIGN KEY (`reservationReferenceNum`) REFERENCES `reservation` (`reservationReferenceNum`) ON DELETE SET NULL
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -183,7 +181,7 @@ CREATE TABLE `reservation` (
   KEY `branchID_idx` (`branchID`),
   CONSTRAINT `reservation_bikeID` FOREIGN KEY (`bikeID`) REFERENCES `bike` (`bikeID`),
   CONSTRAINT `reservation_branchID` FOREIGN KEY (`branchID`) REFERENCES `branch` (`branchID`)
-) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -204,4 +202,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-11-17 22:10:20
+-- Dump completed on 2025-11-19  2:00:43

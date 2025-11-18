@@ -1,6 +1,8 @@
 package com.grp5.controller_gui;
 
+import com.grp5.dao.bikeRecordDAO;
 import com.grp5.dao.bikeReservationDAO;
+import com.grp5.model.bikeRecordModel;
 import com.grp5.model.bikeReservation;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -267,7 +269,11 @@ public class ReservationController {
             if (result.isPresent() && result.get() == ButtonType.OK) {
                 boolean deleted = reservationDAO.deleteReservation(selectedReservation.getReservationReferenceNum());
                 if (deleted) {
+                    bikeRecordDAO bikeDao=new bikeRecordDAO();
+                    bikeRecordModel bike=bikeDao.getBikeRecord(selectedReservation.getBikeID());
+                    bikeDao.updateBikeAvailability(bike, true);
                     showAlert(Alert.AlertType.INFORMATION, "Success", "Reservation record deleted successfully.");
+                   
                     loadReservationData();
                 } else {
                     showAlert(Alert.AlertType.ERROR, "Failure", "Failed to delete reservation record.");
