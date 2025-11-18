@@ -62,11 +62,11 @@ public class User_reserveBikeController {
     private customerRecordModel user;
     private bikeReservation reservation;
     private BigDecimal priceToPay;
-    private String userID; // Store userID for passing to payment screen
+    private String userID;
 
     public void initData(String userID, bikeRecordModel bike) {
         this.selectedBike = bike;
-        this.userID = userID; // Store the userID
+        this.userID = userID; 
         
         // get DAO
         customerDAO = new customerRecordDAO();
@@ -214,7 +214,7 @@ public class User_reserveBikeController {
 
     private boolean validateReservation(LocalDateTime startDateTime, LocalDateTime endDateTime) {
 
-        LocalDateTime now = LocalDateTime.now(); // Get today's date and time
+        LocalDateTime now = LocalDateTime.now(); 
 
         if (selectedBike == null) {
             generalUtilities.showAlert(
@@ -236,7 +236,6 @@ public class User_reserveBikeController {
                 Alert.AlertType.WARNING, "Input Error", "End time must be after the start time.");
             return false;
         }
-        // No errors
         return true;
     }
 
@@ -244,12 +243,10 @@ public class User_reserveBikeController {
         try {
             AnchorPane dashboardContentArea = (AnchorPane) reserveButton.getScene().lookup("#contentArea");
             if (dashboardContentArea != null) {
-                // Load User_paymentSummary.fxml
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/grp5/view/User_paymentSummary.fxml"));
                 AnchorPane newPane = loader.load();
                 User_paymentSummaryController paymentController = loader.getController();
 
-                // Carry data to paymentSummary.fxml (NOW WITH userID)
                 paymentController.init(reservation, priceToPay, userID);
 
                 dashboardContentArea.getChildren().setAll(newPane);

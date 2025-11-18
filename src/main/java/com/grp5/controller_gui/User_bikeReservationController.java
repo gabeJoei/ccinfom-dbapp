@@ -2,6 +2,7 @@ package com.grp5.controller_gui;
 
 import com.grp5.dao.bikeReservationDAO;
 import com.grp5.model.bikeReservation;
+import com.grp5.utils.generalUtilities;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -58,11 +59,15 @@ public class User_bikeReservationController {
         reservationList = FXCollections.observableArrayList();
         setupTableColumns();
         
-        // Get user ID from the dashboard
-        getUserIDFromDashboard();
-        
-        // Load only this user's reservations
-        loadUserReservations();
+        reservationTable.sceneProperty().addListener((obs, oldScene, newScene) -> {
+            if (newScene != null) {
+                // Get user ID from the dashboard
+                getUserIDFromDashboard();
+                
+                // Load only this user's reservations
+                loadUserReservations();
+            }
+        });
     }
 
     /**
@@ -74,10 +79,9 @@ public class User_bikeReservationController {
             Text userIdText = (Text) reservationTable.getScene().lookup("#txtUserID");
             if (userIdText != null) {
                 userID = userIdText.getText();
-                System.out.println(userID);
             } else {
                 userID = "0"; // Default fallback
-                showAlert(Alert.AlertType.WARNING, "Warning", "Could not retrieve user ID.");
+                generalUtilities.showAlert(Alert.AlertType.WARNING, "Warning", "Could not retrieve user ID.");
             }
         } catch (Exception e) {
             userID = "0";
@@ -130,35 +134,30 @@ public class User_bikeReservationController {
     }
 
     /**
-     * Load only the logged-in user's reservations
+     * Load only the logged-in user's reservations.
      */
     private void loadUserReservations() {
         reservationList.clear();
         
         if (userID == null || userID.equals("0")) {
-            showAlert(Alert.AlertType.WARNING, "Warning", "User ID not found. Cannot load reservations.");
+            generalUtilities.showAlert(Alert.AlertType.WARNING, "Warning", "User ID not found. Cannot load reservations.");
             return;
         }
 
         try {
             int customerID = Integer.parseInt(userID);
-            ArrayList<bikeReservation> allReservations = reservationDAO.getAllReservations();
             
-            // Filter to show only this user's reservations
-            for (bikeReservation reservation : allReservations) {
-                if (reservation.getCustomerAccID() == customerID) {
-                    reservationList.add(reservation);
-                }
-            }
+            ArrayList<bikeReservation> userReservations = reservationDAO.getReservationsByCustomerID(customerID);
             
+            reservationList.addAll(userReservations);
             reservationTable.setItems(reservationList);
             
             if (reservationList.isEmpty()) {
-                showAlert(Alert.AlertType.INFORMATION, "No Reservations", 
+                generalUtilities.showAlert(Alert.AlertType.INFORMATION, "No Reservations", 
                     "You don't have any reservations yet.");
             }
         } catch (NumberFormatException e) {
-            showAlert(Alert.AlertType.ERROR, "Error", "Invalid user ID format.");
+            generalUtilities.showAlert(Alert.AlertType.ERROR, "Error", "Invalid user ID format.");
         }
     }
 
@@ -184,14 +183,14 @@ public class User_bikeReservationController {
             if (reservation != null && String.valueOf(reservation.getCustomerAccID()).equals(userID)) {
                 reservationList.add(reservation);
             } else {
-                showAlert(Alert.AlertType.INFORMATION, "Not Found",
-                        "No reservation found with ID: " + refNum);
+                generalUtilities.showAlert(Alert.AlertType.INFORMATION, "Not Found",
+                                 "No reservation found with ID: " + refNum);
             }
             reservationTable.setItems(reservationList);
 
         } catch (NumberFormatException e) {
-            showAlert(Alert.AlertType.ERROR, "Invalid Input",
-                    "Please enter a valid reservation ID number.");
+            generalUtilities.showAlert(Alert.AlertType.ERROR, "Invalid Input",
+                                 "Please enter a valid reservation ID number.");
         }
         searchField.clear();
     }
@@ -204,8 +203,8 @@ public class User_bikeReservationController {
         bikeReservation selected = reservationTable.getSelectionModel().getSelectedItem();
 
         if (selected == null) {
-            showAlert(Alert.AlertType.WARNING, "No Selection",
-                    "Please select a reservation to view details.");
+            generalUtilities.showAlert(Alert.AlertType.WARNING, "No Selection",
+                                 "Please select a reservation to view details.");
             return;
         }
 
@@ -227,16 +226,14 @@ public class User_bikeReservationController {
         detailsAlert.showAndWait();
     }
 
-        
-
-   
+    
     @FXML
     private void handleUpdateReservation() {
         bikeReservation selected = reservationTable.getSelectionModel().getSelectedItem();
 
         if (selected == null) {
-            showAlert(Alert.AlertType.WARNING, "No Selection",
-                    "Please select a reservation to update.");
+            generalUtilities.showAlert(Alert.AlertType.WARNING, "No Selection",
+                                 "Please select a reservation to update.");
             return;
         }
 
@@ -271,6 +268,8 @@ public class User_bikeReservationController {
                 selected.setStatus(cmbStatus.getValue());
                 if (dateReturn.getValue() != null) {
                     selected.setDateReturned(Timestamp.valueOf(dateReturn.getValue().atStartOfDay()));
+                } else {
+                    selected.setDateReturned(null); // Ensure null if the date is cleared
                 }
                 return selected;
             }
@@ -280,35 +279,35 @@ public class User_bikeReservationController {
         Optional<bikeReservation> result = dialog.showAndWait();
         result.ifPresent(reservation -> {
             if (reservationDAO.updateReservation(reservation)) {
-                showAlert(Alert.AlertType.INFORMATION, "Success",
-                        "Reservation updated successfully!");
+                generalUtilities.showAlert(Alert.AlertType.INFORMATION, "Success",
+                                 "Reservation updated successfully!");
                 loadUserReservations();
             } else {
-                showAlert(Alert.AlertType.ERROR, "Error",
-                        "Failed to update reservation.");
+                generalUtilities.showAlert(Alert.AlertType.ERROR, "Error",
+                                 "Failed to update reservation.");
             }
         });
     }
 
     /**
      * Handle cancel reservation button
-     * Users can only cancel pending reservations
+     * Users can only cancel pending or ongoing reservations
      */
     @FXML
     private void handleCancelReservation() {
         bikeReservation selected = reservationTable.getSelectionModel().getSelectedItem();
 
         if (selected == null) {
-            showAlert(Alert.AlertType.WARNING, "No Selection",
-                    "Please select a reservation to cancel.");
+            generalUtilities.showAlert(Alert.AlertType.WARNING, "No Selection",
+                                 "Please select a reservation to cancel.");
             return;
         }
 
         // Only allow cancelling pending or ongoing reservations
         if (!selected.getStatus().equalsIgnoreCase("pending") && 
             !selected.getStatus().equalsIgnoreCase("ongoing")) {
-            showAlert(Alert.AlertType.WARNING, "Cannot Cancel",
-                    "Only pending or ongoing reservations can be cancelled.");
+            generalUtilities.showAlert(Alert.AlertType.WARNING, "Cannot Cancel",
+                                 "Only pending or ongoing reservations can be cancelled.");
             return;
         }
 
@@ -321,12 +320,12 @@ public class User_bikeReservationController {
         if (result.isPresent() && result.get() == ButtonType.OK) {
             selected.setStatus("cancelled");
             if (reservationDAO.updateReservation(selected)) {
-                showAlert(Alert.AlertType.INFORMATION, "Success",
-                        "Reservation cancelled successfully!");
+                generalUtilities.showAlert(Alert.AlertType.INFORMATION, "Success",
+                                 "Reservation cancelled successfully!");
                 loadUserReservations();
             } else {
-                showAlert(Alert.AlertType.ERROR, "Error",
-                        "Failed to cancel reservation.");
+                generalUtilities.showAlert(Alert.AlertType.ERROR, "Error",
+                                 "Failed to cancel reservation.");
             }
         }
     }
@@ -346,7 +345,7 @@ public class User_bikeReservationController {
             }
         } catch (IOException e) {
             e.printStackTrace();
-            showAlert(Alert.AlertType.ERROR, "Error", "Failed to return to rent bike page.");
+            generalUtilities.showAlert(Alert.AlertType.ERROR, "Error", "Failed to return to rent bike page.");
         }
     }
 

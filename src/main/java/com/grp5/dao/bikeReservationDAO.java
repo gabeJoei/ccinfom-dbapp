@@ -199,4 +199,30 @@ public class bikeReservationDAO {
         reservation.setStatus(rs.getString("reservationStatus"));
         return reservation;
     }
+    /* Retrieves all bike reservations for a specific customer ID.
+     * @param customerID The ID of the customer account.
+     * @return An ArrayList of bikeReservation objects belonging to the customer.
+     */
+    public ArrayList<bikeReservation> getReservationsByCustomerID(int customerID) {
+        ArrayList<bikeReservation> reservations = new ArrayList<>();
+        // Fetch reservations where customerAccID matches and order by reservation date.
+        String sql = "SELECT * FROM reservation WHERE customerAccID = ? ORDER BY reservationDate DESC";
+        
+        try (Connection conn = databaseConnection.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setInt(1, customerID); // Set the customer ID parameter
+            
+            try (ResultSet rs = pstmt.executeQuery()) {
+                while (rs.next()) {
+                    reservations.add(extractReservationFromResultSet(rs));
+                }
+            }
+
+        } catch (SQLException e) {
+            System.err.println("Error fetching reservations for customer ID " + customerID + ": " + e.getMessage());
+            e.printStackTrace();
+        }
+        return reservations;
+    }
 }
