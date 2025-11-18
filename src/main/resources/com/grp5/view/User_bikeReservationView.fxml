@@ -35,11 +35,12 @@
             <TableView fx:id="reservationTable" prefHeight="350.0" prefWidth="787.0" VBox.vgrow="ALWAYS">
                 <columns>
                     <TableColumn fx:id="colRefNum" prefWidth="80" text="Ref #" />
-                    <TableColumn fx:id="colCustomer" prefWidth="150" text="Customer" />
                     <TableColumn fx:id="colBike" prefWidth="100" text="Bike" />
                     <TableColumn fx:id="colBranch" prefWidth="120" text="Branch" />
-                    <TableColumn fx:id="colStartDate" prefWidth="150" text="Start Date" />
-                    <TableColumn fx:id="colEndDate" prefWidth="150" text="End Date" />
+                    <TableColumn fx:id="colReservationDate" prefWidth="150" text="Reservation Date" />
+                    <TableColumn fx:id="colStartDate" prefWidth="102.66668701171875" text="Start Date" />
+                    <TableColumn fx:id="colEndDate" prefWidth="104.0" text="End Date" />
+               <TableColumn fx:id="colReturnDate" prefWidth="97.3333740234375" text="Return Date" />
                     <TableColumn fx:id="colStatus" prefWidth="100" text="Status" />
                 </columns>
             <columnResizePolicy>
@@ -49,9 +50,10 @@
             
             <!-- Button Bar -->
             <HBox alignment="CENTER" spacing="10">
-                <Button onAction="#handleUpdate" styleClass="btn-success" text="Update" />
-                <Button onAction="#handleDelete" styleClass="btn-danger" text="Delete" />
-                <Button onAction="#handleViewDetails" styleClass="btn-info" text="View Details" />
+                <Button onAction="#handleUpdateReservation" prefHeight="25.0" prefWidth="87.0" styleClass="btn-success" text="Update" />
+                <Button onAction="#handleViewDetails" prefHeight="25.0" prefWidth="87.0" styleClass="btn-info" text="View Details" />
+            <Button mnemonicParsing="false" onAction="#handleCancelReservation" prefHeight="25.0" prefWidth="87.0" text="Cancel" />
+            <Button mnemonicParsing="false" onAction="#handleBack" prefHeight="25.0" prefWidth="87.0" text="Back" />
             </HBox>
         </VBox>
     </center>

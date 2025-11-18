@@ -7,6 +7,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.collections.*;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
@@ -68,10 +69,12 @@ public class User_bikeReservationController {
      * Get the logged-in user's ID from the dashboard
      */
     private void getUserIDFromDashboard() {
+        
         try {
             Text userIdText = (Text) reservationTable.getScene().lookup("#txtUserID");
             if (userIdText != null) {
                 userID = userIdText.getText();
+                System.out.println(userID);
             } else {
                 userID = "0"; // Default fallback
                 showAlert(Alert.AlertType.WARNING, "Warning", "Could not retrieve user ID.");
@@ -222,6 +225,69 @@ public class User_bikeReservationController {
 
         detailsAlert.setContentText(details);
         detailsAlert.showAndWait();
+    }
+
+        
+
+   
+    @FXML
+    private void handleUpdateReservation() {
+        bikeReservation selected = reservationTable.getSelectionModel().getSelectedItem();
+
+        if (selected == null) {
+            showAlert(Alert.AlertType.WARNING, "No Selection",
+                    "Please select a reservation to update.");
+            return;
+        }
+
+        Dialog<bikeReservation> dialog = new Dialog<>();
+        dialog.setTitle("Update Reservation");
+        dialog.setHeaderText("Update reservation #" + selected.getReservationReferenceNum());
+
+        GridPane grid = new GridPane();
+        grid.setHgap(10);
+        grid.setVgap(10);
+
+        ComboBox<String> cmbStatus = new ComboBox<>();
+        cmbStatus.getItems().addAll("pending", "ongoing", "completed", "cancelled");
+        cmbStatus.setValue(selected.getStatus());
+
+        DatePicker dateReturn = new DatePicker();
+        if (selected.getDateReturned() != null) {
+            dateReturn.setValue(selected.getDateReturned().toLocalDateTime().toLocalDate());
+        }
+
+        grid.add(new Label("Status:"), 0, 0);
+        grid.add(cmbStatus, 1, 0);
+        grid.add(new Label("Date Returned:"), 0, 1);
+        grid.add(dateReturn, 1, 1);
+
+        dialog.getDialogPane().setContent(grid);
+        ButtonType btnUpdate = new ButtonType("Update", ButtonBar.ButtonData.OK_DONE);
+        dialog.getDialogPane().getButtonTypes().addAll(btnUpdate, ButtonType.CANCEL);
+
+        dialog.setResultConverter(dialogButton -> {
+            if (dialogButton == btnUpdate) {
+                selected.setStatus(cmbStatus.getValue());
+                if (dateReturn.getValue() != null) {
+                    selected.setDateReturned(Timestamp.valueOf(dateReturn.getValue().atStartOfDay()));
+                }
+                return selected;
+            }
+            return null;
+        });
+
+        Optional<bikeReservation> result = dialog.showAndWait();
+        result.ifPresent(reservation -> {
+            if (reservationDAO.updateReservation(reservation)) {
+                showAlert(Alert.AlertType.INFORMATION, "Success",
+                        "Reservation updated successfully!");
+                loadUserReservations();
+            } else {
+                showAlert(Alert.AlertType.ERROR, "Error",
+                        "Failed to update reservation.");
+            }
+        });
     }
 
     /**
