@@ -1,3 +1,7 @@
+package com.grp5.model;
+
+import java.util.List;
+
 /*
  * Model for bike rental month report
  * 
@@ -6,10 +10,6 @@
  * It provides getters and setters for all fields.
  * 
  */
-package com.grp5.model;
-
-import java.util.List;
-
 public class BikeRentalMonthReportModel {
     //variable declaration
     private final int year;

@@ -1,10 +1,3 @@
-/**
- * Data Access Object (DAO) for managing branch records.
- * 
- * This class handles all CRUD operations for the branch database table,
- * including inserting, retrieving, updating, deleting customer records.
- *
- */
 package com.grp5.dao;
 
 import java.sql.Connection;
@@ -17,7 +10,13 @@ import java.util.List;
 import com.grp5.model.branchRecordModel;
 import com.grp5.utils.databaseConnection;
 
-
+/**
+ * Data Access Object (DAO) for managing branch records.
+ * 
+ * This class handles all CRUD operations for the branch database table,
+ * including inserting, retrieving, updating, deleting customer records.
+ *
+ */
 public class branchRecordDAO {
 
     // INSERTS A NEW BRANCH RECORD IN THE BRANCH DATA BASE

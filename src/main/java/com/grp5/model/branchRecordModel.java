@@ -1,3 +1,6 @@
+
+package com.grp5.model;
+
 /*
  * Model for branch record in the Bike Rental System.
  * 
@@ -6,8 +9,6 @@
  * It provides getters and setters for all fields.
  * 
  */
-
-package com.grp5.model;
 
 public class branchRecordModel {
 /*Variable declaration */

@@ -1,3 +1,7 @@
+package com.grp5.model;
+
+import java.sql.Timestamp;
+
 /*
  * Model for bike reservation record in the Bike Rental System.
  * 
@@ -7,10 +11,6 @@
  * setters for all fields, and a toString method.
  * 
  */
-package com.grp5.model;
-
-import java.sql.Timestamp;
-
 public class bikeReservation {
     private int reservationReferenceNum;
     private int customerAccID;

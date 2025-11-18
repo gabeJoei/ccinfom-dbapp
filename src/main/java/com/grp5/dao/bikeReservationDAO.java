@@ -1,10 +1,3 @@
-/**
- * Data Access Object (DAO) for managing bike reservation records.
- * 
- * This class handles all CRUD operations for the bike reservation database table,
- * including inserting, retrieving, updating, deleting customer records.
- *
- */
 package com.grp5.dao;
 
 import java.sql.Connection;
@@ -18,6 +11,13 @@ import java.util.ArrayList;
 import com.grp5.model.bikeReservation;
 import com.grp5.utils.databaseConnection;
 
+/**
+ * Data Access Object (DAO) for managing bike reservation records.
+ * 
+ * This class handles all CRUD operations for the bike reservation database table,
+ * including inserting, retrieving, updating, deleting customer records.
+ *
+ */
 public class bikeReservationDAO {
 
     // CREATE - Add new reservation

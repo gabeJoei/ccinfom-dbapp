@@ -1,12 +1,3 @@
-/**
- * Data Access Object (DAO) for managing customer records.
- * 
- * This class handles all CRUD operations for the customer database table,
- * including inserting, retrieving, updating, deleting customer records
- * and other supporting methods.
- *
- */
-
 package com.grp5.dao;
 
 import java.sql.Connection;
@@ -19,6 +10,14 @@ import java.util.List;
 import com.grp5.model.customerRecordModel;
 import com.grp5.utils.databaseConnection;
 
+/**
+ * Data Access Object (DAO) for managing customer records.
+ * 
+ * This class handles all CRUD operations for the customer database table,
+ * including inserting, retrieving, updating, deleting customer records
+ * and other supporting methods.
+ *
+ */
 public class customerRecordDAO {
 
     // CREATE || inserts a new record to the customer record

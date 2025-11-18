@@ -1,11 +1,3 @@
-/**
- * Data Access Object (DAO) for managing bike records.
- * 
- * This class handles all CRUD operations for the bike database table,
- * including inserting, retrieving, updating, deleting customer records.
- *
- */
-
 package com.grp5.dao;
 
 import java.math.BigDecimal;
@@ -19,6 +11,13 @@ import java.util.List;
 import com.grp5.model.bikeRecordModel;
 import com.grp5.utils.databaseConnection;
 
+/**
+ * Data Access Object (DAO) for managing bike records.
+ * 
+ * This class handles all CRUD operations for the bike database table,
+ * including inserting, retrieving, updating, deleting customer records.
+ *
+ */
 public class bikeRecordDAO {
 
     // Create

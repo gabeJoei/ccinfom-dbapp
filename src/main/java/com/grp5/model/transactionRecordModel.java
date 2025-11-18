@@ -1,5 +1,3 @@
-
-
 package com.grp5.model;
 
 import java.math.BigDecimal;
@@ -7,6 +5,14 @@ import java.sql.Timestamp;
 import java.time.Duration;
 import com.grp5.utils.generalUtilities;
 
+/*
+ * Model for transaction record in the Bike Rental System.
+ * 
+ * This model stores key information related to payment transaction ,
+ * including the customer account ID, branch ID, bike ID, paymenet date, 
+ * payment amount. It provides getters and setters for all fields, and a toString method.
+ * 
+ */
 public class transactionRecordModel {
 
     /* Variable Declarations */
