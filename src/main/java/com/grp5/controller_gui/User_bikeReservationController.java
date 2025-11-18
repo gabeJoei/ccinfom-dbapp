@@ -3,6 +3,7 @@ package com.grp5.controller_gui;
 import com.grp5.dao.bikeReservationDAO;
 import com.grp5.model.bikeReservation;
 import com.grp5.utils.generalUtilities;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -12,8 +13,11 @@ import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
+
 import java.io.IOException;
 import java.sql.Timestamp;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Optional;
 import java.util.ArrayList;
 
@@ -243,7 +247,7 @@ public class User_bikeReservationController {
             return;
         }
 
-        Dialog<bikeReservation> dialog = new Dialog<>();
+        Dialog<LocalDate> dialog = new Dialog<>();
         dialog.setTitle("Update Reservation");
         dialog.setHeaderText("Update reservation #" + selected.getReservationReferenceNum());
 
@@ -251,17 +255,28 @@ public class User_bikeReservationController {
         grid.setHgap(10);
         grid.setVgap(10);
 
-        ComboBox<String> cmbStatus = new ComboBox<>();
-        cmbStatus.getItems().addAll("pending", "ongoing", "completed", "cancelled");
-        cmbStatus.setValue(selected.getStatus());
-
         DatePicker dateReturn = new DatePicker();
-        if (selected.getDateReturned() != null) {
-            dateReturn.setValue(selected.getDateReturned().toLocalDateTime().toLocalDate());
+
+        // Do not prompt return date if reservation is already complete
+        if (selected.getDateReturned() != null) {   
+            generalUtilities.showAlert(
+                Alert.AlertType.INFORMATION, 
+                "Reservation complete.", 
+                "Bike was already returned on " + selected.getDateReturned().toLocalDateTime().toLocalDate().toString()
+            );
+            return;
         }
 
-        grid.add(new Label("Status:"), 0, 0);
-        grid.add(cmbStatus, 1, 0);
+        // Do not prompt return date if reservation was cancelled
+        if (selected.getStatus().equalsIgnoreCase("cancelled")) {
+             generalUtilities.showAlert(
+                Alert.AlertType.ERROR, 
+                "Invalid Action!", 
+                "You cannot return a bike for a cancelled reservation."
+            );
+            return; 
+        }
+
         grid.add(new Label("Date Returned:"), 0, 1);
         grid.add(dateReturn, 1, 1);
 
@@ -271,28 +286,77 @@ public class User_bikeReservationController {
 
         dialog.setResultConverter(dialogButton -> {
             if (dialogButton == btnUpdate) {
-                selected.setStatus(cmbStatus.getValue());
-                if (dateReturn.getValue() != null) {
-                    selected.setDateReturned(Timestamp.valueOf(dateReturn.getValue().atStartOfDay()));
-                } else {
-                    selected.setDateReturned(null); // Ensure null if the date is cleared
-                }
-                return selected;
+                return dateReturn.getValue();
             }
             return null;
         });
 
-        Optional<bikeReservation> result = dialog.showAndWait();
-        result.ifPresent(reservation -> {
-            if (reservationDAO.updateReservation(reservation)) {
-                generalUtilities.showAlert(Alert.AlertType.INFORMATION, "Success",
-                                 "Reservation updated successfully!");
-                loadUserReservations();
-            } else {
-                generalUtilities.showAlert(Alert.AlertType.ERROR, "Error",
-                                 "Failed to update reservation.");
+        Optional<LocalDate> result = dialog.showAndWait();
+
+        result.ifPresent(selectedDate -> {
+            
+            // Get current time
+            LocalDateTime returnDateTime = LocalDateTime.of(selectedDate, LocalDateTime.now().toLocalTime());
+            Timestamp returnTimestamp = Timestamp.valueOf(returnDateTime);
+
+            if (returnTimestamp.before(selected.getStartDate())) {
+                // Bike is returned early
+                handleEarlyReturn(selected);
+            } 
+            else if (returnTimestamp.after(selected.getEndDate())) {
+                // Bike is returned late
+                handleLateReturn(selected, returnTimestamp);
+            } 
+            else {
+                handleReturn(selected, returnTimestamp);
             }
         });
+    }
+
+    private void handleEarlyReturn(bikeReservation reservation) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Early Return Detected!");
+        alert.setHeaderText("Reservation Has Not Started Yet.");
+        alert.setContentText("""
+                             You are returning this bike before the reservation has even started!
+                             Click OK to CANCEL the reservation instead.""");
+
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.isPresent() && result.get() == ButtonType.OK) {
+            reservation.setStatus("cancelled");
+            reservation.setDateReturned(null); 
+            updateDatabase(reservation);
+        }
+    }
+
+    private void handleLateReturn(bikeReservation reservation, Timestamp returnTimeStamp) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Late return Detected!");
+        alert.setHeaderText("Reservation has ended.");
+        alert.setContentText("You are returning this bike after the reservation end date!" +
+                            "A late fee has been added to your account.");
+
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.isPresent() && result.get() == ButtonType.OK) {
+            reservation.setStatus("completed");
+            reservation.setDateReturned(returnTimeStamp); 
+            updateDatabase(reservation);
+        }
+    }
+
+    private void handleReturn(bikeReservation reservation, Timestamp returnTimestamp) {
+        reservation.setDateReturned(returnTimestamp);
+        reservation.setStatus("completed");
+        updateDatabase(reservation);
+    }
+
+    private void updateDatabase(bikeReservation reservation) {
+        if (reservationDAO.updateReservation(reservation)) {
+            generalUtilities.showAlert(Alert.AlertType.INFORMATION, "Success", "Reservation updated successfully!");
+            loadUserReservations(); 
+        } else {
+            generalUtilities.showAlert(Alert.AlertType.ERROR, "Error", "Failed to update reservation.");
+        }
     }
 
     /**
