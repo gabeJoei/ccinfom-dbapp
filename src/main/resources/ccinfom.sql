@@ -55,7 +55,7 @@ DROP TABLE IF EXISTS `bike`;
 CREATE TABLE `bike` (
   `bikeID` int NOT NULL AUTO_INCREMENT,
   `branchIDNum` int NOT NULL,
-  **`bikeAvailability` BOOLEAN NOT NULL DEFAULT 1,** -- FIX 1: Changed from ENUM('Yes', 'No') to BOOLEAN
+  `bikeAvailability` enum('Yes','No') NOT NULL DEFAULT 'Yes',
   `bikeModel` varchar(50) NOT NULL,
   `hourlyRate` decimal(7,2) DEFAULT NULL,
   `dailyRate` decimal(7,2) DEFAULT NULL,
@@ -181,7 +181,7 @@ CREATE TABLE `reservation` (
   KEY `customerAccID_idx` (`customerAccID`),
   KEY `bikeID_idx` (`bikeID`),
   KEY `branchID_idx` (`branchID`),
-  CONSTRAINT `reservation_bikeID` FOREIGN KEY (`bikeID`) REFERENCES `bike` (`bikeID`) **ON DELETE CASCADE**, -- FIX 2: Added ON DELETE CASCADE
+  CONSTRAINT `reservation_bikeID` FOREIGN KEY (`bikeID`) REFERENCES `bike` (`bikeID`),
   CONSTRAINT `reservation_branchID` FOREIGN KEY (`branchID`) REFERENCES `branch` (`branchID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
