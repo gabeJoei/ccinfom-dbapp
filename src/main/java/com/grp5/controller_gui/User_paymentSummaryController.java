@@ -23,7 +23,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
-import javafx.scene.control.DatePicker;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 
@@ -43,6 +42,10 @@ public class User_paymentSummaryController {
     private Text endDateTxt;
     @FXML
     private Text totalPriceTxt;
+    @FXML
+    private Button payButton;
+    @FXML
+    private Button backButton;
 
     private customerRecordDAO customerDAO;
     private bikeRecordDAO bikeDAO;
@@ -56,24 +59,23 @@ public class User_paymentSummaryController {
     private customerRecordModel user;
     private bikeRecordModel bike;
     private branchRecordModel branch;
+    private String userID;
 
-    public void init(bikeReservation reservation, BigDecimal priceToPay) {
+    public void init(bikeReservation reservation, BigDecimal priceToPay, String userID) {
         this.reservation = reservation;
         this.priceToPay = priceToPay;
+        this.userID = userID;
 
-        // load DAOs 
         customerDAO = new customerRecordDAO();
         bikeDAO = new bikeRecordDAO();
         branchDAO = new branchRecordDAO();
         transactionDAO = new transactionRecordDAO();
         reservationDAO = new bikeReservationDAO();
 
-        // get user, bike, and branch information
         user = customerDAO.getCustomer(reservation.getCustomerAccID());
         bike = bikeDAO.getBikeRecord(reservation.getBikeID());
         branch = branchDAO.getBranchRecordData(bike.getBranchIDNum());
 
-        // display text information
         customerNameTxt.setText(user.getFirstName() + " " + user.getLastName());
         bikeModelTxt.setText(bike.getBikeModel());
         branchTxt.setText(branch.getBranchAddress());
@@ -116,7 +118,26 @@ public class User_paymentSummaryController {
             );
             transactionDAO.addTransactionRecordData(transaction);
 
+            // Show success message
+            generalUtilities.showAlert(Alert.AlertType.INFORMATION, "Success", 
+                "Payment successful! Your reservation has been confirmed.");
+
             goToRentPage();
+        }
+    }
+
+    @FXML
+    protected void onBackClick() {
+        // Confirm cancellation
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Cancel Payment");
+        alert.setHeaderText(null);
+        alert.setContentText("Are you sure you want to go back? You can modify your reservation details.");
+
+        Optional<ButtonType> result = alert.showAndWait();
+        
+        if (result.isPresent() && result.get() == ButtonType.OK) {
+            goBackToReservationPage();
         }
     }
 
@@ -126,7 +147,6 @@ public class User_paymentSummaryController {
         alert.setHeaderText(null);
         alert.setContentText("Press OK to confirm your payment.");
 
-        // --- 3. Show the alert and WAIT for the user's response ---
         Optional<ButtonType> result = alert.showAndWait();
 
         return (result.isPresent() && result.get() == ButtonType.OK);
@@ -147,6 +167,28 @@ public class User_paymentSummaryController {
         } catch (IOException e) {
             e.printStackTrace();
             generalUtilities.showAlert(Alert.AlertType.ERROR, "Error", "Could not load bike rental page.");
+        }
+    }
+
+    private void goBackToReservationPage() {
+        try {
+            AnchorPane dashboardContentArea = (AnchorPane) totalPriceTxt.getScene().lookup("#contentArea");
+            
+            if (dashboardContentArea != null) {
+                // Load the User_reserveBike.fxml file
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/grp5/view/User_reserveBike.fxml"));
+                AnchorPane newPane = loader.load();
+                
+                // Get the controller and pass the bike data back
+                User_reserveBikeController reserveController = loader.getController();
+                reserveController.initData(userID, bike);
+
+                // Set the dashboard's content to the reservation page
+                dashboardContentArea.getChildren().setAll(newPane);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+            generalUtilities.showAlert(Alert.AlertType.ERROR, "Error", "Could not load reservation page.");
         }
     }
 }

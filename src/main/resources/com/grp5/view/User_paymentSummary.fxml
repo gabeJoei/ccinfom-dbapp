@@ -63,24 +63,29 @@
             </HBox>
             <HBox>
                <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Start DateL:" wrappingWidth="106.13671875" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Start Date:" wrappingWidth="106.13671875" />
                   <Text fx:id="startDateTxt" strokeType="OUTSIDE" strokeWidth="0.0" text="SDateHolder" />
                </children>
             </HBox>
             <HBox>
                <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="EndDate" wrappingWidth="106.13671875" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="End Date:" wrappingWidth="106.13671875" />
                   <Text fx:id="endDateTxt" strokeType="OUTSIDE" strokeWidth="0.0" text="EndDateholder" />
                </children>
             </HBox>
             <HBox>
                <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Total" wrappingWidth="106.13671875" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Total:" wrappingWidth="106.13671875" />
                   <Text fx:id="totalPriceTxt" strokeType="OUTSIDE" strokeWidth="0.0" text="totalHolder" />
                </children>
             </HBox>
          </children>
       </VBox>
-      <Button fx:id="payButton" layoutX="396.0" layoutY="530.0" mnemonicParsing="false" onAction="#onPayClick" text="Pay" />
+      <HBox alignment="CENTER" layoutX="314.0" layoutY="530.0" spacing="20.0">
+         <children>
+            <Button fx:id="backButton" mnemonicParsing="false" onAction="#onBackClick" prefWidth="80.0" text="Back" />
+            <Button fx:id="payButton" mnemonicParsing="false" onAction="#onPayClick" prefWidth="80.0" text="Pay" />
+         </children>
+      </HBox>
    </children>
 </AnchorPane>

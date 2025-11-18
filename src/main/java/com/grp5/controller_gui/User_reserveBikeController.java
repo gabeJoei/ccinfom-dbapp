@@ -7,10 +7,6 @@ import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Date;
-
-import org.w3c.dom.events.MouseEvent;
 
 import com.grp5.dao.bikeRecordDAO;
 import com.grp5.dao.bikeReservationDAO;
@@ -66,9 +62,11 @@ public class User_reserveBikeController {
     private customerRecordModel user;
     private bikeReservation reservation;
     private BigDecimal priceToPay;
+    private String userID; // Store userID for passing to payment screen
 
     public void initData(String userID, bikeRecordModel bike) {
         this.selectedBike = bike;
+        this.userID = userID; // Store the userID
         
         // get DAO
         customerDAO = new customerRecordDAO();
@@ -106,23 +104,22 @@ public class User_reserveBikeController {
         changeImage();
     }
 
-    private void changeImage(){
+    private void changeImage() {
         switch (selectedBike.getBikeModel()) {
-    case "Mountain Bike" -> img.setImage(new Image(
-        getClass().getResource("/com/grp5/view/images/MountainBike-.png").toExternalForm()));
-    case "Road Bike" -> img.setImage(new Image(
-        getClass().getResource("/com/grp5/view/images/RoadBike-.png").toExternalForm()));
-    case "Bike with E-assist" -> img.setImage(new Image(
-        getClass().getResource("/com/grp5/view/images/E-Bike-.png").toExternalForm()));
-    case "Tandem Bike" -> img.setImage(new Image(
-        getClass().getResource("/com/grp5/view/images/TandemBike-.png").toExternalForm()));
-    case "E-Bike" -> img.setImage(new Image(
-        getClass().getResource("/com/grp5/view/images/Electric_Bike-.png").toExternalForm()));
-    case "BMX bike" -> img.setImage(new Image(
-        getClass().getResource("/com/grp5/view/images/BMX bike.png").toExternalForm()));
-    default -> System.err.println("Unknown bike: " + selectedBike.getBikeModel());
-}
-
+            case "Mountain Bike" -> img.setImage(new Image(
+                getClass().getResource("/com/grp5/view/images/MountainBike-.png").toExternalForm()));
+            case "Road Bike" -> img.setImage(new Image(
+                getClass().getResource("/com/grp5/view/images/RoadBike-.png").toExternalForm()));
+            case "Bike with E-assist" -> img.setImage(new Image(
+                getClass().getResource("/com/grp5/view/images/E-Bike-.png").toExternalForm()));
+            case "Tandem Bike" -> img.setImage(new Image(
+                getClass().getResource("/com/grp5/view/images/TandemBike-.png").toExternalForm()));
+            case "E-Bike" -> img.setImage(new Image(
+                getClass().getResource("/com/grp5/view/images/Electric_Bike-.png").toExternalForm()));
+            case "BMX bike" -> img.setImage(new Image(
+                getClass().getResource("/com/grp5/view/images/BMX bike.png").toExternalForm()));
+            default -> System.err.println("Unknown bike: " + selectedBike.getBikeModel());
+        }
     }
 
     @FXML
@@ -252,8 +249,8 @@ public class User_reserveBikeController {
                 AnchorPane newPane = loader.load();
                 User_paymentSummaryController paymentController = loader.getController();
 
-                // Carry data to paymentSummary.fxml
-                paymentController.init(reservation, priceToPay);
+                // Carry data to paymentSummary.fxml (NOW WITH userID)
+                paymentController.init(reservation, priceToPay, userID);
 
                 dashboardContentArea.getChildren().setAll(newPane);
             }
