@@ -1,13 +1,15 @@
 
 package com.grp5.model;
 
-/*
+/**
  * Model for branch record in the Bike Rental System.
  * 
  * This model stores key information related to a branch record,
  * including the branch name, branch address.
  * It provides getters and setters for all fields.
  * 
+ * @author [group 5]
+ * @verion 1.0
  */
 
 public class branchRecordModel {
@@ -17,10 +19,21 @@ private String branchName;
 private String branchAddress;
 private int locationID;
 
-//empty constructor
+/* Default constructor, empty arguments. 
+* Used for initialization of new and empty 
+* branchRecordModel Object
+*/
 public branchRecordModel(){}
 
-//full constructor
+/**
+ * Full constructor, used for initialization of new 
+ * and complete branch record. 
+ * 
+ * @param branchID, the unique identifier of a branch
+ * @param branchName, the name of the branch
+ * @param branchAddress, the address of the branc
+ * @param locationID, the unique identifier of a location
+ */
 public branchRecordModel( int branchID,String branchName, String branchAddress, int locationID){
     this.branchID=branchID;
     this.locationID=locationID;
@@ -28,14 +41,26 @@ public branchRecordModel( int branchID,String branchName, String branchAddress, 
     this.branchAddress=branchAddress;
 }
 
-//setters
+/**
+* sets the branch Id
+* @param branID, new branch ID
+*/
 public void setBranchID(int branID){
     branchID=branID;
 }
+
+/**
+* sets the location Id
+* @param locID, new location 
+*/
 public void setLocationID(int locID){
     locationID=locID;
 }
 
+/**
+* sets the location Id
+* @param locID, new location 
+*/
 public void setBranchName(String bName){
     branchName=bName;
 }
