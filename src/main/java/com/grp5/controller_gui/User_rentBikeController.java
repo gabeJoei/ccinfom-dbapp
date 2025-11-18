@@ -29,7 +29,10 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 
 /**
- * Rent Bike Controller with Sidebar Integration
+ * Controller for the user's bike rental interface (User_rentBike.fxml).
+ * This class manages displaying available bikes based on the selected branch,
+ * checking their real-time availability against the reservation table,
+ * and handling navigation to the bike reservation page.
  */
 public class User_rentBikeController {
 
@@ -98,6 +101,11 @@ public class User_rentBikeController {
     private bikeRecordModel eBike;
     private bikeRecordModel bmxBike;
 
+    /**
+     * Initializes the controller. This method is called automatically by the FXML loader. 
+     * It sets up DAO instances, populates the branch selector, and applies hover/animation 
+     * effects to the bike images.
+     */
     @FXML
     public void initialize() {
         bikeDAO = new bikeRecordDAO();
@@ -108,7 +116,11 @@ public class User_rentBikeController {
         highlightEffect();
     }
 
-    /** Load all branches into the ChoiceBox */
+    /**
+     * Fetches all branches from the database via {@link branchRecordDAO} and populates the
+     * branch {@code ChoiceBox}. It sets the first branch in the list as the
+     * default selection and adds a listener to reload bikes when the selection changes.
+     */
     private void loadBranches() {
         ArrayList<branchRecordModel> branches = branchDAO.getAllBranch();
 
@@ -124,7 +136,17 @@ public class User_rentBikeController {
         cmbBranch.setOnAction(e -> loadBikesForBranch());
     }
 
-    // Load bikes for the selected branch
+    /**
+     * Loads and displays the bikes available for the currently selected branch.
+     * This method performs the following steps:
+     * 1. Resets all bike-type models (e.g., {@code mountainBike}) to null.
+     * 2. Fetches all bikes for the selected branch from {@link bikeRecordDAO}.
+     * 3. Checks the real-time availability of each bike by querying {@link bikeReservationDAO}
+     * for any overlapping reservations within the next hour.
+     * 4. Counts available bikes by model type (Mountain, Road, etc.) and stores a sample
+     * of each type.
+     * 5. Calls {@link #updateBikeDisplay} to update the FXML {@code Text} fields for each bike type.
+     */
     private void loadBikesForBranch() {
         String selectedBranch = cmbBranch.getValue();
 
@@ -200,7 +222,14 @@ public class User_rentBikeController {
         updateBikeDisplay(bmxBike, bmxCount, txtBMXModel, txtBMXAvailable, txtBMXCost);
     }
 
-    /** Update individual bike display */
+    /**
+     * Helper method to update the FXML {@code Text} nodes for a single bike display card.
+     * @param bike        The {@link bikeRecordModel} for the bike type (e.g., Mountain bike).
+     * @param count       The number of available bikes of this type.
+     * @param modelText   The {@code Text} node to display the bike's model.
+     * @param availableText The {@code Text} node to display the available count.
+     * @param costText    The {@code Text} node to display the rental cost.
+     */
     private void updateBikeDisplay(bikeRecordModel bike, int count,
             Text modelText, Text availableText, Text costText) {
         if (bike != null) {
