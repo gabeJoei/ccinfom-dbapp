@@ -21,6 +21,11 @@ public class Profile_deleteController {
     PasswordField passwordField;
 
     @FXML
+    void handleConfirmBtn() {
+        System.out.println("Confirm Button Clicked!");
+    }
+
+    @FXML
     private void handleBackBtn() {
         System.out.println("Back button clicked!");
         if (AccountSession.isAdmin()) {
