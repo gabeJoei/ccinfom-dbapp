@@ -70,7 +70,6 @@ public class databaseConnection {
     }
 
     public static void main(String[] args) {
-        System.out.println("Testing database connection...");
         if (!testConnection()) {
             System.out.println("Connection failed! Check your environment variables.");
         }
