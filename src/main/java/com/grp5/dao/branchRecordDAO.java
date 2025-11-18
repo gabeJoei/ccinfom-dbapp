@@ -1,3 +1,10 @@
+/**
+ * Data Access Object (DAO) for managing branch records.
+ * 
+ * This class handles all CRUD operations for the branch database table,
+ * including inserting, retrieving, updating, deleting customer records.
+ *
+ */
 package com.grp5.dao;
 
 import java.sql.Connection;
@@ -13,7 +20,7 @@ import com.grp5.utils.databaseConnection;
 
 public class branchRecordDAO {
 
-
+    // INSERTS A NEW BRANCH RECORD IN THE BRANCH DATA BASE
     public int addBranchRecordData(branchRecordModel branch){
         try{
             Connection connect=databaseConnection.getConnection();
@@ -31,7 +38,7 @@ public class branchRecordDAO {
         }
     }
     
-   
+   // UPDATES A RECORD IN THE BRANCH DATABASE
     public boolean updateBranchRecord(branchRecordModel branch){
         try{
             Connection connect=databaseConnection.getConnection();
@@ -52,6 +59,7 @@ public class branchRecordDAO {
         }
     }
 
+    //RETRIEVES A SPECIFIC BRANCH RECORD IN THE DATABASE
     public branchRecordModel getBranchRecordData(int branchID){
         try{
             Connection connect=databaseConnection.getConnection();
@@ -71,6 +79,7 @@ public class branchRecordDAO {
         return null;
     }
 
+    //RETRIEVES ALL BRANCH RECORD IN THE DATABASE
     public ArrayList<branchRecordModel> getAllBranch(){
         ArrayList<branchRecordModel> branch=new ArrayList<>();
         try{
@@ -188,7 +197,7 @@ public class branchRecordDAO {
         }
     }
 
-
+    //HELPER TO EXTRACT FROM RESULT SET
       private branchRecordModel extractFromBranchTable(ResultSet rs)throws SQLException {
            branchRecordModel branch=new branchRecordModel();
            branch.setBranchID(rs.getInt("branchID"));
@@ -197,6 +206,7 @@ public class branchRecordDAO {
            return branch;
       }
 
+    //RETRIEVES ALL BRANCH RECORD FROM THE BRANCH DATABASE
       public List<branchRecordModel> getAllBranches() {
         List<branchRecordModel> branches = new ArrayList<>();
         String query = "SELECT * FROM branch";
@@ -218,6 +228,7 @@ public class branchRecordDAO {
         return branches;
     }
     
+    //RETRIEVES A SPECIFIC BRANCH RECORD, BASED ON THE BRANCH NAME PASSED IN THE PARAMETER
     public branchRecordModel getBranch(String branchName) {
         try (Connection connect = databaseConnection.getConnection();
               PreparedStatement prepState = connect.prepareStatement(

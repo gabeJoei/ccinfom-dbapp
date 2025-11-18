@@ -1,3 +1,12 @@
+/**
+ * Data Access Object (DAO) for managing payment transaction records.
+ * 
+ * This class handles all CRUD operations for the payment database table,
+ * including inserting, retrieving, updating, and deleting payment transactions.
+ * It also provides utility methods for joining related customer, reservation,
+ * and branch data.
+ */
+
 package com.grp5.dao;
 
 import java.sql.Connection;
@@ -11,6 +20,7 @@ import com.grp5.utils.databaseConnection;
 
 public class transactionRecordDAO {
 
+    //A method used to insert new data into the payment transaction record. 
     public int addTransactionRecordData(transactionRecordModel transaction) {
         try {
             Connection connect = databaseConnection.getConnection();
@@ -37,6 +47,7 @@ public class transactionRecordDAO {
         }
     }
 
+    // retrives a specific record that has the same payment reference number(pk) passed through the parameter.
     public transactionRecordModel getTransactionRecordData(int paymentReferenceNumber) {
         try {
             Connection connect = databaseConnection.getConnection();
@@ -56,6 +67,7 @@ public class transactionRecordDAO {
         return null;
     }
 
+    //deletes a transaction record
     public int delTransactionRecordData(int paymentReferenceNum) {
         try {
             Connection connect = databaseConnection.getConnection();
@@ -71,6 +83,7 @@ public class transactionRecordDAO {
         }
     }
 
+    //Allows the modification of the transaction record. 
     public int modifyTransactionRecordData(transactionRecordModel transaction) {
         String query = "UPDATE payment SET customerID=?, reservationReferenceNum=?, bikeID=?, branchID=?, paymentDate=?, paymentAmount=? WHERE paymentReferenceNum=?";
         try {
@@ -93,6 +106,8 @@ public class transactionRecordDAO {
         }
     }
 
+    /*a method used to retrieve a payment made by a specific customer. 
+    It joins payment with customer and branch table. */
     public void paymentJoinCustomer(String columnName, int columnIVal, String columnSVal) {
         try {
             Connection connect = databaseConnection.getConnection();
@@ -126,6 +141,7 @@ public class transactionRecordDAO {
         }
     }
 
+    //retrieves all payement transaction record in the transaction database. 
     public ArrayList<transactionRecordModel> getAllPayment() {
         ArrayList<transactionRecordModel> transaction = new ArrayList<>();
         try {
@@ -144,6 +160,7 @@ public class transactionRecordDAO {
         return transaction;
     }
 
+    //Converts the results of the query to become transactionRecordModel, then returns that transaction. 
     private transactionRecordModel extractFromPaymentTable(ResultSet rs) throws SQLException {
         transactionRecordModel transaction = new transactionRecordModel();
         transaction.setPaymentReferenceNumber(rs.getInt("paymentReferenceNum"));

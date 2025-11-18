@@ -1,3 +1,10 @@
+/**
+ * Data Access Object (DAO) for managing admin records.
+ * 
+ * This class handles all CRUD operations for the admin database table,
+ * including inserting, retrieving, updating, deleting customer records.
+ *
+ */
 package com.grp5.dao;
 
 import com.grp5.model.adminModel;

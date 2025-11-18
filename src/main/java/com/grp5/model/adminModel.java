@@ -7,6 +7,7 @@
  * It provides getters and setters for all fields,and a toString method.
  * 
  */
+
 package com.grp5.model;
 
 public class adminModel {

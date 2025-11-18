@@ -1,3 +1,11 @@
+/**
+ * Data Access Object (DAO) for managing bike records.
+ * 
+ * This class handles all CRUD operations for the bike database table,
+ * including inserting, retrieving, updating, deleting customer records.
+ *
+ */
+
 package com.grp5.dao;
 
 import java.math.BigDecimal;

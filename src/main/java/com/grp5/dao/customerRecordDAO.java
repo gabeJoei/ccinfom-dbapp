@@ -1,3 +1,12 @@
+/**
+ * Data Access Object (DAO) for managing customer records.
+ * 
+ * This class handles all CRUD operations for the customer database table,
+ * including inserting, retrieving, updating, deleting customer records
+ * and other supporting methods.
+ *
+ */
+
 package com.grp5.dao;
 
 import java.sql.Connection;
@@ -12,7 +21,7 @@ import com.grp5.utils.databaseConnection;
 
 public class customerRecordDAO {
 
-    // CREATE
+    // CREATE || inserts a new record to the customer record
     public boolean addCustomerRecordData(customerRecordModel customer) {
         String query = "INSERT INTO customer (customerAccID,lastName,firstName,customerEmail,phoneNumber,customerPass) VALUES (?,?,?,?,?,?)";
         try (Connection connect = databaseConnection.getConnection();
@@ -36,7 +45,7 @@ public class customerRecordDAO {
         }
     }
 
-    // READ
+    // READ || it reads a record from the customer database that has the same customer ID. 
     public customerRecordModel getCustomerRecordData(customerRecordModel customer) {
         String query = "SELECT * FROM customer WHERE customerAccID=?";
         try (Connection connect = databaseConnection.getConnection();
@@ -58,7 +67,7 @@ public class customerRecordDAO {
         return null;
     }
 
-    // READ - CUSTOMER TRANSACTION
+    // READ - CUSTOMER TRANSACTION || It retrieves all the payement transaction made by a customer
     public customerRecordModel getCustomerTransaction(customerRecordModel customer) {
         String query = "SELECT * FROM customer C JOIN payment P ON C.customerAccID=P.customerAccID WHERE C.customerAccID=?";
         try (Connection connect = databaseConnection.getConnection();
@@ -79,7 +88,7 @@ public class customerRecordDAO {
         return null;
     }
 
-    // UPDATE
+    // UPDATE || it updates a record from the customer data base
     public boolean modifyCustomerRecordData(customerRecordModel customer) {
         String query = "UPDATE Customer SET lastName=?, firstName=?, customerEmail=?, phoneNumber=?, customerPass=? WHERE customerAccID=?";
         try (Connection connect = databaseConnection.getConnection();
@@ -102,7 +111,7 @@ public class customerRecordDAO {
         }
     }
 
-    // DELETE
+    // DELETE || it deletes a record from the customer database
     public boolean delCustomerRecordData(int customerAccID) {
         String query = "DELETE FROM Customer WHERE customerAccID=?";
         try (Connection connect = databaseConnection.getConnection();
@@ -132,7 +141,7 @@ public class customerRecordDAO {
         return customerModel;
     }
 
-    // Updates a customer's password
+    // Updates a customer's password 
     public boolean updateCustomerPassword(int customerAccID, String newPass) {
         String sql = "UPDATE customer SET customerPass=? WHERE customerAccID=?";
         try (Connection connect = databaseConnection.getConnection();
@@ -187,6 +196,7 @@ public class customerRecordDAO {
         return null;
     }
 
+    //retrieves all the records in the customer data base
     public List<customerRecordModel> getAllCustomers() {
         List<customerRecordModel> customers = new ArrayList<>();
         String query = "SELECT * FROM customer";
@@ -205,6 +215,7 @@ public class customerRecordDAO {
         return customers;
     }
 
+    //gets a specific customer record in the database that matches the customerAccID passed through the parameter
     public customerRecordModel getCustomer(int customerAccID) {
         String query = "SELECT * FROM customer WHERE customerAccID=?";
         try (Connection connect = databaseConnection.getConnection();
@@ -224,6 +235,7 @@ public class customerRecordDAO {
         return null;
     }
 
+    //checks if the email exists in the customer database. 
     public boolean emailExists(String email) {
         String query = "SELECT COUNT(*) FROM customer WHERE customerEmail = ?";
         try (Connection connect = databaseConnection.getConnection();
@@ -242,6 +254,7 @@ public class customerRecordDAO {
         return false;
     }
 
+    //retrieves the next available customerAccID. 
     public int getNextCustomerAccID() {
         String query = "SELECT MAX(customerAccID) as maxID FROM customer";
         try (Connection connect = databaseConnection.getConnection();
@@ -260,6 +273,7 @@ public class customerRecordDAO {
         return 100000; // Default starting ID
     }
 
+    //
     public boolean createCustomer(customerRecordModel customer) {
         return addCustomerRecordData(customer);
     }
