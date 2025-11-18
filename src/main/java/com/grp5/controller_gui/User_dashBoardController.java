@@ -1,5 +1,6 @@
 package com.grp5.controller_gui;
 
+import com.grp5.session.AccountSession;
 import com.grp5.utils.sessionManager;
 
 import java.io.IOException;
@@ -85,19 +86,19 @@ public class User_dashBoardController {
 
         // Show confirmation dialog
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        sessionManager session=new sessionManager();
+        sessionManager session = new sessionManager();
         alert.setTitle("Logout Confirmation");
         alert.setHeaderText("Are you sure you want to logout?");
         alert.setContentText("You will be returned to the login selection screen.");
 
         alert.showAndWait().ifPresent(response -> {
             if (response == ButtonType.OK) {
+                AccountSession.cleanSession();
                 session.performLogout(btnLogout);
             }
         });
     }
 
-   
     public void setUserName(String userName) {
         if (txtUserName != null) {
             txtUserName.setText(userName);

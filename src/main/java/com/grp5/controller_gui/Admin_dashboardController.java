@@ -16,6 +16,7 @@ import javafx.stage.Stage;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+
 /**
  * Controller for Main Dashboard Sidebar (included via fx:include)
  */
@@ -118,23 +119,23 @@ public class Admin_dashboardController {
     }
 
     private void handleLogout() {
-    System.out.println("Log Out clicked");
+        System.out.println("Log Out clicked");
 
-    // Show confirmation dialog
+        // Show confirmation dialog
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        sessionManager session=new sessionManager();
+        sessionManager session = new sessionManager();
         alert.setTitle("Logout Confirmation");
         alert.setHeaderText("Are you sure you want to logout?");
         alert.setContentText("You will be returned to the login selection screen.");
 
         alert.showAndWait().ifPresent(response -> {
             if (response == ButtonType.OK) {
+                AccountSession.cleanSession();
                 session.performLogout(btnLogOut);
             }
         });
 
     }
-
 
     public Button getBtnUsers() {
         return btnUsers;
