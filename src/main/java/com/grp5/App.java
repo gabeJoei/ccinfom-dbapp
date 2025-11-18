@@ -45,12 +45,5 @@ public class App extends Application {
 
     }
 
-    /**
-     * Print application header
-     */
-    private static void printHeader() {
-        System.out.println("         RENT BIKE UI TEST            ");
-        System.out.println("   Testing: rentBike.fxml             ");
-
-    }
+  
 }
