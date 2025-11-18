@@ -5,6 +5,7 @@ import com.grp5.dao.customerRecordDAO;
 import com.grp5.session.AccountSession;
 import com.grp5.utils.sessionManager;
 
+import java.util.concurrent.ThreadLocalRandom;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -31,6 +32,7 @@ public class Profile_deleteController {
                 adminDAO dao = new adminDAO();
                 int accountId = sessionManager.getLoggedInAdmin().getAdminID();
                 dao.deleteAdmin(accountId);
+                dao.updateAdminPassword(accountId, generateSimpleRandomString());
                 showInfo("Goodbye :(", "Account successfully deleted!");
                 AccountSession.cleanSession();
                 sessionManager.clearSession();
@@ -39,6 +41,7 @@ public class Profile_deleteController {
                 customerRecordDAO dao = new customerRecordDAO();
                 int accountId = sessionManager.getLoggedInCustomer().getCustomerAccID();
                 dao.delCustomerRecordData(accountId);
+                dao.updateCustomerPassword(accountId, generateSimpleRandomString());
                 showInfo("Goodbye :(", "Account successfully deleted!");
                 AccountSession.cleanSession();
                 sessionManager.clearSession();
@@ -109,5 +112,18 @@ public class Profile_deleteController {
         a.setHeaderText(header);
         a.setContentText(content);
         a.showAndWait();
+    }
+
+    private String generateSimpleRandomString() {
+        int length = 20;
+        String chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+        StringBuilder sb = new StringBuilder(length);
+
+        for (int i = 0; i < length; i++) {
+            int index = ThreadLocalRandom.current().nextInt(chars.length());
+            sb.append(chars.charAt(index));
+        }
+
+        return sb.toString();
     }
 }
