@@ -58,22 +58,51 @@ public void setLocationID(int locID){
 }
 
 /**
-* sets the location Id
-* @param locID, new location 
+* sets the branch name
+* @param bName, new branch Name
 */
 public void setBranchName(String bName){
     branchName=bName;
 }
+
+/**
+* sets the branch address
+* @param add, new branch address
+*/
 public void setBranchAddress(String add){
     branchAddress=add;
 }
 
-//getters
+
+/**
+* gets the branch id
+* @return branch id
+*/     
 public int getBranchID(){return branchID;}
+
+/**
+* gets the location id
+* @return location id
+*/
 public int getLocationID(){return locationID;}
+
+/**
+* gets the branch name
+* @return branch name
+*/
 public String getBranchName(){return branchName;}
+
+/**
+* gets the branch address
+* @return branch address
+*/
 public String getBranchAddress(){return branchAddress;}
 
+/**
+* The string representation of the branch record model.
+* @return a string containing the branchID, branchName, branchAddress
+* locationID.
+*/
 public String toString(){
         return "{branch"+
                 "branchID"+branchID
