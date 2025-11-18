@@ -65,12 +65,9 @@ public class ReservationController {
     private bikeReservationDAO reservationDAO = new bikeReservationDAO();
     private ObservableList<bikeReservation> reservationList = FXCollections.observableArrayList();
 
-    /**
-     * Initializes the controller class.
-     */
+   
     @FXML
     public void initialize() {
-        // Set up the cell value factories for the TableView columns
         refNumColumn.setCellValueFactory(new PropertyValueFactory<>("reservationReferenceNum"));
         customerIDColumn.setCellValueFactory(new PropertyValueFactory<>("customerAccID"));
         bikeIDColumn.setCellValueFactory(new PropertyValueFactory<>("bikeID"));
@@ -84,9 +81,7 @@ public class ReservationController {
         loadReservationData();
     }
 
-    /**
-     * Loads all reservation records from the database and populates the TableView.
-     */
+    
     private void loadReservationData() {
         ArrayList<bikeReservation> allReservations = reservationDAO.getAllReservations();
 
@@ -101,7 +96,7 @@ public class ReservationController {
         try {
             String idText = reservationIDTextField.getText().trim();
             if (idText.isEmpty()) {
-                loadReservationData(); // Show all if search field is empty
+                loadReservationData(); 
                 return;
             }
 
@@ -262,7 +257,6 @@ public class ReservationController {
     void handleDeleteButtonAction(ActionEvent event) {
         bikeReservation selectedReservation = reservationTableView.getSelectionModel().getSelectedItem();
         if (selectedReservation != null) {
-            // Confirmation dialog
             Alert confirmAlert = new Alert(Alert.AlertType.CONFIRMATION);
             confirmAlert.setTitle("Confirm Deletion");
             confirmAlert.setHeaderText("Delete Reservation Record");
