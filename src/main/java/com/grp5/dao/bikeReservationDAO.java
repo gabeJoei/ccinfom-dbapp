@@ -105,11 +105,11 @@ public class bikeReservationDAO {
             conn.setAutoCommit(false); // Start transaction
 
             // First, delete all payments associated with this reservation
-            String deletePaymentsSQL = "DELETE FROM payment WHERE reservationReferenceNum = ?";
+            /*String deletePaymentsSQL = "DELETE FROM payment WHERE reservationReferenceNum = ?";
             try (PreparedStatement pstmt = conn.prepareStatement(deletePaymentsSQL)) {
                 pstmt.setInt(1, reservationRefNumber);
                 pstmt.executeUpdate();
-            }
+            }*/
 
             // Then delete the reservation
             String deleteReservationSQL = "DELETE FROM reservation WHERE reservationReferenceNum = ?";
