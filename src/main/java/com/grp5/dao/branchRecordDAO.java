@@ -20,88 +20,90 @@ import com.grp5.utils.databaseConnection;
 public class branchRecordDAO {
 
     // INSERTS A NEW BRANCH RECORD IN THE BRANCH DATA BASE
-    public int addBranchRecordData(branchRecordModel branch){
-        try{
-            Connection connect=databaseConnection.getConnection();
-            PreparedStatement prepState=connect.prepareStatement("INSERT INTO branch (branchID, branchName,branchAddress) VALUES (?,?,?) ");
-            prepState.setInt(1, branch.getBranchID());
-            prepState.setString(2,branch.getBranchName());
-            prepState.setString(3,branch.getBranchAddress());
+    public int addBranchRecordData(branchRecordModel branch) {
+        try {
+            Connection connect = databaseConnection.getConnection();
+            PreparedStatement prepState = connect
+                    .prepareStatement("INSERT INTO branch (branchName,branchAddress) VALUES (?,?) ");
+            prepState.setString(1, branch.getBranchName());
+            prepState.setString(2, branch.getBranchAddress());
             prepState.executeUpdate();
             prepState.close();
             connect.close();
             return 1;
-        }catch(SQLException e){
+        } catch (SQLException e) {
             System.out.println(e.getMessage());
             return 0;
         }
     }
-    
-   // UPDATES A RECORD IN THE BRANCH DATABASE
-    public boolean updateBranchRecord(branchRecordModel branch){
-        try{
-            Connection connect=databaseConnection.getConnection();
-            PreparedStatement prepState=connect.prepareStatement(
-                "UPDATE branch SET branchName=?,branchAddress=? WHERE branchID=?"); 
-            prepState.setString(1,branch.getBranchName());
-            prepState.setString(2,branch.getBranchAddress());
-            prepState.setInt(3,branch.getBranchID());  // FIXED: Changed from 4 to 3
-            
+
+    // UPDATES A RECORD IN THE BRANCH DATABASE
+    public boolean updateBranchRecord(branchRecordModel branch) {
+        try {
+            Connection connect = databaseConnection.getConnection();
+            PreparedStatement prepState = connect.prepareStatement(
+                    "UPDATE branch SET branchName=?,branchAddress=? WHERE branchID=?");
+            prepState.setString(1, branch.getBranchName());
+            prepState.setString(2, branch.getBranchAddress());
+            prepState.setInt(3, branch.getBranchID()); // FIXED: Changed from 4 to 3
+
             int rowsAffected = prepState.executeUpdate();
-            
+
             prepState.close();
             connect.close();
             return rowsAffected > 0;
-        }catch(SQLException e){
+        } catch (SQLException e) {
             System.out.println(e.getMessage());
             return false;
         }
     }
 
-    //RETRIEVES A SPECIFIC BRANCH RECORD IN THE DATABASE
-    public branchRecordModel getBranchRecordData(int branchID){
-        try{
-            Connection connect=databaseConnection.getConnection();
-            PreparedStatement prepState=connect.prepareStatement("SELECT * FROM branch WHERE branchID=?");
-            prepState.setInt(1,branchID);
-            ResultSet result=prepState.executeQuery();
-            if (result.next()){
+    // RETRIEVES A SPECIFIC BRANCH RECORD IN THE DATABASE
+    public branchRecordModel getBranchRecordData(int branchID) {
+        try {
+            Connection connect = databaseConnection.getConnection();
+            PreparedStatement prepState = connect.prepareStatement("SELECT * FROM branch WHERE branchID=?");
+            prepState.setInt(1, branchID);
+            ResultSet result = prepState.executeQuery();
+            if (result.next()) {
                 return extractFromBranchTable(result);
             }
             result.close();
             prepState.close();
             connect.close();
-            
-        }catch(SQLException e){
+
+        } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
         return null;
     }
 
-    //RETRIEVES ALL BRANCH RECORD IN THE DATABASE
-    public ArrayList<branchRecordModel> getAllBranch(){
-        ArrayList<branchRecordModel> branch=new ArrayList<>();
-        try{
-            Connection connect=databaseConnection.getConnection();
-            PreparedStatement prepState=connect.prepareStatement("SELECT * FROM branch");
-            ResultSet result=prepState.executeQuery();
-            while(result.next()){
+    // RETRIEVES ALL BRANCH RECORD IN THE DATABASE
+    public ArrayList<branchRecordModel> getAllBranch() {
+        ArrayList<branchRecordModel> branch = new ArrayList<>();
+        try {
+            Connection connect = databaseConnection.getConnection();
+            PreparedStatement prepState = connect.prepareStatement("SELECT * FROM branch");
+            ResultSet result = prepState.executeQuery();
+            while (result.next()) {
                 branch.add(extractFromBranchTable(result));
             }
             result.close();
             prepState.close();
             connect.close();
-        }catch(SQLException e){
+        } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
         return branch;
     }
 
-
     /**
-     * Helper method to clean up all dependent records (Payments, Reservations, then Bikes) 
+     * Helper method to clean up all dependent records (Payments, Reservations, then
+     * Bikes)
      * associated with a specific branch ID within a single transaction.
-     * @param branchID The ID of the branch whose dependent records need to be deleted.
+     * 
+     * @param branchID The ID of the branch whose dependent records need to be
+     *                 deleted.
      * @return 1 on success, 0 on failure.
      */
     private int deleteDependentRecords(int branchID) {
@@ -145,12 +147,12 @@ public class branchRecordDAO {
                 prepState.executeUpdate();
             }
 
-            connect.commit(); 
+            connect.commit();
             return 1;
         } catch (SQLException e) {
             try {
                 if (connect != null) {
-                    connect.rollback(); 
+                    connect.rollback();
                 }
             } catch (SQLException rollbackE) {
                 System.out.println("Rollback failed: " + rollbackE.getMessage());
@@ -160,59 +162,60 @@ public class branchRecordDAO {
         } finally {
             try {
                 if (connect != null) {
-                    connect.setAutoCommit(true); 
+                    connect.setAutoCommit(true);
                     connect.close();
                 }
             } catch (SQLException closeE) {
-                 System.out.println("Error closing connection: " + closeE.getMessage());
+                System.out.println("Error closing connection: " + closeE.getMessage());
             }
         }
     }
-    
+
     /**
-     * Deletes a branch record. It first deletes all associated dependent records 
+     * Deletes a branch record. It first deletes all associated dependent records
      * (Payments, Reservations, then Bikes) to satisfy the foreign key constraints.
+     * 
      * @param branchID The ID of the branch to delete.
      * @return 1 on success, 0 on failure.
      */
-    public int delBranchRecordData(int branchID){
-        
+    public int delBranchRecordData(int branchID) {
+
         if (deleteDependentRecords(branchID) == 0) {
             System.out.println("Deletion aborted due to failure in deleting dependent records.");
             return 0;
         }
 
         try (Connection connect = databaseConnection.getConnection();
-             PreparedStatement prepState = connect.prepareStatement(
-                 "DELETE FROM branch WHERE branchID=?")) {
-            
-            prepState.setInt(1,branchID);
+                PreparedStatement prepState = connect.prepareStatement(
+                        "DELETE FROM branch WHERE branchID=?")) {
+
+            prepState.setInt(1, branchID);
             prepState.executeUpdate();
-            
+
             return 1;
-        } catch(SQLException e){
+        } catch (SQLException e) {
             System.out.println("Error deleting branch record: " + e.getMessage());
             return 0;
         }
     }
 
-    //HELPER TO EXTRACT FROM RESULT SET
-      private branchRecordModel extractFromBranchTable(ResultSet rs)throws SQLException {
-           branchRecordModel branch=new branchRecordModel();
-           branch.setBranchID(rs.getInt("branchID"));
-           branch.setBranchName(rs.getString("branchName"));
-           branch.setBranchAddress(rs.getString("branchAddress"));
-           return branch;
-      }
+    // HELPER TO EXTRACT FROM RESULT SET
+    private branchRecordModel extractFromBranchTable(ResultSet rs) throws SQLException {
+        branchRecordModel branch = new branchRecordModel();
+        branch.setBranchID(rs.getInt("branchID"));
+        branch.setBranchName(rs.getString("branchName"));
+        branch.setBranchAddress(rs.getString("branchAddress"));
+        return branch;
+    }
 
-    //RETRIEVES ALL BRANCH RECORD FROM THE BRANCH DATABASE
-      public List<branchRecordModel> getAllBranches() {
+    // RETRIEVES ALL BRANCH RECORD FROM THE BRANCH DATABASE
+    public List<branchRecordModel> getAllBranches() {
         List<branchRecordModel> branches = new ArrayList<>();
         String query = "SELECT * FROM branch";
 
         try (Connection connect = databaseConnection.getConnection();
-              PreparedStatement prepState = connect.prepareStatement(query);
-              ResultSet result = prepState.executeQuery()) {
+                PreparedStatement prepState = connect.prepareStatement(query);
+                ResultSet result = prepState.executeQuery()) {
 
             while (result.next()) {
                 branchRecordModel branch = new branchRecordModel();
@@ -226,12 +229,13 @@ public class branchRecordDAO {
         }
         return branches;
     }
-    
-    //RETRIEVES A SPECIFIC BRANCH RECORD, BASED ON THE BRANCH NAME PASSED IN THE PARAMETER
+
+    // RETRIEVES A SPECIFIC BRANCH RECORD, BASED ON THE BRANCH NAME PASSED IN THE
+    // PARAMETER
     public branchRecordModel getBranch(String branchName) {
         try (Connection connect = databaseConnection.getConnection();
-              PreparedStatement prepState = connect.prepareStatement(
-                   "SELECT * FROM branch WHERE branchName = ?")) {
+                PreparedStatement prepState = connect.prepareStatement(
+                        "SELECT * FROM branch WHERE branchName = ?")) {
 
             prepState.setString(1, branchName);
             ResultSet result = prepState.executeQuery();
