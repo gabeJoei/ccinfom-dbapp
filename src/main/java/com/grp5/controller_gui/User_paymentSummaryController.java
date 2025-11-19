@@ -112,8 +112,6 @@ public class User_paymentSummaryController {
                 reservation.getStartDate(), 
                 reservation.getEndDate(), 
                 Timestamp.valueOf(LocalDateTime.now()), 
-                priceToPay, // change this pa once hourly/daily rate is implemented
-                priceToPay, // change this pa once hourly/daily rate is implemented
                 priceToPay
             );
             transactionDAO.addTransactionRecordData(transaction);

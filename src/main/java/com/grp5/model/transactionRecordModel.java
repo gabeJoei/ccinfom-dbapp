@@ -2,8 +2,6 @@ package com.grp5.model;
 
 import java.math.BigDecimal;
 import java.sql.Timestamp;
-import java.time.Duration;
-import com.grp5.utils.generalUtilities;
 
 /**
  * Model for transaction record in the Bike Rental System.
@@ -44,23 +42,19 @@ public class transactionRecordModel {
      * @param bikeID, the unique identifier of the bike rented. 
      * @param startDate, the start date of the reservation
      * @param endDate, the end date of the reservation. 
-     * @param hourlyRate, the hourly rate of a bike.
-     * @param dailyRate, the daily rate of a bike. 
      * @param paymentDate, the date to which the transaction occurred. 
      * @param paymentAmount, the total bill of the customer.
      * -startDate, endDate, dailyRate, hourlyRate will be used to calculate the payement Amount
     */
     public transactionRecordModel(int customerAccountID,
         int reservationReferenceNumber, int branchID, int bikeID, Timestamp startDate, 
-        Timestamp endDate, Timestamp paymentDate, BigDecimal hourlyRate, BigDecimal dailyRate, BigDecimal paymentAmount) {
+        Timestamp endDate, Timestamp paymentDate, BigDecimal paymentAmount) {
         this.customerAccountID = customerAccountID;
         this.reservationReferenceNumber = reservationReferenceNumber;
         this.branchID = branchID;
         this.bikeID = bikeID;
         this.startDate = startDate;
         this.endDate = endDate;
-        this.hourlyRate = hourlyRate;
-        this.dailyRate = dailyRate;
         this.paymentDate = paymentDate;
         this.paymentAmount = paymentAmount;
     }
@@ -77,15 +71,12 @@ public class transactionRecordModel {
      * @param bikeID, the unique identifier of the bike rented. 
      * @param startDate, the start date of the reservation
      * @param endDate, the end date of the reservation. 
-     * @param hourlyRate, the hourly rate of a bike.
-     * @param dailyRate, the daily rate of a bike. 
      * @param paymentDate, the date to which the transaction occurred. 
      * @param paymentAmount, the total bill of the customer.
      * @return transactionRecordModel object with calculated payment.
-    */
     public transactionRecordModel create(int customerAccountID,
         int reservationReferenceNumber, int branchID, int bikeID, Timestamp startDate, 
-        Timestamp endDate, Timestamp paymentDate, BigDecimal hourlyRate, BigDecimal dailyRate) {
+        Timestamp endDate, Timestamp paymentDate) {
         paymentReferenceNumber = generalUtilities.primaryNumChecker(
             generalUtilities.generateRandIntNum(),
             "paymentReferenceNum", "payment");
@@ -94,7 +85,7 @@ public class transactionRecordModel {
         return new transactionRecordModel(customerAccountID,
             reservationReferenceNumber, branchID, bikeID, startDate, 
             endDate, paymentDate, hourlyRate, dailyRate, paymentAmount);
-    }
+    } */
 
     /**
      * gets the unique paymentReferenceNumber
@@ -131,18 +122,6 @@ public class transactionRecordModel {
      * @return payment amount
      */
     public BigDecimal getPaymentAmount() { return paymentAmount; }
-    
-     /**
-     * gets the hourly rate of the rented bike
-     * @return hourly rate
-     */
-    public BigDecimal getHourlyRate() { return hourlyRate; }
-
-     /**
-     * gets the daily rate of the rented bike
-     * @return daily rate
-     */
-    public BigDecimal getDailyRate() { return dailyRate; }
 
      /**
      * gets the payment date to which the date the transaction took place
@@ -232,53 +211,6 @@ public class transactionRecordModel {
      */
     public void setPaymentAmount(BigDecimal payment) {
         paymentAmount = payment;
-    }
-
-     /**
-     * sets the hourly rate associated with a specific bike 
-     * @param rate, the new hourly rate
-     */
-    public void setHourlyRate(BigDecimal rate) {
-        hourlyRate = rate;
-    }
-
-    /**
-     * sets the daily rate associated with a specific bike 
-     * @param rate, the new daily rate
-     */
-    public void setDailyRate(BigDecimal rate) {
-        dailyRate = rate;
-    }
-
-    /**
-     * Computes the payment amount of a bike reservation. It uses the start date and end date of the reservation
-     * finding it difference in terms of day and time. Then calculates the sum of the hourly and daily rate,
-     * it sum becomes the payment amount. 
-     * 
-     * @param startDate, the start date of the bike reservation 
-     * @param endDate, the end date of the bike reservation
-     * @param hourlyRate, the hourly rate of the reserved bike
-     * @param dailyRate, the daily rate of the reserved bike
-     * @return the calculated payment amount. 
-     */
-    private BigDecimal computePayment(Timestamp startDate, Timestamp endDate, BigDecimal hourlyRate, BigDecimal dailyRate) {
-        BigDecimal payment;
-        Duration duration = Duration.between(startDate.toInstant(), endDate.toInstant());
-
-        if (duration.toHours() > 24) {
-            long days = duration.toDays();
-            payment = dailyRate.multiply(BigDecimal.valueOf(days));
-        } else {
-            long mins = duration.toMinutes();
-            mins /= 30;
-            if (mins % 30 != 0) {
-                mins++;
-            }
-
-            BigDecimal halfRate = hourlyRate.divide(BigDecimal.valueOf(2));
-            payment = halfRate.multiply(BigDecimal.valueOf(mins));
-        }
-        return payment;
     }
 
     /**
