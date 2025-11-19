@@ -54,12 +54,14 @@ DROP TABLE IF EXISTS `bike`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `bike` (
   `bikeID` int NOT NULL AUTO_INCREMENT,
-  `branchIDNum` int NOT NULL,
+  `branchIDNum` int DEFAULT NULL,
   `bikeAvailability` enum('Yes','No') NOT NULL DEFAULT 'Yes',
   `bikeModel` varchar(50) NOT NULL,
   `hourlyRate` decimal(7,2) DEFAULT NULL,
   `dailyRate` decimal(7,2) DEFAULT NULL,
-  PRIMARY KEY (`bikeID`)
+  PRIMARY KEY (`bikeID`),
+  KEY `bike_branchID_idx` (`branchIDNum`),
+  CONSTRAINT `bike_branchID` FOREIGN KEY (`branchIDNum`) REFERENCES `branch` (`branchID`) ON DELETE SET NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -69,7 +71,7 @@ CREATE TABLE `bike` (
 
 LOCK TABLES `bike` WRITE;
 /*!40000 ALTER TABLE `bike` DISABLE KEYS */;
-INSERT INTO `bike` VALUES (1,1,'No','Mountain Bike',25.00,150.00),(2,1,'Yes','Road Bike',20.00,120.00),(3,2,'Yes','Bike with E-assist',30.00,180.00),(4,3,'Yes','tandem Bike',22.50,135.00),(5,2,'Yes','E-Bike',28.00,160.00),(6,1,'Yes','BMX bike',18.00,100.00),(7,1,'No','Mountain Bike',25.00,150.00),(8,2,'Yes','Mountain Bike',25.00,150.00),(9,4,'Yes','Mountain Bike',25.00,150.00),(10,4,'Yes','Mountain Bike',25.00,150.00),(11,5,'Yes','Mountain Bike',25.00,150.00),(12,5,'Yes','Mountain Bike',25.00,150.00),(13,3,'Yes','Mountain Bike',25.00,150.00),(14,3,'Yes','Mountain Bike',25.00,150.00),(15,2,'Yes','Bike with E-assist',30.00,180.00),(16,3,'Yes','Bike with E-assist',30.00,180.00),(17,1,'No','Bike with E-assist',30.00,180.00),(18,2,'Yes','Bike with E-assist',30.00,180.00),(19,3,'Yes','tandem Bike',22.50,135.00),(20,2,'Yes','E-Bike',28.00,160.00),(21,1,'Yes','BMX bike',18.00,100.00),(25,1,'Yes','Mountain Bike',12.00,12.00),(26,1,'No','Mountain Bike',12.00,12.00),(27,1,'No','Mountain Bike',12.00,12.00);
+INSERT INTO `bike` VALUES (1,1,'Yes','Mountain Bike',25.00,150.00),(2,1,'Yes','Road Bike',20.00,120.00),(3,2,'Yes','Bike with E-assist',30.00,180.00),(4,3,'Yes','tandem Bike',22.50,135.00),(5,2,'Yes','E-Bike',28.00,160.00),(6,1,'Yes','BMX bike',18.00,100.00),(7,1,'No','Mountain Bike',25.00,150.00),(8,2,'Yes','Mountain Bike',25.00,150.00),(9,4,'Yes','Mountain Bike',25.00,150.00),(10,4,'Yes','Mountain Bike',25.00,150.00),(13,3,'Yes','Mountain Bike',25.00,150.00),(14,3,'Yes','Mountain Bike',25.00,150.00),(15,2,'Yes','Bike with E-assist',30.00,180.00),(16,3,'Yes','Bike with E-assist',30.00,180.00),(17,1,'No','Bike with E-assist',30.00,180.00),(18,2,'Yes','Bike with E-assist',30.00,180.00),(19,3,'Yes','tandem Bike',22.50,135.00),(20,2,'Yes','E-Bike',28.00,160.00),(21,1,'Yes','BMX bike',18.00,100.00),(25,1,'Yes','Mountain Bike',12.00,12.00),(26,1,'No','Mountain Bike',12.00,12.00),(27,1,'No','Mountain Bike',12.00,12.00);
 /*!40000 ALTER TABLE `bike` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -85,7 +87,7 @@ CREATE TABLE `branch` (
   `branchName` varchar(45) NOT NULL,
   `branchAddress` varchar(45) NOT NULL,
   PRIMARY KEY (`branchID`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -146,7 +148,7 @@ CREATE TABLE `payment` (
   KEY `customerAccID_idx` (`customerID`),
   KEY `reservationReferenceNum_idx` (`reservationReferenceNum`,`customerID`) /*!80000 INVISIBLE */,
   CONSTRAINT `payment_reservationReferenceNum` FOREIGN KEY (`reservationReferenceNum`) REFERENCES `reservation` (`reservationReferenceNum`) ON DELETE SET NULL
-) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -155,6 +157,7 @@ CREATE TABLE `payment` (
 
 LOCK TABLES `payment` WRITE;
 /*!40000 ALTER TABLE `payment` DISABLE KEYS */;
+INSERT INTO `payment` VALUES (22,3,NULL,6,1,'2025-11-19 17:56:07',100),(29,1,NULL,1,1,'2025-11-19 18:11:21',50),(31,3,NULL,1,1,'2025-11-19 18:22:54',150);
 /*!40000 ALTER TABLE `payment` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -181,7 +184,7 @@ CREATE TABLE `reservation` (
   KEY `branchID_idx` (`branchID`),
   CONSTRAINT `reservation_bikeID` FOREIGN KEY (`bikeID`) REFERENCES `bike` (`bikeID`),
   CONSTRAINT `reservation_branchID` FOREIGN KEY (`branchID`) REFERENCES `branch` (`branchID`)
-) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=43 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -202,4 +205,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-11-19  2:00:43
+-- Dump completed on 2025-11-19 18:30:05
