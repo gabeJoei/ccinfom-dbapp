@@ -370,11 +370,11 @@ public class User_bikeReservationController {
             ButtonType payBtn= new ButtonType("Pay");
             alert2.getButtonTypes().add(payBtn);
 
-            transactionRecordModel transactionM=new transactionRecordModel(reservation.getCustomerAccID(), reservation.getReservationReferenceNum(), 
-            reservation.getBranchID(), reservation.getBikeID(),null,null,null,lateFee);
-
             Optional<ButtonType> result2 = alert2.showAndWait();
             if (result2.isPresent() && result2.get() == payBtn) {
+                transactionRecordModel transactionM=new transactionRecordModel(reservation.getCustomerAccID(), reservation.getReservationReferenceNum(), 
+                reservation.getBranchID(), reservation.getBikeID(),null,null,returnTimeStamp,lateFee);
+                transaction.addTransactionRecordData(transactionM);
                 reservation.setStatus("completed");
                 reservation.setDateReturned(returnTimeStamp); 
                 updateDatabase(reservation);
