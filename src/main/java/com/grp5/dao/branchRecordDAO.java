@@ -117,14 +117,16 @@ public class branchRecordDAO {
             try (PreparedStatement prepState = connect.prepareStatement(deletePaymentsViaBikeSQL)) {
                 prepState.setInt(1, branchID);
                 prepState.executeUpdate();
-            }
+            } 
 
             // Delete payments for reservations directly linked to this branch
+            
+             
             String deletePaymentsViaBranchSQL = "DELETE FROM payment WHERE reservationReferenceNum IN (SELECT reservationReferenceNum FROM reservation WHERE branchID = ?)";
             try (PreparedStatement prepState = connect.prepareStatement(deletePaymentsViaBranchSQL)) {
                 prepState.setInt(1, branchID);
                 prepState.executeUpdate();
-            }
+            } 
 
             // Delete reservations linked to bikes at this branch
             String deleteReservationsViaBikeSQL = "DELETE FROM reservation WHERE bikeID IN (SELECT bikeID FROM bike WHERE branchIDNum = ?)";
@@ -180,10 +182,11 @@ public class branchRecordDAO {
      */
     public int delBranchRecordData(int branchID) {
 
+        /* 
         if (deleteDependentRecords(branchID) == 0) {
             System.out.println("Deletion aborted due to failure in deleting dependent records.");
             return 0;
-        }
+        }*/
 
         try (Connection connect = databaseConnection.getConnection();
                 PreparedStatement prepState = connect.prepareStatement(

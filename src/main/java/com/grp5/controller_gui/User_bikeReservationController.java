@@ -355,31 +355,34 @@ public class User_bikeReservationController {
         alert.setTitle("Late return Detected!");
         alert.setHeaderText("Reservation has ended.");
         alert.setContentText("You are returning this bike after the reservation end date! \nA late fee has been added to your account.");
-        alert.showAndWait();
 
-        Alert alert2=new Alert(Alert.AlertType.CONFIRMATION);
-        alert2.setTitle("Late Fees Summary");
-        alert2.setHeaderText("Summary");
-        alert2.setContentText("Late Fee Summary:\n\n Expected Return Date: "+reservation.getEndDate()+
-                            "\nActual Return Date: "+returnTimeStamp+
-                            "\nTotal Late Hours: "+lateDaysCount+
-                            "\nLate Rate: 15\nTotal Bill: "+lateFee);
-        alert2.getButtonTypes().clear();
-        ButtonType payBtn= new ButtonType("Pay");
-        alert2.getButtonTypes().add(payBtn);
+        Optional<ButtonType> result = alert.showAndWait();
 
-        transactionRecordModel transactionM=new transactionRecordModel(reservation.getCustomerAccID(), reservation.getReservationReferenceNum(), 
-        reservation.getBranchID(), reservation.getBikeID(),null,null,returnTimeStamp,null,null,lateFee);
-        transaction.addTransactionRecordData(transactionM);
+        if (result.isPresent() && result.get() == ButtonType.OK) {
+            Alert alert2=new Alert(Alert.AlertType.CONFIRMATION);
+            alert2.setTitle("Late Fees Summary");
+            alert2.setHeaderText("Summary");
+            alert2.setContentText("Late Fee Summary:\n\n Expected Return Date: "+reservation.getEndDate()+
+                                "\nActual Return Date: "+returnTimeStamp+
+                                "\nTotal Late Hours: "+lateDaysCount+
+                                "\nLate Rate: 15\nTotal Bill: "+lateFee);
+            alert2.getButtonTypes().clear();
+            ButtonType payBtn= new ButtonType("Pay");
+            alert2.getButtonTypes().add(payBtn);
 
-        Optional<ButtonType> result = alert2.showAndWait();
-        if (result.isPresent() && result.get() == payBtn) {
-            reservation.setStatus("completed");
-            reservation.setDateReturned(returnTimeStamp); 
-            updateDatabase(reservation);
-            bikeRecordDAO bikeDao=new bikeRecordDAO();
-            bikeRecordModel bike=bikeDao.getBikeRecord(reservation.getBikeID());
-            bikeDao.updateBikeAvailability(bike, true);
+            transactionRecordModel transactionM=new transactionRecordModel(reservation.getCustomerAccID(), reservation.getReservationReferenceNum(), 
+            reservation.getBranchID(), reservation.getBikeID(),null,null,returnTimeStamp,null,null,lateFee);
+            transaction.addTransactionRecordData(transactionM);
+
+            Optional<ButtonType> result2 = alert2.showAndWait();
+            if (result2.isPresent() && result2.get() == payBtn) {
+                reservation.setStatus("completed");
+                reservation.setDateReturned(returnTimeStamp); 
+                updateDatabase(reservation);
+                bikeRecordDAO bikeDao=new bikeRecordDAO();
+                bikeRecordModel bike=bikeDao.getBikeRecord(reservation.getBikeID());
+                bikeDao.updateBikeAvailability(bike, true);
+            }
         }
     }
 

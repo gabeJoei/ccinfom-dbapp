@@ -114,7 +114,7 @@ public class rentalSalesReport {
         generatedSummary.append(String.format("Total Revenue: $%.2f\n", totalRevenue));
         generatedSummary.append("\nTop Performing Rental:\n");
         generatedSummary.append(String.format("  %s \n", topRental.getBikeModel()));
-        generatedSummary.append(String.format("  Revenue: $%.2f\n", topRental.getRevenue()));
+        generatedSummary.append(String.format("  Revenue: ₱%.2f\n", topRental.getRevenue()));
 
 
         return generatedSummary.toString();
