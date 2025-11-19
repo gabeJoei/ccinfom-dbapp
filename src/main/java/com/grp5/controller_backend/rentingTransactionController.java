@@ -10,6 +10,7 @@ import javafx.scene.Scene;
 import javafx.scene.Parent;
 import java.util.ArrayList;
 import java.sql.Timestamp;
+import java.time.Duration;
 import java.time.LocalDateTime;
 import java.math.BigDecimal;
 
@@ -157,6 +158,14 @@ public class rentingTransactionController {
         lblTotalAmount.setText(String.format("₱%.2f", amount));
     }
 
+    public BigDecimal calculateLateFeesByHour(Timestamp endDate, Timestamp lateDateReturn){
+        BigDecimal lateFee;
+        BigDecimal lateRate=new BigDecimal(15);
+        Duration duration = Duration.between(endDate.toInstant(), lateDateReturn.toInstant());
+        long minutes=duration.toHours();
+        lateFee=lateRate.multiply(BigDecimal.valueOf(minutes));
+        return lateFee;
+    }
     /*
      * Process the rental transaction
      */

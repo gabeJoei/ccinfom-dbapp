@@ -5,6 +5,9 @@ import com.grp5.model.bikeReservation;
 import com.grp5.utils.generalUtilities;
 import com.grp5.dao.bikeRecordDAO;
 import com.grp5.model.bikeRecordModel;
+import com.grp5.dao.transactionRecordDAO;
+import com.grp5.model.transactionRecordModel;
+import com.grp5.controller_backend.*;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -17,11 +20,13 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Optional;
 import java.util.ArrayList;
+import java.time.Duration;
 
 /**
  * Controller for User's Bike Reservation Management
@@ -58,8 +63,10 @@ public class User_bikeReservationController {
     private bikeReservationDAO reservationDAO;
     private ObservableList<bikeReservation> reservationList;
     private String userID;
-    private bikeRecordDAO bikeDao;
-    private bikeRecordModel bikeModel;
+    //private bikeRecordDAO bikeDao;
+    //private bikeRecordModel bikeModel;
+    private transactionRecordDAO transaction;
+    private rentingTransactionController rentingControl;
 
     /**
      * Initialize method - called automatically by JavaFX
@@ -337,14 +344,36 @@ public class User_bikeReservationController {
     }
 
     private void handleLateReturn(bikeReservation reservation, Timestamp returnTimeStamp) {
+        rentingControl=new rentingTransactionController();
+        transaction=new transactionRecordDAO();
+
+        BigDecimal lateFee=rentingControl.calculateLateFeesByHour(reservation.getEndDate(),returnTimeStamp);
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        Duration duration= Duration.between(reservation.getEndDate().toInstant(), returnTimeStamp.toInstant());
+        long lateDaysCount=duration.toHours();
+
         alert.setTitle("Late return Detected!");
         alert.setHeaderText("Reservation has ended.");
-        alert.setContentText("You are returning this bike after the reservation end date!" +
-                            "A late fee has been added to your account.");
+        alert.setContentText("You are returning this bike after the reservation end date! \nA late fee has been added to your account.");
+        alert.showAndWait();
 
-        Optional<ButtonType> result = alert.showAndWait();
-        if (result.isPresent() && result.get() == ButtonType.OK) {
+        Alert alert2=new Alert(Alert.AlertType.CONFIRMATION);
+        alert2.setTitle("Late Fees Summary");
+        alert2.setHeaderText("Summary");
+        alert2.setContentText("Late Fee Summary:\n\n Expected Return Date: "+reservation.getEndDate()+
+                            "\nActual Return Date: "+returnTimeStamp+
+                            "\nTotal Late Hours: "+lateDaysCount+
+                            "\nLate Rate: 15\nTotal Bill: "+lateFee);
+        alert2.getButtonTypes().clear();
+        ButtonType payBtn= new ButtonType("Pay");
+        alert2.getButtonTypes().add(payBtn);
+
+        transactionRecordModel transactionM=new transactionRecordModel(reservation.getCustomerAccID(), reservation.getReservationReferenceNum(), 
+        reservation.getBranchID(), reservation.getBikeID(),null,null,returnTimeStamp,null,null,lateFee);
+        transaction.addTransactionRecordData(transactionM);
+
+        Optional<ButtonType> result = alert2.showAndWait();
+        if (result.isPresent() && result.get() == payBtn) {
             reservation.setStatus("completed");
             reservation.setDateReturned(returnTimeStamp); 
             updateDatabase(reservation);
