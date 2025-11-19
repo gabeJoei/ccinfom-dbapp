@@ -330,6 +330,9 @@ public class User_bikeReservationController {
             reservation.setStatus("cancelled");
             reservation.setDateReturned(null); 
             updateDatabase(reservation);
+            bikeRecordDAO bikeDao=new bikeRecordDAO();
+            bikeRecordModel bike=bikeDao.getBikeRecord(reservation.getBikeID());
+            bikeDao.updateBikeAvailability(bike, true);
         }
     }
 
@@ -345,6 +348,9 @@ public class User_bikeReservationController {
             reservation.setStatus("completed");
             reservation.setDateReturned(returnTimeStamp); 
             updateDatabase(reservation);
+            bikeRecordDAO bikeDao=new bikeRecordDAO();
+            bikeRecordModel bike=bikeDao.getBikeRecord(reservation.getBikeID());
+            bikeDao.updateBikeAvailability(bike, true);
         }
     }
 
@@ -352,6 +358,9 @@ public class User_bikeReservationController {
         reservation.setDateReturned(returnTimestamp);
         reservation.setStatus("completed");
         updateDatabase(reservation);
+        bikeRecordDAO bikeDao=new bikeRecordDAO();
+        bikeRecordModel bike=bikeDao.getBikeRecord(reservation.getBikeID());
+        bikeDao.updateBikeAvailability(bike, true);
     }
 
     private void updateDatabase(bikeReservation reservation) {
